@@ -1,0 +1,636 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://raw.githubusercontent.com/learner-lu/picbed/master/logo.png">
+  <link rel="icon" href="https://raw.githubusercontent.com/learner-lu/picbed/master/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#4a00e0">
+  <meta name="author" content="luzhixing12345">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="前言: 最近在写一个python的包,使用python实现pytorch的基本功能.目前包名暂时叫lytorch.也在这里记录一下如何编写发布测试一个自己的python包  引言 熟悉python的朋友一定安装过很多第三方库,python的强大之处不仅在于简洁优雅,还有很好的社区环境,有许多无私的开源贡献者编写了许多实用高效的第三方库,比如matplotlib,numpy之类,只要你想要pytho">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用PYPI发布python包">
+<meta property="og:url" content="https://luzhixing12345.github.io/2022/04/29/%E6%9D%82/%E4%BD%BF%E7%94%A8PYPI%E5%8F%91%E5%B8%83python%E5%8C%85/index.html">
+<meta property="og:site_name" content="kamilu的博客">
+<meta property="og:description" content="前言: 最近在写一个python的包,使用python实现pytorch的基本功能.目前包名暂时叫lytorch.也在这里记录一下如何编写发布测试一个自己的python包  引言 熟悉python的朋友一定安装过很多第三方库,python的强大之处不仅在于简洁优雅,还有很好的社区环境,有许多无私的开源贡献者编写了许多实用高效的第三方库,比如matplotlib,numpy之类,只要你想要pytho">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220429120333.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220429121250.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220429122322.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220429140944.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/lytorch.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220429142109.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220429143617.png">
+<meta property="article:published_time" content="2022-04-29T03:37:58.000Z">
+<meta property="article:modified_time" content="2022-04-29T08:24:07.514Z">
+<meta property="article:author" content="luzhixing12345">
+<meta property="article:tag" content="杂">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220429120333.png">
+  
+  
+  <title>使用PYPI发布python包 - kamilu的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"luzhixing12345.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"fEy8W8VvIoc26nT53dV2157j-gzGzoHsz","app_key":"s9HXuqmvBWrOaAiLA07Jg59A","server_url":"https://fey8w8vv.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Kamilu-blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://raw.githubusercontent.com/learner-lu/picbed/master/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="使用PYPI发布python包">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-04-29 11:37" pubdate>
+        2022年4月29日 中午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      30 分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">使用PYPI发布python包</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2 小时前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>前言: 最近在写一个python的包,使用python实现pytorch的基本功能.目前包名暂时叫lytorch.也在这里记录一下如何编写发布测试一个自己的python包</p>
+<h2 id="引言"><a class="markdownIt-Anchor" href="#引言"></a> 引言</h2>
+<p>熟悉python的朋友一定安装过很多第三方库,python的强大之处不仅在于简洁优雅,还有很好的社区环境,有许多无私的开源贡献者编写了许多实用高效的第三方库,比如matplotlib,numpy之类,只要你想要python实现的功能,几乎都可以搜索找到对应的python包,只需简单的pip安装,阅读相关文档了解其基本函数使用方法就可以迅速上手了,比起其他语言来说解决问题不可谓不快.</p>
+<p>那么如果说我也希望为python的社区做出一些贡献,我能否开发一个python包用于实现一些功能呢? 当然是可以的,而且python社区十分欢迎你参与其中,为开源做出一份贡献.</p>
+<h2 id="pypi"><a class="markdownIt-Anchor" href="#pypi"></a> PYPI</h2>
+<p>那么如何去做呢? 显然在正常使用时如果我们编写了一个python的包(下假定该包名为lytorch),那么我们只需要在其同级目录下import lytorch即可使用,但是我们希望在所有位置都可以使用,在所有地方都可以使用,所有人都可以使用,那么显然我们需要将其移动到一个其他的位置,并且可以被引用到.</p>
+<p>PYPI是一个很好的平台,全称为Python Package Index,是一个开源的python包管理的网站,我们只需要将我们编写好的代码上传到PYPI上,接着通过pip install命令安装,这样包就被下载到 <code>Lib/site-packages</code>下了,使用import之时可以在sys.path中搜索到这个路径,找到lytorch的包,就可以成功的使用了.</p>
+<blockquote>
+<p>如果您尚不熟悉python的import用法,可以参考<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/463969303">python的import详解</a></p>
+</blockquote>
+<h2 id="准备与发布"><a class="markdownIt-Anchor" href="#准备与发布"></a> 准备与发布</h2>
+<blockquote>
+<p>我假定读者具有一定的GitHub的使用经验和python编写经验</p>
+</blockquote>
+<h3 id="首先注册一个pypi账号-pypi"><a class="markdownIt-Anchor" href="#首先注册一个pypi账号-pypi"></a> 首先注册一个PYPI账号-<a target="_blank" rel="noopener" href="https://pypi.org/">PYPI</a></h3>
+<p>注册成功之后回到主界面,右上角就是你的用户名,你将以这个身份进行登录</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220429120333.png" srcset="/img/loading.gif" lazyload alt="20220429120333" /></p>
+<p>中间的搜索框中你可以找到所有发布在PYPI的包名,试试搜索 <code>matplotlib</code> <code>pyautogui</code> <code>numpy</code></p>
+<p>右上角进入个人project,目前没有任何项目.但是PYPI非常贴心的提供了很完整的教学文档,说明文档.如果你更倾向于阅读官方文档也可以移步至<a target="_blank" rel="noopener" href="https://packaging.python.org/en/latest/tutorials/packaging-projects/">PYPI上传包</a></p>
+<h3 id="本地创建包"><a class="markdownIt-Anchor" href="#本地创建包"></a> 本地创建包</h3>
+<p>Github是一个很好的平台,开源项目通常会选择在这里开源源代码,我个人也比较推荐.</p>
+<p>在GitHub上创建一个新的仓库,建议这里勾选下方两项.</p>
+<ul>
+<li>.gitignore 选择python</li>
+<li>license 选择MIT (如果你没有其他想法,选择MIT协议就可以了)</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220429121250.png" srcset="/img/loading.gif" lazyload alt="20220429121250" /></p>
+<blockquote>
+<p>我个人没有勾选 README 的习惯,我通常会在本地补充一个非常完善的README文件.</p>
+</blockquote>
+<p>下载到本地之后创建一个<code>src</code>目录用于保存,里面有一个<code>lytorch</code>目录,同级还有一个<code>test.py</code>文件用于之后的测试.</p>
+<p>目录的结构如下</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220429122322.png" srcset="/img/loading.gif" lazyload alt="20220429122322" /></p>
+<div class="note note-info">
+            <p>那么这个<code>setup.py</code>是用来干嘛的呢?</p>
+          </div>
+<p>它就是用来打包python文件包的,新建<code>setup.py</code>并复制以下内容</p>
+<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> setuptools
+
+<span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;README.md&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>) <span class="hljs-keyword">as</span> fh:
+  long_description = fh.read()
+
+setuptools.setup(
+  name=<span class="hljs-string">&quot;lytorch&quot;</span>,
+  version=<span class="hljs-string">&quot;0.0.1&quot;</span>,
+  author=<span class="hljs-string">&quot;kamilu&quot;</span>,
+  author_email=<span class="hljs-string">&quot;luzhixing12345@163.com&quot;</span>,
+  description=<span class="hljs-string">&quot;my implementation of pytorch&quot;</span>,
+  long_description=long_description,
+  long_description_content_type=<span class="hljs-string">&quot;text/markdown&quot;</span>,
+  url=<span class="hljs-string">&quot;https://github.com/luzhixing12345/mytorch&quot;</span>,
+  package_dir=&#123;<span class="hljs-string">&#x27;&#x27;</span>: <span class="hljs-string">&#x27;src&#x27;</span>&#125;,
+  packages=setuptools.find_packages(where=<span class="hljs-string">&#x27;src&#x27;</span>),
+  classifiers=[
+  <span class="hljs-string">&quot;Programming Language :: Python :: 3&quot;</span>,
+  <span class="hljs-string">&quot;License :: OSI Approved :: MIT License&quot;</span>,
+  <span class="hljs-string">&quot;Operating System :: OS Independent&quot;</span>,
+  ],
+)</code></pre></div>
+<p>这里要修改的几个地方:</p>
+<ul>
+<li>
+<p>name: 这个是你将要发布的包的名字,这里需要一个独一无二的名字</p>
+<p>你需要自己想一个比较好记的名字,然后在PYPI里搜索一下,如果没有人之前发布过重名的包,那么这个名字就是你的了</p>
+<div class="note note-info">
+            <p>一些小tips:</p><ul><li>这里的包名之后时要使用 <code>pip install xxx</code> 下载的,<strong>不建议使用大写字符不过用了也无妨</strong>,只不过没有人会希望下载的时候还要大小写转换吧</li><li>你想到的包名很可能已经被占用了,毕竟总有人比你更早,换一个包名就好了,或者试试加上 <code>py</code>,<code>python-</code>,也许也早就被占用了(笑)</li><li>不建议使用一个太过冗长的名字,虽然也是自己编写着玩玩,但是还是简洁为主</li><li>good luck, 期待你的python包</li></ul>
+          </div>
+</li>
+<li>
+<p>version: 第一版的话使用 <code>v0.0.1</code>就可以了</p>
+</li>
+<li>
+<p>author: 改为你的PYPI用户名</p>
+</li>
+<li>
+<p>author_email:你的邮箱地址</p>
+</li>
+<li>
+<p>description:写一段简短的描述</p>
+</li>
+<li>
+<p>long_description: 这里就是你的README文件的内容了,很多人不好好写README,不过我希望可以认真的完成它</p>
+</li>
+<li>
+<p>url: GitHub仓库的地址</p>
+</li>
+<li>
+<p>package_dir,packages: 这两个不需要改,我们创建的时候就是放在了<code>src</code>目录下</p>
+</li>
+<li>
+<p>classifiers: 代表适用于python3,MIT协议,操作系统无关,也不需要改</p>
+</li>
+</ul>
+<h3 id="上传"><a class="markdownIt-Anchor" href="#上传"></a> 上传</h3>
+<div class="code-wrapper"><pre><code class="hljs bash">python setup.py sdist bdist_wheel</code></pre></div>
+<p>setup会对你的项目进行打包,结束之后你的文件夹里应该会多出一些东西</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220429140944.png" srcset="/img/loading.gif" lazyload alt="20220429140944" /></p>
+<p>有兴趣的话你可以点开看看其中的文件信息,不过这个我们需要的只是这个dist,它是我们需要上传的</p>
+<div class="code-wrapper"><pre><code class="hljs bash">pip install twine
+twine upload dist/*</code></pre></div>
+<p>然后会要求输入PYPI的用户名和密码,正确输入之后即可上传</p>
+<div class="note note-warnning">
+            <p>这里可能会警告说重复了,那就是你要换个name了<br />或者出现一些其他的报错信息,检查一下相关报错信息,用户名密码之类的,或者看看它的解决方法</p>
+          </div>
+<p>接下来你就可以在PYPI上看到你的包了,所有人都可以下载使用!这很令人兴奋不是么?</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/lytorch.png" srcset="/img/loading.gif" lazyload alt="lytorch" /></p>
+<h2 id="下载与测试"><a class="markdownIt-Anchor" href="#下载与测试"></a> 下载与测试</h2>
+<div class="code-wrapper"><pre><code class="hljs bash">pip install lytorch</code></pre></div>
+<div class="note note-light">
+            <p>那么我们应该怎么使用呢?</p><blockquote><p>这一步很多教程没有讲,我在这里卡了好久…</p></blockquote>
+          </div>
+<p>注意我们现在目录结构是这样的</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220429142109.png" srcset="/img/loading.gif" lazyload alt="20220429142109" /></p>
+<p>文件夹<code>lytorch</code>就是我们要import的</p>
+<div class="note note-warning">
+            <p>这里的lytorch与pip install使用的lytorch完全不同</p><ul><li>pip install lytorch 取决于name,就是说setup.py中name写的是什么,就是什么</li><li>import lytorch 取决于src文件夹下你的包的名字,我这里只是恰好同名而已</li></ul><p>这也就是为什么我们使用<code>pip install python-opencv</code>,然后使用<code>import cv2</code>引入了,相同的道理</p>
+          </div>
+<div class="note note-info">
+            <p>为什么看起来我无法导入我之前写的函数呢?也没有高亮提示,补全提示呢?</p>
+          </div>
+<p>作为一个python的包,每一个文件夹都需要作为一个包,一个包需要一个初始化文件,即<code>__init__.py</code>,<strong>这个文件是必要的</strong>.</p>
+<p>以lytorch为例,每一级目录都需要一个<code>__init__.py</code></p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220429143617.png" srcset="/img/loading.gif" lazyload alt="20220429143617" /></p>
+<p><code>__init__.py</code>中需要写什么呢?你需要以相对引用的方式导入所有关联项</p>
+<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> .test <span class="hljs-keyword">import</span> test_f
+<span class="hljs-keyword">from</span> .nn <span class="hljs-keyword">import</span> f</code></pre></div>
+<div class="note note-warning">
+            <p>注意这里不要使用 <code>from .nn import *</code>,这样虽然可以导入,但是这不利于语法补全和语法高亮,标准的引入方式是设置一个__all__.<br />如果你对此尚不熟悉可以参考<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/463969303">python的import详解</a></p>
+          </div>
+<p>我们之前提到过在文件夹里创建一个test.py文件用于测试,你可以尝试在该文件中尝试导入你的包,测试他的功能</p>
+<h2 id="更新"><a class="markdownIt-Anchor" href="#更新"></a> 更新</h2>
+<p>如果你更新了一些功能,或者修改了一些信息,你想要重新发布.你只需要在setup.py中更新version,如v0.0.1 -&gt; v0.0.2,然后重新执行以上步骤即可.</p>
+<div class="note note-info">
+            <p>刚刚更新的库可能不能被马上下载,需要稍稍等待一会完成PYPI的更新</p>
+          </div>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%9D%82/">杂</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/29/git/git%E7%9A%84%E4%BD%BF%E7%94%A8/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">git的使用</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/28/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90-%E4%B8%8B/">
+                        <span class="hidden-mobile">语法分析(下)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"fEy8W8VvIoc26nT53dV2157j-gzGzoHsz","appKey":"s9HXuqmvBWrOaAiLA07Jg59A","path":"window.location.pathname","placeholder":"欢迎讨论,留下163邮箱我才能看到回复哦~","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -1,0 +1,689 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://raw.githubusercontent.com/learner-lu/picbed/master/logo.png">
+  <link rel="icon" href="https://raw.githubusercontent.com/learner-lu/picbed/master/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#4a00e0">
+  <meta name="author" content="luzhixing12345">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="由于笔者水平有限,该文档并不是git的教学文档,仅为学习了git的用法之后的总结,希望能通过整理的方式加深印象,如果对git尚不熟悉,可以参考以下文章  Git入门级参考文章  git官方文档 知乎文章 知乎文章 github markdown git电子书   git的使用 git支持linux的部分命令,包括cat,mkdir,touch,vim,rm,cd等等,也有一些常用的命令和提交格式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git的使用">
+<meta property="og:url" content="https://luzhixing12345.github.io/2022/04/29/git/git%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="kamilu的博客">
+<meta property="og:description" content="由于笔者水平有限,该文档并不是git的教学文档,仅为学习了git的用法之后的总结,希望能通过整理的方式加深印象,如果对git尚不熟悉,可以参考以下文章  Git入门级参考文章  git官方文档 知乎文章 知乎文章 github markdown git电子书   git的使用 git支持linux的部分命令,包括cat,mkdir,touch,vim,rm,cd等等,也有一些常用的命令和提交格式">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220323201925.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220323202744.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220323202913.png">
+<meta property="article:published_time" content="2022-04-29T07:38:45.000Z">
+<meta property="article:modified_time" content="2022-04-29T08:23:42.862Z">
+<meta property="article:author" content="luzhixing12345">
+<meta property="article:tag" content="git">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220323201925.png">
+  
+  
+  <title>git的使用 - kamilu的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"luzhixing12345.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"fEy8W8VvIoc26nT53dV2157j-gzGzoHsz","app_key":"s9HXuqmvBWrOaAiLA07Jg59A","server_url":"https://fey8w8vv.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Kamilu-blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://raw.githubusercontent.com/learner-lu/picbed/master/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="git的使用">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-04-29 15:38" pubdate>
+        2022年4月29日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.2k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      27 分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">git的使用</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2 小时前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>由于笔者水平有限,该文档并不是git的教学文档,仅为学习了git的用法之后的总结,希望能通过整理的方式加深印象,如果对git尚不熟悉,可以参考以下文章</p>
+<h2 id="git入门级参考文章"><a class="markdownIt-Anchor" href="#git入门级参考文章"></a> Git入门级参考文章</h2>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2">git官方文档</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/28976652/answer/1969388194">知乎文章</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/135183491">知乎文章</a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax">github markdown</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/luzhixing12345/luzhixing12345.github.io/releases/download/v0.0.1/progit.pdf">git电子书</a></p>
+</blockquote>
+<h2 id="git的使用"><a class="markdownIt-Anchor" href="#git的使用"></a> git的使用</h2>
+<p>git支持linux的部分命令,包括<code>cat</code>,<code>mkdir</code>,<code>touch</code>,<code>vim</code>,<code>rm</code>,<code>cd</code>等等,也有一些常用的命令和提交格式</p>
+<p>git不支持完整的正则表达式语法(regex es),它只支持<code>unix fnmatch</code>(filename pattern matching),通常来说在命令行中使用正则语法容易出现误导，如<code>demo.c</code>等习惯性的写法,因此采用<a target="_blank" rel="noopener" href="https://docs.python.org/3/library/fnmatch.html">unix的匹配写法</a>,具体为:</p>
+<ul>
+<li><code>*</code>匹配任意字符,任意次数</li>
+<li><code>?</code>匹配任意字符,一次</li>
+<li><code>[seq]</code> 匹配 <code>seq</code> 中出现的字符,一次</li>
+<li><code>[!seq]</code> 匹配不在 <code>seq</code> 中出现的字符,一次</li>
+</ul>
+<p>如匹配 <code>demo.cpp</code>可使用如下任意一种写法,正则写法如 <code>\w*\.\w*</code> 将<strong>不被识别</strong></p>
+<div class="code-wrapper"><pre><code class="hljs shell">*.cpp | demo.* | demo.???</code></pre></div>
+<p>当您使用 <code>Git</code> 和 <code>GitHub</code> 协作处理项目时，例如，如果您在 <code>Windows</code> 计算机上工作，并且您的合作者在 <code>macOS</code> 中进行了更改，则 <code>Git</code> 可能会产生意外的结果.您可以将 Git 配置为自动处理行尾，以便与使用不同操作系统的人员进行有效协作。</p>
+<div class="code-wrapper"><pre><code class="hljs shell">git config --global core.autocrlf true</code></pre></div>
+<h3 id="关于-add"><a class="markdownIt-Anchor" href="#关于-add"></a> 关于 <code>add</code></h3>
+<blockquote>
+<p>将文件从工作区 <code>add</code> 到暂存区</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>添加所有文件</strong></p>
+<div class="code-wrapper"><pre><code class="hljs shell">git add .</code></pre></div>
+</li>
+<li>
+<p>添加所有 <code>.c</code></p>
+<div class="code-wrapper"><pre><code class="hljs shell">git add *.c</code></pre></div>
+</li>
+<li>
+<p><strong>添加 <code>FILEPATH</code> 文件夹下所有的文件</strong></p>
+<div class="code-wrapper"><pre><code class="hljs shell">git add FILEPATH/</code></pre></div>
+</li>
+<li>
+<p>查看添加了哪些文件</p>
+<div class="code-wrapper"><pre><code class="hljs shell">git status</code></pre></div>
+</li>
+</ul>
+<h3 id="关于-rm"><a class="markdownIt-Anchor" href="#关于-rm"></a> 关于 <code>rm</code></h3>
+<blockquote>
+<p>有时候添加错误的或未完成需要修改的文件到暂存区,需要从暂存区删除该文件</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>删除方式</strong></p>
+<blockquote>
+<p>注意,这里可以使用 <code>fnmatch</code>匹配文件名,但是如果某一匹配项不在暂存区而在工作区未被加入,则删除失败</p>
+<p>例如 <code>1.txt</code> 在暂存区中, <code>2.txt</code> 未加入暂存区,则使用 <code>git rm --cached *.txt</code> 会删除失败</p>
+<p><code>git add</code> 不会有这个问题,可以理解为把所有匹配项都加入暂存区,重复的再加一次</p>
+</blockquote>
+<ul>
+<li>
+<p>从暂存区删除该文件,物理文件不删除(推荐使用),放入垃圾桶</p>
+<div class="code-wrapper"><pre><code class="hljs shell">git rm --cached FILENAME</code></pre></div>
+</li>
+<li>
+<p>删除暂存区中的文件和物理文件,<strong>谨慎使用</strong></p>
+<div class="code-wrapper"><pre><code class="hljs shell">git rm --f FILENAME</code></pre></div>
+</li>
+</ul>
+</li>
+<li>
+<p>删除已提交的文件夹或文件</p>
+<div class="code-wrapper"><pre><code class="hljs shell">git rm -r --cached FOLDER
+git add .
+...</code></pre></div>
+</li>
+<li>
+<p>误删文件恢复 <strong>git rm 需谨慎!!!</strong></p>
+<ul>
+<li>
+<p>如果处于未提交状态</p>
+<div class="code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">查看所有修改项</span>
+git reset 
+<span class="hljs-meta prompt_"># </span><span class="language-bash">将FILENAME文件恢复</span>
+git checkout FILENAME</code></pre></div>
+</li>
+<li>
+<p>如果已经commit,那么会有些麻烦,只能退回上个版本,然后把被删除文件再找回来</p>
+<div class="code-wrapper"><pre><code class="hljs shell">git reset HEAD^
+git checkout (捡垃圾)</code></pre></div>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="关于-commit"><a class="markdownIt-Anchor" href="#关于-commit"></a> 关于 <code>commit</code></h3>
+<blockquote>
+<p>将暂存区的文件上传到仓库区</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>提交</strong></p>
+<p><code>-m</code>参数是一个较为常用的参数,用于将提交信息与命令放在同一行</p>
+<div class="code-wrapper"><pre><code class="hljs shell">git commit -m &quot;COMMIT MESSAGE&quot;</code></pre></div>
+<p>通常来说用于描述的commit信息应该记录更新了什么内容等等,一般来说一行足以.如果需要很多文件信息也可以使用</p>
+<div class="code-wrapper"><pre><div class="caption"><span>bash</span></div><code class="hljs git">git commit</code></pre></div>
+<p>打开commit信息文本,书写详细内容,使用方式同<code>vim</code></p>
+</li>
+<li>
+<p>查看commit日志(Q退出)</p>
+<div class="code-wrapper"><pre><code class="hljs shell">git log</code></pre></div>
+</li>
+<li>
+<p>单行查看commit日志,关键信息</p>
+<div class="code-wrapper"><pre><code class="hljs shell">git log --pretty=oneline</code></pre></div>
+</li>
+<li>
+<p>回退到上一个版本(<code>--hard</code>本地代码改变.<strong>谨慎使用</strong>)</p>
+<div class="code-wrapper"><pre><code class="hljs shell">git reset --hard HEAD^</code></pre></div>
+<p>回退到上N个版本</p>
+<div class="code-wrapper"><pre><code class="hljs shell">git reset --hard HEAD~N</code></pre></div>
+<blockquote>
+<p>通常来说使用 <code>git reset --hard HEAD^</code>来进行版本回退是因为有人错误的提交了commit,如提交到了不同的分支(branch)或者误修改了某些文件,但这种情况还是相对较少</p>
+<p>这里提供两种可能会遇到的情况:</p>
+<p>比如说你今天打算改一改代码,你可以先把所有文件<code>git add</code>然后<code>git commit</code>一次,然后开始修改,<code>a.txt b.txt c.txt</code>等文件,修改完之后你发现测试的结果不尽如人意,或者你觉得你的修改太愚蠢了太繁琐了想要重写,这时候就可以使用<code>git reset --hard HEAD</code> 来回到最后一次commit的位置,这样你在<code>a/b/c.txt</code>中的所有修改都会撤回(<strong>注意会改变本地文件,使用时请注意</strong>),就不需要你记住修改了什么文件再一次次<code>ctrl+z</code>回退了.</p>
+<p>或者如果你改了某几个文件的代码,但是想撤回某一个文件的所有修改,可以使用 <code>git checkout -- FILENAME</code>来撤销修改</p>
+</blockquote>
+</li>
+<li>
+<p>返回到某一个指定的版本</p>
+<div class="code-wrapper"><pre><code class="hljs shell">git reflog                # 查看所有commit记录,根据commit内容搜索,找到前面对应的序号
+git reset --hard 3f72bae  # 同步到某一版本</code></pre></div>
+</li>
+</ul>
+<h3 id="关于-push"><a class="markdownIt-Anchor" href="#关于-push"></a> 关于 <code>push</code></h3>
+<blockquote>
+<p>将仓库区的文件上传到GitHub</p>
+<p>有时候会出现<code>Failed to connect to github.com port 443 after xxx ms: Timed out</code>的报错信息或者<code>OpenSSL fail</code>的报错,网上的解决方法很多,有时成功有时不成功,我搜集到的所有解决方法.目前使用SSH可以无压力的上传下载使用git</p>
+</blockquote>
+<p><strong>Git保存的并不是文件的变化差异,而是文件不同时刻的快照</strong>.</p>
+<ul>
+<li>
+<p><code>git add</code>操作是将文件加入暂存区,Git会为每个对象计算校验和(SHA-1哈希算法),保存blob对象的快照</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220323201925.png" srcset="/img/loading.gif" lazyload alt="20220323201925" /></p>
+</li>
+<li>
+<p><code>git commit</code>操作会单独计算每一个目录的校验和,使用多个树对象来保存blob对象的校验和,最后再计算树对象的校验和,生成一个提交对象,包含树对象的指针和所有提交信息</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220323202744.png" srcset="/img/loading.gif" lazyload alt="20220323202744" /></p>
+</li>
+<li>
+<p>每次提交都会包含一个指向上次提交对象的指针</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220323202913.png" srcset="/img/loading.gif" lazyload alt="20220323202913" /></p>
+</li>
+</ul>
+<p>首先与远程仓库建立连接,有两种方式</p>
+<ul>
+<li>
+<p>直接从URL克隆仓库,默认将 <code>origin</code>设置为该仓库的地址</p>
+<div class="code-wrapper"><pre><div class="caption"><span>bash</span></div><code class="hljs git">git clone URL</code></pre></div>
+</li>
+<li>
+<p>将本地文件夹与远程仓库连接,<code>origin</code>对应远程仓库的地址(需要新建GitHub仓库)</p>
+<div class="code-wrapper"><pre><div class="caption"><span>bash</span></div><code class="hljs git">git remote add origin git@github.com:luzhixing12345/git-learning.git</code></pre></div>
+</li>
+</ul>
+<p>可以使用<code>git remote -v</code>查看远程仓库的地址,一个本地仓库可以连接多个远程仓库</p>
+<p>默认的分支是<code>master</code>,也就是说我们选择将我们目前commit的本地仓库提交到某一个远程仓库的某一个分支上,我们使用</p>
+<div class="code-wrapper"><pre><div class="caption"><span>bash</span></div><code class="hljs git">git push origin master</code></pre></div>
+<p>第一次提交的时候可以选择<code>git push -u origin master</code>追踪此分支,这样默认选择以后都提交到<code>origin</code>远程仓库的<code>master</code>分支,之后的提交可以省略参数</p>
+<div class="code-wrapper"><pre><div class="caption"><span>bash</span></div><code class="hljs git">git push</code></pre></div>
+<hr />
+<p>总结: 一套基本的git/GitHub的文件流如下</p>
+<ul>
+<li>
+<p>初次配置</p>
+<div class="code-wrapper"><pre><div class="caption"><span>bash</span></div><code class="hljs git">git init
+git add .
+git commit -m &quot;upload all the files&quot;
+git remote add origin git@github.com:luzhixing12345/git-learning.git
+git push -u origin master</code></pre></div>
+</li>
+<li>
+<p>之后的所有修改</p>
+<div class="code-wrapper"><pre><div class="caption"><span>bash</span></div><code class="hljs git">git add .
+git commit -m &quot;update git learning and fix docs bugs&quot;
+git push</code></pre></div>
+</li>
+</ul>
+<p>以上的命令已经可以满足绝大多数个人的项目开发与维护了,但是往往还有一些其他的问题,比如多人合作编写代码,比如临时修复bug等任务</p>
+<hr />
+<p>git设计了很好的分支系统和项目拉取合并的方式,这一部分也十分重要,但并不是必要掌握的</p>
+<p>接下来会介绍<code>branch | pull | fetch | merge</code>.这一部分可以说是git使用时最常见的问题,涉及多人合作完成项目,分支的使用|合并</p>
+<h3 id="优质网站"><a class="markdownIt-Anchor" href="#优质网站"></a> 优质网站</h3>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://ghproxy.com/">GitHub文件代理加速下载服务</a>  (GitHub 文件/Releases/archive/gist/raw.githubusercontent.com)</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/git/">git</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/29/git/git%E7%9A%84commit%E7%94%A8%E6%B3%95/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">git的commit用法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/29/%E6%9D%82/%E4%BD%BF%E7%94%A8PYPI%E5%8F%91%E5%B8%83python%E5%8C%85/">
+                        <span class="hidden-mobile">使用PYPI发布python包</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"fEy8W8VvIoc26nT53dV2157j-gzGzoHsz","appKey":"s9HXuqmvBWrOaAiLA07Jg59A","path":"window.location.pathname","placeholder":"欢迎讨论,留下163邮箱我才能看到回复哦~","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

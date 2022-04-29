@@ -1,0 +1,611 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://raw.githubusercontent.com/learner-lu/picbed/master/logo.png">
+  <link rel="icon" href="https://raw.githubusercontent.com/learner-lu/picbed/master/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#4a00e0">
+  <meta name="author" content="luzhixing12345">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="git官方提供了十分详细的描述,有很多直观的图片描述,很容易理解 我将在这部分根据我的理解给出一些描述性的图片,git的图片很好我并没有打算超越,仅作为学习记录 git官方的分支介绍 Note: “origin” 并无特殊含义 远程仓库名字 “origin” 与分支名字 “master” 一样，在 Git 中并没有任何特别的含义一样。 同时 “master” 是当你运行 git init 时默认">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git的branch和pull">
+<meta property="og:url" content="https://luzhixing12345.github.io/2022/04/29/git/git%E7%9A%84branch%E5%92%8Cpull/index.html">
+<meta property="og:site_name" content="kamilu的博客">
+<meta property="og:description" content="git官方提供了十分详细的描述,有很多直观的图片描述,很容易理解 我将在这部分根据我的理解给出一些描述性的图片,git的图片很好我并没有打算超越,仅作为学习记录 git官方的分支介绍 Note: “origin” 并无特殊含义 远程仓库名字 “origin” 与分支名字 “master” 一样，在 Git 中并没有任何特别的含义一样。 同时 “master” 是当你运行 git init 时默认">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220324235742.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220325000119.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220325000020.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220325000249.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220325000832.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220325001333.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220325001904.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220325002004.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220325002918.png">
+<meta property="article:published_time" content="2022-04-29T07:47:52.000Z">
+<meta property="article:modified_time" content="2022-04-29T07:48:06.336Z">
+<meta property="article:author" content="luzhixing12345">
+<meta property="article:tag" content="git">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220324235742.png">
+  
+  
+  <title>git的branch和pull - kamilu的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"luzhixing12345.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"fEy8W8VvIoc26nT53dV2157j-gzGzoHsz","app_key":"s9HXuqmvBWrOaAiLA07Jg59A","server_url":"https://fey8w8vv.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Kamilu-blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://raw.githubusercontent.com/learner-lu/picbed/master/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="git的branch和pull">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-04-29 15:47" pubdate>
+        2022年4月29日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.3k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      28 分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">git的branch和pull</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2 小时前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>git官方提供了十分详细的描述,有很多直观的图片描述,很容易理解</p>
+<p>我将在这部分根据我的理解给出一些描述性的图片,git的图片很好我并没有打算超越,仅作为学习记录</p>
+<p><a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%88%86%E6%94%AF%E7%AE%80%E4%BB%8B">git官方的分支介绍</a></p>
+<p>Note: “origin” 并无特殊含义</p>
+<p>远程仓库名字 “origin” 与分支名字 “master” 一样，在 Git 中并没有任何特别的含义一样。 同时 “master” 是当你运行 git init 时默认的起始分支名字，原因仅仅是它的广泛使用， “origin” 是当你运行 git clone 时默认的远程仓库名字。 如果你运行 git clone -o booyah，那么你默认的远程分支名字将会是 booyah/master。</p>
+</blockquote>
+<h2 id="pull-branch"><a class="markdownIt-Anchor" href="#pull-branch"></a> pull | branch</h2>
+<p>这个过程我用一个实例来演示,希望有助于理解</p>
+<ul>
+<li>
+<p>首先我创建了一个新的GitHub仓库(git branch),新建了一个文件夹并将他们remote连接,创建README文件并且提交上去,其过程无二致</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220324235742.png" srcset="/img/loading.gif" lazyload alt="20220324235742" /></p>
+</li>
+<li>
+<p>接着我补充了一些文件信息,创建<code>text.txt</code>,写入一句话,补充readme,作为第二次提交</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220325000119.png" srcset="/img/loading.gif" lazyload alt="20220325000119" /></p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220325000020.png" srcset="/img/loading.gif" lazyload alt="20220325000020" /></p>
+</li>
+<li>
+<p>截至目前,我已经在本地做了两次修改,并且全部提交到了GitHub上面,在GitHub中可以点击commit查看所有的提交记录</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220325000249.png" srcset="/img/loading.gif" lazyload alt="20220325000249" /></p>
+</li>
+</ul>
+<p>如果只有我一个人的话,我只需要每次写完代码commit,也可以多次commit保存记录选取最后一次push到GitHub,这样我的GitHub和本地仓库一定是统一的且是最新的</p>
+<p>master分支不断前进,HEAD代表你目前所在分支也不断前进,同时你的本地仓库与远程仓库处于同一位置</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220325000832.png" srcset="/img/loading.gif" lazyload alt="20220325000832" /></p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220325001333.png" srcset="/img/loading.gif" lazyload alt="20220325001333" /></p>
+<p>但是如果是多人合作编写程序的话,这样面临的一个问题是可能是你在本地做了一些工作,但是已经有人提前把工作推送到GitHub上,这就导致远程仓库的master接受了新的push,但是你的本地依然维持原样,当你编写完毕想要push你的commit时发现有错误信息</p>
+<ul>
+<li>
+<p>我在GitHub中手动修改README文件并且提交</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220325001904.png" srcset="/img/loading.gif" lazyload alt="20220325001904" /></p>
+</li>
+<li>
+<p>同时我也在本地修改README文件并且提交</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220325002004.png" srcset="/img/loading.gif" lazyload alt="20220325002004" /></p>
+</li>
+</ul>
+<p>这时产生了报错信息,即拒绝了我的提交,因为我的current branch is behind(我被落下了)</p>
+<div class="code-wrapper"><pre><div class="caption"><span>bash</span></div><code class="hljs git">luzhi@LZX MINGW64 /g/learner_lu/git-branch (master)
+$ git push origin master
+To github.com:learner-lu/git-branch.git
+ ! [rejected]        master -&gt; master (non-fast-forward)
+error: failed to push some refs to &#x27;github.com:learner-lu/git-branch.git&#x27;
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. Integrate the remote changes (e.g.
+hint: &#x27;git pull ...&#x27;) before pushing again.
+hint: See the &#x27;Note about fast-forwards&#x27; in &#x27;git push --help&#x27; for details.</code></pre></div>
+<p>git的推荐信息是使用<code>git pull</code></p>
+<ul>
+<li>
+<p>我们使用<code>git pull</code>拉取对应仓库的对应分支</p>
+<div class="code-wrapper"><pre><div class="caption"><span>bash</span></div><code class="hljs git">git pull origin master</code></pre></div>
+</li>
+</ul>
+<p><code>git pull</code>命令是将远程仓库与本地仓库进行统一,这里会出现一个问题: 如果是别人新建的文件,那么直接会在我的本地仓库复制;但如果是对于一个文件我也做了修改他也做了修改,这时就会产生冲突,因为不清楚这里的修改怎么做,需要手动解决冲突</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220325002918.png" srcset="/img/loading.gif" lazyload alt="20220325002918" /></p>
+<p>vscode插件提供了方便的比较视图,可以选择接受现在的,接受当前提交到GitHub中最新的,还是都接受.解决所有冲突之后就可以commit了</p>
+<div class="code-wrapper"><pre><div class="caption"><span>bash</span></div><code class="hljs git">git commit -am &quot;solve crash&quot;</code></pre></div>
+<p>这种先pull后push的方式可以有效避免代码不同步,严格的commit检验保证了所有人的代码再提交的那一刻一定是与远程仓库的代码同步的,最新的. 但是于此同时也带来了一个问题,那就是每次我都需要处理冲突的文件,进行手动的选择接受哪一种修改,这显然不是一个好的方式,如果我交上去的东西被别人pull下来修改了,然后他把他的push上去. 那我再pull的时候又会发现不同,这显然不利于团队开发.</p>
+<p>我们倾向于选择一种方式分开不同的开发,比如合理的分工,模块化到不同的文件夹/文件编写代码,这样就不需要处理冲突. 因为如果你没有改动这个文件夹/文件,其他人的修改会直接覆盖/更新此文件而不需要处理冲突(Fast-forward)</p>
+<p>显然git也想到了这一点,比起创建文件夹这种本办法,git采用了分支的这种思想</p>
+<ul>
+<li>
+<p>我们可以创建一个新的分支<code>dev</code>,并且移动到这个分支</p>
+<div class="code-wrapper"><pre><div class="caption"><span>bash</span></div><code class="hljs git">git branch dev
+git checkout dev</code></pre></div>
+</li>
+</ul>
+<p>如果你在这个<code>dev</code>分支上做开发,比如新建了一些文件,改写了一些代码,提交了commit.这些操作都不会影响之前的master分支.</p>
+<p>如果你现在选择移动到master分支 <code>git checkout master</code>,你会发现所有的dev中的修改全都不见了,仍然是创建dev时的样子,你可以继续在master中做开发.</p>
+<p>当你master处理完毕后可以再回到dev分支,这时又回到了dev分支的状态,这种分支的切换对于处理不同任务等复杂的场景十分适合</p>
+<blockquote>
+<p>注意: 切换分支前应commit所有修改项</p>
+</blockquote>
+<p>对于多人开发时,可以创建多个分支以供不同contributer开发,最后再合理的时刻进行合并,或者更新主分支master</p>
+<h2 id="fetch-merge"><a class="markdownIt-Anchor" href="#fetch-merge"></a> fetch merge</h2>
+<p>常规情况使用pull操作即可强制更新本地仓库,还可以使用<code>git fetch</code> <code>git merge</code>来进行合并</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41975655/article/details/82887273">pull与fetch的区别</a></p>
+</blockquote>
+<p>简单来说就是<code>git fetch</code>不更新master只更新origin/master,然后使用<code>git merge</code>合并本地master和origin/master,产生新commit提交.</p>
+<div class="code-wrapper"><pre><div class="caption"><span>bash</span></div><code class="hljs git">git fetch origin
+git merge origin/master
+git commit -am &quot;successfully merge&quot;
+git push origin master</code></pre></div>
+<p><code>git pull</code>就是直接合并了本地master和本地remote</p>
+<p>两者的本质区别就是<code>fetch</code>只是将远程仓库替换本地的remote,并不会修改你当前的任何文件,你可以检查fetch的内容再决定要不要合并.<br />
+而<code>pull</code>则直接进行合并,需要你现在处理冲突,决定是否改变文件.</p>
+<p>普遍推荐使用<code>git fetch + git merge</code> 而不是 <code>git pull</code>,当然对于小项目来说看起来<code>git pull</code>更方便一些,也没有什么大问题</p>
+<h2 id="rebase-变基"><a class="markdownIt-Anchor" href="#rebase-变基"></a> rebase 变基</h2>
+<p>由dev变基到master</p>
+<div class="code-wrapper"><pre><div class="caption"><span>bash</span></div><code class="hljs git">git checkout dev
+git rebase master</code></pre></div>
+<blockquote>
+<p>它的原理是首先找到这两个分支(dev master)最近共同祖先，然后对比当前分支(dev)相对于该祖先的历次提交，提取相应的修改并存为临时文件， 然后将当前分支指向目标基底 master, 最后以此将之前另存为临时文件的修改依序应用</p>
+</blockquote>
+<p>rebase会确保在向远程分支推送时能保持提交历史的整洁.例如向某个其他人维护的项目贡献代码时。 在这种情况下，你首先在自己的分支里进行开发，当开发完成时你需要先将你的代码变基到 origin/master 上，然后再向主项目提交修改。 这样的话，该项目的维护者就不再需要进行整合工作，只需要快进合并便可。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%8F%98%E5%9F%BA">一些其他变基过程</a></p>
+</blockquote>
+<p>也可以直接使用<code>pull + rebase</code>的方式,快速拉取变基合并. 如果有冲突需要处理冲突,选择接受哪一种修改(<a target="_blank" rel="noopener" href="http://xn--git-xz8i.md">见git.md</a>).</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43845059/article/details/119754972">git rebase(master|REBASE 1/1)</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/rocling/article/details/82956402">git push: failed to push some refs to</a></p>
+</blockquote>
+<div class="code-wrapper"><pre><div class="caption"><span>bash</span></div><code class="hljs git">git pull --rebase origin master</code></pre></div>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/git/">git</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/29/%E6%9D%82/markdown%E8%AF%AD%E6%B3%95/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">markdown语法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/29/git/git%E8%BF%9E%E6%8E%A5%E8%B6%85%E6%97%B6/">
+                        <span class="hidden-mobile">git连接超时</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"fEy8W8VvIoc26nT53dV2157j-gzGzoHsz","appKey":"s9HXuqmvBWrOaAiLA07Jg59A","path":"window.location.pathname","placeholder":"欢迎讨论,留下163邮箱我才能看到回复哦~","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
