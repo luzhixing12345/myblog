@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>pytorch预训练模型下载地址</title>
+      <link href="/2022/05/10/pytorch/pytorch%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80/"/>
+      <url>/2022/05/10/pytorch/pytorch%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80/</url>
+      
+        <content type="html"><![CDATA[<div class="note note-info">            <p>转载<a href="https://www.cnblogs.com/ywheunji/p/10605614.html">pytorch预训练模型的下载地址以及解决下载速度慢的方法</a><br />侵删</p>          </div><div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># Resnet:</span>model_urls = &#123;    <span class="hljs-string">&#x27;resnet18&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/resnet18-5c106cde.pth&#x27;</span>,    <span class="hljs-string">&#x27;resnet34&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/resnet34-333f7ec4.pth&#x27;</span>,    <span class="hljs-string">&#x27;resnet50&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/resnet50-19c8e357.pth&#x27;</span>,    <span class="hljs-string">&#x27;resnet101&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/resnet101-5d3b4d8f.pth&#x27;</span>,    <span class="hljs-string">&#x27;resnet152&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/resnet152-b121ed2d.pth&#x27;</span>,&#125;<span class="hljs-comment"># inception:</span>model_urls = &#123;    <span class="hljs-comment"># Inception v3 ported from TensorFlow</span>    <span class="hljs-string">&#x27;inception_v3_google&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/inception_v3_google-1a9a5a14.pth&#x27;</span>,&#125;<span class="hljs-comment"># Densenet:</span>model_urls = &#123;    <span class="hljs-string">&#x27;densenet121&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/densenet121-a639ec97.pth&#x27;</span>,    <span class="hljs-string">&#x27;densenet169&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/densenet169-b2777c0a.pth&#x27;</span>,    <span class="hljs-string">&#x27;densenet201&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/densenet201-c1103571.pth&#x27;</span>,    <span class="hljs-string">&#x27;densenet161&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/densenet161-8d451a50.pth&#x27;</span>,&#125;<span class="hljs-comment"># Alexnet:</span>model_urls = &#123;    <span class="hljs-string">&#x27;alexnet&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/alexnet-owt-4df8aa71.pth&#x27;</span>,&#125;<span class="hljs-comment"># vggnet:</span>model_urls = &#123;    <span class="hljs-string">&#x27;vgg11&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/vgg11-bbd30ac9.pth&#x27;</span>,    <span class="hljs-string">&#x27;vgg13&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/vgg13-c768596a.pth&#x27;</span>,    <span class="hljs-string">&#x27;vgg16&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/vgg16-397923af.pth&#x27;</span>,    <span class="hljs-string">&#x27;vgg19&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/vgg19-dcbb9e9d.pth&#x27;</span>,    <span class="hljs-string">&#x27;vgg11_bn&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/vgg11_bn-6002323d.pth&#x27;</span>,    <span class="hljs-string">&#x27;vgg13_bn&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/vgg13_bn-abd245e5.pth&#x27;</span>,    <span class="hljs-string">&#x27;vgg16_bn&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/vgg16_bn-6c64b313.pth&#x27;</span>,    <span class="hljs-string">&#x27;vgg19_bn&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/vgg19_bn-c79401a0.pth&#x27;</span>,&#125;</code></pre></div>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> pytorch </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>如何给开源项目提PR</title>
       <link href="/2022/05/04/git/%E5%A6%82%E4%BD%95%E7%BB%99%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E6%8F%90PR/"/>
       <url>/2022/05/04/git/%E5%A6%82%E4%BD%95%E7%BB%99%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E6%8F%90PR/</url>

@@ -16,21 +16,21 @@
   <meta name="author" content="luzhixing12345">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Github官方.gitigore规范  .gitignore文件用来剔除不希望git上传的文件,包括  编译的中间文件 不重要的文件 一些项目运行阶段生成的文件 一些大文件(超过git默认的100M)  如果使用了Commitizen作为代码规范commit,我的个人.gitignore配置如下 &#x2F;node_modules&#x2F; .vscode CHANGELOG.md  *.json 同时可以使">
+    <meta name="description" content="转载pytorch预训练模型的下载地址以及解决下载速度慢的方法侵删            # Resnet:  model_urls &#x3D; &amp;#123;     &amp;#x27;resnet18&amp;#x27;: &amp;#x27;https:&#x2F;&#x2F;download.pytorch.org&#x2F;models&#x2F;resnet18-5c106cde.pth&amp;#x27;,     &amp;#x27;resn">
 <meta property="og:type" content="article">
-<meta property="og:title" content="gitignore使用">
-<meta property="og:url" content="https://luzhixing12345.github.io/2022/04/29/git/gitignore%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:title" content="pytorch预训练模型下载地址">
+<meta property="og:url" content="https://luzhixing12345.github.io/2022/05/10/pytorch/pytorch%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80/index.html">
 <meta property="og:site_name" content="kamilu的博客">
-<meta property="og:description" content="Github官方.gitigore规范  .gitignore文件用来剔除不希望git上传的文件,包括  编译的中间文件 不重要的文件 一些项目运行阶段生成的文件 一些大文件(超过git默认的100M)  如果使用了Commitizen作为代码规范commit,我的个人.gitignore配置如下 &#x2F;node_modules&#x2F; .vscode CHANGELOG.md  *.json 同时可以使">
+<meta property="og:description" content="转载pytorch预训练模型的下载地址以及解决下载速度慢的方法侵删            # Resnet:  model_urls &#x3D; &amp;#123;     &amp;#x27;resnet18&amp;#x27;: &amp;#x27;https:&#x2F;&#x2F;download.pytorch.org&#x2F;models&#x2F;resnet18-5c106cde.pth&amp;#x27;,     &amp;#x27;resn">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-04-29T07:51:17.000Z">
-<meta property="article:modified_time" content="2022-04-29T08:09:38.185Z">
+<meta property="article:published_time" content="2022-05-09T18:30:31.000Z">
+<meta property="article:modified_time" content="2022-05-09T18:33:10.520Z">
 <meta property="article:author" content="luzhixing12345">
-<meta property="article:tag" content="git">
+<meta property="article:tag" content="pytorch">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>gitignore使用 - kamilu的博客</title>
+  <title>pytorch预训练模型下载地址 - kamilu的博客</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -164,7 +164,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="gitignore使用">
+            <span class="h2" id="subtitle" title="pytorch预训练模型下载地址">
               
             </span>
 
@@ -174,8 +174,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-04-29 15:51" pubdate>
-        2022年4月29日 下午
+      <time datetime="2022-05-10 02:30" pubdate>
+        2022年5月10日 凌晨
       </time>
     </span>
   
@@ -185,7 +185,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      899 字
+      2k 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      8 分钟
+      17 分钟
     </span>
   
 
@@ -231,58 +231,64 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">gitignore使用</h1>
+            <h1 style="display: none">pytorch预训练模型下载地址</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：10 天前
+                  本文最后更新于：2 分钟前
                 
               </p>
             
             <div class="markdown-body">
-              <blockquote>
-<p><a target="_blank" rel="noopener" href="https://github.com/github/gitignore">Github官方.gitigore规范</a></p>
-</blockquote>
-<p>.gitignore文件用来剔除不希望git上传的文件,包括</p>
-<ul>
-<li>编译的中间文件</li>
-<li>不重要的文件</li>
-<li>一些项目运行阶段生成的文件</li>
-<li>一些大文件(超过git默认的100M)</li>
-</ul>
-<p>如果使用了<code>Commitizen</code>作为代码规范commit,我的个人<code>.gitignore</code>配置如下</p>
-<div class="code-wrapper"><pre><code class="hljs shell">/node_modules/
-.vscode
-CHANGELOG.md 
-*.json</code></pre></div>
-<p>同时可以使用GitHub官方提供的不同语言的gitignore文件,创建仓库是可以直接选择gitignore文件</p>
-<p>.gitignore文件通常需要根据具体的项目目录文件进行调整,需要自建<code>.gitignore</code>文件以定向剔除,也可以在多个文件夹下建立<code>.gitignore</code></p>
-<p>值得一提的是,gitignore中新加入的项并不会从已上传的仓库中删除,也就是说如果你已经上传了cpp文件后在gitignore中去除*.cpp,已上传的cpp并不会被删除.这是因为在暂存区拥有该文件的备份,使用<code>git add</code>命令如果文件未修改则直接使用备份,使gitignore生效的方法如下</p>
-<ul>
-<li>
-<p>稍微改动当前文件,空格/换行</p>
-</li>
-<li>
-<p>清除暂存区的cached之后<code>git add</code>即可</p>
-<div class="code-wrapper"><pre><code class="hljs shell">git rm -r --cached .
-git add .
-...</code></pre></div>
-</li>
-</ul>
-<p>GitHub并不支持上传空文件夹,这个其实算是git设计时的失误,<a target="_blank" rel="noopener" href="https://git.wiki.kernel.org/index.php/GitFaq#Can_I_add_empty_directories.3F">原回答</a>,可以使用gitignore或者readme占位</p>
-<div class="code-wrapper"><pre><code class="hljs shell">Can I add empty directories? 
----
-目前，Git索引（staging area）的设计只允许列出文件，
-没有人有足够的能力进行更改以允许空目录，也没有人足够关心这种情况来纠正它。
+              <div class="note note-info">
+            <p>转载<a target="_blank" rel="noopener" href="https://www.cnblogs.com/ywheunji/p/10605614.html">pytorch预训练模型的下载地址以及解决下载速度慢的方法</a><br />侵删</p>
+          </div>
+<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># Resnet:</span>
 
-在目录中添加文件时会自动添加目录。也就是说，目录不必添加到存储库中，也不需要单独跟踪。
+model_urls = &#123;
+    <span class="hljs-string">&#x27;resnet18&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/resnet18-5c106cde.pth&#x27;</span>,
+    <span class="hljs-string">&#x27;resnet34&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/resnet34-333f7ec4.pth&#x27;</span>,
+    <span class="hljs-string">&#x27;resnet50&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/resnet50-19c8e357.pth&#x27;</span>,
+    <span class="hljs-string">&#x27;resnet101&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/resnet101-5d3b4d8f.pth&#x27;</span>,
+    <span class="hljs-string">&#x27;resnet152&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/resnet152-b121ed2d.pth&#x27;</span>,
+&#125;
 
-你可以说“git add&lt;dir&gt;”，它会将文件添加到其中。
+<span class="hljs-comment"># inception:</span>
 
-如果你真的需要一个目录存在于签出中，你应该在其中创建一个文件。
-gitignore可以很好地实现这一目的（还有一个使用.NET framework的工具MarkEmptyDirs，
-它允许您自动完成这项任务）；您可以将其留空，或填写不希望出现在目录中的文件名。</code></pre></div>
-<p>GitHub本身是不建议仓库体积很大的</p>
+model_urls = &#123;
+    <span class="hljs-comment"># Inception v3 ported from TensorFlow</span>
+    <span class="hljs-string">&#x27;inception_v3_google&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/inception_v3_google-1a9a5a14.pth&#x27;</span>,
+&#125;
+
+<span class="hljs-comment"># Densenet:</span>
+
+model_urls = &#123;
+    <span class="hljs-string">&#x27;densenet121&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/densenet121-a639ec97.pth&#x27;</span>,
+    <span class="hljs-string">&#x27;densenet169&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/densenet169-b2777c0a.pth&#x27;</span>,
+    <span class="hljs-string">&#x27;densenet201&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/densenet201-c1103571.pth&#x27;</span>,
+    <span class="hljs-string">&#x27;densenet161&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/densenet161-8d451a50.pth&#x27;</span>,
+&#125;
+
+
+
+<span class="hljs-comment"># Alexnet:</span>
+
+model_urls = &#123;
+    <span class="hljs-string">&#x27;alexnet&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/alexnet-owt-4df8aa71.pth&#x27;</span>,
+&#125;
+
+<span class="hljs-comment"># vggnet:</span>
+
+model_urls = &#123;
+    <span class="hljs-string">&#x27;vgg11&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/vgg11-bbd30ac9.pth&#x27;</span>,
+    <span class="hljs-string">&#x27;vgg13&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/vgg13-c768596a.pth&#x27;</span>,
+    <span class="hljs-string">&#x27;vgg16&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/vgg16-397923af.pth&#x27;</span>,
+    <span class="hljs-string">&#x27;vgg19&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/vgg19-dcbb9e9d.pth&#x27;</span>,
+    <span class="hljs-string">&#x27;vgg11_bn&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/vgg11_bn-6002323d.pth&#x27;</span>,
+    <span class="hljs-string">&#x27;vgg13_bn&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/vgg13_bn-abd245e5.pth&#x27;</span>,
+    <span class="hljs-string">&#x27;vgg16_bn&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/vgg16_bn-6c64b313.pth&#x27;</span>,
+    <span class="hljs-string">&#x27;vgg19_bn&#x27;</span>: <span class="hljs-string">&#x27;https://download.pytorch.org/models/vgg19_bn-c79401a0.pth&#x27;</span>,
+&#125;</code></pre></div>
 
             </div>
             <hr>
@@ -293,7 +299,7 @@ gitignore可以很好地实现这一目的（还有一个使用.NET framework的
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/git/">git</a>
+                      <a class="hover-with-bg" href="/tags/pytorch/">pytorch</a>
                     
                   </div>
                 
@@ -310,18 +316,12 @@ gitignore可以很好地实现这一目的（还有一个使用.NET framework的
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/05/04/git/%E5%A6%82%E4%BD%95%E7%BB%99%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E6%8F%90PR/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">如何给开源项目提PR</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/04/29/%E6%9D%82/markdown%E8%AF%AD%E6%B3%95/">
-                        <span class="hidden-mobile">markdown语法</span>
+                      <a href="/2022/05/04/git/%E5%A6%82%E4%BD%95%E7%BB%99%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E6%8F%90PR/">
+                        <span class="hidden-mobile">如何给开源项目提PR</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
