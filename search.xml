@@ -4,6 +4,44 @@
   
     
     <entry>
+      <title>自制操作系统day0</title>
+      <link href="/2022/05/12/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday0/"/>
+      <url>/2022/05/12/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday0/</url>
+      
+        <content type="html"><![CDATA[<h1 id="day0-买书准备动手准备动手-2022512"><a class="markdownIt-Anchor" href="#day0-买书准备动手准备动手-2022512"></a> day0 买书,准备动手,准备动手 - 2022/5/12</h1><p>虽然对于计算机专业的学生来说0就是第一天,但是我还是给一天缓冲时间吧. 明天正式开始做!</p><p>买书,搜索了下有好多推荐的大学课程,也有好多前辈已经做过的东西,还是很厉害的~,希望可以顺利完成任务吧.</p><p>最后还是决定买了这本经典的 “30天自制操作系统”</p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/akljb.jpg" height="500">]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> OS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>GAN网络详解(上) - 基本原理及数学推导</title>
+      <link href="/2022/05/12/GAN/GAN%E7%BD%91%E7%BB%9C%E8%AF%A6%E8%A7%A3/"/>
+      <url>/2022/05/12/GAN/GAN%E7%BD%91%E7%BB%9C%E8%AF%A6%E8%A7%A3/</url>
+      
+        <content type="html"><![CDATA[<p>生成对抗网络(GAN)的出现可以说在深度学习领域具有划时代的意义,如今GAN也被广泛应用于各种机器学习的场景之中.GAN系列也是我个人学习过程的收获和心得,分享出来希望可以学习进步,欢迎批评指正</p><p>本系列会分上中下三部分,分别介绍</p><ul><li>GAN的基本原理及数学推导</li><li>GAN的不足之处以及后续的改进版本DCGAN,WGAN-CP,WGAN-GP</li><li>一个我的Github项目,使用WGAN-GP生成动漫头像</li></ul><hr />]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> GAN </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>pytorch预训练模型下载地址</title>
       <link href="/2022/05/10/pytorch/pytorch%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80/"/>
       <url>/2022/05/10/pytorch/pytorch%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80/</url>
