@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>自制操作系统day1</title>
+      <link href="/2022/05/14/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday1/"/>
+      <url>/2022/05/14/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday1/</url>
+      
+        <content type="html"><![CDATA[<h1 id="day1-从计算机结构到汇编程序入门-2022514"><a class="markdownIt-Anchor" href="#day1-从计算机结构到汇编程序入门-2022514"></a> day1 从计算机结构到汇编程序入门 - 2022/5/14</h1><blockquote><p><s>5/13有事鸽了一天</s>,今天开始学习</p></blockquote><div class="note note-info">            <p><a href="https://github.com/luzhixing12345/L-OS/releases/download/v0.0.2/Bz1621.lzh_jb51.rar">Bz1621下载</a><br /><a href="https://www.cnblogs.com/yucloud/p/13054367.html">NASM+GCC</a><br /><a href="https://blog.csdn.net/qq_40950957/article/details/80467513">VMware下载安装</a></p><p>这个软件emm怎么说呢,容易闪退,而且书里给的汇编代码也不是特别好看,我本身是不建议手动敲一遍的,因为我自己确实敲了一遍,确实挺费劲的…</p>          </div><p>我们可以直接使用作者光盘中提供的<code>day1/helloos0/helloos.img</code></p><p>Vscode有很优雅的方式查看这个文件,下载插件 <code>hexodump for VSCode</code> 和 <code>x86 and x86_64 Assembly</code></p><p>右键选择 <code>Show Hexdump</code></p><p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220514222002.png" alt="20220514222002" /></p><p>可以观察到这个十六进制文件和书中的例子是相同的,作者的图片中似乎没有给出所有的十六进制数值有些奇怪</p><p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220514222121.png" alt="20220514222121" /></p><p>接着按着书上的步骤,成功使用QEMU启动</p><p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220514223552.png" alt="20220514223552" /></p><p>我们也可以选择直接下载<a href="http://www.qemu.org/download">QEMU</a>,然后将目录配置到环境变量之中,重启vscode终端然后输入</p><div class="code-wrapper"><pre><code class="hljs bash">qemu-system-i386 helloos.img</code></pre></div><p>也可以得到类似的界面,只不过上方的文字有些不同,也许是版本的原因吧</p><p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220514173841.png" alt="20220514173841" /></p><p>接着作者又提供了汇编的代码,我们可以直接下载<a href="https://www.nasm.us/pub/nasm/releasebuilds/2.14.02/win64/">NASM</a>,目录加入环境变量,重启vscode终端然后在命令行中输入</p><div class="code-wrapper"><pre><code class="hljs bash">nasm -f bin day1.asm -o day1.img</code></pre></div><p>就可以得到一个img文件了,接着使用qemu启动也是可以的</p><p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220514230908.png" alt="20220514230908" /></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> OS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>优雅的日志记录-logging</title>
       <link href="/2022/05/13/python/%E4%BC%98%E9%9B%85%E7%9A%84%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95-logging/"/>
       <url>/2022/05/13/python/%E4%BC%98%E9%9B%85%E7%9A%84%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95-logging/</url>
@@ -27,7 +46,7 @@
       <link href="/2022/05/12/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday0/"/>
       <url>/2022/05/12/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday0/</url>
       
-        <content type="html"><![CDATA[<h1 id="day0-买书准备动手准备动手-2022512"><a class="markdownIt-Anchor" href="#day0-买书准备动手准备动手-2022512"></a> day0 买书,准备动手,准备动手 - 2022/5/12</h1><p>虽然对于计算机专业的学生来说0就是第一天,但是我还是给一天缓冲时间吧. 明天正式开始做!</p><p>买书,搜索了下有好多推荐的大学课程,也有好多前辈已经做过的东西,还是很厉害的~,希望可以顺利完成任务吧.</p><p>最后还是决定买了这本经典的 “30天自制操作系统”</p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/akljb.jpg" height="500">]]></content>
+        <content type="html"><![CDATA[<h1 id="day0-买书准备动手准备动手-2022512"><a class="markdownIt-Anchor" href="#day0-买书准备动手准备动手-2022512"></a> day0 买书,准备动手,准备动手 - 2022/5/12</h1><p>虽然对于计算机专业的学生来说0就是第一天,但是我还是给一天缓冲时间吧. 明天正式开始做!</p><p>买书,搜索了下有好多推荐的大学课程,也有好多前辈已经做过的东西,还是很厉害的~,希望可以顺利完成任务吧.</p><p>最后还是决定买了这本经典的 “30天自制操作系统”</p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/akljb.jpg" height="500"><h2 id="导出光盘文件"><a class="markdownIt-Anchor" href="#导出光盘文件"></a> 导出光盘文件</h2><p><a href="https://github.com/luzhixing12345/L-OS/releases/download/v0.0.2/OS.rar">光盘文件下载</a></p><h2 id="一些写在最前面的话"><a class="markdownIt-Anchor" href="#一些写在最前面的话"></a> 一些写在最前面的话</h2><p>这个博客系列-OS应该会更新32次,day0做一些简要的介绍,day1-day30分别记录每一次的任务和学到的东西,最后一次day31用来整理所学知识和寻求进一步改进</p><p>我会完整的记录我的学习心得和历程,尽可能给出较为详细的过程和具体实践方法,所有的代码文件同步在仓库<a href="https://github.com/luzhixing12345/L-OS">L-OS</a>,所有的文字记录同步在博客.</p><p>不过再怎么说也难免挂一漏万,语焉不详.而且写博客的目的也不是复制书上的内容,而是整理总结,所以如果有读者浏览此博客建议跟着书走,如果遇到问题或者有些疑惑之处可以查看博客内容.</p><p>我是vscode用户,不可能照顾到每个人的软硬件环境.每个人的软件硬件,实现方法的选择也许不尽相同,不过最终都是为了一个共同的目标,也算是一个计算机学生的理想之一,<strong>写一个操作系统</strong>,仅供参考</p><p>目前我还是很纯的一个小白,对操作系统的概念和很多具体问题的实现方法尚且不清晰,希望可以通过一段时间的学习掌握操作系统的内容,并通过代码的方式独立编写一个自己的操作系统,选择此书也是想在模仿中学习,希望可以坚持下来,把完整的博客更完.</p><p>本系列博客的内容部分参考网络上其他前辈的参考文档,部分为笔者独立思考,参考文章会在开头给出,如有不当之处,欢迎留言讨论</p><p>加油~</p>]]></content>
       
       
       
