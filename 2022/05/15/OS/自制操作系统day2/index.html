@@ -16,21 +16,21 @@
   <meta name="author" content="luzhixing12345">
   <meta name="keywords" content="">
   
-    <meta name="description" content="生成对抗网络(GAN)的出现可以说在深度学习领域具有划时代的意义,如今GAN也被广泛应用于各种机器学习的场景之中.GAN系列也是我个人学习过程的收获和心得,分享出来希望可以学习进步,欢迎批评指正 本系列会分上中下三部分,分别介绍  GAN的基本原理及数学推导 GAN的不足之处以及后续的改进版本DCGAN,WGAN-CP,WGAN-GP 一个我的Github项目,使用WGAN-GP生成动漫头像">
+    <meta name="description" content="day2 汇编语言学习和Makefile入门 - 2022&#x2F;5&#x2F;15 这day2的没什么特别好说的,大二的时候学过RISC-V的汇编,也看过汇编语言第三版的一本书,所以理解汇编语言没什么特别大的问题 makefile的话学编译原理的时候也接触过,gcc写C文件编译的过程 emm这部分真没啥好说的,跳过吧.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GAN网络详解(上) - 基本原理及数学推导">
-<meta property="og:url" content="https://luzhixing12345.github.io/2022/05/12/GAN/GAN%E7%BD%91%E7%BB%9C%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:title" content="自制操作系统day2">
+<meta property="og:url" content="https://luzhixing12345.github.io/2022/05/15/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday2/index.html">
 <meta property="og:site_name" content="kamilu的博客">
-<meta property="og:description" content="生成对抗网络(GAN)的出现可以说在深度学习领域具有划时代的意义,如今GAN也被广泛应用于各种机器学习的场景之中.GAN系列也是我个人学习过程的收获和心得,分享出来希望可以学习进步,欢迎批评指正 本系列会分上中下三部分,分别介绍  GAN的基本原理及数学推导 GAN的不足之处以及后续的改进版本DCGAN,WGAN-CP,WGAN-GP 一个我的Github项目,使用WGAN-GP生成动漫头像">
+<meta property="og:description" content="day2 汇编语言学习和Makefile入门 - 2022&#x2F;5&#x2F;15 这day2的没什么特别好说的,大二的时候学过RISC-V的汇编,也看过汇编语言第三版的一本书,所以理解汇编语言没什么特别大的问题 makefile的话学编译原理的时候也接触过,gcc写C文件编译的过程 emm这部分真没啥好说的,跳过吧.">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-05-11T16:00:47.000Z">
-<meta property="article:modified_time" content="2022-05-12T07:23:54.548Z">
+<meta property="article:published_time" content="2022-05-15T01:57:44.000Z">
+<meta property="article:modified_time" content="2022-05-16T15:29:50.251Z">
 <meta property="article:author" content="luzhixing12345">
-<meta property="article:tag" content="GAN">
+<meta property="article:tag" content="OS">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>GAN网络详解(上) - 基本原理及数学推导 - kamilu的博客</title>
+  <title>自制操作系统day2 - kamilu的博客</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -164,7 +164,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="GAN网络详解(上) - 基本原理及数学推导">
+            <span class="h2" id="subtitle" title="自制操作系统day2">
               
             </span>
 
@@ -174,8 +174,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-05-12 00:00" pubdate>
-        2022年5月12日 凌晨
+      <time datetime="2022-05-15 09:57" pubdate>
+        2022年5月15日 上午
       </time>
     </span>
   
@@ -185,7 +185,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      192 字
+      147 字
     </span>
   
 
@@ -231,23 +231,19 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">GAN网络详解(上) - 基本原理及数学推导</h1>
+            <h1 style="display: none">自制操作系统day2</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2 天前
+                  本文最后更新于：1 天前
                 
               </p>
             
             <div class="markdown-body">
-              <p>生成对抗网络(GAN)的出现可以说在深度学习领域具有划时代的意义,如今GAN也被广泛应用于各种机器学习的场景之中.GAN系列也是我个人学习过程的收获和心得,分享出来希望可以学习进步,欢迎批评指正</p>
-<p>本系列会分上中下三部分,分别介绍</p>
-<ul>
-<li>GAN的基本原理及数学推导</li>
-<li>GAN的不足之处以及后续的改进版本DCGAN,WGAN-CP,WGAN-GP</li>
-<li>一个我的Github项目,使用WGAN-GP生成动漫头像</li>
-</ul>
-<hr />
+              <h1 id="day2-汇编语言学习和makefile入门-2022515"><a class="markdownIt-Anchor" href="#day2-汇编语言学习和makefile入门-2022515"></a> day2 汇编语言学习和Makefile入门 - 2022/5/15</h1>
+<p>这day2的没什么特别好说的,大二的时候学过RISC-V的汇编,也看过汇编语言第三版的一本书,所以理解汇编语言没什么特别大的问题</p>
+<p>makefile的话学编译原理的时候也接触过,gcc写C文件编译的过程</p>
+<p>emm这部分真没啥好说的,跳过吧.</p>
 
             </div>
             <hr>
@@ -258,7 +254,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/GAN/">GAN</a>
+                      <a class="hover-with-bg" href="/tags/OS/">OS</a>
                     
                   </div>
                 
@@ -275,18 +271,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/05/12/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday0/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">自制操作系统day0</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/05/10/pytorch/pytorch%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80/">
-                        <span class="hidden-mobile">pytorch预训练模型下载地址</span>
+                      <a href="/2022/05/14/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday1/">
+                        <span class="hidden-mobile">自制操作系统day1</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
