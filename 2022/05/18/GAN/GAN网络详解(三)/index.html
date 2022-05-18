@@ -16,21 +16,21 @@
   <meta name="author" content="luzhixing12345">
   <meta name="keywords" content="">
   
-    <meta name="description" content="不使用https连接,使用SSH连接(推荐)  使用RSA非对称加密算法 参考SSH key配置 SSH key配置教程 SSH SSL HTTPS    创建SSH key ssh-keygen -t rsa -C &quot;YOUR@EMAIL&quot;   默认路径保存,两个文件保存在 c:&#x2F;user&#x2F;luzhi&#x2F;.ssh   不设置密码,跳过   然后会在上面的文件夹中生成id_rs">
+    <meta name="description" content="本文将会介绍WGAN-CP和WGAN-GP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="git连接超时">
-<meta property="og:url" content="https://luzhixing12345.github.io/2022/04/29/git/git%E8%BF%9E%E6%8E%A5%E8%B6%85%E6%97%B6/index.html">
+<meta property="og:title" content="GAN网络详解(三)">
+<meta property="og:url" content="https://luzhixing12345.github.io/2022/05/18/GAN/GAN%E7%BD%91%E7%BB%9C%E8%AF%A6%E8%A7%A3(%E4%B8%89)/index.html">
 <meta property="og:site_name" content="kamilu的博客">
-<meta property="og:description" content="不使用https连接,使用SSH连接(推荐)  使用RSA非对称加密算法 参考SSH key配置 SSH key配置教程 SSH SSL HTTPS    创建SSH key ssh-keygen -t rsa -C &quot;YOUR@EMAIL&quot;   默认路径保存,两个文件保存在 c:&#x2F;user&#x2F;luzhi&#x2F;.ssh   不设置密码,跳过   然后会在上面的文件夹中生成id_rs">
+<meta property="og:description" content="本文将会介绍WGAN-CP和WGAN-GP">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-04-29T07:44:25.000Z">
-<meta property="article:modified_time" content="2022-05-15T15:01:33.068Z">
+<meta property="article:published_time" content="2022-05-18T15:08:13.000Z">
+<meta property="article:modified_time" content="2022-05-18T15:09:28.730Z">
 <meta property="article:author" content="luzhixing12345">
-<meta property="article:tag" content="git">
+<meta property="article:tag" content="GAN">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>git连接超时 - kamilu的博客</title>
+  <title>GAN网络详解(三) - kamilu的博客</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -164,7 +164,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="git连接超时">
+            <span class="h2" id="subtitle" title="GAN网络详解(三)">
               
             </span>
 
@@ -174,8 +174,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-04-29 15:44" pubdate>
-        2022年4月29日 下午
+      <time datetime="2022-05-18 23:08" pubdate>
+        2022年5月18日 晚上
       </time>
     </span>
   
@@ -185,7 +185,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.4k 字
+      21 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      12 分钟
+      1 分钟
     </span>
   
 
@@ -231,107 +231,16 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">git连接超时</h1>
+            <h1 style="display: none">GAN网络详解(三)</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：3 天前
+                  本文最后更新于：几秒前
                 
               </p>
             
             <div class="markdown-body">
-              <h2 id="不使用https连接使用ssh连接推荐"><a class="markdownIt-Anchor" href="#不使用https连接使用ssh连接推荐"></a> 不使用https连接,使用SSH连接(推荐)</h2>
-<blockquote>
-<p>使用RSA非对称加密算法</p>
-<p>参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36667170/article/details/79094257">SSH key配置</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.runoob.com/git/git-remote-repo.html">SSH key配置教程</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/5e3f9dfd2cb4">SSH SSL HTTPS</a></p>
-</blockquote>
-<ul>
-<li>
-<p>创建SSH key</p>
-<div class="code-wrapper"><pre><code class="hljs shell">ssh-keygen -t rsa -C &quot;YOUR@EMAIL&quot;</code></pre></div>
-</li>
-<li>
-<p>默认路径保存,两个文件保存在 <code>c:/user/luzhi/.ssh</code></p>
-</li>
-<li>
-<p>不设置密码,跳过</p>
-</li>
-<li>
-<p>然后会在上面的文件夹中生成<code>id_rsa</code>(私钥)和<code>id_rsa.pub</code>(公钥),<strong>私钥不要泄露!</strong></p>
-</li>
-<li>
-<p>打开Github-&gt;settings-&gt;SSH and GPG keys-&gt;new SSH key</p>
-</li>
-<li>
-<p>title随便起,将<code>id_rsa.pub</code>复制到下方</p>
-</li>
-<li>
-<p>确定后不久会收到Github的邮件</p>
-</li>
-<li>
-<p>在git bash中输入,注意就是<code>git@github.com</code>不是你的邮箱,该操作是将你的邮箱与github建立连接</p>
-<div class="code-wrapper"><pre><code class="hljs shell">ssh -T git@github.com</code></pre></div>
-</li>
-<li>
-<p>yes</p>
-<blockquote>
-<p>SSH协议采用由人工判断公钥的fingerprint是否可信的方式。当使用ssh命令连接服务器时，命令行会提示如下信息:</p>
-<p>The authenticity of host '168.30.9.213 (&lt;no hostip for proxy command&gt;) can’t be established.<br />
-RSA key fingerprint is 23:42:c1:e4:3f:d2:cc:37:1d:89:cb:e7:5d:be:5d:53.<br />
-Are you sure you want to continue connecting (yes/no)?</p>
-</blockquote>
-</li>
-<li>
-<p>如果出现Hi “用户名”! You’ve successfully authenticated, but GitHub does not provide shell access则设置成功</p>
-</li>
-<li>
-<p><strong>之后使用ssh的地址<code>git@github.com:xxx</code>而不是https的地址<code>https://github.com/xxx</code></strong></p>
-</li>
-<li>
-<p>可以使用 <code>git remote</code> 查看远程仓库,默认为空.</p>
-<ul>
-<li>
-<p>查看远程仓库绑定的地址</p>
-<div class="code-wrapper"><pre><code class="hljs shell">git remote -v</code></pre></div>
-</li>
-<li>
-<p>如果已经添加<code>origin</code>,可以使用如下命令删除</p>
-<div class="code-wrapper"><pre><code class="hljs shell">git remote rm origin</code></pre></div>
-</li>
-<li>
-<p>添加GitHub仓库地址,注意添加的是SSH的地址</p>
-<div class="code-wrapper"><pre><code class="hljs shell">git remote add origin git@github.com:learner-lu/git-learning.git</code></pre></div>
-</li>
-<li>
-<p>然后就可以自由的push啦</p>
-<div class="code-wrapper"><pre><code class="hljs shell">git push origin master</code></pre></div>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="如果之前都可以很稳定的push突然有一天报错ssl-port22-timeouttnnd坑死我了"><a class="markdownIt-Anchor" href="#如果之前都可以很稳定的push突然有一天报错ssl-port22-timeouttnnd坑死我了"></a> 如果之前都可以很稳定的push,突然有一天报错ssl port22 timeout(tnnd坑死我了)</h2>
-<p>这时候一般都不是你的问题,可以重新尝试一下<code>ssh -T git@github.com</code>, 如果仍然连接失败,网上有些方法是说添加一个config文件,换成443端口,我本人亲测不好使</p>
-<p>最后找了好久,发现是校园网…</p>
-<p>换流量,就可以了…</p>
-<h2 id="其他解决方法偶尔可以解决偶尔出问题"><a class="markdownIt-Anchor" href="#其他解决方法偶尔可以解决偶尔出问题"></a> 其他解决方法(偶尔可以解决,偶尔出问题)</h2>
-<ul>
-<li>
-<p>关掉代理(1)</p>
-<div class="code-wrapper"><pre><code class="hljs shell">git config --global  --unset https.https://github.com.proxy 
-git config --global  --unset http.https://github.com.proxy</code></pre></div>
-</li>
-<li>
-<p>关掉代理(2)</p>
-<div class="code-wrapper"><pre><code class="hljs shell">git config --global --unset http.proxy
-git config --global --unset https.proxy</code></pre></div>
-</li>
-<li>
-<p>UU加速器 | steam++</p>
-<p>见<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Aq4y1q7hr?spm_id_from=444.41.0.0">B站视频介绍</a></p>
-</li>
-</ul>
+              <p>本文将会介绍WGAN-CP和WGAN-GP</p>
 
             </div>
             <hr>
@@ -342,7 +251,7 @@ git config --global --unset https.proxy</code></pre></div>
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/git/">git</a>
+                      <a class="hover-with-bg" href="/tags/GAN/">GAN</a>
                     
                   </div>
                 
@@ -359,18 +268,12 @@ git config --global --unset https.proxy</code></pre></div>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/04/29/git/git%E7%9A%84branch%E5%92%8Cpull/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">git的branch和pull</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/04/29/git/git%E7%9A%84commit%E7%94%A8%E6%B3%95/">
-                        <span class="hidden-mobile">git的commit用法</span>
+                      <a href="/2022/05/18/GAN/GAN%E7%BD%91%E7%BB%9C%E8%AF%A6%E8%A7%A3(%E4%BA%8C)/">
+                        <span class="hidden-mobile">GAN网络详解(二)</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
