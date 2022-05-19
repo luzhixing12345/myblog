@@ -18,7 +18,7 @@
   
     <meta name="description" content="本文将会介绍WGAN-CP和它的改进版本WGAN-GP  WGAN-CP  参考文章GAN到WGAN,作者连续五篇文章非常详尽的分析了WGAN,读完之后受益匪浅  鉴于GAN网络存在的种种问题,那么我们应该寻求一个新的距离来替代JS.该文认为需要对“生成分布与真实分布之间的距离”探索一种更合适的度量方法。作者们把眼光转向了Earth-Mover距离,简称EM距离,又称Wasserstein距离">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GAN网络详解(三)">
+<meta property="og:title" content="GAN网络详解(三) - WGAN-CP 与 WGAN-GP">
 <meta property="og:url" content="https://luzhixing12345.github.io/2022/05/18/GAN/GAN%E7%BD%91%E7%BB%9C%E8%AF%A6%E8%A7%A3(%E4%B8%89)/index.html">
 <meta property="og:site_name" content="kamilu的博客">
 <meta property="og:description" content="本文将会介绍WGAN-CP和它的改进版本WGAN-GP  WGAN-CP  参考文章GAN到WGAN,作者连续五篇文章非常详尽的分析了WGAN,读完之后受益匪浅  鉴于GAN网络存在的种种问题,那么我们应该寻求一个新的距离来替代JS.该文认为需要对“生成分布与真实分布之间的距离”探索一种更合适的度量方法。作者们把眼光转向了Earth-Mover距离,简称EM距离,又称Wasserstein距离">
@@ -34,14 +34,14 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/v2-34114a10c56518d606c1b5dd77f64585_720w.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/v2-5b01ef93f60a14e7fa10dbea2b620627_720w.jpg">
 <meta property="article:published_time" content="2022-05-18T15:08:13.000Z">
-<meta property="article:modified_time" content="2022-05-19T09:38:02.703Z">
+<meta property="article:modified_time" content="2022-05-19T10:57:29.470Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="GAN">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/v2-d70ccd4a56287e7635c672e4b5a8261c_720w.jpg">
   
   
-  <title>GAN网络详解(三) - kamilu的博客</title>
+  <title>GAN网络详解(三) - WGAN-CP 与 WGAN-GP - kamilu的博客</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -175,7 +175,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="GAN网络详解(三)">
+            <span class="h2" id="subtitle" title="GAN网络详解(三) - WGAN-CP 与 WGAN-GP">
               
             </span>
 
@@ -242,11 +242,11 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">GAN网络详解(三)</h1>
+            <h1 style="display: none">GAN网络详解(三) - WGAN-CP 与 WGAN-GP</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：1 小时前
+                  本文最后更新于：9 分钟前
                 
               </p>
             
@@ -450,7 +450,7 @@ p_r(x^r) = \int_{x^g}\gamma(x^g,x^r)dx^g
 <p>WGAN并不是最GAN网络中最优秀的,随着如今的发展,每年都会有很多GAN相关的论文和模型结构的提出,但是WGAN无疑是一次巨大的飞跃</p>
 <p>初次学习了解GAN网络,不仅感叹前人的智慧,非常感谢网络上大佬无私分享的科普文章,阅读之后受益匪浅</p>
 <p>笔者个人水平不足,绝大部分内容都为摘抄整理,加入自己的一些理解之后总结的.在对应的引用开头前都标注了原文章的出处,如有侵权即刻删除</p>
-<p>从GAN,到使用深度卷积神经网络的DCGAN,到后来改进优化模型的WGAN,到后来进一步加入惩罚梯度的WGAN-GP,以及style3GAN,LSGAN等等等等,真的是学无止境啊!!</p>
+<p>从GAN,到使用深度卷积神经网络的DCGAN,到后来改进优化模型的WGAN,到后来进一步加入惩罚梯度的WGAN-GP,以及styleGAN,LSGAN等等等等,真的是学无止境啊!!</p>
 <p>说起来这只是一门专选课的结课大作业,我上不上都可以的,不过老师的结课要求很宽松,自由度很高,正巧我之前只是了解过一点GAN相关的内容,并没有深入的学习过.这次正好利用了这次机会初步了解了GAN的相关内容和数学推导,确实令我折服.</p>
 <div class="note note-info">
             <p>后来也有很多人讨论了关于WGAN的内容,也提出了一些质疑的声音,可以参考<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/361808267">这里</a>,有兴趣的可以去了解一下</p>
@@ -494,7 +494,7 @@ p_r(x^r) = \int_{x^g}\gamma(x^g,x^r)dx^g
                     
                     
                       <a href="/2022/05/18/GAN/GAN%E7%BD%91%E7%BB%9C%E8%AF%A6%E8%A7%A3(%E4%BA%8C)/">
-                        <span class="hidden-mobile">GAN网络详解(二)</span>
+                        <span class="hidden-mobile">GAN网络详解(二) - DCGAN以及GAN网络存在的一些问题</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
