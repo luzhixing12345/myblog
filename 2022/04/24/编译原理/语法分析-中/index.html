@@ -24,7 +24,7 @@
 <meta property="og:description" content="这一部分我推荐先浏览B站哈工大老师的编译原理课程,老师讲解的深入浅出,清晰明了    消除左递归和左公因子 为什么要消除左递归? 答: 自顶向下的文法是根据输入的句子的词法分析之后的结果进行判断的,每次的指针只有在正确匹配到对应的终结符之后才会继续向后移动. 例1: 假设有如下文法,用于表示算术运算的匹配.              E -&gt; E + T | E - T | T T -&amp;gt">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-04-24T15:02:33.000Z">
-<meta property="article:modified_time" content="2022-04-29T07:32:53.975Z">
+<meta property="article:modified_time" content="2022-05-21T14:27:50.372Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="编译原理">
 <meta name="twitter:card" content="summary_large_image">
@@ -235,7 +235,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：20 天前
+                  本文最后更新于：1 天前
                 
               </p>
             
@@ -516,15 +516,15 @@ C -&gt; 3C4 | ε</code></pre></div>
 </tr>
 </tbody>
 </table>
-<p>FOLLOW©很好求</p>
+<p>FOLLOW(C)很好求</p>
 <ul>
 <li>C-&gt;3C4|ε 可以得到FOLLOW© = {4}</li>
 <li>A-&gt;2CB 可以得到FOLLOW© = {4} + FIRST(B)-ε = {4,1}</li>
 </ul>
-<p>所以最后FOLLOW© = {$,4,1},表示如果现在的状态是C,那么后面跟着的不是1就是4</p>
-<p>因为 B -&gt; ε,A -&gt; 2CB,所以FOLLOW(A)加入到FOLLOW©,这是合理的,虽然没啥用</p>
-<p>但是你不能把FOLLOW©加入到FOLLOW(A)里,A就是最开始的推导串,哪里有什么其他非终结符作为FOLLOW呢?</p>
-<p><strong>所以FOLLOW集的添加是不可逆的</strong>,将FOLLOW(A)加入到FOLLOW©中</p>
+<p>所以最后FOLLOW(C) = {$,4,1},表示如果现在的状态是C,那么后面跟着的不是1就是4</p>
+<p>因为 B -&gt; ε,A -&gt; 2CB,所以FOLLOW(A)加入到FOLLOW(C),这是合理的,虽然没啥用</p>
+<p>但是你不能把FOLLOW(C)加入到FOLLOW(A)里,A就是最开始的推导串,哪里有什么其他非终结符作为FOLLOW呢?</p>
+<p><strong>所以FOLLOW集的添加是不可逆的</strong>,将FOLLOW(A)加入到FOLLOW(C)中</p>
 <div class="note note-warning">
             <p>最后一个补充的就是和FIRST集的推导中的提示类似,如果某一个推导可能推导出空串,那么就要注意如果它是空的情况</p><p>如果FIRST集中含有ε,那么我们不把ε加入到FOLLOW集.FOLLOW集都是不含ε的,因为就算ε可以跟在一个非终结符后面,这也没啥意义.</p>
           </div>

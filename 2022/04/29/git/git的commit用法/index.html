@@ -16,15 +16,15 @@
   <meta name="author" content="luzhixing12345">
   <meta name="keywords" content="">
   
-    <meta name="description" content="实话说我认为有些没必要,或许不应该在这种小事上大费周章,或许有些吹毛求疵吧,但我还是希望养成一个好的习惯 node_modules的设计…有些臃肿,不是很喜欢 参考知乎文章   环境配置 配置 npm  安装nodejs,选择LTS(长期稳定支持的版本),下载完成后配置环境  配置 Commitizen 以格式化 commit message   Commitizen安装 npm install">
+    <meta name="description" content="实话说我认为有些没必要,或许不应该在这种小事上大费周章,或许有些吹毛求疵吧,但我还是希望养成一个好的习惯 node_modules的设计…有些臃肿,不是很喜欢 参考知乎文章   git commit 标准用法  [feat] : 新增功能 [fix] : 修复 bug [docs] : 仅仅修改了文档，比如 README, CHANGELOG等等 [test] : 增加&#x2F;修改测试用例，包括单元测">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git的commit用法">
 <meta property="og:url" content="https://luzhixing12345.github.io/2022/04/29/git/git%E7%9A%84commit%E7%94%A8%E6%B3%95/index.html">
 <meta property="og:site_name" content="kamilu的博客">
-<meta property="og:description" content="实话说我认为有些没必要,或许不应该在这种小事上大费周章,或许有些吹毛求疵吧,但我还是希望养成一个好的习惯 node_modules的设计…有些臃肿,不是很喜欢 参考知乎文章   环境配置 配置 npm  安装nodejs,选择LTS(长期稳定支持的版本),下载完成后配置环境  配置 Commitizen 以格式化 commit message   Commitizen安装 npm install">
+<meta property="og:description" content="实话说我认为有些没必要,或许不应该在这种小事上大费周章,或许有些吹毛求疵吧,但我还是希望养成一个好的习惯 node_modules的设计…有些臃肿,不是很喜欢 参考知乎文章   git commit 标准用法  [feat] : 新增功能 [fix] : 修复 bug [docs] : 仅仅修改了文档，比如 README, CHANGELOG等等 [test] : 增加&#x2F;修改测试用例，包括单元测">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-04-29T07:43:43.000Z">
-<meta property="article:modified_time" content="2022-04-29T08:23:41.831Z">
+<meta property="article:modified_time" content="2022-05-22T16:42:02.275Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="git">
 <meta name="twitter:card" content="summary_large_image">
@@ -185,7 +185,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.8k 字
+      2.1k 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      16 分钟
+      18 分钟
     </span>
   
 
@@ -235,7 +235,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：20 天前
+                  本文最后更新于：6 小时前
                 
               </p>
             
@@ -245,6 +245,18 @@
 node_modules的设计…有些臃肿,不是很喜欢<br />
 <a target="_blank" rel="noopener" href="https://www.zhihu.com/search?type=content&amp;q=git%20cz">参考知乎文章</a></p>
 </blockquote>
+<h2 id="git-commit-标准用法"><a class="markdownIt-Anchor" href="#git-commit-标准用法"></a> git commit 标准用法</h2>
+<ul>
+<li>[feat] : 新增功能</li>
+<li>[fix] : 修复 bug</li>
+<li>[docs] : 仅仅修改了文档，比如 README, CHANGELOG等等</li>
+<li>[test] : 增加/修改测试用例，包括单元测试、集成测试等</li>
+<li>[style] : 修改了空行、缩进格式、引用包排序等等（不改变代码逻辑）</li>
+<li>[perf] : 优化相关内容，比如提升性能、体验、算法等</li>
+<li>[refactor] : 代码重构，「没有新功能或者bug修复」</li>
+<li>[chore] : 改变构建流程、或者增加依赖库、工具等</li>
+<li>[revert]: 回滚到上一个版本merge]: 代码合并</li>
+</ul>
 <h2 id="环境配置"><a class="markdownIt-Anchor" href="#环境配置"></a> 环境配置</h2>
 <p>配置 <code>npm</code></p>
 <ul>
