@@ -16,31 +16,27 @@
   <meta name="author" content="luzhixing12345">
   <meta name="keywords" content="">
   
-    <meta name="description" content="day3 自制操作系统day3-进入32位模式并导入C语言  start 这里遇到一个很难过的事情,如果我们向往常一样使用nask + qemu,会发现显示load error 正常来说看这个汇编代码JC应该是不执行,所以进入fin进入循环等待CPU启动,只使用nask直接生成img文件没有磁盘映像这个过程所以说出现问题,JC会直接跳转,显示load error  所以需要一个磁盘映像加入,da">
+    <meta name="description" content="day5 结构体&#x2F;文字显示与GDT&#x2F;IDT初始化 到现在看到这个结构体就能明白作者当初的用意了 struct BOOTINFO &amp;#123; 	char cyls, leds, vmode, reserve; 	short scrnx, scrny; 	char *vram; &amp;#125;; 与asmhead.nas中的 CYLS        EQU     0x0ff0 LEDS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="自制操作系统day3-进入32位模式并导入C语言">
-<meta property="og:url" content="https://luzhixing12345.github.io/2022/05/24/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday3/index.html">
+<meta property="og:title" content="自制操作系统day5-结构体&#x2F;文字显示与GDT&#x2F;IDT初始化">
+<meta property="og:url" content="https://luzhixing12345.github.io/2022/05/26/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday5/index.html">
 <meta property="og:site_name" content="kamilu的博客">
-<meta property="og:description" content="day3 自制操作系统day3-进入32位模式并导入C语言  start 这里遇到一个很难过的事情,如果我们向往常一样使用nask + qemu,会发现显示load error 正常来说看这个汇编代码JC应该是不执行,所以进入fin进入循环等待CPU启动,只使用nask直接生成img文件没有磁盘映像这个过程所以说出现问题,JC会直接跳转,显示load error  所以需要一个磁盘映像加入,da">
+<meta property="og:description" content="day5 结构体&#x2F;文字显示与GDT&#x2F;IDT初始化 到现在看到这个结构体就能明白作者当初的用意了 struct BOOTINFO &amp;#123; 	char cyls, leds, vmode, reserve; 	short scrnx, scrny; 	char *vram; &amp;#125;; 与asmhead.nas中的 CYLS        EQU     0x0ff0 LEDS">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220525114641.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220525145646.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220525145702.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220525161542.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220525161748.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220525163212.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220525163655.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/QQ%E6%88%AA%E5%9B%BE20220525210759.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/QQ%E6%88%AA%E5%9B%BE20220525211509.png">
-<meta property="article:published_time" content="2022-05-24T13:55:04.000Z">
-<meta property="article:modified_time" content="2022-05-25T19:17:26.515Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220526021405.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220526024750.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220526025108.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220526025737.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220526030252.png">
+<meta property="article:published_time" content="2022-05-25T17:54:35.000Z">
+<meta property="article:modified_time" content="2022-05-25T19:36:30.394Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="OS">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220525114641.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220526021405.png">
   
   
-  <title>自制操作系统day3-进入32位模式并导入C语言 - kamilu的博客</title>
+  <title>自制操作系统day5-结构体/文字显示与GDT/IDT初始化 - kamilu的博客</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -174,9 +170,9 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="自制操作系统day3-进入32位模式并导入C语言">
+            <span class="h2" id="subtitle" title="自制操作系统day5-结构体/文字显示与GDT/IDT初始化">
               
-                自制操作系统day3-进入32位模式并导入C语言
+                自制操作系统day5-结构体/文字显示与GDT/IDT初始化
               
             </span>
 
@@ -186,8 +182,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-05-24 21:55" pubdate>
-        2022年5月24日 晚上
+      <time datetime="2022-05-26 01:54" pubdate>
+        2022年5月26日 凌晨
       </time>
     </span>
   
@@ -197,7 +193,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.2k 字
+      426 字
     </span>
   
 
@@ -206,7 +202,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      19 分钟
+      4 分钟
     </span>
   
 
@@ -243,120 +239,47 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">自制操作系统day3-进入32位模式并导入C语言</h1>
+            <h1 style="display: none">自制操作系统day5-结构体/文字显示与GDT/IDT初始化</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：39 分钟前
+                  本文最后更新于：20 分钟前
                 
               </p>
             
             <div class="markdown-body">
-              <h1 id="day3-自制操作系统day3-进入32位模式并导入c语言"><a class="markdownIt-Anchor" href="#day3-自制操作系统day3-进入32位模式并导入c语言"></a> day3 自制操作系统day3-进入32位模式并导入C语言</h1>
-<h2 id="start"><a class="markdownIt-Anchor" href="#start"></a> start</h2>
-<p>这里遇到一个很难过的事情,如果我们向往常一样使用nask + qemu,会发现显示load error</p>
-<p>正常来说看这个汇编代码JC应该是不执行,所以进入fin进入循环等待CPU启动,只使用nask直接生成img文件没有磁盘映像这个过程所以说出现问题,JC会直接跳转,显示load error</p>
-<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220525114641.png" srcset="/img/loading.gif" lazyload alt="20220525114641" /></p>
-<p>所以需要一个磁盘映像加入,day2 和 day3的差距主要就是在这里</p>
-<blockquote>
-<p>感兴趣的朋友可以顺着makefile去看一下qemu那里的.bat,需要一些其他的BIOS来启动</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">day</th>
-<th style="text-align:center">makefile</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">day2</td>
-<td style="text-align:center"><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220525145646.png" srcset="/img/loading.gif" lazyload alt="20220525145646" /></td>
-</tr>
-<tr>
-<td style="text-align:center">day3</td>
-<td style="text-align:center"><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220525145702.png" srcset="/img/loading.gif" lazyload alt="20220525145702" /></td>
-</tr>
-</tbody>
-</table>
-<p>接着加入了读取失败重启的过程,使用AH=0X00,DL=0X00,INT 0X13进行系统复位</p>
-<div class="code-wrapper"><pre><code class="hljs asm">retry:
-		MOV		AH,0x02			; AH=0x02 : 读取磁盘
-		MOV		AL,1			; AL=1 : 读取第1个扇区
-		MOV		BX,0
-		MOV		DL,0x00			; DL=0x00 : 读取第1个簇(A驱动器)
-		INT		0x13			; 读取磁盘
-		JNC		fin				; 读取成功,跳转到fin
-		INC		SI				; 读取失败次数+1
-		CMP		SI,5			; 读取失败次数&gt;5,跳转到fin
-		JG		fin				; 跳转到fin
-		MOV 	AH,0x00			; AH=0x00 : 停止磁盘
-		MOV 	DL,0x00			; DL=0x00 : 停止第1个簇(A驱动器)
-		INT		0x13			; 停止磁盘
-		JMP		retry			; 重试</code></pre></div>
-<h2 id="着手开发操作系统"><a class="markdownIt-Anchor" href="#着手开发操作系统"></a> 着手开发操作系统</h2>
-<div class="note note-warning">
-            <p>使用make install的时候出现如下报错是因为不是软盘,和64位系统不兼容</p><div class="code-wrapper"><pre><code class="hljs bash">process_begin: CreateProcess(NULL, w a: haribote.img, ...) failed.
-make (e=2): 
-make: *** [install] Error 2</code></pre></div>
-          </div>
-<p>使用最简单的<code>haribote.nas</code>,运行<code>make img</code>得到如下的结果</p>
-<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220525161542.png" srcset="/img/loading.gif" lazyload alt="20220525161542" /></p>
-<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220525161748.png" srcset="/img/loading.gif" lazyload alt="20220525161748" /></p>
-<div class="note note-info">
-            <p>向一个空软盘保存文件的时候</p><ul><li>文件名写在0x002600以后的地方</li><li>文件的内容会写在0x004200以后的地方</li></ul>
-          </div>
-<p>这一部分的地址分配比较复杂,可能你读到这里有很多疑惑,作者也没有解释很清楚,我来解释一下</p>
-<p>首先推荐阅读一下阮一峰老师的<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2013/02/booting.html">计算机是如何启动的?</a></p>
-<p>简单来说就是如下五个过程:</p>
+              <h1 id="day5-结构体文字显示与gdtidt初始化"><a class="markdownIt-Anchor" href="#day5-结构体文字显示与gdtidt初始化"></a> day5 结构体/文字显示与GDT/IDT初始化</h1>
+<p>到现在看到这个结构体就能明白作者当初的用意了</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">BOOTINFO</span> &#123;</span>
+	<span class="hljs-type">char</span> cyls, leds, vmode, reserve;
+	<span class="hljs-type">short</span> scrnx, scrny;
+	<span class="hljs-type">char</span> *vram;
+&#125;;</code></pre></div>
+<p>与asmhead.nas中的</p>
+<div class="code-wrapper"><pre><code class="hljs asm">CYLS        EQU     0x0ff0
+LEDS        EQU     0x0ff1
+VMODE       EQU     0x0ff2
+SCRNX       EQU     0x0ff4
+SCRNY       EQU     0x0ff6
+VRAM        EQU     0x0ff8</code></pre></div>
+<p>好耶,一个A</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220526021405.png" srcset="/img/loading.gif" lazyload alt="20220526021405" /></p>
+<p>hankanku字体</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220526024750.png" srcset="/img/loading.gif" lazyload alt="20220526024750" /></p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220526025108.png" srcset="/img/loading.gif" lazyload alt="20220526025108" /></p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220526025737.png" srcset="/img/loading.gif" lazyload alt="20220526025737" /></p>
+<p>鼠标这里蛮坑的,作者突然把原来的init_screen改成init_screen8</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220526030252.png" srcset="/img/loading.gif" lazyload alt="20220526030252" /></p>
+<h2 id="gdt-idt初始化"><a class="markdownIt-Anchor" href="#gdt-idt初始化"></a> GDT IDT初始化</h2>
+<p>终于到了有意思一点的地方了,作者一开始打算用分段的方式处理任务</p>
+<p>GDT 是 <code>global (segment) descriptor table</code> 的缩写,全局段号记录表.</p>
+<p>每一个段需要使用8字节保存信息:</p>
 <ul>
-<li>通电</li>
-<li>读取ROM里面的BIOS,用来检查硬件</li>
-<li>硬件检查通过</li>
-<li>BIOS根据指定的顺序,检查引导设备的第一个扇区（即主引导记录）,加载在内存地址 0x7C00</li>
-<li>主引导记录把操作权交给操作系统</li>
+<li>段的大小</li>
+<li>段的起始地址</li>
+<li>段的管理属性(禁止写入,禁止执行,系统专用)</li>
 </ul>
-<p>接下来阅读<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2015/09/0x7c00.html">为什么主引导记录的内存地址是0x7C00?</a></p>
-<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220525163212.png" srcset="/img/loading.gif" lazyload alt="20220525163212" /></p>
-<p>启动区之后,接下来0x7e00 - 0x9fbff的区域都是没有特别用途的,操作系统可以所以使用,作者于是选择了0x8000这个地址作为操作系统的起始地址,<strong>没什么特殊的理由</strong>(见P49).</p>
-<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220525163655.png" srcset="/img/loading.gif" lazyload alt="20220525163655" /></p>
-<p>我们在ipl.nas的汇编中显示指定了<code>ORG 0x7c00</code>,如果不用ORG规定则汇编得到的目标程序将从0000H开始.根据内存地址的分配,0x7c00-0x7dff用作启动区,也就是我们的ipl.nas编译后的<code>ipl.bin</code>,这个文件具有16 x 32 = 512(字节)大小,是分离出来的启动区</p>
-<p>我们使用nask制作512字节的启动区,对应makefile中的</p>
-<div class="code-wrapper"><pre><code class="hljs makefile">ipl.bin : ipl.nas Makefile
-	<span class="hljs-variable">$(NASK)</span> ipl.nas ipl.bin ipl.lst</code></pre></div>
-<p>然后利用制作好的启动区,再使用磁盘映像管理工具来制作整个磁盘映像.</p>
-<p>所以现在的分布是,0x7c00-0x7dff存放了启动区的程序,0x8000-0x81ff也存放了启动区的程序,这个程序保存了两份.</p>
-<p>接下来0x8200-0x34fff是从软盘中读取的数据.</p>
-<p><strong>那我们的操作系统呢?他放在哪里?</strong></p>
-<p>不得不说,这是一个非常好的问题,我也困扰了很久.查看生成的img映像文件可以看到sys的文件的内容保存在0x4200以后的地方,我们把整个磁盘放在了0x8000的位置上,所以绝对的内存位置就是 0x8000+0x4200 = 0xc200</p>
-<p>这也就是为什么我们在启动区的最后使用<code>JMP 0xc200</code>跳转到这个位置,如果改成<code>JMP 0xd200</code> 那么会卡在启动之后,然后退出</p>
-<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/QQ%E6%88%AA%E5%9B%BE20220525210759.png" srcset="/img/loading.gif" lazyload alt="QQ截图20220525210759" /></p>
-<p>然后就是另一个令我困惑的问题,我们编写haribote.nas的时候</p>
-<div class="code-wrapper"><pre><code class="hljs asm">    ORG     0xc200              ;这个程序要被装载到内存的地址
-
-    MOV     AL,0x13            ;VGA显卡,320x200x8位彩色
-    MOV     AH,0x00            ;
-    INT     0x10
-
-
-fin:
-    HLT
-    JMP     fin</code></pre></div>
-<p>这里虽然使用了 <code>ORG 0xc200</code>,但是如果你这里更改为 0xdc00,或者其他,或者干脆注释掉,这丝毫不影响程序的运行.</p>
-<p>而且img文件依然是0x4200的位置保存了文件内容,似乎这个ORG并没有像说的一样把他加载到内存中的固定位置.</p>
-<p>不过这个ORG并没有影响什么大的地方,所以我们暂且不论,后面当这个程序复杂起来了修改这个地方绝对会出现问题</p>
-<div class="code-wrapper"><pre><code class="hljs makefile">haribote.sys : haribote.nas Makefile
-	<span class="hljs-variable">$(NASK)</span> haribote.nas haribote.sys haribote.lst
-
-haribote.img : ipl.bin haribote.sys Makefile
-	<span class="hljs-variable">$(EDIMG)</span>   imgin:../z_tools/fdimg0at.tek \
-		wbinimg src:ipl.bin len:512 from:0 to:0 \
-		copy from:haribote.sys to:@: \
-		imgout:haribote.img</code></pre></div>
-<p>总之一片漆黑是搞出来了</p>
-<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/QQ%E6%88%AA%E5%9B%BE20220525211509.png" srcset="/img/loading.gif" lazyload alt="QQ截图20220525211509" /></p>
-<p>接下来就是无情的打字机器了,当然你可以选择复制下来,不过我还是习惯一行一行对着打下来~</p>
-<p>最后测试没有其他问题,看看明天吧~</p>
+<p>(8192x8=64KB)</p>
 
             </div>
             <hr>
@@ -384,18 +307,12 @@ haribote.img : ipl.bin haribote.sys Makefile
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/05/26/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday4/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">自制操作系统day4-C语言与画面显示</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/05/19/GAN/GAN%E7%BD%91%E7%BB%9C%E8%AF%A6%E8%A7%A3(%E5%9B%9B)/">
-                        <span class="hidden-mobile">GAN网络详解(四) - 使用WGAN生成动漫头像</span>
+                      <a href="/2022/05/26/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday4/">
+                        <span class="hidden-mobile">自制操作系统day4-C语言与画面显示</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
