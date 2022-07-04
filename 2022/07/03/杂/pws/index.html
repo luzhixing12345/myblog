@@ -1,0 +1,586 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://raw.githubusercontent.com/learner-lu/picbed/master/logo.png">
+  <link rel="icon" href="https://raw.githubusercontent.com/learner-lu/picbed/master/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#4a00e0">
+  <meta name="author" content="luzhixing12345">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Windows Powershell美化以及 Vscode 终端美化配置 效果展示   下载 首先我们配置 Powershell, windows本身的Windows powershell(蓝色的)操作系统自带的并不是我们需要的 微软推出了一个新的终端terminal,是一个跨平台的应用程序,界面与之前的terminal相同但是增加了一些功能 点进去之后有两种下载方式,一种是官方推荐的使用 mi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows PowerShell美化以及 Vscode 终端美化配置">
+<meta property="og:url" content="https://luzhixing12345.github.io/2022/07/03/%E6%9D%82/pws/index.html">
+<meta property="og:site_name" content="kamilu的博客">
+<meta property="og:description" content="Windows Powershell美化以及 Vscode 终端美化配置 效果展示   下载 首先我们配置 Powershell, windows本身的Windows powershell(蓝色的)操作系统自带的并不是我们需要的 微软推出了一个新的终端terminal,是一个跨平台的应用程序,界面与之前的terminal相同但是增加了一些功能 点进去之后有两种下载方式,一种是官方推荐的使用 mi">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704100352.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704100832.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704100933.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704101132.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704101740.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704102713.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704103853.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704104026.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704104756.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704105205.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704110548.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704110636.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704110702.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704110956.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704111102.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704111226.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704111426.png">
+<meta property="article:published_time" content="2022-07-03T14:12:12.000Z">
+<meta property="article:modified_time" content="2022-07-04T03:15:34.366Z">
+<meta property="article:author" content="luzhixing12345">
+<meta property="article:tag" content="杂">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704100352.png">
+  
+  
+  <title>Windows PowerShell美化以及 Vscode 终端美化配置 - kamilu的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"luzhixing12345.github.io","root":"/","version":"1.8.14","typing":{"enable":false,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"fEy8W8VvIoc26nT53dV2157j-gzGzoHsz","app_key":"s9HXuqmvBWrOaAiLA07Jg59A","server_url":"https://fey8w8vv.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Kamilu-blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://raw.githubusercontent.com/learner-lu/picbed/master/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Windows PowerShell美化以及 Vscode 终端美化配置">
+              
+                Windows PowerShell美化以及 Vscode 终端美化配置
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-07-03 22:12" pubdate>
+        2022年7月3日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.4k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      21 分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Windows PowerShell美化以及 Vscode 终端美化配置</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：1 分钟前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1 id="windows-powershell美化以及-vscode-终端美化配置"><a class="markdownIt-Anchor" href="#windows-powershell美化以及-vscode-终端美化配置"></a> Windows Powershell美化以及 Vscode 终端美化配置</h1>
+<p>效果展示</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704100352.png" srcset="/img/loading.gif" lazyload alt="20220704100352" /></p>
+<h2 id="下载"><a class="markdownIt-Anchor" href="#下载"></a> 下载</h2>
+<p>首先我们配置 Powershell, windows本身的Windows powershell(蓝色的)操作系统自带的并不是我们需要的</p>
+<p>微软推出了一个新的终端<a target="_blank" rel="noopener" href="https://github.com/microsoft/terminal">terminal</a>,是一个跨平台的应用程序,界面与之前的terminal相同但是增加了一些功能</p>
+<p>点进去之后有两种下载方式,一种是官方推荐的使用 microsoft store 下载, 另一种就是通过 releases 下载</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704100832.png" srcset="/img/loading.gif" lazyload alt="20220704100832" /></p>
+<p>我个人在microsoft store下载速度很慢,所以安装的最新的realses的版本,注意区分不同操作系统的版本,我是win11</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704100933.png" srcset="/img/loading.gif" lazyload alt="20220704100933" /></p>
+<p>安装之后就可以查看到一个终端预览,打开之后就是基本的界面,明显可以看出做了圆滑,在设置里面也多了许多功能</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704101132.png" srcset="/img/loading.gif" lazyload alt="20220704101132" /></p>
+<p>这里的windows powershell也并不是我们需要的,我们需要格外单独下载一个<a target="_blank" rel="noopener" href="https://github.com/PowerShell/PowerShell">powershell</a></p>
+<p>之后根据操作系统选择最新的版本就可以了,通常来说都是64位windows所以选择LTS版本的就可以了.</p>
+<blockquote>
+<p>当然你也可以翻阅找到所有releases版本下载</p>
+</blockquote>
+<p>安装之后就可以在开始界面看到多出了一个powershell7,这个就是我们今天的主角</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704101740.png" srcset="/img/loading.gif" lazyload alt="20220704101740" /></p>
+<p>点开之后还是熟悉的界面,没什么变化.</p>
+<p>依次执行以下三条命令,他会为你安装 <code>oh-my-posh</code> 和 <code>posh-git</code> 两个模块</p>
+<blockquote>
+<p>安装过程中全部选择 Y</p>
+</blockquote>
+<div class="code-wrapper"><pre><code class="hljs bash">Install-Module oh-my-posh -Scope CurrentUser -SkipPublisherCheck
+Install-Module posh-git -Scope CurrentUser
+Install-Module -Name PSReadLine -AllowPrerelease -Scope CurrentUser -Force -SkipPublisherCheck</code></pre></div>
+<p>之后导入模块</p>
+<div class="code-wrapper"><pre><code class="hljs bash">Import-Module posh-git
+Import-Module oh-my-posh</code></pre></div>
+<p>在导入 <code>oh-my-posh</code> 中会弹出一段话, 大致意思是目前 oh-my-posh 更新了一个版本,不使用<code>Import-Module oh-my-posh</code> 来安装了,并提供了一个<a target="_blank" rel="noopener" href="https://ohmyposh.dev/docs/migrating">网址</a></p>
+<p>点击进入之后我们看到这是powershell的网址,说明了模块的更新和修改</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704102713.png" srcset="/img/loading.gif" lazyload alt="20220704102713" /></p>
+<p>阅读说明之后按照它的提示首先移除模块的缓存</p>
+<div class="code-wrapper"><pre><code class="hljs bash">Remove-Item <span class="hljs-variable">$env</span>:POSH_PATH -Force -Recurse</code></pre></div>
+<p>然后进入windows的<a target="_blank" rel="noopener" href="https://ohmyposh.dev/docs/installation/windows">页面</a>,提示我们使用之前下载过的 windows terminal</p>
+<p>接着执行</p>
+<div class="code-wrapper"><pre><code class="hljs bash">winget install JanDeDobbeleer.OhMyPosh -s winget</code></pre></div>
+<p>短暂的等待之后就安装完成了,本次更新为我们带来了<code>oh-my-posh.exe</code> 和旗下的所有主题 <code>themes</code></p>
+<h2 id="主题选择"><a class="markdownIt-Anchor" href="#主题选择"></a> 主题选择</h2>
+<p>现在的powershell还是看起来没什么区别,我们可以选择一款喜爱的主题,执行命令查看所有主题</p>
+<div class="code-wrapper"><pre><code class="hljs bash">Get-PoshThemes</code></pre></div>
+<blockquote>
+<p>看花了眼的话可以在官网的<a target="_blank" rel="noopener" href="https://ohmyposh.dev/docs/themes">主题</a>页面查看所有主题,选择一个比较喜欢的主题吧,我个人选择的是<code>marcduiker</code></p>
+</blockquote>
+<p>接着配置主题,命令行中提示了我们如何设置</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704103853.png" srcset="/img/loading.gif" lazyload alt="20220704103853" /></p>
+<p>执行命令</p>
+<div class="code-wrapper"><pre><code class="hljs bash">oh-my-posh init pwsh --config C:\Users\luzhi\AppData\Local\Programs\oh-my-posh\themes/jandedobbeleer.omp.json | Invoke-Expression</code></pre></div>
+<p>当前使用的就是<code>jandedobbeleer</code>主题了,当然你可以选择你的主题名字,注意<code>luzhi</code>变成你的名字就好了</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704104026.png" srcset="/img/loading.gif" lazyload alt="20220704104026" /></p>
+<h2 id="配置文件"><a class="markdownIt-Anchor" href="#配置文件"></a> 配置文件</h2>
+<p>看样子可以了,但是你会发现退出再重进又变成最开始的状态了,这时候我们需要设置一个配置文件让每一次运行都执行这条命令</p>
+<div class="code-wrapper"><pre><code class="hljs bash">notepad.exe <span class="hljs-variable">$PROFILE</span></code></pre></div>
+<p>第一次执行会创建一个新的配置文件,之后在执行就是打开这个配置文件,将上面的命令复制到这里,保存.</p>
+<p>之后每一次进入都是这个主题啦!</p>
+<p>接着我们美化以下图标</p>
+<div class="code-wrapper"><pre><code class="hljs bash">Install-Module -Name Terminal-Icons -Repository PSGallery
+Import-Module -Name Terminal-Icons</code></pre></div>
+<p>通过<code>ls</code>命令可以看到所有文件都根据它的属性有了不同的图标显示</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704104756.png" srcset="/img/loading.gif" lazyload alt="20220704104756" /></p>
+<p>再次使用 <code>notepad.exe $PROFILE</code> 也将 <code>Import-Module -Name Terminal-Icons</code> 加入其中作为默认启动项</p>
+<p>再向里面添加一行,帮助我们命令行自动补全和提示</p>
+<div class="code-wrapper"><pre><code class="hljs bash">Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete</code></pre></div>
+<p>最后你的配置文件应该有三行</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704105205.png" srcset="/img/loading.gif" lazyload alt="20220704105205" /></p>
+<h2 id="字体"><a class="markdownIt-Anchor" href="#字体"></a> 字体</h2>
+<p>这时候我们会发现一个奇怪的问题,我的主题为什么会有一些奇怪的白框框,当然你的主题可能没有.</p>
+<p>出现这个问题的原因是你选择的主题使用了特殊的字体库 <code>Nerd Fonts</code>(书呆子字体),你没有安装这个字体库所以会出现乱码.如果主题没有使用这个字体库那么倒也没有问题</p>
+<p>你可以在<a target="_blank" rel="noopener" href="https://www.nerdfonts.com/font-downloads">字体库</a>查看所有字体,我个人比较喜欢的是<code>CodeNewRoman Nerd Font</code>这款字体,新罗马字体我一直比较喜欢~</p>
+<p>你可以直接点击下载,解压之后将压缩包里所有的字体文件点击安装.</p>
+<p>ohmyposh也提供了一键下载,选择你的字体名字就可以下载了</p>
+<div class="code-wrapper"><pre><code class="hljs bash">oh-my-posh font install</code></pre></div>
+<p>现在你可以直接点击powershell来启动你的终端,我们也可以配置默认打开powershell,</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704110548.png" srcset="/img/loading.gif" lazyload alt="20220704110548" /></p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704110636.png" srcset="/img/loading.gif" lazyload alt="20220704110636" /></p>
+<p>选择你的字体,保存</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704110702.png" srcset="/img/loading.gif" lazyload alt="20220704110702" /></p>
+<p>重启就可以发现没有问题了</p>
+<p>现在使用终端预览就可以直接打开一个带主题的powershell了,但是会需要先执行配置文件,会有一些卡顿.</p>
+<h2 id="vscode终端"><a class="markdownIt-Anchor" href="#vscode终端"></a> Vscode终端</h2>
+<p>打开终端选项然后下拉找到默认终端选择powershell</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704110956.png" srcset="/img/loading.gif" lazyload alt="20220704110956" /></p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704111102.png" srcset="/img/loading.gif" lazyload alt="20220704111102" /></p>
+<p>重启终端之后发现又出现了字体的问题</p>
+<p>设置 -&gt; font family 找到字体库,这里默认是空的,填入之前字体名字,然后补一个<code>monospace</code></p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704111226.png" srcset="/img/loading.gif" lazyload alt="20220704111226" /></p>
+<div class="code-wrapper"><pre><code class="hljs bash">CodeNewRoman Nerd Font, monospace</code></pre></div>
+<p>大功告成了</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704111426.png" srcset="/img/loading.gif" lazyload alt="20220704111426" /></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%9D%82/">杂</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/06/28/%E9%85%8D%E7%BD%AE/npm%E5%8C%85/">
+                        <span class="hidden-mobile">npm包</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"fEy8W8VvIoc26nT53dV2157j-gzGzoHsz","appKey":"s9HXuqmvBWrOaAiLA07Jg59A","path":"window.location.pathname","placeholder":"欢迎讨论,留下163邮箱我才能看到回复哦~","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

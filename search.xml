@@ -4,6 +4,95 @@
   
     
     <entry>
+      <title>Windows PowerShell美化以及 Vscode 终端美化配置</title>
+      <link href="/2022/07/03/%E6%9D%82/pws/"/>
+      <url>/2022/07/03/%E6%9D%82/pws/</url>
+      
+        <content type="html"><![CDATA[<h1 id="windows-powershell美化以及-vscode-终端美化配置"><a class="markdownIt-Anchor" href="#windows-powershell美化以及-vscode-终端美化配置"></a> Windows Powershell美化以及 Vscode 终端美化配置</h1><p>效果展示</p><p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704100352.png" alt="20220704100352" /></p><h2 id="下载"><a class="markdownIt-Anchor" href="#下载"></a> 下载</h2><p>首先我们配置 Powershell, windows本身的Windows powershell(蓝色的)操作系统自带的并不是我们需要的</p><p>微软推出了一个新的终端<a href="https://github.com/microsoft/terminal">terminal</a>,是一个跨平台的应用程序,界面与之前的terminal相同但是增加了一些功能</p><p>点进去之后有两种下载方式,一种是官方推荐的使用 microsoft store 下载, 另一种就是通过 releases 下载</p><p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704100832.png" alt="20220704100832" /></p><p>我个人在microsoft store下载速度很慢,所以安装的最新的realses的版本,注意区分不同操作系统的版本,我是win11</p><p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704100933.png" alt="20220704100933" /></p><p>安装之后就可以查看到一个终端预览,打开之后就是基本的界面,明显可以看出做了圆滑,在设置里面也多了许多功能</p><p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704101132.png" alt="20220704101132" /></p><p>这里的windows powershell也并不是我们需要的,我们需要格外单独下载一个<a href="https://github.com/PowerShell/PowerShell">powershell</a></p><p>之后根据操作系统选择最新的版本就可以了,通常来说都是64位windows所以选择LTS版本的就可以了.</p><blockquote><p>当然你也可以翻阅找到所有releases版本下载</p></blockquote><p>安装之后就可以在开始界面看到多出了一个powershell7,这个就是我们今天的主角</p><p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704101740.png" alt="20220704101740" /></p><p>点开之后还是熟悉的界面,没什么变化.</p><p>依次执行以下三条命令,他会为你安装 <code>oh-my-posh</code> 和 <code>posh-git</code> 两个模块</p><blockquote><p>安装过程中全部选择 Y</p></blockquote><div class="code-wrapper"><pre><code class="hljs bash">Install-Module oh-my-posh -Scope CurrentUser -SkipPublisherCheckInstall-Module posh-git -Scope CurrentUserInstall-Module -Name PSReadLine -AllowPrerelease -Scope CurrentUser -Force -SkipPublisherCheck</code></pre></div><p>之后导入模块</p><div class="code-wrapper"><pre><code class="hljs bash">Import-Module posh-gitImport-Module oh-my-posh</code></pre></div><p>在导入 <code>oh-my-posh</code> 中会弹出一段话, 大致意思是目前 oh-my-posh 更新了一个版本,不使用<code>Import-Module oh-my-posh</code> 来安装了,并提供了一个<a href="https://ohmyposh.dev/docs/migrating">网址</a></p><p>点击进入之后我们看到这是powershell的网址,说明了模块的更新和修改</p><p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704102713.png" alt="20220704102713" /></p><p>阅读说明之后按照它的提示首先移除模块的缓存</p><div class="code-wrapper"><pre><code class="hljs bash">Remove-Item <span class="hljs-variable">$env</span>:POSH_PATH -Force -Recurse</code></pre></div><p>然后进入windows的<a href="https://ohmyposh.dev/docs/installation/windows">页面</a>,提示我们使用之前下载过的 windows terminal</p><p>接着执行</p><div class="code-wrapper"><pre><code class="hljs bash">winget install JanDeDobbeleer.OhMyPosh -s winget</code></pre></div><p>短暂的等待之后就安装完成了,本次更新为我们带来了<code>oh-my-posh.exe</code> 和旗下的所有主题 <code>themes</code></p><h2 id="主题选择"><a class="markdownIt-Anchor" href="#主题选择"></a> 主题选择</h2><p>现在的powershell还是看起来没什么区别,我们可以选择一款喜爱的主题,执行命令查看所有主题</p><div class="code-wrapper"><pre><code class="hljs bash">Get-PoshThemes</code></pre></div><blockquote><p>看花了眼的话可以在官网的<a href="https://ohmyposh.dev/docs/themes">主题</a>页面查看所有主题,选择一个比较喜欢的主题吧,我个人选择的是<code>marcduiker</code></p></blockquote><p>接着配置主题,命令行中提示了我们如何设置</p><p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704103853.png" alt="20220704103853" /></p><p>执行命令</p><div class="code-wrapper"><pre><code class="hljs bash">oh-my-posh init pwsh --config C:\Users\luzhi\AppData\Local\Programs\oh-my-posh\themes/jandedobbeleer.omp.json | Invoke-Expression</code></pre></div><p>当前使用的就是<code>jandedobbeleer</code>主题了,当然你可以选择你的主题名字,注意<code>luzhi</code>变成你的名字就好了</p><p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704104026.png" alt="20220704104026" /></p><h2 id="配置文件"><a class="markdownIt-Anchor" href="#配置文件"></a> 配置文件</h2><p>看样子可以了,但是你会发现退出再重进又变成最开始的状态了,这时候我们需要设置一个配置文件让每一次运行都执行这条命令</p><div class="code-wrapper"><pre><code class="hljs bash">notepad.exe <span class="hljs-variable">$PROFILE</span></code></pre></div><p>第一次执行会创建一个新的配置文件,之后在执行就是打开这个配置文件,将上面的命令复制到这里,保存.</p><p>之后每一次进入都是这个主题啦!</p><p>接着我们美化以下图标</p><div class="code-wrapper"><pre><code class="hljs bash">Install-Module -Name Terminal-Icons -Repository PSGalleryImport-Module -Name Terminal-Icons</code></pre></div><p>通过<code>ls</code>命令可以看到所有文件都根据它的属性有了不同的图标显示</p><p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704104756.png" alt="20220704104756" /></p><p>再次使用 <code>notepad.exe $PROFILE</code> 也将 <code>Import-Module -Name Terminal-Icons</code> 加入其中作为默认启动项</p><p>再向里面添加一行,帮助我们命令行自动补全和提示</p><div class="code-wrapper"><pre><code class="hljs bash">Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete</code></pre></div><p>最后你的配置文件应该有三行</p><p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704105205.png" alt="20220704105205" /></p><h2 id="字体"><a class="markdownIt-Anchor" href="#字体"></a> 字体</h2><p>这时候我们会发现一个奇怪的问题,我的主题为什么会有一些奇怪的白框框,当然你的主题可能没有.</p><p>出现这个问题的原因是你选择的主题使用了特殊的字体库 <code>Nerd Fonts</code>(书呆子字体),你没有安装这个字体库所以会出现乱码.如果主题没有使用这个字体库那么倒也没有问题</p><p>你可以在<a href="https://www.nerdfonts.com/font-downloads">字体库</a>查看所有字体,我个人比较喜欢的是<code>CodeNewRoman Nerd Font</code>这款字体,新罗马字体我一直比较喜欢~</p><p>你可以直接点击下载,解压之后将压缩包里所有的字体文件点击安装.</p><p>ohmyposh也提供了一键下载,选择你的字体名字就可以下载了</p><div class="code-wrapper"><pre><code class="hljs bash">oh-my-posh font install</code></pre></div><p>现在你可以直接点击powershell来启动你的终端,我们也可以配置默认打开powershell,</p><p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704110548.png" alt="20220704110548" /></p><p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704110636.png" alt="20220704110636" /></p><p>选择你的字体,保存</p><p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704110702.png" alt="20220704110702" /></p><p>重启就可以发现没有问题了</p><p>现在使用终端预览就可以直接打开一个带主题的powershell了,但是会需要先执行配置文件,会有一些卡顿.</p><h2 id="vscode终端"><a class="markdownIt-Anchor" href="#vscode终端"></a> Vscode终端</h2><p>打开终端选项然后下拉找到默认终端选择powershell</p><p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704110956.png" alt="20220704110956" /></p><p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704111102.png" alt="20220704111102" /></p><p>重启终端之后发现又出现了字体的问题</p><p>设置 -&gt; font family 找到字体库,这里默认是空的,填入之前字体名字,然后补一个<code>monospace</code></p><p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704111226.png" alt="20220704111226" /></p><div class="code-wrapper"><pre><code class="hljs bash">CodeNewRoman Nerd Font, monospace</code></pre></div><p>大功告成了</p><p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704111426.png" alt="20220704111426" /></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 杂 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>npm包</title>
+      <link href="/2022/06/28/%E9%85%8D%E7%BD%AE/npm%E5%8C%85/"/>
+      <url>/2022/06/28/%E9%85%8D%E7%BD%AE/npm%E5%8C%85/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>anaconda</title>
+      <link href="/2022/06/27/%E9%85%8D%E7%BD%AE/anaconda/"/>
+      <url>/2022/06/27/%E9%85%8D%E7%BD%AE/anaconda/</url>
+      
+        <content type="html"><![CDATA[<h2 id="创建新环境"><a class="markdownIt-Anchor" href="#创建新环境"></a> 创建新环境</h2><p><code>test</code> 为环境名, 我个人喜欢python3.7的环境</p><div class="code-wrapper"><pre><code class="hljs bash">conda create -n <span class="hljs-built_in">test</span> python=3.7</code></pre></div>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 配置 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>服务器基本配置命令和常用配置项总结</title>
+      <link href="/2022/06/27/%E9%85%8D%E7%BD%AE/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4%E5%92%8C%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E9%A1%B9%E6%80%BB%E7%BB%93/"/>
+      <url>/2022/06/27/%E9%85%8D%E7%BD%AE/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4%E5%92%8C%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E9%A1%B9%E6%80%BB%E7%BB%93/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>所有命令均在Debian操作系统中适用,Debian是我个人比较喜欢使用在服务器上的一个操作系统</p></blockquote><h2 id="基本命令"><a class="markdownIt-Anchor" href="#基本命令"></a> 基本命令</h2><ul><li><p>安装 sudo</p><div class="code-wrapper"><pre><code class="hljs bash">apt-get install sudo</code></pre></div></li><li><p>更新</p><div class="code-wrapper"><pre><code class="hljs bash">sudo apt update</code></pre></div></li><li><p>一些安装项</p><div class="code-wrapper"><pre><code class="hljs bash">sudo apt install openssh-serversudo apt install curl</code></pre></div></li></ul><h2 id="服务器域名dns端口防火墙"><a class="markdownIt-Anchor" href="#服务器域名dns端口防火墙"></a> 服务器域名/DNS/端口/防火墙</h2><p><a href="https://www.jianshu.com/p/806d0514ec7d">https://www.jianshu.com/p/806d0514ec7d</a></p><p><a href="https://support.huaweicloud.com/dns_faq/dns_faq_1403.html">https://support.huaweicloud.com/dns_faq/dns_faq_1403.html</a></p><p><a href="https://support.huaweicloud.com/usermanual-cloudsite/cloudsite_01_4110.html">https://support.huaweicloud.com/usermanual-cloudsite/cloudsite_01_4110.html</a></p><h2 id="软件安装"><a class="markdownIt-Anchor" href="#软件安装"></a> 软件安装</h2><ul><li><p>git</p><div class="code-wrapper"><pre><code class="hljs bash">sudo apt install git</code></pre></div><p>检查</p><div class="code-wrapper"><pre><code class="hljs bash">git --version</code></pre></div></li><li><p>Anaconda</p><p>visit <a href="https://www.anaconda.com/products/distribution#linux">https://www.anaconda.com/products/distribution#linux</a> and download the lastest</p><p>通过FTP发送到服务器</p><div class="code-wrapper"><pre><code class="hljs bash">bash Anaconda(TAB补全)</code></pre></div><p>安装过后conda init,这个默认的不好使,需要手动将这个路径加入到环境变量中</p><blockquote><p>通常来说anaconda的环境在linux中安装的位置默认是root/anaconda3,如果你更改了这个默认路径那就把下面的换成你的路径</p></blockquote><div class="code-wrapper"><pre><code class="hljs bash">vim ~/.bashrc<span class="hljs-built_in">export</span> PATH=root/anaconda3/bin:<span class="hljs-variable">$PATH</span><span class="hljs-built_in">source</span> ~/.bashrc</code></pre></div></li><li><p>npm</p><div class="code-wrapper"><pre><code class="hljs bash">sudo apt install nodejs npm</code></pre></div><div class="code-wrapper"><pre><code class="hljs bash">nodejs --version</code></pre></div></li></ul>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 配置 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>自制操作系统day8</title>
+      <link href="/2022/06/25/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday8/"/>
+      <url>/2022/06/25/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday8/</url>
+      
+        <content type="html"><![CDATA[<h1 id="day8-鼠标控制与32位模式切换"><a class="markdownIt-Anchor" href="#day8-鼠标控制与32位模式切换"></a> day8 鼠标控制与32位模式切换</h1>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> OS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>深度学习模型部署(3)-真正的服务器</title>
       <link href="/2022/06/14/pytorch/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2-3/"/>
       <url>/2022/06/14/pytorch/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2-3/</url>
