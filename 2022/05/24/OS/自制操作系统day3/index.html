@@ -30,10 +30,14 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220525161748.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220525163212.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220525163655.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/QQ%E6%88%AA%E5%9B%BE20220525210759.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704224428.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704224522.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704224708.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704224950.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/QQ%E6%88%AA%E5%9B%BE20220525211509.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704231449.png">
 <meta property="article:published_time" content="2022-05-24T13:55:04.000Z">
-<meta property="article:modified_time" content="2022-05-25T19:17:26.515Z">
+<meta property="article:modified_time" content="2022-07-04T15:15:36.936Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="OS">
 <meta name="twitter:card" content="summary_large_image">
@@ -197,7 +201,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.2k 字
+      2.9k 字
     </span>
   
 
@@ -206,7 +210,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      19 分钟
+      24 分钟
     </span>
   
 
@@ -247,7 +251,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：1 个月前
+                  本文最后更新于：1 天前
                 
               </p>
             
@@ -325,38 +329,56 @@ make: *** [install] Error 2</code></pre></div>
 <div class="code-wrapper"><pre><code class="hljs makefile">ipl.bin : ipl.nas Makefile
 	<span class="hljs-variable">$(NASK)</span> ipl.nas ipl.bin ipl.lst</code></pre></div>
 <p>然后利用制作好的启动区,再使用磁盘映像管理工具来制作整个磁盘映像.</p>
-<p>所以现在的分布是,0x7c00-0x7dff存放了启动区的程序,0x8000-0x81ff也存放了启动区的程序,这个程序保存了两份.</p>
-<p>接下来0x8200-0x34fff是从软盘中读取的数据.</p>
-<p><strong>那我们的操作系统呢?他放在哪里?</strong></p>
-<p>不得不说,这是一个非常好的问题,我也困扰了很久.查看生成的img映像文件可以看到sys的文件的内容保存在0x4200以后的地方,我们把整个磁盘放在了0x8000的位置上,所以绝对的内存位置就是 0x8000+0x4200 = 0xc200</p>
-<p>这也就是为什么我们在启动区的最后使用<code>JMP 0xc200</code>跳转到这个位置,如果改成<code>JMP 0xd200</code> 那么会卡在启动之后,然后退出</p>
-<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/QQ%E6%88%AA%E5%9B%BE20220525210759.png" srcset="/img/loading.gif" lazyload alt="QQ截图20220525210759" /></p>
-<p>然后就是另一个令我困惑的问题,我们编写haribote.nas的时候</p>
-<div class="code-wrapper"><pre><code class="hljs asm">    ORG     0xc200              ;这个程序要被装载到内存的地址
-
-    MOV     AL,0x13            ;VGA显卡,320x200x8位彩色
-    MOV     AH,0x00            ;
-    INT     0x10
-
-
-fin:
-    HLT
-    JMP     fin</code></pre></div>
-<p>这里虽然使用了 <code>ORG 0xc200</code>,但是如果你这里更改为 0xdc00,或者其他,或者干脆注释掉,这丝毫不影响程序的运行.</p>
-<p>而且img文件依然是0x4200的位置保存了文件内容,似乎这个ORG并没有像说的一样把他加载到内存中的固定位置.</p>
-<p>不过这个ORG并没有影响什么大的地方,所以我们暂且不论,后面当这个程序复杂起来了修改这个地方绝对会出现问题</p>
-<div class="code-wrapper"><pre><code class="hljs makefile">haribote.sys : haribote.nas Makefile
-	<span class="hljs-variable">$(NASK)</span> haribote.nas haribote.sys haribote.lst
-
-haribote.img : ipl.bin haribote.sys Makefile
-	<span class="hljs-variable">$(EDIMG)</span>   imgin:../z_tools/fdimg0at.tek \
-		wbinimg src:ipl.bin len:512 from:0 to:0 \
-		copy from:haribote.sys to:@: \
-		imgout:haribote.img</code></pre></div>
+<hr />
+<p>总结一下整体的启动流程</p>
+<p>计算机启动首先是BIOS程序硬件自检,硬件自检完成之后BIOS把控制权转交给下一阶段的启动程序,这个启动程序读取该设备的第一个扇区,也就是读取最前面的512个字节.</p>
+<p>该主引导程序的位置是0x7c00,如果这512个字节的最后两个字节是0x55和0xAA,表明这个设备可以用于启动；如果不是,表明设备不能用于启动,控制权于是被转交给&quot;启动顺序&quot;中的下一个设备</p>
+<p>我们将这段程序放置到内存的0x7c00的位置,并且最后两个字节也是0x55和0xAA,所以启动区正常启动</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704224428.png" srcset="/img/loading.gif" lazyload alt="20220704224428" /></p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704224522.png" srcset="/img/loading.gif" lazyload alt="20220704224522" /></p>
+<p>&quot;主引导记录&quot;只有512个字节,放不了太多东西。它的主要作用是,告诉计算机到硬盘的哪一个位置去找操作系统</p>
+<p>现在的分布是,0x7c00-0x7dff存放了启动区的程序<code>ipl.bin</code>,0x8000-0x81ff也存放了启动区的程序<code>ipl.bin</code>,这个程序保存了两份.</p>
+<p>我们在启动区中设计了从软盘(硬盘)中读取数据,它们会被导入到内存的0x8200-0x34fff处.</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704224708.png" srcset="/img/loading.gif" lazyload alt="20220704224708" /></p>
+<p>我们的操作系统一开始并不在内存中,启动区的程序将这部分内容复制到了内存. 最后我们在启动区程序的最后将CPU的指针跳转到了0xc200的位置</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704224950.png" srcset="/img/loading.gif" lazyload alt="20220704224950" /></p>
+<p>0xc200的位置是因为整个操作系统处于映像文件(img)的0x4200的相对位置,而我们将img保存到了内存的0x8000起始位置,所以操作系统开始的相对位置就是 0x8000 + 0x4200 = 0xc200</p>
+<p>接下来控制权转交给操作系统,操作系统开始准备载入内核程序,初始化等等操作,启动步骤完成</p>
+<hr />
 <p>总之一片漆黑是搞出来了</p>
 <p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/QQ%E6%88%AA%E5%9B%BE20220525211509.png" srcset="/img/loading.gif" lazyload alt="QQ截图20220525211509" /></p>
 <p>接下来就是无情的打字机器了,当然你可以选择复制下来,不过我还是习惯一行一行对着打下来~</p>
-<p>最后测试没有其他问题,看看明天吧~</p>
+<p><code>haribote.nas</code> 新增了很多内容,看不懂,作者也建议先跳过. 命名被修改为了 <code>asmhead.nas</code>,应该是作为初始启动的一些必要设置</p>
+<h2 id="c语言的编译链接"><a class="markdownIt-Anchor" href="#c语言的编译链接"></a> C语言的编译链接</h2>
+<p>C语言出现了,那么这个<code>bootpack.c</code>是如何变成机器语言与之前写的汇编语言链接到一起的呢?</p>
+<blockquote>
+<p>一开始我略过了这一部分,现在回来把这里补上,我觉得这里比较重要,因为后面的很多内容都和这里息息相关.这里如果没有理解编译的过程后面有一些吃力</p>
+</blockquote>
+<p>现在操作系统一共有四个文件</p>
+<ul>
+<li>ipl10.nas : 启动区程序</li>
+<li>asmhead.nas : 初始化的所有参数,包括键盘鼠标,显示器等等标志位</li>
+<li>naskfunc.nas 和 bootpack.c</li>
+</ul>
+<p>其中我们可以看到 bootpack.c 中定义了一个函数<code>io_hlt</code>但是并没有函数的实现,而naskfunc.nas中定义了一个函数_io_hlt并且使用汇编做了实现.</p>
+<p>bootpack可以调用这个函数使整个程序中断在这里,这也体现了C语言底层的特点,可以和操作系统/汇编直接链接</p>
+<p>然后我们来看一下Makefile文件中文件的关联关系,我用一个流程图来简单演示一下文件之间的关系</p>
+<div class="code-wrapper"><pre class="mermaid">graph
+
+A[bootpack.c] --> B[bootpack.gas]
+B --> C[bootpack.nas] --> D[bootpack.obj]
+E[naskfunc.nas] --> F[naskfunc.obj]
+D --> G[bootpack.bim]
+F --> G --> H[bootpack.hrb]
+1[asmhead.nas] --> 2[asmhead.bin]
+2 --> 3[haribote.sys]
+H --> 3
+4[ipl10.nas] --> 5[ipl10.bin]
+5 --> 6[haribote.img]
+3 --> 6</pre></div>
+<p>这个图就是最后映像文件生成的makefile依赖关系</p>
+<p>其中比较关键的就是obj文件之间的链接,这与gcc编译器的链接过程相同,这也提示我们不仅可以使用 <code>.h .c</code>文件实现C语言的定义和实现,也可以使用汇编语言完成更为底层的操作</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704231449.png" srcset="/img/loading.gif" lazyload alt="20220704231449" /></p>
 
             </div>
             <hr>

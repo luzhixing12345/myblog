@@ -32,7 +32,8 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704103853.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704104026.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704104756.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704105205.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704170541.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704170757.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704110548.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704110636.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704110702.png">
@@ -41,7 +42,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704111226.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704111426.png">
 <meta property="article:published_time" content="2022-07-03T14:12:12.000Z">
-<meta property="article:modified_time" content="2022-07-04T03:15:34.366Z">
+<meta property="article:modified_time" content="2022-07-04T09:08:01.652Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="杂">
 <meta name="twitter:card" content="summary_large_image">
@@ -205,7 +206,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.4k 字
+      3.4k 字
     </span>
   
 
@@ -214,7 +215,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      21 分钟
+      29 分钟
     </span>
   
 
@@ -255,7 +256,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：1 分钟前
+                  本文最后更新于：2 天前
                 
               </p>
             
@@ -322,10 +323,37 @@ Import-Module -Name Terminal-Icons</code></pre></div>
 <p>通过<code>ls</code>命令可以看到所有文件都根据它的属性有了不同的图标显示</p>
 <p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704104756.png" srcset="/img/loading.gif" lazyload alt="20220704104756" /></p>
 <p>再次使用 <code>notepad.exe $PROFILE</code> 也将 <code>Import-Module -Name Terminal-Icons</code> 加入其中作为默认启动项</p>
-<p>再向里面添加一行,帮助我们命令行自动补全和提示</p>
-<div class="code-wrapper"><pre><code class="hljs bash">Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete</code></pre></div>
-<p>最后你的配置文件应该有三行</p>
-<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704105205.png" srcset="/img/loading.gif" lazyload alt="20220704105205" /></p>
+<p>最后我们再设置一下命令行的自动补全,执行命令</p>
+<div class="code-wrapper"><pre><code class="hljs bash">Import-Module PSReadLine
+Set-PSReadLineOption -PredictionSource History</code></pre></div>
+<p>将以下内容添加到$profile结尾</p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># Shows navigable menu of all options when hitting Tab</span>
+Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
+
+<span class="hljs-comment"># Autocompletion for arrow keys</span>
+Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
+Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
+
+<span class="hljs-comment"># auto suggestions</span>
+Import-Module PSReadLine
+Set-PSReadLineOption -PredictionSource History</code></pre></div>
+<p>最后你的配置文件应该和我的类似</p>
+<div class="code-wrapper"><pre><code class="hljs bash">oh-my-posh init pwsh --config C:\Users\luzhi\AppData\Local\Programs\oh-my-posh\themes/marcduiker.omp.json | Invoke-Expression
+Import-Module -Name Terminal-Icons
+<span class="hljs-comment"># Shows navigable menu of all options when hitting Tab</span>
+Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
+
+<span class="hljs-comment"># Autocompletion for arrow keys</span>
+Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
+Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
+
+<span class="hljs-comment"># auto suggestions</span>
+Import-Module PSReadLine
+Set-PSReadLineOption -PredictionSource History</code></pre></div>
+<p>可以看到补全和自动提示也出现了</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704170541.png" srcset="/img/loading.gif" lazyload alt="20220704170541" /></p>
+<p>我的主题对于不同的git状态的显示还是不错的</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704170757.png" srcset="/img/loading.gif" lazyload alt="20220704170757" /></p>
 <h2 id="字体"><a class="markdownIt-Anchor" href="#字体"></a> 字体</h2>
 <p>这时候我们会发现一个奇怪的问题,我的主题为什么会有一些奇怪的白框框,当然你的主题可能没有.</p>
 <p>出现这个问题的原因是你选择的主题使用了特殊的字体库 <code>Nerd Fonts</code>(书呆子字体),你没有安装这个字体库所以会出现乱码.如果主题没有使用这个字体库那么倒也没有问题</p>
@@ -348,6 +376,8 @@ Import-Module -Name Terminal-Icons</code></pre></div>
 <p>设置 -&gt; font family 找到字体库,这里默认是空的,填入之前字体名字,然后补一个<code>monospace</code></p>
 <p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704111226.png" srcset="/img/loading.gif" lazyload alt="20220704111226" /></p>
 <div class="code-wrapper"><pre><code class="hljs bash">CodeNewRoman Nerd Font, monospace</code></pre></div>
+<p>这时候你会发现你文本编辑器中的字体也变了,没错,font family是所有的字体库,vscode的默认字体是Consolas,如果你想保持原先的字体,那么只需加在font family的最前面</p>
+<div class="code-wrapper"><pre><code class="hljs bash">Consolas, CodeNewRoman Nerd Font, monospace</code></pre></div>
 <p>大功告成了</p>
 <p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220704111426.png" srcset="/img/loading.gif" lazyload alt="20220704111426" /></p>
 
@@ -381,8 +411,8 @@ Import-Module -Name Terminal-Icons</code></pre></div>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/06/28/%E9%85%8D%E7%BD%AE/npm%E5%8C%85/">
-                        <span class="hidden-mobile">npm包</span>
+                      <a href="/2022/06/27/%E9%85%8D%E7%BD%AE/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4%E5%92%8C%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE%E9%A1%B9%E6%80%BB%E7%BB%93/">
+                        <span class="hidden-mobile">服务器基本配置命令和常用配置项总结</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

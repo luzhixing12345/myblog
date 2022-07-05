@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220526025737.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220526030252.png">
 <meta property="article:published_time" content="2022-05-25T17:54:35.000Z">
-<meta property="article:modified_time" content="2022-05-25T19:59:24.078Z">
+<meta property="article:modified_time" content="2022-07-05T21:04:55.005Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="OS">
 <meta name="twitter:card" content="summary_large_image">
@@ -193,7 +193,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      493 字
+      2k 字
     </span>
   
 
@@ -202,7 +202,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5 分钟
+      17 分钟
     </span>
   
 
@@ -243,7 +243,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：1 个月前
+                  本文最后更新于：18 分钟前
                 
               </p>
             
@@ -262,6 +262,43 @@ VMODE       EQU     0x0ff2
 SCRNX       EQU     0x0ff4
 SCRNY       EQU     0x0ff6
 VRAM        EQU     0x0ff8</code></pre></div>
+<p>字符显示这里作者的做法也是比较巧妙的,每一个字符都是一个8x16的矩阵,每一行一个字节,所以每一个字符是长度为16的数组.</p>
+<p>从 0x80 - 0x01 对于每一个字节的八位从高到低(从左至右)依次按位与判断,如果为1则将该位的 <code>p[i]</code> 置为 c 的颜色</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">putfont8</span><span class="hljs-params">(<span class="hljs-type">char</span> *vram, <span class="hljs-type">int</span> xsize, <span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y, <span class="hljs-type">char</span> c, <span class="hljs-type">char</span> *font)</span>
+&#123;
+    <span class="hljs-type">int</span> i;
+    <span class="hljs-type">char</span> *p, d <span class="hljs-comment">/* data */</span>;
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">16</span>; i++) &#123;
+        p = vram + (y + i) * xsize + x;
+        d = font[i];
+        <span class="hljs-keyword">if</span> ((d &amp; <span class="hljs-number">0x80</span>) != <span class="hljs-number">0</span>) &#123; p[<span class="hljs-number">0</span>] = c; &#125;
+        <span class="hljs-keyword">if</span> ((d &amp; <span class="hljs-number">0x40</span>) != <span class="hljs-number">0</span>) &#123; p[<span class="hljs-number">1</span>] = c; &#125;
+        <span class="hljs-keyword">if</span> ((d &amp; <span class="hljs-number">0x20</span>) != <span class="hljs-number">0</span>) &#123; p[<span class="hljs-number">2</span>] = c; &#125;
+        <span class="hljs-keyword">if</span> ((d &amp; <span class="hljs-number">0x10</span>) != <span class="hljs-number">0</span>) &#123; p[<span class="hljs-number">3</span>] = c; &#125;
+        <span class="hljs-keyword">if</span> ((d &amp; <span class="hljs-number">0x08</span>) != <span class="hljs-number">0</span>) &#123; p[<span class="hljs-number">4</span>] = c; &#125;
+        <span class="hljs-keyword">if</span> ((d &amp; <span class="hljs-number">0x04</span>) != <span class="hljs-number">0</span>) &#123; p[<span class="hljs-number">5</span>] = c; &#125;
+        <span class="hljs-keyword">if</span> ((d &amp; <span class="hljs-number">0x02</span>) != <span class="hljs-number">0</span>) &#123; p[<span class="hljs-number">6</span>] = c; &#125;
+        <span class="hljs-keyword">if</span> ((d &amp; <span class="hljs-number">0x01</span>) != <span class="hljs-number">0</span>) &#123; p[<span class="hljs-number">7</span>] = c; &#125;
+    &#125;
+    <span class="hljs-keyword">return</span>;
+&#125;</code></pre></div>
+<p>我们之前在函数中定义过所有的颜色,对应的RGB数值. 字体使用了一个字体库, 纯文字就是白(0xFFFFFFFF), 对于鼠标的绘制就是边缘是<code>COL8_000000</code>(黑) , 内部是 <code>COL8_FFFFFF</code>(白) , 其余部分就是背景颜色,对于这个操作系统的界面来说就是<code>COL8_008484</code>(浅暗蓝)</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">define</span> COL8_000000		0</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> COL8_FF0000		1</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> COL8_00FF00		2</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> COL8_FFFF00		3</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> COL8_0000FF		4</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> COL8_FF00FF		5</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> COL8_00FFFF		6</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> COL8_FFFFFF		7</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> COL8_C6C6C6		8</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> COL8_840000		9</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> COL8_008400		10</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> COL8_848400		11</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> COL8_000084		12</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> COL8_840084		13</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> COL8_008484		14</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> COL8_848484		15</span></code></pre></div>
 <p>好耶,一个A</p>
 <p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220526021405.png" srcset="/img/loading.gif" lazyload alt="20220526021405" /></p>
 <p>hankanku字体</p>
@@ -279,9 +316,17 @@ VRAM        EQU     0x0ff8</code></pre></div>
 <li>段的起始地址</li>
 <li>段的管理属性(禁止写入,禁止执行,系统专用)</li>
 </ul>
-<p>(8192x8=64KB)</p>
+<p>(8192x8=64KB),实际上如果每个段的大小都相同,那么我们只需要知道段的起始地址和固定的段大小就可以直接计算出当前段应该处于内存的什么位置.不需要每一个段都存储段大小了,可以节约空间</p>
 <p>IDT 是 <code>interrupt descriptor table</code> 的缩写,中断记录表</p>
-<p>作者并没有细说这一部分的内容,仅是草草收尾,所以我也不多说喽</p>
+<p>对于外设的IO相对于CPU的主频要慢很多,目前CPU一般都是在 <code>2.3GHz</code> 左右,与键盘鼠标等外设的频率相比要低很多,所以正常情况下CPU处理任务,如果外设有IO输入那么通过中断机制来执行中断程序</p>
+<p>所以先进行段的设定(GDT),然后就可以设定中断映射表(IDT),这样就把中断号码和调用函数对应起来了</p>
+<p>在定义的过程中将 <code>0x00270000 - 0x0027ffff</code> 内存部分用于GDT表,<code>0x0026f800 - 0x0026ffff</code> 用于IDT</p>
+<blockquote>
+<p>中断向量表只需要256个就足够了,所以只需要 256x8 = 2048 = 0x800</p>
+</blockquote>
+<p>这两个起始地址也是作者随意规定的,没有什么特殊含义.关于这部分代码会在下一篇博客讲解</p>
+<p>段号为1的段上限值为0xffffffff(4GB),起始地址是0,代表CPU所能管理的全部内存本身.</p>
+<p>段号为2的段大小为0x7ffff(512KB),起始地址是0x280000,是为c语言程序编译出的bootpack.hrb准备的</p>
 
             </div>
             <hr>
