@@ -16,26 +16,21 @@
   <meta name="author" content="luzhixing12345">
   <meta name="keywords" content="">
   
-    <meta name="description" content="服务器的购买和使用  可能很多人会说,终于到这里了,我就想知道怎么在服务器上部署,真是墨迹.我只能说确实,我自己也感觉很墨迹,不过写博客就是这样,想讲的详细一些吧 如果你已经购买了一台服务器并且已经可以成功连接上服务器那么可以跳过这一部分  听起来服务器这个名字很厉害,总是听别人大谈特谈,一些专家技术骨干也是几句不离服务器,拥有一台服务器好像似乎是一件很酷的事情. 我个人是在腾讯云购买的一台服务">
+    <meta name="description" content="不使用https连接,使用SSH连接(推荐)  使用RSA非对称加密算法 参考SSH key配置 SSH key配置教程 SSH SSL HTTPS    创建SSH key ssh-keygen -t rsa -C &quot;YOUR@EMAIL&quot;   默认路径保存,两个文件保存在 c:&#x2F;user&#x2F;luzhi&#x2F;.ssh   不设置密码,跳过   然后会在上面的文件夹中生成id_rs">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深度学习模型部署(3)-真正的服务器">
-<meta property="og:url" content="https://luzhixing12345.github.io/2022/06/14/pytorch/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2-3/index.html">
+<meta property="og:title" content="git的SSH连接">
+<meta property="og:url" content="https://luzhixing12345.github.io/2022/04/29/git/git%E7%9A%84SSH%E8%BF%9E%E6%8E%A5/index.html">
 <meta property="og:site_name" content="kamilu的博客">
-<meta property="og:description" content="服务器的购买和使用  可能很多人会说,终于到这里了,我就想知道怎么在服务器上部署,真是墨迹.我只能说确实,我自己也感觉很墨迹,不过写博客就是这样,想讲的详细一些吧 如果你已经购买了一台服务器并且已经可以成功连接上服务器那么可以跳过这一部分  听起来服务器这个名字很厉害,总是听别人大谈特谈,一些专家技术骨干也是几句不离服务器,拥有一台服务器好像似乎是一件很酷的事情. 我个人是在腾讯云购买的一台服务">
+<meta property="og:description" content="不使用https连接,使用SSH连接(推荐)  使用RSA非对称加密算法 参考SSH key配置 SSH key配置教程 SSH SSL HTTPS    创建SSH key ssh-keygen -t rsa -C &quot;YOUR@EMAIL&quot;   默认路径保存,两个文件保存在 c:&#x2F;user&#x2F;luzhi&#x2F;.ssh   不设置密码,跳过   然后会在上面的文件夹中生成id_rs">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220614205413.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220614024607.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220614024548.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220614025927.png">
-<meta property="article:published_time" content="2022-06-13T17:39:19.000Z">
-<meta property="article:modified_time" content="2022-06-14T13:05:28.775Z">
+<meta property="article:published_time" content="2022-04-29T07:44:25.000Z">
+<meta property="article:modified_time" content="2022-07-10T02:41:24.880Z">
 <meta property="article:author" content="luzhixing12345">
-<meta property="article:tag" content="pytorch">
+<meta property="article:tag" content="git">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220614205413.png">
   
   
-  <title>深度学习模型部署(3)-真正的服务器 - kamilu的博客</title>
+  <title>git的SSH连接 - kamilu的博客</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -169,9 +164,9 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="深度学习模型部署(3)-真正的服务器">
+            <span class="h2" id="subtitle" title="git的SSH连接">
               
-                深度学习模型部署(3)-真正的服务器
+                git的SSH连接
               
             </span>
 
@@ -181,8 +176,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-06-14 01:39" pubdate>
-        2022年6月14日 凌晨
+      <time datetime="2022-04-29 15:44" pubdate>
+        2022年4月29日 下午
       </time>
     </span>
   
@@ -192,7 +187,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.8k 字
+      1.4k 字
     </span>
   
 
@@ -201,7 +196,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      16 分钟
+      12 分钟
     </span>
   
 
@@ -238,68 +233,107 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">深度学习模型部署(3)-真正的服务器</h1>
+            <h1 style="display: none">git的SSH连接</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：22 天前
+                  本文最后更新于：1 小时前
                 
               </p>
             
             <div class="markdown-body">
-              <h2 id="服务器的购买和使用"><a class="markdownIt-Anchor" href="#服务器的购买和使用"></a> 服务器的购买和使用</h2>
+              <h2 id="不使用https连接使用ssh连接推荐"><a class="markdownIt-Anchor" href="#不使用https连接使用ssh连接推荐"></a> 不使用https连接,使用SSH连接(推荐)</h2>
 <blockquote>
-<p>可能很多人会说,终于到这里了,我就想知道怎么在服务器上部署,真是墨迹.我只能说确实,我自己也感觉很墨迹,不过写博客就是这样,想讲的详细一些吧</p>
-<p>如果你已经购买了一台服务器并且已经可以成功连接上服务器那么可以跳过这一部分</p>
+<p>使用RSA非对称加密算法</p>
+<p>参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36667170/article/details/79094257">SSH key配置</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/git/git-remote-repo.html">SSH key配置教程</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/5e3f9dfd2cb4">SSH SSL HTTPS</a></p>
 </blockquote>
-<p>听起来服务器这个名字很厉害,总是听别人大谈特谈,一些专家技术骨干也是几句不离服务器,拥有一台服务器好像似乎是一件很酷的事情.</p>
-<p>我个人是在<a target="_blank" rel="noopener" href="https://cloud.tencent.com/">腾讯云</a>购买的一台服务器,说是买其实就是租. 对于新用户来说很便宜,一般来说都会打折促销,几块钱十几块钱租几个月,花点小钱买一个试试看,玩一玩还是可以的</p>
-<div class="note note-info">
-            <p>买/租服务器还是选大厂的比较好,阿里腾讯华为这种更值得信赖一些.刚开始价格比较低,但是后期几年之后那个租的价格就一下子上去了.我自己在华为云打折的时候买了一台一年的服务器185元,打的甚至是0.91折,而不是9.1折.强烈建议大家买服务器之前想好自己要用这台服务器干什么.</p><ul><li>我想做图床,做博客,那你这个年限不能短了,最好一次到位,不然年年续费一次比一次贵</li><li>我就想玩玩,搞个小网站试试,那随意,新用户很便宜搞一台</li><li>我有钱,那没事了</li></ul>
-          </div>
-<p>服务器也是五花八门,像腾讯云这种下面列了一排,新手的话压根不知道买什么.</p>
-<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220614205413.png" srcset="/img/loading.gif" lazyload alt="20220614205413" /></p>
-<p>初次购买也不用考虑那么多,差不多就行,通用性的.我买的是一个2核2GB 40GB SSD的<strong>轻量应用服务器</strong>,3个月18元</p>
+<ul>
+<li>
+<p>创建SSH key</p>
+<div class="code-wrapper"><pre><code class="hljs shell">ssh-keygen -t rsa -C &quot;YOUR@EMAIL&quot;</code></pre></div>
+</li>
+<li>
+<p>默认路径保存,两个文件保存在 <code>c:/user/luzhi/.ssh</code></p>
+</li>
+<li>
+<p>不设置密码,跳过</p>
+</li>
+<li>
+<p>然后会在上面的文件夹中生成<code>id_rsa</code>(私钥)和<code>id_rsa.pub</code>(公钥),<strong>私钥不要泄露!</strong></p>
+</li>
+<li>
+<p>打开Github-&gt;settings-&gt;SSH and GPG keys-&gt;new SSH key</p>
+</li>
+<li>
+<p>title随便起,将<code>id_rsa.pub</code>复制到下方</p>
+</li>
+<li>
+<p>确定后不久会收到Github的邮件</p>
+</li>
+<li>
+<p>在git bash中输入,注意就是<code>git@github.com</code>不是你的邮箱,该操作是将你的邮箱与github建立连接</p>
+<div class="code-wrapper"><pre><code class="hljs shell">ssh -T git@github.com</code></pre></div>
+</li>
+<li>
+<p>yes</p>
 <blockquote>
-<p>腾讯云这台服务器也就是实验性质的,随便玩玩,2022/9月就到期,我也不会续费</p>
+<p>SSH协议采用由人工判断公钥的fingerprint是否可信的方式。当使用ssh命令连接服务器时，命令行会提示如下信息:</p>
+<p>The authenticity of host '168.30.9.213 (&lt;no hostip for proxy command&gt;) can’t be established.<br />
+RSA key fingerprint is 23:42:c1:e4:3f:d2:cc:37:1d:89:cb:e7:5d:be:5d:53.<br />
+Are you sure you want to continue connecting (yes/no)?</p>
 </blockquote>
-<p>购买之后你就可以看到你的<a target="_blank" rel="noopener" href="https://console.cloud.tencent.com/lighthouse/instance/index">服务器</a>了,一般会默认帮你安装操作系统,也是比较方便的.我选的是比较稳定的Debian 11.1</p>
-<div class="note note-info">
-            <p>这里就涉及到第二个问题,怎么选择操作系统?</p><p>一般来说用服务器的都是懂计算机的,linux我就不必多说.自然也不需要图形化界面,centos和debian两个分支我觉得都可以,debian是公认的稳定性,centos,ubuntu这种社区环境会好很多,遇到了很多问题都能找到答案.这个差距其实不大,纠结这个毫无意义.要是不知道怎么选centos就完事了</p>
-          </div>
-<p>腾讯云的网站会开启一个命令行的界面,安装完毕之后就可以正常使用了,不过我们肯定不是在它的官网上操作,毕竟还要肯定是要写代码传文件什么的,无论如何还是本地比较方便</p>
-<p>腾讯云也提供了<a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/1207/44578">远程登陆的例子</a>,首先创建一个<a target="_blank" rel="noopener" href="https://console.cloud.tencent.com/lighthouse/sshkey/index?keyword=&amp;keyword=">密钥</a>,把密钥保存在一个不会乱删的地方,<strong>服务器关机</strong>,然后绑定,<a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/1207/44575">重置密码</a>等等</p>
-<p>教程给的很详细,如果遇到什么问题了自己搜索解决,教程中给的是putty的例子,我比较习惯使用xshell,都可以,按照他的方式填写就可以了,顺利远程登录服务器</p>
-<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220614024607.png" srcset="/img/loading.gif" lazyload alt="20220614024607" /></p>
-<p>也可以通过SSH的方式直接连接,这种方式更加直接,而且vscode的ssh支持的非常舒适,我个人很喜欢.</p>
-<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220614024548.png" srcset="/img/loading.gif" lazyload alt="20220614024548" /></p>
-<h2 id="基本环境的安装"><a class="markdownIt-Anchor" href="#基本环境的安装"></a> 基本环境的安装</h2>
-<p>你需要先检查一下这个操作系统有没有python,是不是py3,如果不对劲的话那就下一个</p>
-<blockquote>
-<p>当然了,你不想搞混系统环境那就anaconda走起</p>
-</blockquote>
-<p>这个每个操作系统大同小异,基本上网上一搜就能找到linux的命令行安装方式,比如debian的操作系统按照如下方式就可以安装python</p>
-<div class="code-wrapper"><pre><code class="hljs bash">sudo apt update</code></pre></div>
-<div class="code-wrapper"><pre><code class="hljs bash">sudo apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libsqlite3-dev libreadline-dev libffi-dev curl libbz2-dev</code></pre></div>
-<div class="code-wrapper"><pre><code class="hljs bash">wget https://www.python.org/ftp/python/3.9.1/Python-3.9.1.tgz</code></pre></div>
-<div class="code-wrapper"><pre><code class="hljs bash">tar -xf Python-3.9.1.tgz
-<span class="hljs-built_in">cd</span> Python-3.9.1</code></pre></div>
-<div class="code-wrapper"><pre><code class="hljs bash">./configure --enable-optimizations
-make -j 12</code></pre></div>
-<p>为了更快完成构建,请修改-j后面的数字为你的处理器的核心数.可以通过键入nproc来找到cpu核心数。当构建过程完成时,安装Python二进制文件</p>
-<blockquote>
-<p>这里有个小梗就是 make -j 8</p>
-<p>很多人第一次见的时候觉得很有趣,其实8是处理器核心数</p>
-</blockquote>
-<div class="code-wrapper"><pre><code class="hljs bash">sudo make altinstall
-python3.9 --version</code></pre></div>
-<p>满屏的编译输出闪过,漫长的等待之后就安装完成了</p>
-<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220614025927.png" srcset="/img/loading.gif" lazyload alt="20220614025927" /></p>
-<p>先别高兴的太早,你现在的python环境可以干干净净的,顺手把其他的环境比如flask和pytorch也装了吧,或者搞一个anaconda?写一个requirements.txt,都可以,总之先把基础的环境配好</p>
-<blockquote>
-<p>我相信深度学习部署的应该配个环境不需要多说什么吧</p>
-</blockquote>
-<h2 id=""><a class="markdownIt-Anchor" href="#"></a> </h2>
+</li>
+<li>
+<p>如果出现Hi “用户名”! You’ve successfully authenticated, but GitHub does not provide shell access则设置成功</p>
+</li>
+<li>
+<p><strong>之后使用ssh的地址<code>git@github.com:xxx</code>而不是https的地址<code>https://github.com/xxx</code></strong></p>
+</li>
+<li>
+<p>可以使用 <code>git remote</code> 查看远程仓库,默认为空.</p>
+<ul>
+<li>
+<p>查看远程仓库绑定的地址</p>
+<div class="code-wrapper"><pre><code class="hljs shell">git remote -v</code></pre></div>
+</li>
+<li>
+<p>如果已经添加<code>origin</code>,可以使用如下命令删除</p>
+<div class="code-wrapper"><pre><code class="hljs shell">git remote rm origin</code></pre></div>
+</li>
+<li>
+<p>添加GitHub仓库地址,注意添加的是SSH的地址</p>
+<div class="code-wrapper"><pre><code class="hljs shell">git remote add origin git@github.com:learner-lu/git-learning.git</code></pre></div>
+</li>
+<li>
+<p>然后就可以自由的push啦</p>
+<div class="code-wrapper"><pre><code class="hljs shell">git push origin master</code></pre></div>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="如果之前都可以很稳定的push突然有一天报错ssl-port22-timeouttnnd坑死我了"><a class="markdownIt-Anchor" href="#如果之前都可以很稳定的push突然有一天报错ssl-port22-timeouttnnd坑死我了"></a> 如果之前都可以很稳定的push,突然有一天报错ssl port22 timeout(tnnd坑死我了)</h2>
+<p>这时候一般都不是你的问题,可以重新尝试一下<code>ssh -T git@github.com</code>, 如果仍然连接失败,网上有些方法是说添加一个config文件,换成443端口,我本人亲测不好使</p>
+<p>最后找了好久,发现是校园网…</p>
+<p>换流量,就可以了…</p>
+<h2 id="其他解决方法偶尔可以解决偶尔出问题"><a class="markdownIt-Anchor" href="#其他解决方法偶尔可以解决偶尔出问题"></a> 其他解决方法(偶尔可以解决,偶尔出问题)</h2>
+<ul>
+<li>
+<p>关掉代理(1)</p>
+<div class="code-wrapper"><pre><code class="hljs shell">git config --global  --unset https.https://github.com.proxy 
+git config --global  --unset http.https://github.com.proxy</code></pre></div>
+</li>
+<li>
+<p>关掉代理(2)</p>
+<div class="code-wrapper"><pre><code class="hljs shell">git config --global --unset http.proxy
+git config --global --unset https.proxy</code></pre></div>
+</li>
+<li>
+<p>UU加速器 | steam++</p>
+<p>见<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Aq4y1q7hr?spm_id_from=444.41.0.0">B站视频介绍</a></p>
+</li>
+</ul>
 
             </div>
             <hr>
@@ -310,7 +344,7 @@ python3.9 --version</code></pre></div>
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/pytorch/">pytorch</a>
+                      <a class="hover-with-bg" href="/tags/git/">git</a>
                     
                   </div>
                 
@@ -327,9 +361,9 @@ python3.9 --version</code></pre></div>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/06/25/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday8/">
+                      <a href="/2022/04/29/git/git%E7%9A%84branch%E5%92%8Cpull/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">自制操作系统day8</span>
+                        <span class="hidden-mobile">git的branch和pull</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -337,8 +371,8 @@ python3.9 --version</code></pre></div>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/06/13/pytorch/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2-2/">
-                        <span class="hidden-mobile">深度学习模型部署(2)-服务器与本地</span>
+                      <a href="/2022/04/29/git/git%E7%9A%84commit%E7%94%A8%E6%B3%95/">
+                        <span class="hidden-mobile">git的commit用法</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

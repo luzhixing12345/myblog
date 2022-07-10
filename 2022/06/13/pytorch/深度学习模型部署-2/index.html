@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220613210717.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/input-text.gif">
 <meta property="article:published_time" content="2022-06-13T11:50:08.000Z">
-<meta property="article:modified_time" content="2022-06-15T04:26:50.268Z">
+<meta property="article:modified_time" content="2022-07-10T02:13:53.357Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="pytorch">
 <meta name="twitter:card" content="summary_large_image">
@@ -190,7 +190,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      5.9k 字
+      6.8k 字
     </span>
   
 
@@ -199,7 +199,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      49 分钟
+      57 分钟
     </span>
   
 
@@ -240,7 +240,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：22 天前
+                  本文最后更新于：1 小时前
                 
               </p>
             
@@ -289,7 +289,7 @@ app = Flask(__name__)
             <p>值得一提的是除了python运行文件启动之外,我们还可以使用如下命令启动服务</p><div class="code-wrapper"><pre><code class="hljs bash">flask run</code></pre></div><p>flask run提供了更多命令行可选参数</p><div class="code-wrapper"><pre><code class="hljs bash">flask run --<span class="hljs-built_in">help</span></code></pre></div><p>如果电脑本机5000端口被占用了,那么也可以更换端口</p><div class="code-wrapper"><pre><code class="hljs bash">flask run --port=5500</code></pre></div><p>但是需要注意这种情况下如果文件名为 <a target="_blank" rel="noopener" href="http://app.py">app.py</a> 或者 <a target="_blank" rel="noopener" href="http://wsgi.py">wsgi.py</a> ,那么不需要设置 FLASK_APP 环境变量,否则需要配置一下环境变量,以(hello.py为例)</p><div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">set</span> FLASK_APP=hello
 flask run</code></pre></div><p>关于flask run 和 python .py的区别,请阅读<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/58564162/what-is-the-difference-between-using-flask-run-vs-python-app-py-vs-python-m-fla">这里</a></p>
           </div>
-<p><strong>当然,没有必要一定是使用flask run,我们仍然使用python.exe执行文件即可</strong></p>
+<p><strong>当然,没有必要一定是使用flask run,我们仍然使用python.exe执行文件即可</strong>,但是在实际服务器部署上的时候还是需要依靠flask的服务,也就是说并不能将一些预先的函数写在<code>if __name__ == &quot;__main__&quot;</code> 里,还是要写在整个python文件中处理,因为flask run是不会走这条分支的</p>
 <p>通过调用run()方法启动Flask应用程序。但是,当应用程序正在开发中时,应该为代码中的每个更改手动重新启动它。为避免这种不便,请启用调试支持。</p>
 <div class="note note-info">
             <p>你可能会感到奇怪,服务器呢? 127.0.0.1这不本机么?只有我电脑是可以使用服务,换个别的电脑肯定就不行了啊</p>
@@ -464,17 +464,30 @@ app = Flask(__name__)
     <span class="hljs-keyword">var</span> last_name = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;last_name&quot;</span>).<span class="hljs-property">value</span>;
     <span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;Hello &quot;</span> + first_name + <span class="hljs-string">&quot; &quot;</span> + last_name);
 &#125;</code></pre></div>
-<p>重新运行python <a target="_blank" rel="noopener" href="http://app.py">app.py</a> , 打开浏览器尝试一下吧~</p>
+<p>重新运行<code>python app.py</code> , 打开浏览器尝试一下吧~</p>
 <h2 id="flask精通"><a class="markdownIt-Anchor" href="#flask精通"></a> flask精通</h2>
-<p>好了,你已经是flask大师了,快去</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/luzhixing12345/html-css-js">https://github.com/luzhixing12345/html-css-js</a></p>
+<p>好了,你已经是flask大师了,快去做一个像样的网页吧.<a target="_blank" rel="noopener" href="https://visual.kamilu.top">我的链接传送门</a></p>
+<p>flask还是有很多比较复杂的地方没有去讲,包括重定向,py和js之间的数据传输,我推荐一个<a target="_blank" rel="noopener" href="https://www.w3cschool.cn/flask/">教程网站</a>,我个人认为说的还是很详细的,推荐感兴趣的朋友去看一下.</p>
+<p>当然如果遇到py和js之间的数据传输的问题,我建议去看一下我的这个网站的源代码,ajax固然可以发送POST请求但是无法再实现网页的刷新即<code>render_template</code>一个新的页面,这令我很头大,具体的解决方法就是在div标签中加入数据项进行python-&gt;js文件的数据传入,从js传出python就还是要利用form表单的onsubmit. 我在这个项目中遇到并且解决了一些问题,可以去浏览一下<a target="_blank" rel="noopener" href="https://github.com/luzhixing12345/pytorch-model-deployment">代码</a></p>
+<p>关于前端的网页编写,那基本就是看个人的html+css+js的能力了,我前端的本身水平不高,这个仓库有我的一些记录的<a target="_blank" rel="noopener" href="https://github.com/luzhixing12345/html-css-js">例子</a>,感兴趣的话可以参考一下</p>
 <h2 id="flask入土"><a class="markdownIt-Anchor" href="#flask入土"></a> flask入土</h2>
 <blockquote>
 <p>这么快就入土了? -确实</p>
 </blockquote>
 <p>运行服务器后,会发现只有您自己的电脑可以使用服务,而网络中的其他电脑却不行。默认的设置就是这样的,因为在调试模式下该应用的用户可以执行您电脑中 的任意 Python 代码。</p>
 <p>如果您关闭了调试器或信任您网络中的用户,那么可以让服务器被公开访问。 只要在命令行上简单的加上 --host=0.0.0.0 即可:</p>
-<p>让我们稍微深入一点点,首先你看到一句警告: 不要部署到生产环境中.</p>
+<p>但是我们之前提到过需要在服务器运行,所以如果你写好了app.py的话那么运行的话就是</p>
+<div class="code-wrapper"><pre><code class="hljs bash">flask run --host=0.0.0.0 --port=3000</code></pre></div>
+<p>但是这样的话还是不行,因为它需要保证你的终端是开启的,一旦你关闭终端这个进程就会被杀死,所以我们需要将这个进程挂在后台</p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">nohup</span> flask run --host=0.0.0.0 --port=3000 2&gt;&amp;1 &amp;</code></pre></div>
+<p>如果要结束这个进程的话就去查找它的PID号然后杀死他</p>
+<div class="code-wrapper"><pre><code class="hljs bash">ps -ef
+<span class="hljs-built_in">kill</span> PID</code></pre></div>
+<p>关于服务器的部署,我会把这部分的内容放到<a href="1">服务器的目录</a>下方,如果你对服务器的网页搭建,IP端口访问,HTTPS连接的建立尚且不熟悉可以参考我的文章</p>
+<p>到此为止我们的客户端/移动端访问网页的任务已经完成啦,值的一提的是服务器并不一定有GPU,所以在运行深度学习项目的时候算起来会有一点点慢,当然如果有财力的话可以直接购买GPU的服务器,对于一般的用户我们也就退而求其次设置一下CPU不是CUDA就完事了,但是不要忘记模型加载的时候也会需要一个<code>map_location=torch.device('cpu')</code></p>
+<blockquote>
+<p>如果不知道在哪里写的话运行的时候会有报错,按照说明改一下就可以了</p>
+</blockquote>
 
             </div>
             <hr>
@@ -502,9 +515,9 @@ app = Flask(__name__)
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/06/14/pytorch/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2-3/">
+                      <a href="/2022/06/14/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%85%A5%E9%97%A8/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">深度学习模型部署(3)-真正的服务器</span>
+                        <span class="hidden-mobile">服务器入门</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
