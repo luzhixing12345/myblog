@@ -27,8 +27,9 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220614024607.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220614024548.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/lowi823.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220710114635.png">
 <meta property="article:published_time" content="2022-06-13T17:39:19.000Z">
-<meta property="article:modified_time" content="2022-07-10T03:33:14.597Z">
+<meta property="article:modified_time" content="2022-07-10T03:48:21.047Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="服务器">
 <meta name="twitter:card" content="summary_large_image">
@@ -192,7 +193,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.8k 字
+      2.2k 字
     </span>
   
 
@@ -201,7 +202,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      16 分钟
+      19 分钟
     </span>
   
 
@@ -242,7 +243,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：几秒前
+                  本文最后更新于：2 小时前
                 
               </p>
             
@@ -270,8 +271,10 @@
             <p>这里就涉及到第二个问题,怎么选择操作系统?</p><p>一般来说用服务器的都是懂计算机的,linux我就不必多说.自然也不需要图形化界面,centos和debian两个分支我觉得都可以,debian是公认的稳定性,centos,ubuntu这种社区环境会好很多,遇到了很多问题都能找到答案.这个差距其实不大,纠结这个毫无意义.要是不知道怎么选centos就完事了</p>
           </div>
 <p>腾讯云的网站会开启一个命令行的界面,安装完毕之后就可以正常使用了,不过我们肯定不是在它的官网上操作,毕竟还要肯定是要写代码传文件什么的,无论如何还是本地比较方便</p>
+<blockquote>
 <p>腾讯云也提供了<a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/1207/44578">远程登陆的例子</a>,首先创建一个<a target="_blank" rel="noopener" href="https://console.cloud.tencent.com/lighthouse/sshkey/index?keyword=&amp;keyword=">密钥</a>,把密钥保存在一个不会乱删的地方,<strong>服务器关机</strong>,然后绑定,<a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/1207/44575">重置密码</a>等等</p>
 <p>教程给的很详细,如果遇到什么问题了自己搜索解决,教程中给的是putty的例子,我比较习惯使用xshell,都可以,按照他的方式填写就可以了,顺利远程登录服务器</p>
+</blockquote>
 <p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220614024607.png" srcset="/img/loading.gif" lazyload alt="20220614024607" /></p>
 <p>也可以通过SSH的方式直接连接,这种方式更加直接,而且vscode的ssh支持的非常舒适,我个人很喜欢.</p>
 <p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220614024548.png" srcset="/img/loading.gif" lazyload alt="20220614024548" /></p>
@@ -290,16 +293,31 @@
 <h3 id="vscode-ssh"><a class="markdownIt-Anchor" href="#vscode-ssh"></a> Vscode + SSH</h3>
 <p>实际开发之中我倾向于使用Vscode远程开发,不得不说Vscode的SSH服务实在是香,很方便,Vscode界面还好看,有插件,真棒</p>
 <blockquote>
-<p>默认安装了git,ssh等基本配置,这一步与github建立SSH连接是类似的</p>
+<p>默认安装了git,ssh等基本配置,这一步与github建立SSH连接是类似的,参考<a href="https://luzhixing12345.github.io/2022/04/29/git/git%E7%9A%84SSH%E8%BF%9E%E6%8E%A5/">git的SSH连接</a></p>
 </blockquote>
 <div class="code-wrapper"><pre><code class="hljs bash">ssh-keygen -t rsa -C <span class="hljs-string">&quot;YOUR@EMAIL&quot;</span></code></pre></div>
+<p>将<code>id_rsa.pub</code>传入服务器,传入/root/目录下</p>
+<p>以root用户登录</p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> id_rsa.pub &gt;&gt; .ssh/authorized_keys</code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs bash">service sshd restart</code></pre></div>
+<p>在进行本机ssh登录的时候就要求验证,选择yes认证之后就可以免密登录了</p>
+<p>Vscode的环境就是使用远程资源管理器登录</p>
+<p>由于过程比较简单,这里介绍的并不是很详细,推荐几个比较详细的配置流程,如果新手小白遇到了一些问题可以参考</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/68577071">https://zhuanlan.zhihu.com/p/68577071</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/huoyanCC/p/14730244.html">https://www.cnblogs.com/huoyanCC/p/14730244.html</a></li>
+</ul>
 <h3 id="ftp"><a class="markdownIt-Anchor" href="#ftp"></a> FTP</h3>
 <p>用于大批量文件传输</p>
 <p>这个也有不同的WinSCP/XFTP等等软件,我这里就直接推荐XFTP吧,我个人很喜欢</p>
 <blockquote>
 <p>介意者误用: <a target="_blank" rel="noopener" href="https://github.com/luzhixing12345/cloud-server/releases/download/v0.0.1/Xftp-7.0.0097p.exe">下载地址</a></p>
 </blockquote>
+<p>与Xshell类似的配置,完成之后就可以传入文件了.值得一提的是最高修改一下设置显示隐藏文件,必要情况下还是需要直接传入这些文件夹内的</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220710114635.png" srcset="/img/loading.gif" lazyload alt="20220710114635" /></p>
+<hr />
 <p>关于服务器的购买,域名购买,DNS解析,IPC备案,二级域名的使用,HTTPS的申请,nginx服务的端口反向代理,如何启动nodejs服务,静态页面,flask服务,等等官网的文档也都在常见问题中有很详细的图文并茂的说明.这些也确实是新手入门的障碍,不折腾折腾怎么能搞明白(笑)</p>
+<p>我会在之后的文章中完成这部分的教程</p>
 
             </div>
             <hr>
