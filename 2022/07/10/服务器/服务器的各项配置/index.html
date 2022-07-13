@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220710135618.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220708145028.png">
 <meta property="article:published_time" content="2022-07-10T02:38:01.000Z">
-<meta property="article:modified_time" content="2022-07-10T06:14:24.269Z">
+<meta property="article:modified_time" content="2022-07-10T07:21:51.559Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="服务器">
 <meta name="twitter:card" content="summary_large_image">
@@ -247,7 +247,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：1 分钟前
+                  本文最后更新于：4 天前
                 
               </p>
             
@@ -302,7 +302,8 @@ server.<span class="hljs-title function_">listen</span>(<span class="hljs-number
 pm2 stop server.js         // 停止
 pm2 restart server.js      // 重启</code></pre></div>
 <p>查看所有运行后台服务</p>
-<div class="code-wrapper"><pre><code class="hljs bash">pm2 list</code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs bash">pm2 list
+pm2 flush // 清除日志</code></pre></div>
 <p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220710124206.png" srcset="/img/loading.gif" lazyload alt="20220710124206" /></p>
 <p>也可以直接查看log日志</p>
 <div class="code-wrapper"><pre><code class="hljs bash">pm2 <span class="hljs-built_in">log</span>    // 查看所有运行后台服务
@@ -353,19 +354,18 @@ pm2 <span class="hljs-built_in">log</span> 0  // 单独查看某一个的日志<
 <p>在/etc/nginx/ 下新建一个cert文件夹用于保存证书文件,然后将nginx的两个证书ftp传入这个目录</p>
 <p>关于conf的配置文件主要如下,http请求转换成https请求, 对于443端口(HTTPS默认是443端口请求)映射到location的位置,默认index.html文件</p>
 <p>我给出我的配置文件</p>
-<p>这里解释一下我的配置,<code>kamilu.top</code>是我的一级域名也就是我购买的,访问这个域名会被跳转到<code>/home/lzx/project</code>这个目录下的<code>index.html</code>文件,也就是我的主页. ssl_certificate和ssl_certificate_key就是证书的名字,改成你的</p>
+<p>这里解释一下我的配置,<code>kamilu.top</code>是我的一级域名也就是我购买的,访问这个域名会被跳转到<code>/home/cloud-server</code>这个目录下的<code>index.html</code>文件,也就是我的主页. ssl_certificate和ssl_certificate_key就是证书的名字,改成你的</p>
 <p>除此之外可以再申请一个HTTPS证书用于二级域名,二级域名不需要买,买了一级域名就可以使用旗下的所有二级域名,但是因为我们的HTTPS证书是免费的,所以所有的二级域名还是需要重新申请证书的,如果是泛域名的证书那么 <code>*.kamilu.top</code> 的二级域名都可以直接使用,不过那就要花钱了,也没必要</p>
 <p><code>visual.kamilu.top</code> 是我的申请的一个二级域名,它会被映射到我的3000端口的服务,也就是说访问<code>https://visual.kamilu.top</code>就相当于访问 <code>https://kamilu.top:3000</code></p>
 <blockquote>
 <p>内容加在http {} 大括号中间的位置就可以</p>
 </blockquote>
 <div class="code-wrapper"><pre><code class="hljs txt">server &#123; # 自动跳转到https
-    listen 80;
-    server_name kamilu.top;
-    #将请求转成https
-    rewrite ^(.*)$ https://$host$1 permanent;
-&#125;
-
+		listen 80;
+		server_name kamilu.top;
+		#将请求转成https
+		rewrite ^(.*)$ https://$host$1 permanent;
+	&#125;
 server &#123;
     listen       443 ssl; #配置HTTPS的默认访问端口为443。如果在此处未配置HTTPS的默认访问端口，可能会导致Nginx无法启动。
     server_name  kamilu.top; #修改为您证书绑定的域名。
@@ -376,7 +376,7 @@ server &#123;
     ssl_ciphers  HIGH:!aNULL:!MD5; #加密套件。
     ssl_prefer_server_ciphers  on;
     location / &#123;
-        root   /home/lzx/project; #站点目录。
+        root   /home/cloud-server; #站点目录。
         index  index.html; #添加属性。
     &#125;  
 &#125;
@@ -390,7 +390,7 @@ server &#123;
     ssl_session_cache    shared:SSL:1m;
     ssl_session_timeout  5m;
 
-    ssl_ciphers  HIGH:!aNULL:!MD5;
+    ssl_ciphers  HIGH:!aNULL:!MD5;	
     ssl_prefer_server_ciphers  on;
 
     location / &#123;
@@ -432,12 +432,18 @@ server &#123;
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2022/07/11/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday12/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">自制操作系统day12-定时器(1)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
                       <a href="/2022/07/08/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday11/">
-                        <span class="hidden-mobile">自制操作系统day11</span>
+                        <span class="hidden-mobile">自制操作系统day11-制作窗口</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

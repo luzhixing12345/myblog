@@ -16,21 +16,25 @@
   <meta name="author" content="luzhixing12345">
   <meta name="keywords" content="">
   
-    <meta name="description" content="day10 叠加处理  向下舍入和向上舍入 这里作者讲的很清楚,例子举得也十分恰当 核心思想就是一个 i &#x3D; (i+0xfff) &amp; 0xfffff000,这种做法确实很巧妙  叠加处理  果然如我在day8中所料,在多窗口中准备做处理  关于绘图的窗口这里,我感觉作者说的也是挺清晰了,我也做了相应的可视化演示,我觉得如果没有耐心把作者的源代码看完那估计也没有耐心听我讲完 我个人感觉这里">
+    <meta name="description" content="day10 叠加处理  向下舍入和向上舍入 这里作者讲的很清楚,例子举得也十分恰当 核心思想就是一个 i &#x3D; (i+0xfff) &amp; 0xfffff000,这种做法确实很巧妙  叠加处理  果然如我在day8中所料,在多窗口中准备做处理  首先我觉得很重要的一点是数据结构的清晰明了,窗口的阶段新定义的数据结构有两个 #define MAX_SHEETS		256 struct SHEET">
 <meta property="og:type" content="article">
 <meta property="og:title" content="自制操作系统day10-叠加处理">
 <meta property="og:url" content="https://luzhixing12345.github.io/2022/07/08/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday10/index.html">
 <meta property="og:site_name" content="kamilu的博客">
-<meta property="og:description" content="day10 叠加处理  向下舍入和向上舍入 这里作者讲的很清楚,例子举得也十分恰当 核心思想就是一个 i &#x3D; (i+0xfff) &amp; 0xfffff000,这种做法确实很巧妙  叠加处理  果然如我在day8中所料,在多窗口中准备做处理  关于绘图的窗口这里,我感觉作者说的也是挺清晰了,我也做了相应的可视化演示,我觉得如果没有耐心把作者的源代码看完那估计也没有耐心听我讲完 我个人感觉这里">
+<meta property="og:description" content="day10 叠加处理  向下舍入和向上舍入 这里作者讲的很清楚,例子举得也十分恰当 核心思想就是一个 i &#x3D; (i+0xfff) &amp; 0xfffff000,这种做法确实很巧妙  叠加处理  果然如我在day8中所料,在多窗口中准备做处理  首先我觉得很重要的一点是数据结构的清晰明了,窗口的阶段新定义的数据结构有两个 #define MAX_SHEETS		256 struct SHEET">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/x039nas.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/ajsdkl8912.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/asdhkj8993.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/fjsi823l.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/laslnlasn.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220708045700.png">
 <meta property="article:published_time" content="2022-07-07T19:58:28.000Z">
-<meta property="article:modified_time" content="2022-07-08T04:59:39.482Z">
+<meta property="article:modified_time" content="2022-07-11T09:15:04.067Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="OS">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/laslnlasn.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/x039nas.jpg">
   
   
   <title>自制操作系统day10-叠加处理 - kamilu的博客</title>
@@ -190,7 +194,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      230 字
+      4.6k 字
     </span>
   
 
@@ -199,7 +203,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      2 分钟
+      39 分钟
     </span>
   
 
@@ -240,7 +244,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2 天前
+                  本文最后更新于：3 天前
                 
               </p>
             
@@ -253,8 +257,189 @@
 <blockquote>
 <p>果然如我在day8中所料,在多窗口中准备做处理</p>
 </blockquote>
-<p>关于绘图的窗口这里,我感觉作者说的也是挺清晰了,我也做了相应的<a href="123">可视化演示</a>,我觉得如果没有耐心把作者的源代码看完那估计也没有耐心听我讲完</p>
-<p>我个人感觉这里的处理还是比较明智的,作者也在之后做了两次优化,减少了刷新的范围</p>
+<p>首先我觉得很重要的一点是数据结构的清晰明了,窗口的阶段新定义的数据结构有两个</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">define</span> MAX_SHEETS		256</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">SHEET</span> &#123;</span>
+	<span class="hljs-type">unsigned</span> <span class="hljs-type">char</span> *buf;
+	<span class="hljs-type">int</span> bxsize, bysize, vx0, vy0, col_inv, height, flags;
+&#125;;
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">SHTCTL</span> &#123;</span>
+	<span class="hljs-type">unsigned</span> <span class="hljs-type">char</span> *vram;
+	<span class="hljs-type">int</span> xsize, ysize, top;
+	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">SHEET</span> *<span class="hljs-title">sheets</span>[<span class="hljs-title">MAX_SHEETS</span>];</span>
+	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">SHEET</span> <span class="hljs-title">sheets0</span>[<span class="hljs-title">MAX_SHEETS</span>];</span>
+&#125;;</code></pre></div>
+<p><code>SHEET</code> 结构用于记录单个图层</p>
+<ul>
+<li>
+<p>buf是一个数组的指针,用于记录当前图层的数组的起始地址</p>
+</li>
+<li>
+<p>bxsize,bysize代表当前图层的 X Y 大小</p>
+</li>
+<li>
+<p>vx0, vy0 代表的是图层在画面上的位置,指的是最左上角的开始位置</p>
+<p>也就是说整个图层可以看作一个矩形, (vx0 - vx0 + bxsize, vy0 - vy0 + bysize)的区域范围</p>
+</li>
+<li>
+<p>col_inv 代表透明色色号</p>
+</li>
+<li>
+<p>height表示图层高度,height越高代表越靠前显示</p>
+</li>
+<li>
+<p>flags表示图层的各种设定信息,0代表未使用,1代表正在使用.</p>
+<blockquote>
+<p>其实这里只用了两种状态可以使用bool类型</p>
+</blockquote>
+</li>
+</ul>
+<p>接着是一个总的所有图层的结构体 <code>SHTCTL</code>(sheet control)</p>
+<ul>
+<li>
+<p>vram xsize ysize是从 BOOTINFO中取出的变量值,用于记录屏幕的信息</p>
+</li>
+<li>
+<p>top是最上面图层的高度</p>
+</li>
+<li>
+<p>sheets0是所有的图层,不过图层的顺序混乱,sheets是按照高度升序排列的整理好的图层</p>
+<p>sheets表示的是所有图层按height排序之后的结果,即sheets[0]代表该图层处于第0层,不存在相同的图层高度.虽然我们可以理解为不相交的图层可以处于同一高度,相交的图层之间才存在高度差和显示问题,但是那样的话处理起来很麻烦,还要考虑数组容量的问题,直接将所有图层列为不同的高度,然后再统一处理(sheet_updown)比较明智</p>
+</li>
+</ul>
+<div class="note note-info">
+            <p>值得一提的是这里的sheets是指针(32位4字节),sheets0是纯结构体,两者的所需的内存空间大小不同,作者的内存分配示意图还是很清晰的.</p><blockquote><p>前面说的flags可以使用bool类型但是现在看来没有区别,即使使用bool(1位)在结构体中还是会为了对其补齐成32位</p></blockquote><div align=center><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/x039nas.jpg" srcset="/img/loading.gif" lazyload height="500"></div>
+          </div>
+<p><code>shctl_init</code>就是初始化了SHTCTL的初始化信息,分配内存空间.值得一提的是这里的分配内存是使用的我们之前写过的<code>memman_alloc_4k</code>函数来进行分配内存,之和往常写C语言的malloc函数有异曲同工之妙,不过是我们自己实现了内存分配算法和方式.</p>
+<p>将top的值置为-1,将所有图层的flags置零,表示所有图层都未使用</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-keyword">struct</span> SHTCTL *<span class="hljs-title function_">shtctl_init</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> MEMMAN *memman, <span class="hljs-type">unsigned</span> <span class="hljs-type">char</span> *vram, <span class="hljs-type">int</span> xsize, <span class="hljs-type">int</span> ysize)</span>
+&#123;
+	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">SHTCTL</span> *<span class="hljs-title">ctl</span>;</span>
+	<span class="hljs-type">int</span> i;
+	ctl = (<span class="hljs-keyword">struct</span> SHTCTL *) memman_alloc_4k(memman, <span class="hljs-keyword">sizeof</span> (<span class="hljs-keyword">struct</span> SHTCTL));
+	<span class="hljs-keyword">if</span> (ctl == <span class="hljs-number">0</span>) &#123;
+		<span class="hljs-keyword">goto</span> err;
+	&#125;
+	ctl-&gt;vram = vram;
+	ctl-&gt;xsize = xsize;
+	ctl-&gt;ysize = ysize;
+	ctl-&gt;top = <span class="hljs-number">-1</span>;
+	<span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; MAX_SHEETS; i++) &#123;
+		ctl-&gt;sheets0[i].flags = <span class="hljs-number">0</span>; <span class="hljs-comment">// ??????</span>
+	&#125;
+err:
+	<span class="hljs-keyword">return</span> ctl;
+&#125;
+</code></pre></div>
+<p><code>sheet_alloc</code>在当前结构体 sheets0 中查找第一个未使用过的(flags=0)图层,如果找到了就返回当前图层,并且设置为正在使用,height图层的的高度置为-1,相当于置于底层(隐藏)</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">define</span> SHEET_USE		1</span>
+
+<span class="hljs-keyword">struct</span> SHEET *<span class="hljs-title function_">sheet_alloc</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> SHTCTL *ctl)</span>
+&#123;
+	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">SHEET</span> *<span class="hljs-title">sht</span>;</span>
+	<span class="hljs-type">int</span> i;
+	<span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; MAX_SHEETS; i++) &#123;
+		<span class="hljs-keyword">if</span> (ctl-&gt;sheets0[i].flags == <span class="hljs-number">0</span>) &#123;
+			sht = &amp;ctl-&gt;sheets0[i];
+			sht-&gt;flags = SHEET_USE;
+			sht-&gt;height = <span class="hljs-number">-1</span>;
+			<span class="hljs-keyword">return</span> sht;
+		&#125;
+	&#125;
+	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</code></pre></div>
+<div class="note note-info">
+            <p>&amp; 运算符的优先级要低于 -&gt; (-&gt;运算符优先级是第一级的),所以表示的是</p><p>sht = &amp; (ctl -&gt; sheets0[i])</p>
+          </div>
+<p><code>sheet_setbuf</code>函数比较简单设定否一个图层的缓冲区,XY大小和透明色,这里略过</p>
+<p><code>sheetupdown</code>函数这里要说一下,也是我们主要用来控制图层的上下显示变化的函数</p>
+<p>这个函数有点长我们分开来看它做了什么</p>
+<blockquote>
+<p>其实作者的注释写的还是很清晰的,看看注释结合代码应该看懂了</p>
+</blockquote>
+<p>根据函数的参数可以判断出来是将sht图层的位置由最开始的sht-&gt;height(old)高度调整为height高度,同时更新所有ctl结构体中其他相关图层的高度信息,将初始sht的高度height保存在old变量中,然后做了一些初始化/参数的有效性判断和调整,并且将sht-&gt;height更新为height</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">sheet_updown</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> SHTCTL *ctl, <span class="hljs-keyword">struct</span> SHEET *sht, <span class="hljs-type">int</span> height)</span>
+&#123;
+	<span class="hljs-type">int</span> h, old = sht-&gt;height;
+
+
+	<span class="hljs-keyword">if</span> (height &gt; ctl-&gt;top + <span class="hljs-number">1</span>) &#123;
+		height = ctl-&gt;top + <span class="hljs-number">1</span>;
+	&#125;
+	<span class="hljs-keyword">if</span> (height &lt; <span class="hljs-number">-1</span>) &#123;
+		height = <span class="hljs-number">-1</span>;
+	&#125;
+	sht-&gt;height = height;</code></pre></div>
+<p>接下来是根据sht之前的高度old和更改之后的高度来判断如何更新其他相关图层的高度</p>
+<blockquote>
+<p>old &gt; height 和 old &lt; height 的函数判断是相似的,这里只讲一个分支</p>
+</blockquote>
+<p>如果原先的图层(old)要高于更新之后的图层height,说明将图层向后移.此时分为两种情况</p>
+<ol>
+<li>height&gt;=0</li>
+<li>height&lt;0</li>
+</ol>
+<div align=center><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/ajsdkl8912.jpg" srcset="/img/loading.gif" lazyload height="500"></div>
+<ul>
+<li>
+<p>对于情况1,我们需要做的就是将(height~old)之间的图层依次向前移动一个位置,然后把当前图层放到height位置上</p>
+<div align=center><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/asdhkj8993.jpg" srcset="/img/loading.gif" lazyload height="500"></div>
+</li>
+<li>
+<p>对于情况2,height&lt;0相当于直接隐藏图层,所以只需要考虑在该图层之上的所有图层向下移动一个位置,将原先图层所处的高度填不上就可以了,最后top–</p>
+<div align=center><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/fjsi823l.jpg" srcset="/img/loading.gif" lazyload height="500"></div>
+</li>
+</ul>
+<p>这样看是不是清晰多了,结合下面的代码也就更好理解了,在移动完成之后刷新一下显示<code>sheet_refreshsub</code></p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-keyword">if</span> (old &gt; height) &#123;
+	<span class="hljs-keyword">if</span> (height &gt;= <span class="hljs-number">0</span>) &#123;
+		<span class="hljs-keyword">for</span> (h = old; h &gt; height; h--) &#123;
+			ctl-&gt;sheets[h] = ctl-&gt;sheets[h - <span class="hljs-number">1</span>];
+			ctl-&gt;sheets[h]-&gt;height = h;
+		&#125;
+		ctl-&gt;sheets[height] = sht;
+	&#125; <span class="hljs-keyword">else</span> &#123;
+		<span class="hljs-keyword">if</span> (ctl-&gt;top &gt; old) &#123;
+			<span class="hljs-keyword">for</span> (h = old; h &lt; ctl-&gt;top; h++) &#123;
+				ctl-&gt;sheets[h] = ctl-&gt;sheets[h + <span class="hljs-number">1</span>];
+				ctl-&gt;sheets[h]-&gt;height = h;
+			&#125;
+		&#125;
+		ctl-&gt;top--;
+	&#125;
+	sheet_refresh(ctl);
+&#125;</code></pre></div>
+<p><code>sheet_refresh</code>函数用于刷新整个页面,对于第一版的函数是刷新所有的ctl,对于每一个sht的窗口都会进行完整的绘制.作者也在之后做了两次优化,减少了刷新的范围,我个人感觉这里的处理还是比较明智的.</p>
+<p>锁定刷新范围,反向求得在当前范围内每一个图层需要绘制的范围,减少循环次数</p>
+<div class="note note-info">
+            <p>最后我们来聊一下之前匆匆略过的<code>col_inv</code>,它代表着透明的颜色,其实这个指代并不准确,准确的来说,col_inv是当前图层不绘制的一个标识符</p><p>我们可以看到在bootpack.c中主页面和鼠标图层初始化的方式</p><div class="code-wrapper"><pre><code class="hljs c">sheet_setbuf(sht_back, buf_back, binfo-&gt;scrnx, binfo-&gt;scrny, <span class="hljs-number">-1</span>);
+sheet_setbuf(sht_mouse, buf_mouse, <span class="hljs-number">16</span>, <span class="hljs-number">16</span>, <span class="hljs-number">99</span>);</code></pre></div><p>在用于绘制所有图层显示最终页面的函数<code>sheet_refresh</code>的函数中,核心绘图函数是</p><div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-keyword">for</span> (by = by0; by &lt; by1; by++) &#123;
+	vy = sht-&gt;vy0 + by;
+	<span class="hljs-keyword">for</span> (bx = bx0; bx &lt; bx1; bx++) &#123;
+		vx = sht-&gt;vx0 + bx;
+		c = buf[by * sht-&gt;bxsize + bx];
+		<span class="hljs-keyword">if</span> (c != sht-&gt;col_inv) &#123;
+			vram[vy * ctl-&gt;xsize + vx] = c;
+		&#125;
+	&#125;
+&#125;</code></pre></div><p>也就说主页面的透明色是-1,对于(unsigned char)c的数据范围是不可能判断为-1,所以主页面是一定会完整绘制的,可以说他是一个完整绘图的矩形</p><p>对于鼠标这个透明色的值是99,回忆一下,这个是一个标识符,也就是对应的鼠标的<code>.</code></p><div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">static</span> <span class="hljs-type">char</span> cursor[<span class="hljs-number">16</span>][<span class="hljs-number">16</span>] = &#123;
+<span class="hljs-string">&quot;**************..&quot;</span>,
+<span class="hljs-string">&quot;*OOOOOOOOOOO*...&quot;</span>,
+<span class="hljs-string">&quot;*OOOOOOOOOO*....&quot;</span>,
+<span class="hljs-string">&quot;*OOOOOOOOO*.....&quot;</span>,
+<span class="hljs-string">&quot;*OOOOOOOO*......&quot;</span>,
+<span class="hljs-string">&quot;*OOOOOOO*.......&quot;</span>,
+<span class="hljs-string">&quot;*OOOOOOO*.......&quot;</span>,
+<span class="hljs-string">&quot;*OOOOOOOO*......&quot;</span>,
+<span class="hljs-string">&quot;*OOOO**OOO*.....&quot;</span>,
+<span class="hljs-string">&quot;*OOO*..*OOO*....&quot;</span>,
+<span class="hljs-string">&quot;*OO*....*OOO*...&quot;</span>,
+<span class="hljs-string">&quot;*O*......*OOO*..&quot;</span>,
+<span class="hljs-string">&quot;**........*OOO*.&quot;</span>,
+<span class="hljs-string">&quot;*..........*OOO*&quot;</span>,
+<span class="hljs-string">&quot;............*OO*&quot;</span>,
+<span class="hljs-string">&quot;.............***&quot;</span>
+&#125;;</code></pre></div><p>这部分不进行绘制,也就是保留了下方图层的颜色,进而实现了图层的绘画处理.所以99只是一个标识符,用于代表鼠标的透明色块位置的像素点而已</p><blockquote><p>值得一提的是其实<code>col_inv</code>也可以设置为char类型,是一样的,不过和之前提到的bool类型的flags相同,考虑到结构体的补齐的问题这里也设置为了int</p></blockquote>
+          </div>
 <blockquote>
 <p>好耶,是卡顿的多窗口</p>
 </blockquote>
@@ -292,7 +477,7 @@
                     
                       <a href="/2022/07/08/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday11/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">自制操作系统day11</span>
+                        <span class="hidden-mobile">自制操作系统day11-制作窗口</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
