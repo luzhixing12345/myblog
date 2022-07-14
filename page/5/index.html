@@ -183,15 +183,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/05/26/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday5/" target="_self">
-          自制操作系统day5-结构体/文字显示与GDT/IDT初始化
+        <a href="/2022/04/29/git/git%E7%9A%84branch%E5%92%8Cpull/" target="_self">
+          git的branch和pull
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/05/26/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday5/" target="_self">
+        <a href="/2022/04/29/git/git%E7%9A%84branch%E5%92%8Cpull/" target="_self">
           
-          day5 结构体&#x2F;文字显示与GDT&#x2F;IDT初始化 到现在看到这个结构体就能明白作者当初的用意了 struct BOOTINFO &amp;#123; 	char cyls, leds, vmode, reserve; 	short scrnx, scrny; 	char *vram; &amp;#125;; 与asmhead.nas中的 CYLS        EQU     0x0ff0 LEDS
+          git官方提供了十分详细的描述,有很多直观的图片描述,很容易理解 我将在这部分根据我的理解给出一些描述性的图片,git的图片很好我并没有打算超越,仅作为学习记录 git官方的分支介绍 Note: “origin” 并无特殊含义 远程仓库名字 “origin” 与分支名字 “master” 一样，在 Git 中并没有任何特别的含义一样。 同时 “master” 是当你运行 git init 时默认
         </a>
       </p>
 
@@ -199,8 +199,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-05-26 01:54" pubdate>
-              2022-05-26
+            <time datetime="2022-04-29 15:47" pubdate>
+              2022-04-29
             </time>
           </div>
         
@@ -209,7 +209,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/OS/">OS</a>
+              <a href="/tags/git/">git</a>
             
           </div>
         
@@ -223,15 +223,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/05/26/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday4/" target="_self">
-          自制操作系统day4-C语言与画面显示
+        <a href="/2022/04/29/git/git%E7%9A%84SSH%E8%BF%9E%E6%8E%A5/" target="_self">
+          git的SSH连接
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/05/26/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday4/" target="_self">
+        <a href="/2022/04/29/git/git%E7%9A%84SSH%E8%BF%9E%E6%8E%A5/" target="_self">
           
-          day4 C语言与画面显示 _write_mem8:    ; void write_mem8(int addr, int data)         MOV     ECX,[ESP+4]     ; [ESP+4] &#x3D; addr         MOV     AL,[ESP+8]      ; [ESP+8] &#x3D; data         MOV     [ECX],AL
+          不使用https连接,使用SSH连接(推荐)  使用RSA非对称加密算法 参考SSH key配置 SSH key配置教程 SSH SSL HTTPS    创建SSH key ssh-keygen -t rsa -C &quot;YOUR@EMAIL&quot;   默认路径保存,两个文件保存在 c:&#x2F;user&#x2F;luzhi&#x2F;.ssh   不设置密码,跳过   然后会在上面的文件夹中生成id_rs
         </a>
       </p>
 
@@ -239,8 +239,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-05-26 00:29" pubdate>
-              2022-05-26
+            <time datetime="2022-04-29 15:44" pubdate>
+              2022-04-29
             </time>
           </div>
         
@@ -249,7 +249,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/OS/">OS</a>
+              <a href="/tags/git/">git</a>
             
           </div>
         
@@ -263,15 +263,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/05/24/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday3/" target="_self">
-          自制操作系统day3-进入32位模式并导入C语言
+        <a href="/2022/04/29/git/git%E7%9A%84commit%E7%94%A8%E6%B3%95/" target="_self">
+          git的commit用法
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/05/24/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday3/" target="_self">
+        <a href="/2022/04/29/git/git%E7%9A%84commit%E7%94%A8%E6%B3%95/" target="_self">
           
-          day3 自制操作系统day3-进入32位模式并导入C语言  start 这里遇到一个很难过的事情,如果我们向往常一样使用nask + qemu,会发现显示load error 正常来说看这个汇编代码JC应该是不执行,所以进入fin进入循环等待CPU启动,只使用nask直接生成img文件没有磁盘映像这个过程所以说出现问题,JC会直接跳转,显示load error  所以需要一个磁盘映像加入,da
+          实话说我认为有些没必要,或许不应该在这种小事上大费周章,或许有些吹毛求疵吧,但我还是希望养成一个好的习惯 node_modules的设计…有些臃肿,不是很喜欢 参考知乎文章   git commit 标准用法  [feat] : 新增功能(已实现) [dev] : 功能开发进展(进行中) [fix] : 修复 bug [docs] : 仅仅修改了文档，比如 README, CHANGELOG等等
         </a>
       </p>
 
@@ -279,8 +279,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-05-24 21:55" pubdate>
-              2022-05-24
+            <time datetime="2022-04-29 15:43" pubdate>
+              2022-04-29
             </time>
           </div>
         
@@ -289,7 +289,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/OS/">OS</a>
+              <a href="/tags/git/">git</a>
             
           </div>
         
@@ -303,15 +303,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/05/19/GAN/GAN%E7%BD%91%E7%BB%9C%E8%AF%A6%E8%A7%A3(%E5%9B%9B)/" target="_self">
-          GAN网络详解(四) - 使用WGAN生成动漫头像
+        <a href="/2022/04/29/git/git%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
+          git的使用
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/05/19/GAN/GAN%E7%BD%91%E7%BB%9C%E8%AF%A6%E8%A7%A3(%E5%9B%9B)/" target="_self">
+        <a href="/2022/04/29/git/git%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_self">
           
-          本文将会介绍一个我的项目,使用WGAN-GP生成动漫头像. 项目地址: Github-Anime-WGAN   简介 其实这个项目的起因很简单,就是想动手实践一下,顺着GAN往下学就到了WGAN-GP,然后就搜了搜代码找了一个很不错的项目跟着改了改,然后完成了这次任务 关于具体的训练细节,实验结果,潜在空间探索等等内容我都在项目的README里面写的很详细了,这里不再赘述,主要想讲一讲一些细节的部
+          由于笔者水平有限,该文档并不是git的教学文档,仅为学习了git的用法之后的总结,希望能通过整理的方式加深印象,如果对git尚不熟悉,可以参考以下文章  Git入门级参考文章  git官方文档 知乎文章 知乎文章 github markdown git电子书   git的使用 git支持linux的部分命令,包括cat,mkdir,touch,vim,rm,cd等等,也有一些常用的命令和提交格式
         </a>
       </p>
 
@@ -319,8 +319,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-05-19 17:38" pubdate>
-              2022-05-19
+            <time datetime="2022-04-29 15:38" pubdate>
+              2022-04-29
             </time>
           </div>
         
@@ -329,7 +329,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/GAN/">GAN</a>
+              <a href="/tags/git/">git</a>
             
           </div>
         
@@ -343,15 +343,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/05/19/%E8%AE%B0%E5%BD%95/vscode%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/" target="_self">
-          vscode基本配置
+        <a href="/2022/04/29/%E6%9D%82/%E4%BD%BF%E7%94%A8PYPI%E5%8F%91%E5%B8%83python%E5%8C%85/" target="_self">
+          使用PYPI发布python包
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/05/19/%E8%AE%B0%E5%BD%95/vscode%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/" target="_self">
+        <a href="/2022/04/29/%E6%9D%82/%E4%BD%BF%E7%94%A8PYPI%E5%8F%91%E5%B8%83python%E5%8C%85/" target="_self">
           
-          添加snipplet 在settings.json中添加如下设置启用markdown的snippets &quot;[markdown]&quot;: &amp;#123;    &quot;editor.formatOnSave&quot;: true,    &quot;editor.renderWhitespace&quot;: &quot;all&quot;,    &quot;editor.
+          前言: 最近在写一个python的包,使用python实现pytorch的基本功能.目前包名暂时叫lytorch.也在这里记录一下如何编写发布测试一个自己的python包  引言 熟悉python的朋友一定安装过很多第三方库,python的强大之处不仅在于简洁优雅,还有很好的社区环境,有许多无私的开源贡献者编写了许多实用高效的第三方库,比如matplotlib,numpy之类,只要你想要pytho
         </a>
       </p>
 
@@ -359,8 +359,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-05-19 03:14" pubdate>
-              2022-05-19
+            <time datetime="2022-04-29 11:37" pubdate>
+              2022-04-29
             </time>
           </div>
         
@@ -383,15 +383,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/05/18/GAN/GAN%E7%BD%91%E7%BB%9C%E8%AF%A6%E8%A7%A3(%E4%B8%89)/" target="_self">
-          GAN网络详解(三) - WGAN-CP 与 WGAN-GP
+        <a href="/2022/04/28/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90-%E4%B8%8B/" target="_self">
+          LL(1)文法
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/05/18/GAN/GAN%E7%BD%91%E7%BB%9C%E8%AF%A6%E8%A7%A3(%E4%B8%89)/" target="_self">
+        <a href="/2022/04/28/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90-%E4%B8%8B/" target="_self">
           
-          本文将会介绍WGAN-CP和它的改进版本WGAN-GP  WGAN-CP  参考文章GAN到WGAN,作者连续五篇文章非常详尽的分析了WGAN,读完之后受益匪浅  鉴于GAN网络存在的种种问题,那么我们应该寻求一个新的距离来替代JS.该文认为需要对“生成分布与真实分布之间的距离”探索一种更合适的度量方法。作者们把眼光转向了Earth-Mover距离,简称EM距离,又称Wasserstein距离
+          LL(1)文法                什么是LL1文法?             第一个L代表从左至右 第二个L代表产生最左推导 1代表每一步中只需要向前看一个输入符号就可以决定语法分析动作  之前我们提到了如何计算FIRST集和FOLLOW集,既然我们已经知道了在某一状态的开头的字符都是什么,后面跟着字符都可能是什么,那么我们就可以做出预测分析. 由此引出了可选集-SELECT集的概念
         </a>
       </p>
 
@@ -399,8 +399,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-05-18 23:08" pubdate>
-              2022-05-18
+            <time datetime="2022-04-28 13:32" pubdate>
+              2022-04-28
             </time>
           </div>
         
@@ -409,7 +409,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/GAN/">GAN</a>
+              <a href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a>
             
           </div>
         
@@ -423,15 +423,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/05/18/GAN/GAN%E7%BD%91%E7%BB%9C%E8%AF%A6%E8%A7%A3(%E4%BA%8C)/" target="_self">
-          GAN网络详解(二) - DCGAN以及GAN网络存在的一些问题
+        <a href="/2022/04/25/%E8%AE%B0%E5%BD%95/%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" target="_self">
+          注意事项
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/05/18/GAN/GAN%E7%BD%91%E7%BB%9C%E8%AF%A6%E8%A7%A3(%E4%BA%8C)/" target="_self">
+        <a href="/2022/04/25/%E8%AE%B0%E5%BD%95/%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" target="_self">
           
-          本文将会介绍DCGAN以及GAN网络存在的一些问题  DCGAN 这篇论文主要针对于GAN网络的经典问题: GANs have been known to be unstable to train, often resulting in generators that produce nonsensical outputs. 进而提出了使用深度卷积神经网络来改进 作者在论文中提出了了一些改进措施,
+          关于测试 建议本地调试完毕再上传,无需多commit hexo clean hexo g hexo serser  支持markdown mermaid渲染              部分主题的渲染的效果并不理想,我建议使用图片. 本主题可以            npm install --save hexo-filter-mermaid-diagrams 在 _config.melody.y
         </a>
       </p>
 
@@ -439,8 +439,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-05-18 00:12" pubdate>
-              2022-05-18
+            <time datetime="2022-04-25 01:32" pubdate>
+              2022-04-25
             </time>
           </div>
         
@@ -449,7 +449,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/GAN/">GAN</a>
+              <a href="/tags/%E8%AE%B0%E5%BD%95/">记录</a>
             
           </div>
         
@@ -463,15 +463,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/05/15/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday2/" target="_self">
-          自制操作系统day2-汇编语言学习和Makefile入门
+        <a href="/2022/04/24/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90-%E4%B8%AD/" target="_self">
+          消除左递归和左公因子-FIRST&amp;FOLLOW
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/05/15/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday2/" target="_self">
+        <a href="/2022/04/24/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90-%E4%B8%AD/" target="_self">
           
-          day2 汇编语言学习和Makefile入门 - 2022&#x2F;5&#x2F;15 笔者大二的时候在CSAPP的课程中学习过RISC-V的汇编,也阅读过汇编语言第三版,所以理解汇编语言没什么特别大的问题,对语法也比较熟悉 关于makefile学编译原理的时候也接触过, c++多文件编译的时候也有所涉及 这一章涉及了很多计算机的底层的知识,如果一股脑地全部理出来不便于记忆也不便于学习.如果学习过CSAPP课程的
+          这一部分我推荐先浏览B站哈工大老师的编译原理课程,老师讲解的深入浅出,清晰明了    消除左递归和左公因子 为什么要消除左递归? 答: 自顶向下的文法是根据输入的句子的词法分析之后的结果进行判断的,每次的指针只有在正确匹配到对应的终结符之后才会继续向后移动. 例1: 假设有如下文法,用于表示算术运算的匹配.              E -&gt; E + T | E - T | T T -&amp;gt
         </a>
       </p>
 
@@ -479,8 +479,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-05-15 09:57" pubdate>
-              2022-05-15
+            <time datetime="2022-04-24 23:02" pubdate>
+              2022-04-24
             </time>
           </div>
         
@@ -489,7 +489,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/OS/">OS</a>
+              <a href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a>
             
           </div>
         
@@ -503,15 +503,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/05/14/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday1/" target="_self">
-          自制操作系统day1-从计算机结构到汇编程序入门
+        <a href="/2022/04/24/%E7%BD%91%E7%AB%99/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2-%E4%B8%8A/" target="_self">
+          搭建个人博客(上)
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/05/14/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday1/" target="_self">
+        <a href="/2022/04/24/%E7%BD%91%E7%AB%99/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2-%E4%B8%8A/" target="_self">
           
-          day1 从计算机结构到汇编程序入门 - 2022&#x2F;5&#x2F;14  5&#x2F;13有事鸽了一天,今天开始学习   创建第一个 Hello world  参考博客               Bz1621下载这个软件emm怎么说呢,容易闪退,而且书里给的汇编代码也不是特别好看,我本身是不建议手动敲一遍的,因为我自己确实敲了一遍,确实挺费劲的…            我们可以直接使用作者光盘中提供的day1&#x2F;
+          构建一个个人网站需要什么?  一台服务器 一个公网IP 网页的源代码  但是如果是对于新手来说显然并不适合从零开始构建,租服务器需要钱,网页源代码编写需要了解前端的知识,这无疑需要一段时间的学习 好在目前有很多现成的网站搭建方法和教程供小白使用,我也是从零开始构建的这个网站,整体的框架都已经搭建好了只需要在上面补充你需要的内容即可,省去了很多麻烦  Github可以快速利用 Jekyll 来构建
         </a>
       </p>
 
@@ -519,8 +519,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-05-14 17:00" pubdate>
-              2022-05-14
+            <time datetime="2022-04-24 05:18" pubdate>
+              2022-04-24
             </time>
           </div>
         
@@ -529,7 +529,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/OS/">OS</a>
+              <a href="/tags/%E7%BD%91%E7%AB%99%E6%9E%84%E5%BB%BA/">网站构建</a>
             
           </div>
         
@@ -543,15 +543,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/05/13/python/%E4%BC%98%E9%9B%85%E7%9A%84%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95-logging/" target="_self">
-          优雅的日志记录-logging
+        <a href="/2022/04/22/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90-%E4%B8%8A/" target="_self">
+          上下文无关文法-最左推导最右推导-二义性
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/05/13/python/%E4%BC%98%E9%9B%85%E7%9A%84%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95-logging/" target="_self">
+        <a href="/2022/04/22/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90-%E4%B8%8A/" target="_self">
           
-          前言 最近在写代码的过程中遇到了一些问题,如果我想输出一些信息,如果使用print函数的话,由于深度学习项目时间较长,我会将它提交到超算进行计算,但是它并不会实时输出,我必须要等到运行结束才能看到结果,如果一点有任何异常报错退出,那么我也看不到所有的print信息. 况且使用print是一种比较简单的输出格式,输出到控制台的话无法记录下来,如果使用txt单独保存信息似乎过于原始,我希望选择一种更
+          语法分析器从词法分析器获得一个由词法单元组成的串,并验证这个串可以由源语言的文法生成  上下文无关文法及定义              什么是上下文无关文法?                         编译器以简洁的方式指定编程语法,简称文法上下文无关文法由 终结符 非终结符 开始符号 产生式组成                         什么是终结符?
         </a>
       </p>
 
@@ -559,8 +559,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-05-13 15:11" pubdate>
-              2022-05-13
+            <time datetime="2022-04-22 03:25" pubdate>
+              2022-04-22
             </time>
           </div>
         
@@ -569,7 +569,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/python/">python</a>
+              <a href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a>
             
           </div>
         
@@ -581,7 +581,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/4/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/#board">6</a><a class="page-number" href="/page/7/#board">7</a><a class="extend next" rel="next" href="/page/6/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/4/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="page-number current">5</span>
     </span>
   </nav>
 
