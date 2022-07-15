@@ -16,18 +16,18 @@
   <meta name="author" content="luzhixing12345">
   <meta name="keywords" content="">
   
-    <meta name="description" content="day9 内存管理  作者这里的思路还是蛮有趣的,从编译器优化后的汇编语言代码反推编译器对C语言代码的优化过程 最后既想保留编译器的优化,也想实现按页对内存进行访问,所以直接手写了汇编   挑战内存管理 作者这里介绍了两种内存管理的方式,一种是位图(bit map),一种是段表  位图 对于第一种方式,先使用char的数组存储,每个数组元素代表该页(4KB)是否占用,0代表未占用,1代表占用 对">
+    <meta name="description" content="day9 内存管理  作者这里的思路还是蛮有趣的,从编译器优化后的汇编语言代码反推编译器对C语言代码的优化过程 最后既想保留编译器的优化,也想实现按页对内存进行访问,所以直接手写了汇编   挑战内存管理 作者这里介绍了两种内存管理的方式,一种是位图(bit map),一种是空闲链表  位图 对于第一种方式,先使用char的数组存储,每个数组元素代表该页(4KB)是否占用,0代表未占用,1代表占用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="自制操作系统day9-内存管理">
 <meta property="og:url" content="https://luzhixing12345.github.io/2022/07/07/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday9/index.html">
 <meta property="og:site_name" content="kamilu的博客">
-<meta property="og:description" content="day9 内存管理  作者这里的思路还是蛮有趣的,从编译器优化后的汇编语言代码反推编译器对C语言代码的优化过程 最后既想保留编译器的优化,也想实现按页对内存进行访问,所以直接手写了汇编   挑战内存管理 作者这里介绍了两种内存管理的方式,一种是位图(bit map),一种是段表  位图 对于第一种方式,先使用char的数组存储,每个数组元素代表该页(4KB)是否占用,0代表未占用,1代表占用 对">
+<meta property="og:description" content="day9 内存管理  作者这里的思路还是蛮有趣的,从编译器优化后的汇编语言代码反推编译器对C语言代码的优化过程 最后既想保留编译器的优化,也想实现按页对内存进行访问,所以直接手写了汇编   挑战内存管理 作者这里介绍了两种内存管理的方式,一种是位图(bit map),一种是空闲链表  位图 对于第一种方式,先使用char的数组存储,每个数组元素代表该页(4KB)是否占用,0代表未占用,1代表占用">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220707180754.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/fdslhoaisdhoq.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220707220949.png">
 <meta property="article:published_time" content="2022-07-07T07:20:22.000Z">
-<meta property="article:modified_time" content="2022-07-07T19:59:28.706Z">
+<meta property="article:modified_time" content="2022-07-14T19:57:01.166Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="OS">
 <meta name="twitter:card" content="summary_large_image">
@@ -241,7 +241,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：7 天前
+                  本文最后更新于：5 小时前
                 
               </p>
             
@@ -252,7 +252,7 @@
 <p>最后既想保留编译器的优化,也想实现按页对内存进行访问,所以直接手写了汇编</p>
 <p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/fdslhoaisdhoq.png" srcset="/img/loading.gif" lazyload alt="fdslhoaisdhoq" /></p>
 <h2 id="挑战内存管理"><a class="markdownIt-Anchor" href="#挑战内存管理"></a> 挑战内存管理</h2>
-<p>作者这里介绍了两种内存管理的方式,一种是位图(bit map),一种是段表</p>
+<p>作者这里介绍了两种内存管理的方式,一种是位图(bit map),一种是空闲链表</p>
 <h3 id="位图"><a class="markdownIt-Anchor" href="#位图"></a> 位图</h3>
 <p>对于第一种方式,先使用char的数组存储,每个数组元素代表该页(4KB)是否占用,0代表未占用,1代表占用</p>
 <p>对于128MB内存128MB/4KB=0x8000=32768个页,如果使用char类型的数组来存储的话一共需要8x32768b = 32KB大小用于存储表</p>
@@ -265,13 +265,13 @@
     a[i] = <span class="hljs-number">0</span>;
 &#125;</code></pre></div><p>这里为什么要用 <code>i&lt;1024</code>? 分配了4MB的空间用于干什么了呢?</p>
           </div>
-<h3 id="段表"><a class="markdownIt-Anchor" href="#段表"></a> 段表</h3>
-<p>段表的管理方法就是在表中记录从(xxx)开始的(yyy)字节的空间是空闲的</p>
+<h3 id="空闲链表"><a class="markdownIt-Anchor" href="#空闲链表"></a> 空闲链表</h3>
+<p>空闲链表的管理方法就是在表中记录从(xxx)开始的(yyy)字节的空间是空闲的</p>
 <div class="note note-info">
-            <p>这两种方式各有优缺点,位图的话首先存储空间要相比段表大一些,其次在分配连续内存空间的时候很不方便,因为需要查找一段连续的空间是否都没有被使用,如果分配的内存空间很大很容易搜索很长时间. 相比之下段表对于大整型的内存分配就要有好很多,但是如果处理剩余的空间,10MB的空间分配了9.8MB那么剩下的零散的空间如何有效利用? 不同剩余空间的大小如何选择一个进行分配,如何回收. 这些系统性的知识点在操作系统课程中作为前置知识都介绍过了,我在这里就不再赘述</p>
+            <p>这两种方式各有优缺点,位图的话首先存储空间要相比空闲链表大一些,其次在分配连续内存空间的时候很不方便,因为需要查找一段连续的空间是否都没有被使用,如果分配的内存空间很大很容易搜索很长时间. 相比之下空闲链表对于大整型的内存分配就要有好很多,但是如果处理剩余的空间,10MB的空间分配了9.8MB那么剩下的零散的空间如何有效利用? 不同剩余空间的大小如何选择一个进行分配,如何回收. 这些系统性的知识点在操作系统课程中作为前置知识都介绍过了,我在这里就不再赘述</p>
           </div>
 <h2 id="实现内存管理"><a class="markdownIt-Anchor" href="#实现内存管理"></a> 实现内存管理</h2>
-<p>作者在这里也没有纠结,选择了简单化处理,割舍到多出来的内存空间,使用了段表的形式</p>
+<p>作者在这里也没有纠结,选择了简单化处理,割舍到多出来的内存空间,使用了空闲链表的形式</p>
 <p>首先构建了两个结构体,用于存储表中的信息.</p>
 <p>创建了四个函数:</p>
 <ul>
