@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>Vscode使用技巧</title>
+      <link href="/2022/08/05/vscode%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/"/>
+      <url>/2022/08/05/vscode%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</url>
+      
+        <content type="html"><![CDATA[<h1 id="vscode使用技巧"><a class="markdownIt-Anchor" href="#vscode使用技巧"></a> Vscode使用技巧</h1><p>使用snippets屏蔽推荐词,并且使snippet的推荐置顶</p><div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span>    <span class="hljs-attr">&quot;editor.wordBasedSuggestions&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">false</span><span class="hljs-punctuation">,</span>    <span class="hljs-attr">&quot;editor.snippetSuggestions&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;top&quot;</span><span class="hljs-punctuation">&#125;</span></code></pre></div>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 杂 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>自制操作系统day15-多任务(1)</title>
       <link href="/2022/07/17/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday15/"/>
       <url>/2022/07/17/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday15/</url>
@@ -281,177 +300,6 @@
         <tags>
             
             <tag> pytorch </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>混子速成-第七题</title>
-      <link href="/2022/06/12/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E6%B7%B7%E5%AD%90%E9%80%9F%E6%88%90-%E7%AC%AC%E4%B8%83%E9%A2%98/"/>
-      <url>/2022/06/12/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E6%B7%B7%E5%AD%90%E9%80%9F%E6%88%90-%E7%AC%AC%E4%B8%83%E9%A2%98/</url>
-      
-        <content type="html"><![CDATA[<h1 id="c语言编译器行为和错误分析"><a class="markdownIt-Anchor" href="#c语言编译器行为和错误分析"></a> C语言编译器行为和错误分析</h1><p>这一题题目难度比较大,比较考验对于C语言的理解,以及对计算机组成原理的理解.其中指针/地址,栈/寄存器都是经常考察的地方.这道题没有什么固定的套路,只能说是见招拆招.</p><h2 id="2008级"><a class="markdownIt-Anchor" href="#2008级"></a> 2008级</h2><div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">foo</span><span class="hljs-params">()</span> &#123;    <span class="hljs-type">int</span> i;    <span class="hljs-type">int</span> a[] = &#123;<span class="hljs-number">10</span>,<span class="hljs-number">20</span>&#125;;    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i&lt;=<span class="hljs-number">2</span>; i++) a[i]-=<span class="hljs-number">3</span>;    <span class="hljs-keyword">return</span>;&#125;</code></pre></div><h3 id="测试发现for语句处出现了死循环分析为什么会出现死循环"><a class="markdownIt-Anchor" href="#测试发现for语句处出现了死循环分析为什么会出现死循环"></a> 测试发现for语句处出现了死循环,分析为什么会出现死循环?</h3><p>首先可以很容易观察到数组a在for循环中 <code>i=2</code> 一定是越界了,那么这个越界的影响就是导致了i的值被改变了所以判断 <code>i&lt;=2</code>始终为真</p><p>回忆一下计组中的知识,临时变量定义在栈中,栈地址由高到低</p><p><a href="https://zhuanlan.zhihu.com/p/114161428">https://zhuanlan.zhihu.com/p/114161428</a></p><p><a href="https://blog.csdn.net/liitdar/article/details/80972088">https://blog.csdn.net/liitdar/article/details/80972088</a></p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 编译原理 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>混子速成-第六题</title>
-      <link href="/2022/06/12/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E6%B7%B7%E5%AD%90%E9%80%9F%E6%88%90-%E7%AC%AC%E5%85%AD%E9%A2%98/"/>
-      <url>/2022/06/12/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E6%B7%B7%E5%AD%90%E9%80%9F%E6%88%90-%E7%AC%AC%E5%85%AD%E9%A2%98/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 编译原理 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>混子速成-第五题</title>
-      <link href="/2022/06/12/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E6%B7%B7%E5%AD%90%E9%80%9F%E6%88%90-%E7%AC%AC%E4%BA%94%E9%A2%98/"/>
-      <url>/2022/06/12/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E6%B7%B7%E5%AD%90%E9%80%9F%E6%88%90-%E7%AC%AC%E4%BA%94%E9%A2%98/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 编译原理 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>混子速成-第四题</title>
-      <link href="/2022/06/12/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E6%B7%B7%E5%AD%90%E9%80%9F%E6%88%90-%E7%AC%AC%E5%9B%9B%E9%A2%98/"/>
-      <url>/2022/06/12/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E6%B7%B7%E5%AD%90%E9%80%9F%E6%88%90-%E7%AC%AC%E5%9B%9B%E9%A2%98/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 编译原理 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>混子速成-第三题</title>
-      <link href="/2022/06/12/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E6%B7%B7%E5%AD%90%E9%80%9F%E6%88%90-%E7%AC%AC%E4%B8%89%E9%A2%98/"/>
-      <url>/2022/06/12/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E6%B7%B7%E5%AD%90%E9%80%9F%E6%88%90-%E7%AC%AC%E4%B8%89%E9%A2%98/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 编译原理 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>混子速成-第二题</title>
-      <link href="/2022/06/12/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E6%B7%B7%E5%AD%90%E9%80%9F%E6%88%90-%E7%AC%AC%E4%BA%8C%E9%A2%98/"/>
-      <url>/2022/06/12/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E6%B7%B7%E5%AD%90%E9%80%9F%E6%88%90-%E7%AC%AC%E4%BA%8C%E9%A2%98/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 编译原理 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>混子速成-第一题</title>
-      <link href="/2022/06/03/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E6%B7%B7%E5%AD%90%E9%80%9F%E6%88%90-%E7%AC%AC%E4%B8%80%E9%A2%98/"/>
-      <url>/2022/06/03/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E6%B7%B7%E5%AD%90%E9%80%9F%E6%88%90-%E7%AC%AC%E4%B8%80%E9%A2%98/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 编译原理 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>画一个点,然后保存图片</title>
-      <link href="/2022/05/28/%E5%9B%BE%E5%BD%A2%E5%AD%A6/graphic-2/"/>
-      <url>/2022/05/28/%E5%9B%BE%E5%BD%A2%E5%AD%A6/graphic-2/</url>
-      
-        <content type="html"><![CDATA[<p>参考<a href="https://github.com/ssloy/tinyrenderer/wiki/Lesson-0:-getting-started">TinyRender</a></p><h1 id="画一个点"><a class="markdownIt-Anchor" href="#画一个点"></a> 画一个点</h1><p>对于点阵图,像素,0-255这些概念我觉得应该自不必说,现在的问题是,我想画一个点,应该怎么做?</p><p>这是一个很好的问题,这应该算是图形学的开端,就和所有计算机专业的同学一定在人生某个时刻考虑过电梯算法,想去了解图形学的人一定想过如何画一个点. 如果实现过操作系统,那么其实&quot;显示出来&quot;无非就是往显卡内存地址写入数据,他就会在屏幕上显示出来.但很显然面向windows编程似乎有些走远了,编写一个GUI界面出来显然不是我的重点.</p><p>所以我们的目光自然就放到了,图片.作为一种可以直接被操作系统读取显示的文件格式,点阵图又和矩阵及其类似,这显然是我们要找的,所以现在的问题就是,如何生成一张图片</p><p>图片可以说是电脑中最常见的一种格式了,点阵图矢量图,jpeq/bmp/gif/png等等格式也是层出不穷,如今大部分人也不用去关心这些图片格式的头文件,一些具体定义/实现方式了,有很多现成的库都已经具备非常完善的图片读取/保存功能了,相信对于熟悉python的小伙伴来说这个问题简单到爆.但是对于c<ins>来说稍有困难,只是说纯c</ins>实现不借助任何依赖,稍有困难.</p><p>我们这里使用的是一种日常使用比较小众的格式 TGA</p><div class="note note-info">            <p>Truevision TGA，通常称为TARGA,是一种创建的光栅图形文件格式</p><p>TARGA 是 <code>Truevision Advanced Raster Graphics Adapter</code> 的首字母缩写；TGA是 <code>Truevision Graphics Adapter</code> 的缩写</p><p>TGA 文件在 PC DOS / Windows系统和macOS上通常具有扩展名“.tga”.该格式可以存储每像素 8、15、16、24或 32位精度的图像数据 —— RGB的最大 24 位和一个额外的 8 位alpha 通道。颜色数据可以是颜色映射的，也可以是直接颜色或真彩色格式。类似于PackBits的无损RLE 压缩。这种类型的压缩对于典型的摄影图像表现不佳，但对于简单的图像（如图标、卡通和线条图）效果很好。</p><p>关于TGA的相关知识你可以在<a href="https://en.wikipedia.org/wiki/Truevision_TGA">wiki-TGA</a>中找到</p>          </div><p>该文件格式的头文件如下,分为五个部分</p><div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">TGA_Header</span> &#123;</span><span class="hljs-type">char</span> idlength;<span class="hljs-type">char</span> colormaptype;<span class="hljs-type">char</span> datatypecode;<span class="hljs-type">short</span> colormaporigin;<span class="hljs-type">short</span> colormaplength;<span class="hljs-type">char</span> colormapdepth;<span class="hljs-type">short</span> x_origin;<span class="hljs-type">short</span> y_origin;<span class="hljs-type">short</span> width;<span class="hljs-type">short</span> height;<span class="hljs-type">char</span>  bitsperpixel;<span class="hljs-type">char</span>  imagedescriptor;&#125;;</code></pre></div><ul><li>第一部分: 表明图像字段的长度</li></ul>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 图形学 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>图形学开篇简介</title>
-      <link href="/2022/05/28/%E5%9B%BE%E5%BD%A2%E5%AD%A6/graphic-1/"/>
-      <url>/2022/05/28/%E5%9B%BE%E5%BD%A2%E5%AD%A6/graphic-1/</url>
-      
-        <content type="html"><![CDATA[<h1 id="图形学开篇简介"><a class="markdownIt-Anchor" href="#图形学开篇简介"></a> 图形学开篇简介</h1><p>中断一下写操作系统的进程,打算先做一个有意思的事情. 图形学可以说是一个很有趣的话题,我的室友对此深有研究,unity引擎,光栅化,物理仿真什么的可以说是张口就来,抬手就写,着实可谓爱好者. 受其影响,我也或多或少了解一些,正所谓近朱者赤吧(笑)</p><blockquote><p>称&quot;室友&quot;有些隔阂,以下简称 “笑”</p></blockquote><p>正巧操作系统已经写到图形化界面了,我往后看了看会有图片等格式之类的,还会有游戏. 于是灵光一闪,打算做一个可交互的旋转立方体,也算是图形学的开篇吧. 大概最后的理想效果就是,一个图形化的界面,然后鼠标可以交互,点击拖动这个立方体就可以旋转.</p><p>问了问笑,他告诉我不难,是一个叫做MVP的操作,也不算复杂,基本上就是矩阵运算. 我一听挺高兴的,刚好适合入门,于是便开此节.</p><p>所有的代码内容你都可以在<a href="https://github.com/luzhixing12345/cube-MVP">cube-MVP</a>找到,我提供了一个简单的纯c++版本实现,一个QT的实现,和一个opencv的实现,在对应的分支中,如有兴趣可自行查阅readme文件.</p><p>笔者初入此门,学艺不精,所有笔记知识可以说是现学现卖,参考借鉴前辈的知识总结,如有不当之处还望不吝赐教.</p><p>那, 我们开始吧~</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 图形学 </tag>
             
         </tags>
       
