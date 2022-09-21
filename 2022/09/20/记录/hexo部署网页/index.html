@@ -1,0 +1,664 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://raw.githubusercontent.com/learner-lu/picbed/master/logo.png">
+  <link rel="icon" href="https://raw.githubusercontent.com/learner-lu/picbed/master/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#4a00e0">
+  <meta name="author" content="luzhixing12345">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="这篇博客讲一下如何给我们的GitHub仓库生成一个网页,我们可以利用GitHub pages,无需服务器的部署静态资源,通常来说是简单的功能js交互或者一些文档说明,都可以很好的使用这个方法 首先我们新建一个GitHub仓库,然后在主分支写一些源代码.这时候如果我们希望在网页端部署一些资源,给一个url地址可以让其他人查看,我们可以利用hexo快速部署  hexo 的安装很简单,安装nodejs之">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用hexo部署Github Pages网页">
+<meta property="og:url" content="https://luzhixing12345.github.io/2022/09/20/%E8%AE%B0%E5%BD%95/hexo%E9%83%A8%E7%BD%B2%E7%BD%91%E9%A1%B5/index.html">
+<meta property="og:site_name" content="kamilu的博客">
+<meta property="og:description" content="这篇博客讲一下如何给我们的GitHub仓库生成一个网页,我们可以利用GitHub pages,无需服务器的部署静态资源,通常来说是简单的功能js交互或者一些文档说明,都可以很好的使用这个方法 首先我们新建一个GitHub仓库,然后在主分支写一些源代码.这时候如果我们希望在网页端部署一些资源,给一个url地址可以让其他人查看,我们可以利用hexo快速部署  hexo 的安装很简单,安装nodejs之">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220921210934.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220921013243.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220920233001.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220920231155.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220921013813.png">
+<meta property="article:published_time" content="2022-09-19T16:53:46.000Z">
+<meta property="article:modified_time" content="2022-09-21T13:22:04.717Z">
+<meta property="article:author" content="luzhixing12345">
+<meta property="article:tag" content="记录">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220921210934.png">
+  
+  
+  <title>使用hexo部署Github Pages网页 - kamilu的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"luzhixing12345.github.io","root":"/","version":"1.8.14","typing":{"enable":false,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"fEy8W8VvIoc26nT53dV2157j-gzGzoHsz","app_key":"s9HXuqmvBWrOaAiLA07Jg59A","server_url":"https://fey8w8vv.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Kamilu-blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://raw.githubusercontent.com/learner-lu/picbed/master/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="使用hexo部署Github Pages网页">
+              
+                使用hexo部署Github Pages网页
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-09-20 00:53" pubdate>
+        2022年9月20日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.2k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      35 分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">使用hexo部署Github Pages网页</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：几秒前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>这篇博客讲一下如何给我们的GitHub仓库生成一个网页,我们可以利用GitHub pages,无需服务器的部署静态资源,通常来说是简单的功能js交互或者一些文档说明,都可以很好的使用这个方法</p>
+<p>首先我们新建一个GitHub仓库,然后在主分支写一些源代码.这时候如果我们希望在网页端部署一些资源,给一个url地址可以让其他人查看,我们可以利用hexo快速部署</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220921210934.png" srcset="/img/loading.gif" lazyload alt="20220921210934" /></p>
+<p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">hexo</a> 的安装很简单,安装<a target="_blank" rel="noopener" href="https://nodejs.org/en/">nodejs</a>之后一行命令就可以了,这里都比较基础就直接跳过了</p>
+<div class="code-wrapper"><pre><code class="hljs bash">npm install hexo-cli -g</code></pre></div>
+<p>通常来说一个仓库应该是main/master分支包含仓库对应的源代码,dev/debug分支用于测试/修改,gh-pages分支用于网页端文档的展示或是效果的展示</p>
+<p>我个人的习惯的构建方式如下,即使用一个GitHub_pages目录单独保存所有的网页文档,源代码则在repo中改动,实现原仓库的代码和网页端的文章内容分开,方便管理</p>
+<div class="code-wrapper"><pre><code class="hljs txt">|--- Github_pages
+     |--- C-libs
+     |--- ...
+|--- repo
+     |--- C-libs
+     |--- ...</code></pre></div>
+<ol>
+<li>
+<p>在GitHub_pages目录下使用hexo初始化一个文件夹</p>
+<div class="code-wrapper"><pre><code class="hljs bash">hexo init C-libs</code></pre></div>
+</li>
+<li>
+<p>安装必要的部署插件</p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> C-libs
+npm install hexo-deployer-git --save</code></pre></div>
+</li>
+<li>
+<p>查看仓库所在的URL和仓库部署的对应的网站地址</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220921013243.png" srcset="/img/loading.gif" lazyload alt="20220921013243" /></p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220920233001.png" srcset="/img/loading.gif" lazyload alt="20220920233001" /></p>
+<blockquote>
+<p>这里可以看到所有的仓库是建立在你的github.io的域名之下的子目录</p>
+</blockquote>
+</li>
+<li>
+<p>修改 <code>_config.yml</code></p>
+<p>需要修改两个地方,一个是url,一个是deploy的部分</p>
+<p>url如果不修改的话hexo部署上去是没有主题样式的,因为css文件的的引用关系不正确. 虽然在本地使用 hexo server查看没有问题但是在GitHub网页端它的路径不一样,所以这里需要修改.</p>
+<p>deploy的修改则表示使用git部署,GitHub地址,对应的branch分支</p>
+<div class="code-wrapper"><pre><code class="hljs yml"><span class="hljs-comment"># URL</span>
+<span class="hljs-comment">## Set your site url here. For example, if you use GitHub Page, set url as &#x27;https://username.github.io/project&#x27;</span>
+<span class="hljs-attr">url:</span> <span class="hljs-string">https://luzhixing12345.github.io/C-libs/</span>
+
+<span class="hljs-attr">deploy:</span>
+  <span class="hljs-attr">type:</span> <span class="hljs-string">&#x27;git&#x27;</span>
+  <span class="hljs-attr">repo:</span>
+    <span class="hljs-attr">github:</span> <span class="hljs-string">git@github.com:luzhixing12345/C-libs.git</span>
+  <span class="hljs-attr">branch:</span> <span class="hljs-string">gh-pages</span></code></pre></div>
+<blockquote>
+<p>通常来说我们会单独将仓库对应的网页部署在gh-pages这个分支下</p>
+</blockquote>
+</li>
+<li>
+<p>上传</p>
+<div class="code-wrapper"><pre><code class="hljs bash">hexo clean
+hexo g -d</code></pre></div>
+<p>等待Github Action执行完毕打开链接即可浏览网页</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220920231155.png" srcset="/img/loading.gif" lazyload alt="20220920231155" /></p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220921013813.png" srcset="/img/loading.gif" lazyload alt="20220921013813" /></p>
+</li>
+</ol>
+<hr />
+<p>上述的5步其实都是在命令行中就可以完成的,所以我们可以简单写一个脚本</p>
+<blockquote>
+<p>我这里用的是C写的,其实什么语言都差不多,就是一些简单的命令行功能</p>
+</blockquote>
+<p>复制如下代码,将 <code>user_name</code> 改为你的, <code>local_GithubPages_URL</code> 改为你的本机文件夹地址</p>
+<p>编译之后得到exe文件,放到path目录下即可全局调用</p>
+<div class="code-wrapper"><pre><code class="hljs bash">gcc page.c -o page</code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span> </span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span>  </span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>  </span>
+  
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> BUF_SIZE 1024  </span>
+<span class="hljs-type">char</span> buf[BUF_SIZE];
+
+<span class="hljs-type">const</span> <span class="hljs-type">char</span>* user_name = <span class="hljs-string">&quot;luzhixing12345&quot;</span>; <span class="hljs-comment">// 你的用户名</span>
+<span class="hljs-type">char</span>* local_GithubPages_URL = <span class="hljs-string">&quot;G:\\Github_pages&quot;</span>; <span class="hljs-comment">// 这里修改为你的本机文件夹地址</span>
+<span class="hljs-type">char</span>* branch = <span class="hljs-string">&quot;gh-pages&quot;</span>;
+  
+<span class="hljs-type">char</span> *<span class="hljs-title function_">getfileall</span><span class="hljs-params">(<span class="hljs-type">char</span> *fname)</span>
+&#123;
+    FILE *fp;
+    <span class="hljs-type">char</span> *str;
+    <span class="hljs-type">char</span> txt[BUF_SIZE];
+    <span class="hljs-type">int</span> filesize;
+    <span class="hljs-comment">//打开一个文件</span>
+    <span class="hljs-keyword">if</span> ((fp=fopen(fname,<span class="hljs-string">&quot;r&quot;</span>))==<span class="hljs-literal">NULL</span>)&#123;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;打开文件%s错误\n&quot;</span>,fname);
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;
+    &#125;
+    <span class="hljs-comment">//将文件指针移到末尾</span>
+    fseek(fp,<span class="hljs-number">0</span>,SEEK_END);
+    filesize = ftell(fp);<span class="hljs-comment">//通过ftell函数获得指针到文件头的偏移字节数。</span>
+    
+    str=(<span class="hljs-type">char</span> *)<span class="hljs-built_in">malloc</span>(filesize);<span class="hljs-comment">//动态分配str内存</span>
+    str[<span class="hljs-number">0</span>]=<span class="hljs-number">0</span>;<span class="hljs-comment">//字符串置空</span>
+    rewind(fp);
+    
+    <span class="hljs-keyword">while</span>((fgets(txt,BUF_SIZE,fp))!=<span class="hljs-literal">NULL</span>)&#123;<span class="hljs-comment">//循环读取,如果没有数据则退出循环</span>
+        <span class="hljs-built_in">strcat</span>(str,txt);<span class="hljs-comment">//拼接字符串</span>
+    &#125;
+    fclose(fp);
+    <span class="hljs-keyword">return</span> str;
+&#125;
+
+<span class="hljs-type">char</span> *<span class="hljs-title function_">str_replace</span><span class="hljs-params">(<span class="hljs-type">char</span> *orig, <span class="hljs-type">char</span> *rep, <span class="hljs-type">char</span> *with)</span> &#123;
+    <span class="hljs-type">char</span> *result; <span class="hljs-comment">// the return string</span>
+    <span class="hljs-type">char</span> *ins;    <span class="hljs-comment">// the next insert point</span>
+    <span class="hljs-type">char</span> *tmp;    <span class="hljs-comment">// varies</span>
+    <span class="hljs-type">int</span> len_rep;  <span class="hljs-comment">// length of rep (the string to remove)</span>
+    <span class="hljs-type">int</span> len_with; <span class="hljs-comment">// length of with (the string to replace rep with)</span>
+    <span class="hljs-type">int</span> len_front; <span class="hljs-comment">// distance between rep and end of last rep</span>
+    <span class="hljs-type">int</span> count;    <span class="hljs-comment">// number of replacements</span>
+
+    <span class="hljs-comment">// sanity checks and initialization</span>
+    <span class="hljs-keyword">if</span> (!orig || !rep)
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;
+    len_rep = <span class="hljs-built_in">strlen</span>(rep);
+    <span class="hljs-keyword">if</span> (len_rep == <span class="hljs-number">0</span>)
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>; <span class="hljs-comment">// empty rep causes infinite loop during count</span>
+    <span class="hljs-keyword">if</span> (!with)
+        with = <span class="hljs-string">&quot;&quot;</span>;
+    len_with = <span class="hljs-built_in">strlen</span>(with);
+
+    <span class="hljs-comment">// count the number of replacements needed</span>
+    ins = orig;
+    <span class="hljs-keyword">for</span> (count = <span class="hljs-number">0</span>; tmp = <span class="hljs-built_in">strstr</span>(ins, rep); ++count) &#123;
+        ins = tmp + len_rep;
+    &#125;
+
+    tmp = result = <span class="hljs-built_in">malloc</span>(<span class="hljs-built_in">strlen</span>(orig) + (len_with - len_rep) * count + <span class="hljs-number">1</span>);
+
+    <span class="hljs-keyword">if</span> (!result)
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;
+
+    <span class="hljs-keyword">while</span> (count--) &#123;
+        ins = <span class="hljs-built_in">strstr</span>(orig, rep);
+        len_front = ins - orig;
+        tmp = <span class="hljs-built_in">strncpy</span>(tmp, orig, len_front) + len_front;
+        tmp = <span class="hljs-built_in">strcpy</span>(tmp, with) + len_with;
+        orig += len_front + len_rep; <span class="hljs-comment">// move to next &quot;end of rep&quot;</span>
+    &#125;
+    <span class="hljs-built_in">strcpy</span>(tmp, orig);
+    <span class="hljs-keyword">return</span> result;
+&#125;
+
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> *argv[])</span>  
+&#123;  
+    <span class="hljs-comment">// input format : git@github.com:luzhixing12345/C-libs.git</span>
+    <span class="hljs-type">char</span> *total_lib_name = argv[<span class="hljs-number">1</span>];
+    <span class="hljs-type">char</span> *lib_name = total_lib_name + <span class="hljs-built_in">strlen</span>(<span class="hljs-string">&quot;git@github.com:/&quot;</span>) + <span class="hljs-built_in">strlen</span>(user_name);
+    lib_name[<span class="hljs-built_in">strlen</span>(lib_name)<span class="hljs-number">-4</span>] = <span class="hljs-string">&#x27;\0&#x27;</span>;
+
+    chdir(local_GithubPages_URL);
+    <span class="hljs-built_in">sprintf</span>(buf,<span class="hljs-string">&quot;hexo init %s&quot;</span>,lib_name);
+    system(buf);
+    <span class="hljs-built_in">sprintf</span>(buf,<span class="hljs-string">&quot;%s\\%s&quot;</span>,local_GithubPages_URL,lib_name);
+    chdir(buf);
+    system(<span class="hljs-string">&quot;npm install hexo-deployer-git --save&quot;</span>);
+
+    <span class="hljs-comment">// printf(&quot;%s\n&quot;, getcwd(s, 100));</span>
+    <span class="hljs-type">char</span> *str = getfileall(<span class="hljs-string">&quot;_config.yml&quot;</span>);
+    <span class="hljs-built_in">sprintf</span>(buf,<span class="hljs-string">&quot;http://%s.github.io/%s/&quot;</span>,user_name,lib_name);
+    str = str_replace(str,<span class="hljs-string">&quot;http://example.com&quot;</span>,buf);
+    <span class="hljs-built_in">sprintf</span>(buf,<span class="hljs-string">&quot;type: git\n  repo:\n    github: %s.git\n  branch: %s&quot;</span>,total_lib_name,branch);
+    str = str_replace(str,<span class="hljs-string">&quot;type: \&#x27;\&#x27;&quot;</span>,buf);
+    FILE *fp = fopen(<span class="hljs-string">&quot;_config.yml&quot;</span>,<span class="hljs-string">&quot;w+&quot;</span>);
+    <span class="hljs-built_in">fputs</span>(str,fp);
+    fclose(fp);
+    <span class="hljs-built_in">sprintf</span>(buf,<span class="hljs-string">&quot;hexo g -d&quot;</span>);
+    system(buf);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;  
+&#125;
+</code></pre></div>
+<blockquote>
+<p>这里其实username也可以通过popen拿到git config --global <a target="_blank" rel="noopener" href="http://user.name">user.name</a> 的返回值做到,不过没有这么做</p>
+</blockquote>
+<p>这段代码就是实现了之前提到的一系列操作,自动把网页部署上去.需要传入一个参数argv[1]就是你的GitHub仓库的ssh地址,注意一定是ssh地址不是http的地址!</p>
+<div class="code-wrapper"><pre><code class="hljs bash">page git@github.com:luzhixing12345/C-libs.git</code></pre></div>
+<p>注意到这里只是单纯的hexo init之后就直接部署上去了,所以看到的效果是最初始的hexo,这段代码也只是为了快速初始化一个页面.至于后续使用什么hexo主题,怎么写就是后面的事情了~</p>
+<p>相关使用视频可以查看<a href="TODO">TODO</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%AE%B0%E5%BD%95/">记录</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/08/05/%E6%9D%82/vscode%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/">
+                        <span class="hidden-mobile">Vscode使用技巧</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"fEy8W8VvIoc26nT53dV2157j-gzGzoHsz","appKey":"s9HXuqmvBWrOaAiLA07Jg59A","path":"window.location.pathname","placeholder":"欢迎讨论,留下163邮箱我才能看到回复哦~","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
