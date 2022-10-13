@@ -183,6 +183,206 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2022/07/11/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday13/" target="_self">
+          自制操作系统day13-定时器(2)
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/07/11/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday13/" target="_self">
+          
+          定时器(2) 开始是一些结构化的调整和测试速度,我也就没测懒 然后是对缓冲区的调整FIFO32,将所有外部IO的输入和输出全部整合到一个缓冲区的队列中 这一部分我重点说明一下线性表和哨兵,这里的处理思路很好  线性表的处理 由于中断处理中不应该耗时过长,而作者提及的这两处都涉及到了内存单元的读写,这显然是不希望看到的   那么如何避免这种内存单元的移动呢? 新加了一个指针next struct
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-07-11 22:41" pubdate>
+              2022-07-11
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/OS/">OS</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/07/11/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday12/" target="_self">
+          自制操作系统day12-定时器(1)
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/07/11/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday12/" target="_self">
+          
+          定时器(1) 说起来定时器这个话题倒是让我想起来之前在知乎看到的一个问题,如何设计一个定时装置,多少多少秒记录一次.因为之前考虑到CPU主频的问题,时钟周期这个东西也没办法具有通用性.看起来似乎作者给了我答案  这里直接引用作者书中的原话  在电脑中管理定时器需要对PIT进行设定,PIT是&quot;Programmable Interval Timer&quot;的缩写,可编程的间隔型定时器.
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-07-11 22:41" pubdate>
+              2022-07-11
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/OS/">OS</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/07/10/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%90%84%E9%A1%B9%E9%85%8D%E7%BD%AE/" target="_self">
+          服务器的各项配置
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/07/10/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%90%84%E9%A1%B9%E9%85%8D%E7%BD%AE/" target="_self">
+          
+          本文以华为的云服务器为例,各大服务器平台基本流程类似.本文默认已经购买了一台服务器,并且完成了基本的操作系统搭建,具体可以参考本系列之前的两篇文章   服务器端口  如果你对服务器的基本端口&#x2F;域名&#x2F;端口号尚且不清楚,可以先阅读这篇科普文章,IP,域名和端口号之间的联系,我觉得说的还是清晰的  我们现在来运行一个服务吧,在&#x2F;home&#x2F;目录下新建一个project文件夹,新建 server.js文件
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-07-10 10:38" pubdate>
+              2022-07-10
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/07/08/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday11/" target="_self">
+          自制操作系统day11-制作窗口
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/07/08/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday11/" target="_self">
+          
+          day11 制作窗口  绘图与窗口 对于画面外的支持就是简单的处理一下sheet_refreshsub这个函数,将显示的范围和(0 0 ct1-&gt;xsize ct1-&gt;ysize)比较,进行约束 然后就是调整一下函数的结构,参数之类的,这里传参调整一下就可以了.  然后是绘制一个窗口,就是调用了之前的一些函数,这一部分也没什么特别好说的  然后一个计数器,疯狂刷新闪屏.闪屏的原因作者
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-07-08 12:59" pubdate>
+              2022-07-08
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/OS/">OS</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/07/08/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday10/" target="_self">
+          自制操作系统day10-叠加处理
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/07/08/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday10/" target="_self">
+          
+          day10 叠加处理  向下舍入和向上舍入 这里作者讲的很清楚,例子举得也十分恰当 核心思想就是一个 i &#x3D; (i+0xfff) &amp; 0xfffff000,这种做法确实很巧妙  叠加处理  果然如我在day8中所料,在多窗口中准备做处理  首先我觉得很重要的一点是数据结构的清晰明了,窗口的阶段新定义的数据结构有两个 #define MAX_SHEETS		256 struct SHEET
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-07-08 03:58" pubdate>
+              2022-07-08
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/OS/">OS</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2022/07/07/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday9/" target="_self">
           自制操作系统day9-内存管理
         </a>
@@ -370,206 +570,6 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/06/13/pytorch/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2-2/" target="_self">
-          深度学习模型部署(2)-服务器与本地
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/06/13/pytorch/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2-2/" target="_self">
-          
-          既然是深度学习,那想必Python是主力开发语言了,这里我们暂时不考虑性能啊,响应啊,多线程高并发那么多,我们也不用什么java&#x2F;c++写一个后台服务器,我们的任务就只是单纯的部署到服务器上,能用就行啊.  毕竟我都用python了,还要啥性能呢,对吧  那么,我们接下来就来使用以下python的一个库: flask  flask入门 我们先来构建一个网页,和专业的的Web,Nodejs功能相似,
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-06-13 19:50" pubdate>
-              2022-06-13
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/pytorch/">pytorch</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/06/13/pytorch/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2-1/" target="_self">
-          深度学习模型部署(1)-前言及基本介绍
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/06/13/pytorch/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2-1/" target="_self">
-          
-          本系列以pytorch为例,其他框架请移步别处.   前言 深度学习的教程很多,网上也有很多现成的简单的模型训练的例子和预训练模型,然而在实际的工业场景中,我们往往更加关注如何部署一个已经训练好的模型.  我们希望可以客户端&#x2F;移动端访问网页就可以看到模型的效果,计算由服务器帮我们处理. 我们希望在一个没有python环境的地方依然可以执行模型的效果 我们希望加速模型的计算,python换成c++
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-06-13 16:12" pubdate>
-              2022-06-13
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/pytorch/">pytorch</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/05/26/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday7/" target="_self">
-          自制操作系统day7-FIFO与鼠标控制
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/05/26/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday7/" target="_self">
-          
-          day7 FIFO与鼠标控制 显示按键的信息 通知PIC已经知道发生IRQ-x中断了,PIC继续监视IRQ-x中断是否发生,否则不管下次键盘输出什么信息系统都不做反应 io_out8(PIC0_OCW2, 0x61);	&#x2F;&#x2F; 通知PIC IRQ-01已经发生 (0x60+IRQ)  作者制作了FIFO缓冲区,不过数据移送的方式实在是太愚蠢了,于是作者用使用了一个类似循环队列的方式 关于FIFO的
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-05-26 22:01" pubdate>
-              2022-05-26
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/OS/">OS</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/05/26/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday6/" target="_self">
-          自制操作系统day6-分割编译与中断处理
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/05/26/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday6/" target="_self">
-          
-          day6 分割编译与中断处理 首先把一个.c文件拆开,按功能分为几个文件,把定义放在头文件引用.  按道理说应该是每一个.c对应一个.h,可能是为了方便吧  GDTR是一个特殊的48位寄存器,给他赋值的时候唯一的方法就是指定一个内存地址,从指定的地址读取6个字节,使用的汇编指令时LGDT struct SEGMENT_DESCRIPTOR &amp;#123; 	short limit_low, bas
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-05-26 16:17" pubdate>
-              2022-05-26
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/OS/">OS</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/05/26/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday5/" target="_self">
-          自制操作系统day5-结构体/文字显示与GDT/IDT初始化
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/05/26/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday5/" target="_self">
-          
-          day5 结构体&#x2F;文字显示与GDT&#x2F;IDT初始化 到现在看到这个结构体就能明白作者当初的用意了 struct BOOTINFO &amp;#123; 	char cyls, leds, vmode, reserve; 	short scrnx, scrny; 	char *vram; &amp;#125;; 与asmhead.nas中的 CYLS        EQU     0x0ff0 LEDS
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-05-26 01:54" pubdate>
-              2022-05-26
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/OS/">OS</a>
             
           </div>
         

@@ -23,13 +23,11 @@
 <meta property="og:site_name" content="kamilu的博客">
 <meta property="og:description" content="基本环境的安装 一般来说购买服务器的环节就有了安装操作系统的环节,你可以选择不同的操作系统.Centos,ubuntu等等其他unix系统 我个人是习惯使用debian操作系统的,比较稳定,网上的文档也很多.遇到的问题基本可以解决. 不同的操作系统确实有所差异,如果你遇到了什么问题不要忘记加上你的linux操作系统名字,或许才能搜索到正确的答案 选择一个操作系统之后稍事等待就帮你一键安装成功了,">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220614025927.png">
 <meta property="article:published_time" content="2022-06-27T05:13:42.000Z">
-<meta property="article:modified_time" content="2022-07-10T06:41:06.651Z">
+<meta property="article:modified_time" content="2022-10-07T14:13:48.941Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="服务器">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220614025927.png">
   
   
   <title>服务器操作系统环境搭建 - kamilu的博客</title>
@@ -189,7 +187,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.6k 字
+      1.1k 字
     </span>
   
 
@@ -198,7 +196,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      14 分钟
+      10 分钟
     </span>
   
 
@@ -239,7 +237,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2 个月前
+                  本文最后更新于：6 天前
                 
               </p>
             
@@ -258,6 +256,8 @@
 <div class="code-wrapper"><pre><code class="hljs bash">apt-get install sudo</code></pre></div>
 <p>更新</p>
 <div class="code-wrapper"><pre><code class="hljs bash">sudo apt update</code></pre></div>
+<p>查看操作系统版本</p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> /etc/os-release</code></pre></div>
 <h3 id="一些安装项"><a class="markdownIt-Anchor" href="#一些安装项"></a> 一些安装项</h3>
 <div class="code-wrapper"><pre><code class="hljs bash">sudo apt install openssh-server
 sudo apt install curl</code></pre></div>
@@ -300,26 +300,15 @@ sudo apt install curl</code></pre></div>
 <div class="code-wrapper"><pre><code class="hljs bash">systemctl stop nginx</code></pre></div>
 <p>查看配置信息</p>
 <div class="code-wrapper"><pre><code class="hljs bash">nginx -t</code></pre></div>
-<h3 id="纯python应该不会有人真用纯python吧"><a class="markdownIt-Anchor" href="#纯python应该不会有人真用纯python吧"></a> 纯python(应该不会有人真用纯python吧)</h3>
-<div class="code-wrapper"><pre><code class="hljs bash">sudo apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libsqlite3-dev libreadline-dev libffi-dev curl libbz2-dev</code></pre></div>
-<div class="code-wrapper"><pre><code class="hljs bash">wget https://www.python.org/ftp/python/3.9.1/Python-3.9.1.tgz</code></pre></div>
-<div class="code-wrapper"><pre><code class="hljs bash">tar -xf Python-3.9.1.tgz
-<span class="hljs-built_in">cd</span> Python-3.9.1</code></pre></div>
-<div class="code-wrapper"><pre><code class="hljs bash">./configure --enable-optimizations
-make -j 12</code></pre></div>
-<p>为了更快完成构建,请修改-j后面的数字为你的处理器的核心数.可以通过键入nproc来找到cpu核心数。当构建过程完成时,安装Python二进制文件</p>
+<h3 id="docker"><a class="markdownIt-Anchor" href="#docker"></a> <a target="_blank" rel="noopener" href="https://www.runoob.com/docker/debian-docker-install.html">docker</a></h3>
+<div class="code-wrapper"><pre><code class="hljs bash">curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun</code></pre></div>
 <blockquote>
-<p>这里有个小梗就是 make -j 8</p>
-<p>很多人第一次见的时候觉得很有趣,其实8是处理器核心数</p>
+<p><a target="_blank" rel="noopener" href="https://yeasy.gitbook.io/docker_practice/install/mirror">换源</a></p>
 </blockquote>
-<div class="code-wrapper"><pre><code class="hljs bash">sudo make altinstall
-python3.9 --version</code></pre></div>
-<p>满屏的编译输出闪过,漫长的等待之后就安装完成了</p>
-<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220614025927.png" srcset="/img/loading.gif" lazyload alt="20220614025927" /></p>
-<p>先别高兴的太早,你现在的python环境可以干干净净的,顺手把其他的环境比如flask和pytorch也装了吧,或者搞一个anaconda?写一个requirements.txt,都可以,总之先把基础的环境配好</p>
-<blockquote>
-<p>我相信深度学习部署的应该配个环境不需要多说什么吧</p>
-</blockquote>
+<h3 id="vcpkg"><a class="markdownIt-Anchor" href="#vcpkg"></a> vcpkg</h3>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/microsoft/vcpkg/blob/master/README_zh_CN.md#%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B-windows">下载</a></li>
+</ul>
 
             </div>
             <hr>
