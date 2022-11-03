@@ -16,23 +16,24 @@
   <meta name="author" content="luzhixing12345">
   <meta name="keywords" content="">
   
-    <meta name="description" content="为什么会选择使用 vim ? 久闻大名如雷贯耳,但vscode如此好用所以一直没有一个入手vim的理由,直到我读到这篇文章:为什么还有人用VIM？ 韦神写的非常好,插件和自由一直是我所追求的,高度的自定义才是我追求的浪漫.看完此文随即决定上手vim,并留下了一条评论   如何学习 vim ? 我这里分享一下我自己的学习路线,实操环境使用的时windows的wsl(ubuntu) wsl --in">
+    <meta name="description" content="V2ray官网  修改V2ray默认选项 设置-&gt;参数设置-&gt;允许来自局域网的连接   查看代理端口  http的系统代理走局域网的10811端口  修改.bashrc文件 打开.bashrc vim ~&#x2F;.bashrc 在文件结尾加入 export host_ip&#x3D;$(cat &#x2F;etc&#x2F;resolv.conf |grep &quot;nameserver&quot; |cut -f">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Vim(1)-vim启蒙与vimtutor">
-<meta property="og:url" content="https://luzhixing12345.github.io/2022/10/05/vim%E5%90%AF%E8%92%99%E4%B8%8Evimtutor/index.html">
+<meta property="og:title" content="WSL2+V2ray配置代理">
+<meta property="og:url" content="https://luzhixing12345.github.io/2022/10/23/%E6%9C%8D%E5%8A%A1%E5%99%A8/WSL2-V2ray%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86/index.html">
 <meta property="og:site_name" content="kamilu的博客">
-<meta property="og:description" content="为什么会选择使用 vim ? 久闻大名如雷贯耳,但vscode如此好用所以一直没有一个入手vim的理由,直到我读到这篇文章:为什么还有人用VIM？ 韦神写的非常好,插件和自由一直是我所追求的,高度的自定义才是我追求的浪漫.看完此文随即决定上手vim,并留下了一条评论   如何学习 vim ? 我这里分享一下我自己的学习路线,实操环境使用的时windows的wsl(ubuntu) wsl --in">
+<meta property="og:description" content="V2ray官网  修改V2ray默认选项 设置-&gt;参数设置-&gt;允许来自局域网的连接   查看代理端口  http的系统代理走局域网的10811端口  修改.bashrc文件 打开.bashrc vim ~&#x2F;.bashrc 在文件结尾加入 export host_ip&#x3D;$(cat &#x2F;etc&#x2F;resolv.conf |grep &quot;nameserver&quot; |cut -f">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220925141849.png">
-<meta property="article:published_time" content="2022-10-04T16:39:36.000Z">
-<meta property="article:modified_time" content="2022-10-04T16:41:08.963Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221023180045.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221023180208.png">
+<meta property="article:published_time" content="2022-10-23T10:00:00.000Z">
+<meta property="article:modified_time" content="2022-10-23T10:07:11.846Z">
 <meta property="article:author" content="luzhixing12345">
-<meta property="article:tag" content="Vim">
+<meta property="article:tag" content="服务器">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220925141849.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221023180045.png">
   
   
-  <title>Vim(1)-vim启蒙与vimtutor - kamilu的博客</title>
+  <title>WSL2+V2ray配置代理 - kamilu的博客</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -166,9 +167,9 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Vim(1)-vim启蒙与vimtutor">
+            <span class="h2" id="subtitle" title="WSL2+V2ray配置代理">
               
-                Vim(1)-vim启蒙与vimtutor
+                WSL2+V2ray配置代理
               
             </span>
 
@@ -178,8 +179,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-10-05 00:39" pubdate>
-        2022年10月5日 凌晨
+      <time datetime="2022-10-23 18:00" pubdate>
+        2022年10月23日 晚上
       </time>
     </span>
   
@@ -189,7 +190,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      473 字
+      432 字
     </span>
   
 
@@ -235,30 +236,35 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Vim(1)-vim启蒙与vimtutor</h1>
+            <h1 style="display: none">WSL2+V2ray配置代理</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：9 天前
+                  本文最后更新于：11 天前
                 
               </p>
             
             <div class="markdown-body">
-              <h2 id="为什么会选择使用-vim"><a class="markdownIt-Anchor" href="#为什么会选择使用-vim"></a> 为什么会选择使用 vim ?</h2>
-<p>久闻大名如雷贯耳,但vscode如此好用所以一直没有一个入手vim的理由,直到我读到这篇文章:<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/547708456/answer/2645630850">为什么还有人用VIM？</a></p>
-<p>韦神写的非常好,插件和自由一直是我所追求的,高度的自定义才是我追求的浪漫.看完此文随即决定上手vim,并留下了一条评论</p>
-<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220925141849.png" srcset="/img/loading.gif" lazyload alt="20220925141849" /></p>
-<h2 id="如何学习-vim"><a class="markdownIt-Anchor" href="#如何学习-vim"></a> 如何学习 vim ?</h2>
-<p>我这里分享一下我自己的学习路线,实操环境使用的时windows的wsl(ubuntu)</p>
-<div class="code-wrapper"><pre><code class="hljs bash">wsl --install -d ubuntu</code></pre></div>
-<div class="code-wrapper"><pre><code class="hljs bash">sudo apt install vim</code></pre></div>
-<ol>
-<li>
-<p>第一阶段: 通读 vimtutor 并实践</p>
-<p>vimtutor 看名字就知道时vim的教程, 使用apt安装vim之后vim会被装在 <code>/usr/share/etc/vim</code> 下有当前的vim版本(比如我是vim81),进入可以找到tutor/tutor这个文件</p>
-<p>不过当然不需要这么麻烦去找,而且这个文件是只读我们不能修改.可以使用如下命令将其直接复制到当前目录下</p>
-<div class="code-wrapper"><pre><code class="hljs bash">vim -u NONE -c <span class="hljs-string">&#x27;e $VIMRUNTIME/tutor/tutor&#x27;</span> -c <span class="hljs-string">&#x27;w! vimtutor&#x27;</span> -c <span class="hljs-string">&#x27;q&#x27;</span></code></pre></div></li>
-</ol>
+              <p><a target="_blank" rel="noopener" href="https://me.tofly.cyou/">V2ray官网</a></p>
+<h2 id="修改v2ray默认选项"><a class="markdownIt-Anchor" href="#修改v2ray默认选项"></a> 修改V2ray默认选项</h2>
+<p>设置-&gt;参数设置-&gt;允许来自局域网的连接</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20221023180045.png" srcset="/img/loading.gif" lazyload alt="20221023180045" /></p>
+<h2 id="查看代理端口"><a class="markdownIt-Anchor" href="#查看代理端口"></a> 查看代理端口</h2>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20221023180208.png" srcset="/img/loading.gif" lazyload alt="20221023180208" /></p>
+<p>http的系统代理走局域网的10811端口</p>
+<h2 id="修改bashrc文件"><a class="markdownIt-Anchor" href="#修改bashrc文件"></a> 修改.bashrc文件</h2>
+<p>打开.bashrc</p>
+<div class="code-wrapper"><pre><code class="hljs bash">vim ~/.bashrc</code></pre></div>
+<p>在文件结尾加入</p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> host_ip=$(<span class="hljs-built_in">cat</span> /etc/resolv.conf |grep <span class="hljs-string">&quot;nameserver&quot;</span> |<span class="hljs-built_in">cut</span> -f 2 -d <span class="hljs-string">&quot; &quot;</span>)
+<span class="hljs-built_in">export</span> http_proxy=<span class="hljs-string">&quot;http://<span class="hljs-variable">$host_ip</span>:10811&quot;</span>
+<span class="hljs-built_in">export</span> https_proxy=<span class="hljs-string">&quot;http://<span class="hljs-variable">$host_ip</span>:10811&quot;</span></code></pre></div>
+<p>:wq保存退出,激活环境</p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">source</span> ~/.bashrc</code></pre></div>
+<h2 id="测试"><a class="markdownIt-Anchor" href="#测试"></a> 测试</h2>
+<div class="code-wrapper"><pre><code class="hljs bash">wget www.google.com
+wget https://raw.githubusercontent.com/luzhixing12345/MyScripts/main/env_setup.py</code></pre></div>
+<p>得到两个文件即为成功</p>
 
             </div>
             <hr>
@@ -269,7 +275,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Vim/">Vim</a>
+                      <a class="hover-with-bg" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
                     
                   </div>
                 
@@ -286,9 +292,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/10/06/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/">
+                      <a href="/2022/11/04/CSAPP/03-AttackLab/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">服务器相关问题</span>
+                        <span class="hidden-mobile">03-AttackLab</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -296,8 +302,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/09/27/C/%E4%BC%98%E9%9B%85%E7%9A%84%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0/">
-                        <span class="hidden-mobile">优雅的处理命令行参数</span>
+                      <a href="/2022/10/23/%E6%9D%82/%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87%E7%9A%84%E6%8A%A5%E9%94%99/">
+                        <span class="hidden-mobile">疑难杂症的报错</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -16,12 +16,12 @@
   <meta name="author" content="luzhixing12345">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言 大二的时候学习过这部分知识,现在也只剩下模糊的印象了,隐约记得做题的时候要算来算去好不麻烦. 为了速成看了一些技术博客,但总感觉走马观花,绝知此事还是要躬行,故留此文以便日后忘记之际重温. 本文主要参考深入理解计算机系统第三版书籍中对于该部分的描述,并且例举一些书中的习题以加深印象,以及CSAPP的Data Lab实验对于浮点数的函数实现  二进制小数 对于一个十进制的数 12371892">
+    <meta name="description" content="#! https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;580191161  title: 计算机系统基础:浮点数的表示 date: 2022-10-07 23:23:41 tags: 杂  前言 大二的时候学习过这部分知识,现在也只剩下模糊的印象了,隐约记得做题的时候要算来算去好不麻烦. 为了速成看了一些技术博客,但总感觉走马观花,绝知此事还是要躬行,故留此文以便日后忘记之际重温. 本">
 <meta property="og:type" content="article">
-<meta property="og:title" content="计算机系统基础:浮点数的表示">
-<meta property="og:url" content="https://luzhixing12345.github.io/2022/10/07/%E6%B5%AE%E7%82%B9%E6%95%B0%E7%9A%84%E8%A1%A8%E7%A4%BA/index.html">
+<meta property="og:title" content="kamilu的博客">
+<meta property="og:url" content="https://luzhixing12345.github.io/2022/10/07/%E6%9D%82/%E6%B5%AE%E7%82%B9%E6%95%B0%E7%9A%84%E8%A1%A8%E7%A4%BA/index.html">
 <meta property="og:site_name" content="kamilu的博客">
-<meta property="og:description" content="前言 大二的时候学习过这部分知识,现在也只剩下模糊的印象了,隐约记得做题的时候要算来算去好不麻烦. 为了速成看了一些技术博客,但总感觉走马观花,绝知此事还是要躬行,故留此文以便日后忘记之际重温. 本文主要参考深入理解计算机系统第三版书籍中对于该部分的描述,并且例举一些书中的习题以加深印象,以及CSAPP的Data Lab实验对于浮点数的函数实现  二进制小数 对于一个十进制的数 12371892">
+<meta property="og:description" content="#! https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;580191161  title: 计算机系统基础:浮点数的表示 date: 2022-10-07 23:23:41 tags: 杂  前言 大二的时候学习过这部分知识,现在也只剩下模糊的印象了,隐约记得做题的时候要算来算去好不麻烦. 为了速成看了一些技术博客,但总感觉走马观花,绝知此事还是要躬行,故留此文以便日后忘记之际重温. 本">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221007234001.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/GJRPY9D7UDUN6M%60%241%40W%24XZ4.jpg">
@@ -31,14 +31,14 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/zx1.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221008175604.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221008010002.png">
-<meta property="article:published_time" content="2022-10-07T15:23:41.000Z">
-<meta property="article:modified_time" content="2022-10-11T14:49:45.094Z">
+<meta property="article:published_time" content="2022-10-07T15:23:41.694Z">
+<meta property="article:modified_time" content="2022-11-03T13:41:34.182Z">
 <meta property="article:author" content="luzhixing12345">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221007234001.png">
   
   
-  <title>计算机系统基础:浮点数的表示 - kamilu的博客</title>
+  <title>kamilu的博客</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -172,9 +172,9 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="计算机系统基础:浮点数的表示">
+            <span class="h2" id="subtitle" title="">
               
-                计算机系统基础:浮点数的表示
+                
               
             </span>
 
@@ -195,7 +195,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      7.4k 字
+      8.7k 字
     </span>
   
 
@@ -204,7 +204,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      62 分钟
+      73 分钟
     </span>
   
 
@@ -241,16 +241,20 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">计算机系统基础:浮点数的表示</h1>
+            <h1 style="display: none"></h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2 天前
+                  本文最后更新于：4 小时前
                 
               </p>
             
             <div class="markdown-body">
-              <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+              <h2 id="httpszhuanlanzhihucomp580191161"><a class="markdownIt-Anchor" href="#httpszhuanlanzhihucomp580191161"></a> #! <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/580191161">https://zhuanlan.zhihu.com/p/580191161</a></h2>
+<h2 id="title-计算机系统基础浮点数的表示date-2022-10-07-232341tags-杂"><a class="markdownIt-Anchor" href="#title-计算机系统基础浮点数的表示date-2022-10-07-232341tags-杂"></a> title: 计算机系统基础:浮点数的表示<br />
+date: 2022-10-07 23:23:41<br />
+tags: 杂</h2>
+<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
 <p>大二的时候学习过这部分知识,现在也只剩下模糊的印象了,隐约记得做题的时候要算来算去好不麻烦.</p>
 <p>为了速成看了一些技术博客,但总感觉走马观花,绝知此事还是要躬行,故留此文以便日后忘记之际重温.</p>
 <p>本文主要参考深入理解计算机系统第三版书籍中对于该部分的描述,并且例举一些书中的习题以加深印象,以及CSAPP的Data Lab实验对于浮点数的函数实现</p>
@@ -488,22 +492,10 @@
 </tr>
 </tbody>
 </table>
-<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/*</span>
-<span class="hljs-comment"> * float_neg - Return bit-level equivalent of expression -f for</span>
-<span class="hljs-comment"> *   floating point argument f.</span>
-<span class="hljs-comment"> *   Both the argument and result are passed as unsigned int&#x27;s, but</span>
-<span class="hljs-comment"> *   they are to be interpreted as the bit-level representations of</span>
-<span class="hljs-comment"> *   single-precision floating point values.</span>
-<span class="hljs-comment"> *   When argument is NaN, return argument.</span>
-<span class="hljs-comment"> *   Legal ops: Any integer/unsigned operations incl. ||, &amp;&amp;. also if, while</span>
-<span class="hljs-comment"> *   Max ops: 10</span>
-<span class="hljs-comment"> *   Rating: 2</span>
-<span class="hljs-comment"> */</span>
-<span class="hljs-type">unsigned</span> <span class="hljs-title function_">float_neg</span><span class="hljs-params">(<span class="hljs-type">unsigned</span> uf)</span> &#123;
- <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;
-&#125;
+<p>最后是datalab中最后的三道浮点数和整数之间的题目</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">//float</span>
 <span class="hljs-comment">/*</span>
-<span class="hljs-comment"> * float_half - Return bit-level equivalent of expression 0.5*f for</span>
+<span class="hljs-comment"> * floatScale2 - Return bit-level equivalent of expression 2*f for</span>
 <span class="hljs-comment"> *   floating point argument f.</span>
 <span class="hljs-comment"> *   Both the argument and result are passed as unsigned int&#x27;s, but</span>
 <span class="hljs-comment"> *   they are to be interpreted as the bit-level representation of</span>
@@ -513,20 +505,91 @@
 <span class="hljs-comment"> *   Max ops: 30</span>
 <span class="hljs-comment"> *   Rating: 4</span>
 <span class="hljs-comment"> */</span>
-<span class="hljs-type">unsigned</span> <span class="hljs-title function_">float_half</span><span class="hljs-params">(<span class="hljs-type">unsigned</span> uf)</span> &#123;
-    <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;
+<span class="hljs-type">unsigned</span> <span class="hljs-title function_">floatScale2</span><span class="hljs-params">(<span class="hljs-type">unsigned</span> uf)</span> &#123;
+    <span class="hljs-type">int</span> exp_mask = <span class="hljs-number">0x7f800000</span>;
+    <span class="hljs-type">int</span> <span class="hljs-built_in">exp</span> = (uf&amp;exp_mask)&gt;&gt;<span class="hljs-number">23</span>;
+    <span class="hljs-type">int</span> frac_mask = <span class="hljs-number">0x7fffff</span>;
+    <span class="hljs-type">int</span> frac = uf &amp; frac_mask;
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">exp</span> == <span class="hljs-number">0</span>) &#123;
+        <span class="hljs-keyword">if</span> (frac&gt;&gt;<span class="hljs-number">23</span>&amp;<span class="hljs-number">1</span>) &#123;
+            frac = frac * <span class="hljs-number">2</span> - <span class="hljs-number">0x7fffff</span>;
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            frac = frac &lt;&lt; <span class="hljs-number">1</span>;
+        &#125;
+        <span class="hljs-keyword">return</span> (uf &amp; ~frac_mask) | frac;
+    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-built_in">exp</span> == <span class="hljs-number">255</span>) &#123;
+        <span class="hljs-keyword">return</span> uf;
+    &#125; <span class="hljs-keyword">else</span> &#123;
+        <span class="hljs-keyword">return</span> (uf &amp; ~exp_mask) | (<span class="hljs-built_in">exp</span>+<span class="hljs-number">1</span>)&lt;&lt;<span class="hljs-number">23</span>;
+    &#125;
 &#125;
 <span class="hljs-comment">/*</span>
-<span class="hljs-comment"> * float_i2f - Return bit-level equivalent of expression (float) x</span>
-<span class="hljs-comment"> *   Result is returned as unsigned int, but</span>
+<span class="hljs-comment"> * floatFloat2Int - Return bit-level equivalent of expression (int) f</span>
+<span class="hljs-comment"> *   for floating point argument f.</span>
+<span class="hljs-comment"> *   Argument is passed as unsigned int, but</span>
 <span class="hljs-comment"> *   it is to be interpreted as the bit-level representation of a</span>
-<span class="hljs-comment"> *   single-precision floating point values.</span>
+<span class="hljs-comment"> *   single-precision floating point value.</span>
+<span class="hljs-comment"> *   Anything out of range (including NaN and infinity) should return</span>
+<span class="hljs-comment"> *   0x80000000u.</span>
 <span class="hljs-comment"> *   Legal ops: Any integer/unsigned operations incl. ||, &amp;&amp;. also if, while</span>
 <span class="hljs-comment"> *   Max ops: 30</span>
 <span class="hljs-comment"> *   Rating: 4</span>
 <span class="hljs-comment"> */</span>
-<span class="hljs-type">unsigned</span> <span class="hljs-title function_">float_i2f</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;
-  <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;
+<span class="hljs-type">int</span> <span class="hljs-title function_">floatFloat2Int</span><span class="hljs-params">(<span class="hljs-type">unsigned</span> uf)</span> &#123;
+    <span class="hljs-type">int</span> exp_mask = <span class="hljs-number">0x7f800000</span>;
+    <span class="hljs-type">int</span> frac_mask = <span class="hljs-number">0x7fffff</span>;
+    <span class="hljs-type">int</span> <span class="hljs-built_in">exp</span> = (uf &amp; exp_mask)&gt;&gt;<span class="hljs-number">23</span>;
+    <span class="hljs-type">int</span> frac = uf &amp; frac_mask;
+    <span class="hljs-type">int</span> signal = uf&gt;&gt;<span class="hljs-number">31</span>&amp;<span class="hljs-number">1</span>;
+    <span class="hljs-type">int</span> bias;
+    <span class="hljs-type">int</span> ans;
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">exp</span> &lt; <span class="hljs-number">127</span>) &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-built_in">exp</span> == <span class="hljs-number">255</span> || <span class="hljs-built_in">exp</span> &gt; <span class="hljs-number">127</span>+<span class="hljs-number">31</span>) &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0x80000000</span>;
+    &#125; <span class="hljs-keyword">else</span> &#123;
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">exp</span>==<span class="hljs-number">127</span>+<span class="hljs-number">31</span>)&#123;
+            <span class="hljs-keyword">if</span> (frac==<span class="hljs-number">0</span> &amp;&amp; signal == <span class="hljs-number">1</span>) &#123;
+                <span class="hljs-keyword">return</span> <span class="hljs-number">0x80000000</span>;
+            &#125; <span class="hljs-keyword">else</span> &#123;
+                <span class="hljs-keyword">return</span> <span class="hljs-number">0x80000000</span>;
+            &#125;
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            bias = <span class="hljs-built_in">exp</span><span class="hljs-number">-127</span>;
+            <span class="hljs-keyword">if</span> (bias &gt;= <span class="hljs-number">23</span>) &#123;
+                ans = (<span class="hljs-number">1</span>&lt;&lt;bias) + (<span class="hljs-number">1</span>&lt;&lt;bias&gt;&gt;<span class="hljs-number">23</span>)*frac;
+            &#125; <span class="hljs-keyword">else</span> &#123;
+                ans = <span class="hljs-number">1</span>&lt;&lt;bias;
+            &#125;
+            <span class="hljs-keyword">return</span> signal ? -ans:ans;
+        &#125;
+    &#125;
+&#125;
+<span class="hljs-comment">/*</span>
+<span class="hljs-comment"> * floatPower2 - Return bit-level equivalent of the expression 2.0^x</span>
+<span class="hljs-comment"> *   (2.0 raised to the power x) for any 32-bit integer x.</span>
+<span class="hljs-comment"> *</span>
+<span class="hljs-comment"> *   The unsigned value that is returned should have the identical bit</span>
+<span class="hljs-comment"> *   representation as the single-precision floating-point number 2.0^x.</span>
+<span class="hljs-comment"> *   If the result is too small to be represented as a denorm, return</span>
+<span class="hljs-comment"> *   0. If too large, return +INF.</span>
+<span class="hljs-comment"> *</span>
+<span class="hljs-comment"> *   Legal ops: Any integer/unsigned operations incl. ||, &amp;&amp;. Also if, while</span>
+<span class="hljs-comment"> *   Max ops: 30</span>
+<span class="hljs-comment"> *   Rating: 4</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-type">unsigned</span> <span class="hljs-title function_">floatPower2</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;
+    <span class="hljs-type">int</span> frac, <span class="hljs-built_in">exp</span>;
+    <span class="hljs-keyword">if</span> (x &lt; <span class="hljs-number">-149</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (x &gt;= <span class="hljs-number">-149</span> &amp;&amp; x &lt;= <span class="hljs-number">-127</span>) &#123;
+        frac = x+<span class="hljs-number">149</span>;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span> &lt;&lt; frac;
+    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (x&lt;<span class="hljs-number">128</span>) &#123;
+        <span class="hljs-built_in">exp</span> = x+<span class="hljs-number">127</span>;
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">exp</span> &lt;&lt; <span class="hljs-number">23</span>;
+    &#125; <span class="hljs-keyword">else</span> &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">255</span> &lt;&lt; <span class="hljs-number">23</span>;
+    &#125;
 &#125;</code></pre></div>
 
             </div>
@@ -558,8 +621,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/10/06/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/">
-                        <span class="hidden-mobile">服务器相关问题</span>
+                      <a href="/2022/10/06/%E6%9C%8D%E5%8A%A1%E5%99%A8/WSL%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/">
+                        <span class="hidden-mobile">WSL相关问题</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
