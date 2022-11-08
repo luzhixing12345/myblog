@@ -16,21 +16,23 @@
   <meta name="author" content="luzhixing12345">
   <meta name="keywords" content="">
   
-    <meta name="description" content="基本环境的安装 一般来说购买服务器的环节就有了安装操作系统的环节,你可以选择不同的操作系统.Centos,ubuntu等等其他unix系统 我个人是习惯使用debian操作系统的,比较稳定,网上的文档也很多.遇到的问题基本可以解决. 不同的操作系统确实有所差异,如果你遇到了什么问题不要忘记加上你的linux操作系统名字,或许才能搜索到正确的答案 选择一个操作系统之后稍事等待就帮你一键安装成功了,">
+    <meta name="description" content="Docker  docker教程   基本架构  docker有两个概念,镜像和容器. 镜像相当于类,容器相当于类创建的对象. 一个镜像可以创建多个容器  安装docker curl -fsSL https:&#x2F;&#x2F;get.docker.com | bash -s docker --mirror Aliyun  换源   拉取一个Ubuntu的镜像(默认最新) docker pull ubuntu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="服务器操作系统环境搭建">
-<meta property="og:url" content="https://luzhixing12345.github.io/2022/06/27/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/index.html">
+<meta property="og:title" content="docker基本命令">
+<meta property="og:url" content="https://luzhixing12345.github.io/2022/11/08/%E6%9C%8D%E5%8A%A1%E5%99%A8/docker%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/index.html">
 <meta property="og:site_name" content="kamilu的博客">
-<meta property="og:description" content="基本环境的安装 一般来说购买服务器的环节就有了安装操作系统的环节,你可以选择不同的操作系统.Centos,ubuntu等等其他unix系统 我个人是习惯使用debian操作系统的,比较稳定,网上的文档也很多.遇到的问题基本可以解决. 不同的操作系统确实有所差异,如果你遇到了什么问题不要忘记加上你的linux操作系统名字,或许才能搜索到正确的答案 选择一个操作系统之后稍事等待就帮你一键安装成功了,">
+<meta property="og:description" content="Docker  docker教程   基本架构  docker有两个概念,镜像和容器. 镜像相当于类,容器相当于类创建的对象. 一个镜像可以创建多个容器  安装docker curl -fsSL https:&#x2F;&#x2F;get.docker.com | bash -s docker --mirror Aliyun  换源   拉取一个Ubuntu的镜像(默认最新) docker pull ubuntu">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-06-27T05:13:42.000Z">
-<meta property="article:modified_time" content="2022-10-07T14:13:48.941Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221108011126.png">
+<meta property="article:published_time" content="2022-11-07T17:06:27.000Z">
+<meta property="article:modified_time" content="2022-11-08T06:34:01.898Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="服务器">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221108011126.png">
   
   
-  <title>服务器操作系统环境搭建 - kamilu的博客</title>
+  <title>docker基本命令 - kamilu的博客</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -164,9 +166,9 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="服务器操作系统环境搭建">
+            <span class="h2" id="subtitle" title="docker基本命令">
               
-                服务器操作系统环境搭建
+                docker基本命令
               
             </span>
 
@@ -176,8 +178,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-06-27 13:13" pubdate>
-        2022年6月27日 下午
+      <time datetime="2022-11-08 01:06" pubdate>
+        2022年11月8日 凌晨
       </time>
     </span>
   
@@ -187,7 +189,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.1k 字
+      2.2k 字
     </span>
   
 
@@ -196,7 +198,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10 分钟
+      19 分钟
     </span>
   
 
@@ -233,82 +235,122 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">服务器操作系统环境搭建</h1>
+            <h1 style="display: none">docker基本命令</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：1 个月前
+                  本文最后更新于：21 分钟前
                 
               </p>
             
             <div class="markdown-body">
-              <h2 id="基本环境的安装"><a class="markdownIt-Anchor" href="#基本环境的安装"></a> 基本环境的安装</h2>
-<p>一般来说购买服务器的环节就有了安装操作系统的环节,你可以选择不同的操作系统.Centos,ubuntu等等其他unix系统</p>
-<p>我个人是习惯使用debian操作系统的,比较稳定,网上的文档也很多.遇到的问题基本可以解决.</p>
-<p>不同的操作系统确实有所差异,如果你遇到了什么问题不要忘记加上你的linux操作系统名字,或许才能搜索到正确的答案</p>
-<p>选择一个操作系统之后稍事等待就帮你一键安装成功了,比较方便.</p>
+              <h1 id="docker"><a class="markdownIt-Anchor" href="#docker"></a> Docker</h1>
 <blockquote>
-<p>以下所有命令均在Debian操作系统中适用,Debian是我个人比较喜欢使用在服务器上的一个操作系统</p>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/docker/debian-docker-install.html">docker教程</a></p>
 </blockquote>
-<p>每一个程序都有他们自身的用法,这里必然不可能展开讲解,如果你有兴趣的话可以查看对应的教程,这里仅仅提供了安装的方式.更加具体的配置方法和使用方法还是要各位自行摸索.</p>
-<h2 id="基本命令"><a class="markdownIt-Anchor" href="#基本命令"></a> 基本命令</h2>
-<h3 id="sudo"><a class="markdownIt-Anchor" href="#sudo"></a> sudo</h3>
-<div class="code-wrapper"><pre><code class="hljs bash">apt-get install sudo</code></pre></div>
-<p>更新</p>
-<div class="code-wrapper"><pre><code class="hljs bash">sudo apt update</code></pre></div>
-<p>查看操作系统版本</p>
-<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> /etc/os-release</code></pre></div>
-<h3 id="一些安装项"><a class="markdownIt-Anchor" href="#一些安装项"></a> 一些安装项</h3>
-<div class="code-wrapper"><pre><code class="hljs bash">sudo apt install openssh-server
-sudo apt install curl</code></pre></div>
-<h3 id="ssh"><a class="markdownIt-Anchor" href="#ssh"></a> SSH</h3>
-<p>这个是默认安装的</p>
-<p>重启服务</p>
-<div class="code-wrapper"><pre><code class="hljs bash">service sshd restart</code></pre></div>
-<p>配置信息在<code>/etc/ssh/sshd_config</code></p>
-<p>记录在<code>/var/log/auth.log</code></p>
-<p>基本信息在<code>/root/.ssh/</code></p>
-<h3 id="ufw防火墙"><a class="markdownIt-Anchor" href="#ufw防火墙"></a> ufw防火墙</h3>
-<div class="code-wrapper"><pre><code class="hljs bash">apt-get install ufw</code></pre></div>
-<h2 id="软件安装"><a class="markdownIt-Anchor" href="#软件安装"></a> 软件安装</h2>
-<h3 id="git"><a class="markdownIt-Anchor" href="#git"></a> git</h3>
-<div class="code-wrapper"><pre><code class="hljs bash">sudo apt install git</code></pre></div>
-<p>检查</p>
-<div class="code-wrapper"><pre><code class="hljs bash">git --version</code></pre></div>
-<p><a href="https://luzhixing12345.github.io/2022/04/29/git/git%E7%9A%84SSH%E8%BF%9E%E6%8E%A5/">git的SSH配置</a></p>
-<h3 id="anaconda"><a class="markdownIt-Anchor" href="#anaconda"></a> Anaconda</h3>
-<p>visit <a target="_blank" rel="noopener" href="https://www.anaconda.com/products/distribution#linux">https://www.anaconda.com/products/distribution#linux</a> and download the lastest,最下面</p>
-<p>通过FTP/SCP发送到服务器</p>
-<div class="code-wrapper"><pre><code class="hljs bash">bash Anaconda(TAB补全)</code></pre></div>
-<p>安装过后conda init,这个默认的不好使,需要手动将这个路径加入到环境变量中</p>
-<blockquote>
-<p>通常来说anaconda的环境在linux中安装的位置默认是root/anaconda3,如果你更改了这个默认路径那就把下面的换成你的路径</p>
-</blockquote>
-<div class="code-wrapper"><pre><code class="hljs bash">vim ~/.bashrc
-<span class="hljs-built_in">export</span> PATH=root/anaconda3/bin:<span class="hljs-variable">$PATH</span>
-<span class="hljs-built_in">source</span> ~/.bashrc</code></pre></div>
-<h3 id="npm"><a class="markdownIt-Anchor" href="#npm"></a> npm</h3>
-<div class="code-wrapper"><pre><code class="hljs bash">sudo apt install nodejs npm</code></pre></div>
-<div class="code-wrapper"><pre><code class="hljs bash">nodejs --version</code></pre></div>
-<h3 id="nginx"><a class="markdownIt-Anchor" href="#nginx"></a> nginx</h3>
-<div class="code-wrapper"><pre><code class="hljs bash">sudo apt install nginx</code></pre></div>
-<p>启动Nginx服务</p>
-<div class="code-wrapper"><pre><code class="hljs bash">systemctl start nginx</code></pre></div>
-<p>重启</p>
-<div class="code-wrapper"><pre><code class="hljs bash">systemctl reload nginx</code></pre></div>
-<p>停止服务</p>
-<div class="code-wrapper"><pre><code class="hljs bash">systemctl stop nginx</code></pre></div>
-<p>查看配置信息</p>
-<div class="code-wrapper"><pre><code class="hljs bash">nginx -t</code></pre></div>
-<h3 id="docker"><a class="markdownIt-Anchor" href="#docker"></a> <a target="_blank" rel="noopener" href="https://www.runoob.com/docker/debian-docker-install.html">docker</a></h3>
+<h2 id="基本架构"><a class="markdownIt-Anchor" href="#基本架构"></a> 基本架构</h2>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20221108011126.png" srcset="/img/loading.gif" lazyload alt="20221108011126" /></p>
+<p>docker有两个概念,镜像和容器. 镜像相当于类,容器相当于类创建的对象. 一个镜像可以创建多个容器</p>
+<h2 id="安装docker"><a class="markdownIt-Anchor" href="#安装docker"></a> 安装docker</h2>
 <div class="code-wrapper"><pre><code class="hljs bash">curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun</code></pre></div>
 <blockquote>
 <p><a target="_blank" rel="noopener" href="https://yeasy.gitbook.io/docker_practice/install/mirror">换源</a></p>
 </blockquote>
-<h3 id="vcpkg"><a class="markdownIt-Anchor" href="#vcpkg"></a> vcpkg</h3>
+<h2 id="拉取一个ubuntu的镜像默认最新"><a class="markdownIt-Anchor" href="#拉取一个ubuntu的镜像默认最新"></a> 拉取一个Ubuntu的镜像(默认最新)</h2>
+<div class="code-wrapper"><pre><code class="hljs bash">docker pull ubuntu</code></pre></div>
+<p>拉取特定版本的</p>
+<div class="code-wrapper"><pre><code class="hljs bash">docker pull ubuntu:16.04</code></pre></div>
+<h2 id="查看所有镜像"><a class="markdownIt-Anchor" href="#查看所有镜像"></a> 查看所有镜像</h2>
+<div class="code-wrapper"><pre><code class="hljs bash">docker images</code></pre></div>
+<p>以下内容以笔者本机为例, 笔者拉取了两个版本的Ubuntu镜像和一个默认拉取的hello-world镜像</p>
+<div class="code-wrapper"><pre><code class="hljs bash">(base) root@hecs-67846:~<span class="hljs-comment"># docker images</span>
+REPOSITORY    TAG       IMAGE ID       CREATED         SIZE
+ubuntu        latest    a8780b506fa4   4 days ago      77.8MB
+hello-world   latest    feb5d9fea6a5   13 months ago   13.3kB
+ubuntu        16.04     b6f507652425   14 months ago   135MB</code></pre></div>
+<h2 id="查看容器情况"><a class="markdownIt-Anchor" href="#查看容器情况"></a> 查看容器情况</h2>
+<div class="code-wrapper"><pre><code class="hljs bash">docker ps -a</code></pre></div>
+<p>笔者这里有一个正在运行的容器</p>
+<div class="code-wrapper"><pre><code class="hljs bash">CONTAINER ID   IMAGE          COMMAND       CREATED       STATUS       PORTS     NAMES
+da1811a84ddc   ubuntu:16.04   <span class="hljs-string">&quot;/bin/bash&quot;</span>   7 hours ago   Up 4 hours             csapp</code></pre></div>
+<h2 id="启动一个容器"><a class="markdownIt-Anchor" href="#启动一个容器"></a> 启动一个容器</h2>
+<div class="code-wrapper"><pre><code class="hljs bash">docker run --name kamilu -itd ubuntu /bin/bash</code></pre></div>
+<p>其中 <code>-it</code> 的 <code>-t</code> 选项让Docker分配一个伪终端(pseudo-tty)并绑定到容器的标准输入上, <code>-i</code> 则让容器的标准输入保持打开</p>
+<p><code>-d</code> 是笔者个人喜欢使用的,它会使容器在后台运行并且返回生成的容器的ID</p>
+<p>后面的ubuntu指的就是镜像的名字,这里使用的ubuntu,也就是ubuntu:latest, 最后启动一个 bash 终端,允许用户进行交互</p>
+<p>前面的 <code>--name</code> 是为这个容器指定一个名字,如果不指定的话这个名字比较随意,不是很方便管理</p>
+<p>再使用 <code>docker ps -a</code> 查看可以看到容器已经运行起来了</p>
+<div class="code-wrapper"><pre><code class="hljs bash">CONTAINER ID   IMAGE          COMMAND       CREATED         STATUS         PORTS     NAMES
+9041786640c9   ubuntu         <span class="hljs-string">&quot;/bin/bash&quot;</span>   8 seconds ago   Up 6 seconds             kamilu
+da1811a84ddc   ubuntu:16.04   <span class="hljs-string">&quot;/bin/bash&quot;</span>   7 hours ago     Up 5 hours               csapp</code></pre></div>
+<div class="note note-info">
+            <p>如果在gdb调试的时候遇到了<code>warning: Error disabling address space randomization: Operation not permitted</code>的报错,需要在OPTION中加入如下参数,后面一样不变</p><div class="code-wrapper"><pre><code class="hljs bash">docker run --cap-add=SYS_PTRACE --security-opt seccomp=unconfined</code></pre></div>
+          </div>
+<h2 id="进入容器"><a class="markdownIt-Anchor" href="#进入容器"></a> 进入容器</h2>
+<p>进入容器之前容器需要处于正在运行的状态,进入有两种方式 <code>attach</code> 和 <code>exec</code></p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/microsoft/vcpkg/blob/master/README_zh_CN.md#%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B-windows">下载</a></li>
+<li>
+<p>attach 从容器退出会导致容器的停止</p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 直接使用容器的名字</span>
+docker attach kamilu
+<span class="hljs-comment"># 使用容器的ID</span>
+docker attach 9041786640c9</code></pre></div>
+</li>
+<li>
+<p>exec 退出不会导致容器停止,比较适合需要持续运行的后台服务</p>
+<div class="code-wrapper"><pre><code class="hljs bash">docker <span class="hljs-built_in">exec</span> -it kamilu /bin/bash</code></pre></div>
+<blockquote>
+<p>如果需要在一个容器中使用多个终端处理不同的任务,应该使用exec的方式进入,attach会导致两个终端的状态同步</p>
+</blockquote>
+</li>
 </ul>
+<h2 id="文件传输"><a class="markdownIt-Anchor" href="#文件传输"></a> 文件传输</h2>
+<p>主机-&gt;容器</p>
+<div class="code-wrapper"><pre><code class="hljs bash">docker <span class="hljs-built_in">cp</span> &lt;PATH&gt; &lt;CONTAINER_ID/NAME&gt;:&lt;PATH&gt;
+<span class="hljs-comment"># docker cp bomb.tar csapp:/root</span></code></pre></div>
+<p>容器-&gt;主机</p>
+<div class="code-wrapper"><pre><code class="hljs bash">docker <span class="hljs-built_in">cp</span> &lt;CONTAINER_ID/NAME&gt;:&lt;PATH&gt; &lt;PATH&gt;
+<span class="hljs-comment"># docker cp csapp:/home/bomb.tar /home/files</span></code></pre></div>
+<h2 id="退出-关闭-删除容器"><a class="markdownIt-Anchor" href="#退出-关闭-删除容器"></a> 退出 关闭 删除容器</h2>
+<h3 id="退出"><a class="markdownIt-Anchor" href="#退出"></a> 退出</h3>
+<ul>
+<li>exit</li>
+<li><kbd>ctrl</kbd> + <kbd>d</kbd></li>
+</ul>
+<h3 id="关闭"><a class="markdownIt-Anchor" href="#关闭"></a> 关闭</h3>
+<div class="code-wrapper"><pre><code class="hljs bash">docker stop &lt;NAME&gt;
+docker stop &lt;CONTAINER_ID&gt;</code></pre></div>
+<h2 id="删除"><a class="markdownIt-Anchor" href="#删除"></a> 删除</h2>
+<div class="code-wrapper"><pre><code class="hljs bash">docker <span class="hljs-built_in">rm</span> -f &lt;NAME&gt;
+docker <span class="hljs-built_in">rm</span> -f &lt;CONTAINER_ID&gt;</code></pre></div>
+<h2 id="导入和导出"><a class="markdownIt-Anchor" href="#导入和导出"></a> 导入和导出</h2>
+<p>导出</p>
+<div class="code-wrapper"><pre><code class="hljs bash">docker <span class="hljs-built_in">export</span> csapp &gt; csapp.tar</code></pre></div>
+<p>导入: 从容器快照文件中再导入为镜像</p>
+<div class="code-wrapper"><pre><code class="hljs bash">docker import csapp.tar another_csapp:v1.0</code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> csapp.tar | docker import - another_csapp:v1.0</code></pre></div>
+<h2 id="删除镜像"><a class="markdownIt-Anchor" href="#删除镜像"></a> 删除镜像</h2>
+<div class="code-wrapper"><pre><code class="hljs bash">docker rmi another_csapp:v1.0</code></pre></div>
+<h2 id="基础环境搭建"><a class="markdownIt-Anchor" href="#基础环境搭建"></a> 基础环境搭建</h2>
+<p>纯docker容器相当的干净,可以快速地把常用软件安装一下,以便后续使用</p>
+<ul>
+<li>基本</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs bash">apt-get -y update
+apt-get -y install sudo
+sudo apt -y install vim
+sudo apt -y install wget
+sudo apt -y install unzip</code></pre></div>
+<ul>
+<li>软件</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs bash">sudo apt -y install git</code></pre></div>
+<ul>
+<li>C</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs bash">sudo apt -y install gcc
+sudo apt -y install build-essential gdb
+sudo apt -y install gcc-multilib</code></pre></div>
 
             </div>
             <hr>
@@ -336,9 +378,9 @@ sudo apt install curl</code></pre></div>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/07/03/%E6%9D%82/pws/">
+                      <a href="/2022/11/08/VPN%E4%B8%8E%E4%BB%A3%E7%90%86/Linux%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Windows PowerShell美化以及 Vscode 终端美化配置</span>
+                        <span class="hidden-mobile">Linux代理配置</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -346,8 +388,8 @@ sudo apt install curl</code></pre></div>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/06/25/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday8/">
-                        <span class="hidden-mobile">自制操作系统day8-鼠标控制与32位模式切换</span>
+                      <a href="/2022/11/04/CSAPP/03-AttackLab/">
+                        <span class="hidden-mobile">03-AttackLab</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

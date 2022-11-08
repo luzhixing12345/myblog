@@ -18,25 +18,19 @@
   
     <meta name="description" content="前言 CSAPP 是计算机专业的一门非常重要的专业课,绝大部分学校将这门课程开在大二. 奈何笔者水平有限,彼时只觉云山雾绕而不得其法,整个的学习过程颇有囫囵吞枣之感. CMU教授精心准备了11个相关实验,因学时与课程安排等原因只安排做了其中之4(data bomb buffer shell).恰得此空闲,打算完整的学习一下CSAPP的相关内容,并且完成所有的11个课程实验,遂有此系列. 笔者会简">
 <meta property="og:type" content="article">
-<meta property="og:title" content="实验环境准备">
+<meta property="og:title" content="00-实验环境准备">
 <meta property="og:url" content="https://luzhixing12345.github.io/2022/10/21/CSAPP/%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/index.html">
 <meta property="og:site_name" content="kamilu的博客">
 <meta property="og:description" content="前言 CSAPP 是计算机专业的一门非常重要的专业课,绝大部分学校将这门课程开在大二. 奈何笔者水平有限,彼时只觉云山雾绕而不得其法,整个的学习过程颇有囫囵吞枣之感. CMU教授精心准备了11个相关实验,因学时与课程安排等原因只安排做了其中之4(data bomb buffer shell).恰得此空闲,打算完整的学习一下CSAPP的相关内容,并且完成所有的11个课程实验,遂有此系列. 笔者会简">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220924231310.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220924233547.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220924233650.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220925010349.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221020002321.png">
 <meta property="article:published_time" content="2022-10-21T14:12:35.000Z">
-<meta property="article:modified_time" content="2022-11-02T14:10:45.085Z">
+<meta property="article:modified_time" content="2022-11-04T09:44:00.883Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="CSAPP">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20220924231310.png">
   
   
-  <title>实验环境准备 - kamilu的博客</title>
+  <title>00-实验环境准备 - kamilu的博客</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -170,9 +164,9 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="实验环境准备">
+            <span class="h2" id="subtitle" title="00-实验环境准备">
               
-                实验环境准备
+                00-实验环境准备
               
             </span>
 
@@ -193,7 +187,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3k 字
+      1.3k 字
     </span>
   
 
@@ -202,7 +196,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      26 分钟
+      11 分钟
     </span>
   
 
@@ -239,11 +233,11 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">实验环境准备</h1>
+            <h1 style="display: none">00-实验环境准备</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：1 天前
+                  本文最后更新于：4 天前
                 
               </p>
             
@@ -256,41 +250,12 @@
 <p>官网<a target="_blank" rel="noopener" href="http://csapp.cs.cmu.edu/3e/labs.html">Lab Assignments</a>提供了所有的实验内容,只需要点击后面的 <code>Self-Study Handout</code> 就可以下载自学版本的压缩包</p>
 <p>为了方便也可以直接下载<a target="_blank" rel="noopener" href="https://github.com/learner-lu/resources-download/releases/download/v0.0.0/CSAPP-LAB.zip">CSAPP完整版压缩包</a></p>
 <h2 id="实验环境"><a class="markdownIt-Anchor" href="#实验环境"></a> 实验环境</h2>
-<p>实验要求的环境是linux系统,所以这里选择使用 WSL(Ubuntu)</p>
-<h3 id="安装-wsl"><a class="markdownIt-Anchor" href="#安装-wsl"></a> 安装 WSL</h3>
-<p>Windows可以使用WSL(<strong>W</strong>indows <strong>S</strong>ubsystem for <strong>L</strong>inux)来使用Linux环境</p>
-<ol>
-<li>
-<p>打开控制面板-&gt;程序</p>
-<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220924231310.png" srcset="/img/loading.gif" lazyload alt="20220924231310" /></p>
-</li>
-<li>
-<p>启动或关闭 Windows 功能</p>
-<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220924233547.png" srcset="/img/loading.gif" lazyload alt="20220924233547" /></p>
-</li>
-<li>
-<p>开启 “适用于 Linux 的 Windows 子系统” 和 “虚拟机平台” 选项</p>
-<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220924233650.png" srcset="/img/loading.gif" lazyload alt="20220924233650" /></p>
-<p>启用服务,重启电脑</p>
-</li>
-<li>
-<p>键盘按下 <kbd>Win</kbd> + <kbd>r</kbd> 输入 cmd 后回车</p>
-<div class="code-wrapper"><pre><code class="hljs bash">wsl --install -d Ubuntu</code></pre></div>
-</li>
-<li>
-<p>等待安装完毕之后,输入用户名 密码就可以进入Linux系统了,这个操作系统的名字是 Ubuntu</p>
-<p>如果<strong>关闭窗口后再想重新进入这个系统</strong>,只需要在命令行中输入 wsl 就可以直接进入</p>
-</li>
-</ol>
-<h3 id="安装一个更加美观的-terminal-终端"><a class="markdownIt-Anchor" href="#安装一个更加美观的-terminal-终端"></a> 安装一个更加美观的 Terminal 终端</h3>
-<p>原生的命令行窗口并不好看,由于本实验可能需要大部分时间面对一个终端的显示,我们考虑选择使用一个更加美观漂亮的终端</p>
-<p>在 <a target="_blank" rel="noopener" href="https://github.com/microsoft/terminal/releases">terminal release</a> 中下载最新版的安装包</p>
-<p>注意区分 Win10/11版本,不要下错了</p>
-<blockquote>
-<p>如果不清楚windows版本可以按下<kbd>Win</kbd> + <kbd>r</kbd> 输入 winver查看</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220925010349.png" srcset="/img/loading.gif" lazyload alt="20220925010349" /></p>
-<p>下载后点击对应版本安装即可,接下来尝试再来按下 <kbd>Win</kbd> + <kbd>r</kbd> 输入cmd进入控制台吧,是不是好看多了?</p>
+<p>实验要求的环境是linux系统,所以这里选择使用 WSL(Ubuntu),但后来又发现Win11上wsl2运行本次实验存在诸多问题,比如gdb在wsl1调试存在问题,attack lab的ctarget段溢出等等,所以最后还是选择在我的一台服务器上(Debian)完成的实验</p>
+<p>环境配置一直是令人恼火的,这里我就不展开介绍了,有大佬写过相关说明做好了docker镜像和资源拉取,这里直接引用他们的文章,如果配置环境吃力的朋友可以看看</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/505497911">https://zhuanlan.zhihu.com/p/505497911</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/339047608">https://zhuanlan.zhihu.com/p/339047608</a></li>
+</ul>
 <h3 id="熟悉命令行操作"><a class="markdownIt-Anchor" href="#熟悉命令行操作"></a> 熟悉命令行操作</h3>
 <p>Windows系统想必已经比较熟悉了,界面窗口(windows)做的很优秀,我们可以通过鼠标完成大部分的交互操作</p>
 <p>但是Linux系统比较特殊,它主要依赖于命令行输入命令执行相关操作,我们可以使用一串串指令完成几乎所有任务.这时候我们可以抛弃鼠标,只使用键盘.</p>
@@ -352,64 +317,6 @@
 <p>输入之后按下回车文件修改完毕保存成功,回到之前的界面</p>
 </li>
 </ol>
-<h2 id="wsl-中使用gdb调试"><a class="markdownIt-Anchor" href="#wsl-中使用gdb调试"></a> WSL 中使用gdb调试</h2>
-<ol>
-<li>
-<p>检查系统中是否已经安装了gdb</p>
-<div class="code-wrapper"><pre><code class="hljs bash">gdb -v</code></pre></div>
-</li>
-<li>
-<p>如果没有安装,则使用命令行安装</p>
-<div class="code-wrapper"><pre><code class="hljs bash">sudo apt-get update
-sudo apt-get install build-essential gdb</code></pre></div>
-<details><summary>如果下载太慢了</summary>
-<p>考虑切换一个下载的源</p>
-<div class="code-wrapper"><pre><code class="hljs bash">vim /etc/apt/sources.list</code></pre></div>
-<p>在文件最前面加入 / 删除整个文件重新创建一个新的文件并写入</p>
-<div class="code-wrapper"><pre><code class="hljs txt">deb http://mirrors.aliyun.com/ubuntu/ jammy main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ jammy main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ jammy-security main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ jammy-security main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ jammy-updates main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ jammy-updates main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ jammy-proposed main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ jammy-proposed main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ jammy-backports main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ jammy-backports main restricted universe multiverse</code></pre></div>
-<p>保存退出,重新执行</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiangxianghehe/article/details/122856771">其他源</a></p>
-</blockquote>
-</details>
-</li>
-<li>
-<p>查看WSL版本</p>
-<div class="code-wrapper"><pre><code class="hljs bash">wsl --list --verbose</code></pre></div>
-<p>如果是WSL1的运行gdb会出现问题,升级到WSL2</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://github.com/microsoft/WSL/issues/8356">Github Issue1</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/microsoft/WSL/issues/8516">Github Issue2</a></p>
-</blockquote>
-<p><strong>回到Windows系统的命令行</strong>, 升级WSL系统</p>
-<div class="code-wrapper"><pre><code class="hljs bash">wsl --set-version Ubuntu 2</code></pre></div>
-</li>
-</ol>
-<h2 id="wsl-与-windows文件互传"><a class="markdownIt-Anchor" href="#wsl-与-windows文件互传"></a> WSL 与 Windows文件互传</h2>
-<p>WSL正常情况下会出现在文件资源管理器,可以直接点击 Linux/Ubuntu 文件夹并且在 home 目录下找到用户名</p>
-<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20221020002321.png" srcset="/img/loading.gif" lazyload alt="20221020002321" /></p>
-<p>如果安装之后没有找到, 可以通过其他方式</p>
-<ul>
-<li><kbd>win</kbd> + <kbd>r</kbd> 输入 <code>\\wsl$</code></li>
-<li>进入wsl的操作系统中,在终端中输入 <code>explorer.exe .</code></li>
-</ul>
-<p>我们可以直接打开两个文件夹,直接通过复制粘贴实现文件传输</p>
-<p>除此之蛙wsl将windows中的文件挂载到 /mnt 虚拟磁盘下,默认的登录路径也是这里,我们可以直接通过mnt切换盘符及路径,比如:</p>
-<div class="code-wrapper"><pre><code class="hljs bash">kamilu@LZX:/mnt/c/Users/luzhi$ <span class="hljs-built_in">cd</span> /mnt/d
-kamilu@LZX:/mnt/d$</code></pre></div>
-<p>再利用 cp 或者 mv 命令就可以实现文件的传输了,笔者这里还是推荐第一种,比较直接</p>
-<hr />
-<p>至此,实验的所有基础内容就全部结束了,其后每一次实验我们只需要将对应实验文件夹下的tar文件移入WSL中,解压</p>
-<div class="code-wrapper"><pre><code class="hljs bash">tar xvf datalab-handout.tar</code></pre></div>
 
             </div>
             <hr>
@@ -437,9 +344,9 @@ kamilu@LZX:/mnt/d$</code></pre></div>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/10/22/CSAPP/02-BombLab/">
+                      <a href="/2022/10/22/CSAPP/01-DataLab/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">02-BombLab</span>
+                        <span class="hidden-mobile">01-DataLab</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
