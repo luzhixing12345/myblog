@@ -183,6 +183,46 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2022/11/10/CSAPP/03-AttackLab/" target="_self">
+          03-AttackLab
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/11/10/CSAPP/03-AttackLab/" target="_self">
+          
+          基本知识 Attack lab考察的是对缓冲区溢出攻击的理解,x86_64结构以及gdb调试 解压之后可以看到五个文件  README.txt 工具的用途介绍 cookie.txt 作为个人学习者使用的密钥 0x59b997fa ctarget 123关攻击的对象,代码注入攻击 rtarget 45关攻击的对象,返回值攻击 farm.c 小工具农场,我们会在45关中利用这里的汇编字节码 hex2
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-11-10 14:35" pubdate>
+              2022-11-10
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/CSAPP/">CSAPP</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2022/11/08/VPN%E4%B8%8E%E4%BB%A3%E7%90%86/Linux%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE/" target="_self">
           Linux代理配置
         </a>
@@ -263,46 +303,6 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/11/04/CSAPP/03-AttackLab/" target="_self">
-          03-AttackLab
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/11/04/CSAPP/03-AttackLab/" target="_self">
-          
-          前言  1. @plt是什么意思 ?  回答1 回答2   2. 为什么调用的函数开头会 sub %rsp? 分配栈帧  运行时栈帧结构   3. sar %eax 少一个参数? 默认移位1,等价于 sar $1,%eax  4. %fs:0x28 是什么意思,是做什么的? 虽然与本题关系不大,但是是一个非常好的问题,也是很深入的问题. 用途是确保 0x18(%rsp) 的数值在函数前后没有发生
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-11-04 01:23" pubdate>
-              2022-11-04
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/CSAPP/">CSAPP</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
         <a href="/2022/10/24/CSAPP/02-BombLab/" target="_self">
           02-BombLab
         </a>
@@ -311,7 +311,7 @@
       <p class="index-excerpt">
         <a href="/2022/10/24/CSAPP/02-BombLab/" target="_self">
           
-          《深入理解计算机系统》Bomb Lab实验解析 CS:APP - Bomb Lab   基本知识  x86-64架构调用函数时参数传递使用的寄存器和栈地址    %rdi %rsi %rdx %rcx %r8 %r9 (%rsp) (%rsp+8) (%rsp+…)     return -&gt; %rax  x86-64寄存器   操作数指示符   常用汇编  mov S,D : 把S的值传
+          《深入理解计算机系统》Bomb Lab实验解析 CS:APP - Bomb Lab               如果在gdb调试的出现Permission deny的问题可以调整bomb的权限chmod 777 bomb             基本知识 Bomb lab 主要考察对应汇编代码的阅读和理解能力,以及使用gdb调试工具  x86-64架构调用函数时参数传递使用的寄存器和栈地址
         </a>
       </p>
 
