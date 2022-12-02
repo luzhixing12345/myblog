@@ -183,6 +183,166 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2022/05/26/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday6/" target="_self">
+          自制操作系统day6-分割编译与中断处理
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/05/26/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday6/" target="_self">
+          
+          day6 分割编译与中断处理 首先把一个.c文件拆开,按功能分为几个文件,把定义放在头文件引用.  按道理说应该是每一个.c对应一个.h,可能是为了方便吧  GDTR是一个特殊的48位寄存器,给他赋值的时候唯一的方法就是指定一个内存地址,从指定的地址读取6个字节,使用的汇编指令时LGDT struct SEGMENT_DESCRIPTOR &amp;#123; 	short limit_low, bas
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-05-26 16:17" pubdate>
+              2022-05-26
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/OS/">OS</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/05/26/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday5/" target="_self">
+          自制操作系统day5-结构体/文字显示与GDT/IDT初始化
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/05/26/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday5/" target="_self">
+          
+          day5 结构体&#x2F;文字显示与GDT&#x2F;IDT初始化 到现在看到这个结构体就能明白作者当初的用意了 struct BOOTINFO &amp;#123; 	char cyls, leds, vmode, reserve; 	short scrnx, scrny; 	char *vram; &amp;#125;; 与asmhead.nas中的 CYLS        EQU     0x0ff0 LEDS
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-05-26 01:54" pubdate>
+              2022-05-26
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/OS/">OS</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/05/26/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday4/" target="_self">
+          自制操作系统day4-C语言与画面显示
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/05/26/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday4/" target="_self">
+          
+          day4 C语言与画面显示 _write_mem8:    ; void write_mem8(int addr, int data)         MOV     ECX,[ESP+4]     ; [ESP+4] &#x3D; addr         MOV     AL,[ESP+8]      ; [ESP+8] &#x3D; data         MOV     [ECX],AL
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-05-26 00:29" pubdate>
+              2022-05-26
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/OS/">OS</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/05/24/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday3/" target="_self">
+          自制操作系统day3-进入32位模式并导入C语言
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/05/24/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday3/" target="_self">
+          
+          day3 自制操作系统day3-进入32位模式并导入C语言  start 这里遇到一个很难过的事情,如果我们向往常一样使用nask + qemu,会发现显示load error 正常来说看这个汇编代码JC应该是不执行,所以进入fin进入循环等待CPU启动,只使用nask直接生成img文件没有磁盘映像这个过程所以说出现问题,JC会直接跳转,显示load error  所以需要一个磁盘映像加入,da
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-05-24 21:55" pubdate>
+              2022-05-24
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/OS/">OS</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2022/05/19/GAN/GAN%E7%BD%91%E7%BB%9C%E8%AF%A6%E8%A7%A3(%E5%9B%9B)/" target="_self">
           GAN网络详解(四) - 使用WGAN生成动漫头像
         </a>
@@ -410,166 +570,6 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/OS/">OS</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/05/13/python/%E4%BC%98%E9%9B%85%E7%9A%84%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95-logging/" target="_self">
-          优雅的日志记录-logging
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/05/13/python/%E4%BC%98%E9%9B%85%E7%9A%84%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95-logging/" target="_self">
-          
-          前言 最近在写代码的过程中遇到了一些问题,如果我想输出一些信息,如果使用print函数的话,由于深度学习项目时间较长,我会将它提交到超算进行计算,但是它并不会实时输出,我必须要等到运行结束才能看到结果,如果一点有任何异常报错退出,那么我也看不到所有的print信息. 况且使用print是一种比较简单的输出格式,输出到控制台的话无法记录下来,如果使用txt单独保存信息似乎过于原始,我希望选择一种更
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-05-13 15:11" pubdate>
-              2022-05-13
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/python/">python</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/05/12/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday0/" target="_self">
-          自制操作系统day0-前言
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/05/12/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday0/" target="_self">
-          
-          day0 买书,准备动手,准备动手 - 2022&#x2F;5&#x2F;12 虽然对于计算机专业的学生来说0就是第一天,但是我还是给一天缓冲时间吧. 明天正式开始做! 买书,搜索了下有好多推荐的大学课程,也有好多前辈已经做过的东西,还是很厉害的~,希望可以顺利完成任务吧. 最后还是决定买了这本经典的 “30天自制操作系统”   导出光盘文件 光盘文件下载  一些写在最前面的话 这个系列应该会更新32次,day0做
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-05-12 15:24" pubdate>
-              2022-05-12
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/OS/">OS</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/05/12/GAN/GAN%E7%BD%91%E7%BB%9C%E8%AF%A6%E8%A7%A3(%E4%B8%80)/" target="_self">
-          GAN网络详解(一) - 基本原理及数学推导
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/05/12/GAN/GAN%E7%BD%91%E7%BB%9C%E8%AF%A6%E8%A7%A3(%E4%B8%80)/" target="_self">
-          
-          生成对抗网络(GAN)的出现可以说在深度学习领域具有划时代的意义,如今GAN也被广泛应用于各种机器学习的场景之中.GAN系列也是我个人学习过程的收获和心得,分享出来希望可以学习进步,欢迎批评指正 本系列预计使用四个部分分别介绍:  GAN的基本原理及数学推导 GAN的不足之处 WGAN-CP,以及后续的改进版本WGAN-GP 一个我的Github项目,使用WGAN-GP生成动漫头像    GAN的
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-05-12 00:00" pubdate>
-              2022-05-12
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/GAN/">GAN</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/05/10/pytorch/pytorch%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80/" target="_self">
-          pytorch预训练模型下载地址
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/05/10/pytorch/pytorch%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80/" target="_self">
-          
-          转载pytorch预训练模型的下载地址以及解决下载速度慢的方法侵删            # Resnet:  model_urls &#x3D; &amp;#123;     &amp;#x27;resnet18&amp;#x27;: &amp;#x27;https:&#x2F;&#x2F;download.pytorch.org&#x2F;models&#x2F;resnet18-5c106cde.pth&amp;#x27;,     &amp;#x27;resn
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-05-10 02:30" pubdate>
-              2022-05-10
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/pytorch/">pytorch</a>
             
           </div>
         

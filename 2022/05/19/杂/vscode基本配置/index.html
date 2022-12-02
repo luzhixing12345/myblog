@@ -24,7 +24,7 @@
 <meta property="og:description" content="添加snipplet 在settings.json中添加如下设置启用markdown的snippets &quot;[markdown]&quot;: &amp;#123;    &quot;editor.formatOnSave&quot;: true,    &quot;editor.renderWhitespace&quot;: &quot;all&quot;,    &quot;editor.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-18T19:14:31.000Z">
-<meta property="article:modified_time" content="2022-05-18T19:17:43.629Z">
+<meta property="article:modified_time" content="2022-11-17T17:24:21.363Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="杂">
 <meta name="twitter:card" content="summary_large_image">
@@ -187,7 +187,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.7k 字
+      2.1k 字
     </span>
   
 
@@ -196,7 +196,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      15 分钟
+      18 分钟
     </span>
   
 
@@ -237,7 +237,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：6 个月前
+                  本文最后更新于：15 天前
                 
               </p>
             
@@ -258,11 +258,6 @@
  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span></code></pre></div>
 <p>我的基本markdown快捷键配置</p>
 <div class="code-wrapper"><pre><code class="hljs json">  <span class="hljs-punctuation">&#123;</span>
-<span class="hljs-comment">// Place your snippets for markdown here. Each snippet is defined under a snippet name and has a prefix, body and </span>
-<span class="hljs-comment">// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:</span>
-<span class="hljs-comment">// $1, $2 for tab stops, $0 for the final cursor position, and $&#123;1:label&#125;, $&#123;2:another&#125; for placeholders. Placeholders with the </span>
-<span class="hljs-comment">// same ids are connected.</span>
-<span class="hljs-comment">// Example:</span>
 <span class="hljs-attr">&quot;create table&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span>
 	<span class="hljs-attr">&quot;prefix&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;table&quot;</span><span class="hljs-punctuation">,</span>
 	<span class="hljs-attr">&quot;body&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
@@ -306,6 +301,34 @@
 	<span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">&#125;</span>
   <span class="hljs-punctuation">&#125;</span></code></pre></div>
+</li>
+<li>
+<p>安装clangd</p>
+<p>vscode扩展,搜索clangd,安装.</p>
+<p>右下角弹出提示下载clangd,点击确定即可</p>
+<p>官网的地址在 <a target="_blank" rel="noopener" href="https://clangd.llvm.org/">https://clangd.llvm.org/</a>, 如果没有代理可以根据系统参考<a target="_blank" rel="noopener" href="https://clangd.llvm.org/installation">文档</a>下载release</p>
+<p>如果文件中使用了部分头文件,添加方法为: 新建<code>.vscode/settings.json</code></p>
+<p>其中 <code>-I</code> + 头文件目录即可, 编译的参数可以在这里指定. 如果gcc版本低可以使用指定使用clang编译器</p>
+<blockquote>
+<p>如果不需要c++17标准不需要加入<code>-std=c++17</code></p>
+</blockquote>
+<div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span>
+    <span class="hljs-attr">&quot;clangd.fallbackFlags&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-string">&quot;-I/root/X86&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-string">&quot;-std=c++17&quot;</span>
+    <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;clangd.arguments&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-string">&quot;--query-driver=/usr/bin/clang++&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">// 使用clang编译</span>
+        <span class="hljs-string">&quot;--background-index&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">// 在后台自动分析文件（基于complie_commands)</span>
+        <span class="hljs-string">&quot;-j=12&quot;</span><span class="hljs-punctuation">,</span>  <span class="hljs-comment">// 同时开启的任务数量</span>
+        <span class="hljs-string">&quot;--clang-tidy&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">// clang-tidy功能</span>
+        <span class="hljs-string">&quot;--clang-tidy-checks=performance-*,bugprone-*&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-string">&quot;--all-scopes-completion&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">// 全局补全（会自动补充头文件）</span>
+        <span class="hljs-string">&quot;--completion-style=detailed&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">// 更详细的补全内容</span>
+        <span class="hljs-string">&quot;--header-insertion=iwyu&quot;</span> <span class="hljs-comment">// 补充头文件的形式</span>
+    <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">&#125;</span></code></pre></div>
+<p>重启即可</p>
 </li>
 </ol>
 
