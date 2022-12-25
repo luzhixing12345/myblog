@@ -16,17 +16,15 @@
   <meta name="author" content="luzhixing12345">
   <meta name="keywords" content="">
   
-    <meta name="description" content="RDMA简介 参考 https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;55142557  DMA和RDMA概念 DMA(直接内存访问)是一种能力，允许在计算机主板上的设备直接把数据发送到内存中去，数据搬运不需要CPU的参与 传统内存访问需要通过CPU进行数据copy来移动数据，通过CPU将内存中的Buffer1移动到Buffer2中。DMA模式：可以同DMA Engine之间通过硬件将数">
+    <meta name="description" content="RDMA简介  参考 https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;55142557 参考 https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1Aq4y1C7Fh   DMA和RDMA概念 DMA(直接内存访问)是一种能力，允许在计算机主板上的设备直接把数据发送到内存中去，数据搬运不需要CPU的参与 传统内存访问需要通过CPU进行数据copy来移动数据，通过CPU将内">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RDMA简介">
 <meta property="og:url" content="https://luzhixing12345.github.io/2022/12/02/HPC/RDMA%E7%AE%80%E4%BB%8B/index.html">
 <meta property="og:site_name" content="kamilu的博客">
-<meta property="og:description" content="RDMA简介 参考 https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;55142557  DMA和RDMA概念 DMA(直接内存访问)是一种能力，允许在计算机主板上的设备直接把数据发送到内存中去，数据搬运不需要CPU的参与 传统内存访问需要通过CPU进行数据copy来移动数据，通过CPU将内存中的Buffer1移动到Buffer2中。DMA模式：可以同DMA Engine之间通过硬件将数">
+<meta property="og:description" content="RDMA简介  参考 https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;55142557 参考 https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1Aq4y1C7Fh   DMA和RDMA概念 DMA(直接内存访问)是一种能力，允许在计算机主板上的设备直接把数据发送到内存中去，数据搬运不需要CPU的参与 传统内存访问需要通过CPU进行数据copy来移动数据，通过CPU将内">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221202163405.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221202173152.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221202173243.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221202173358.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221202185305.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221202190643.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221202190709.png">
@@ -37,8 +35,13 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221202192541.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221202192632.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221202193241.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/1213.gif">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/4123.gif">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221204105418.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221204105822.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221204110450.png">
 <meta property="article:published_time" content="2022-12-02T08:30:57.000Z">
-<meta property="article:modified_time" content="2022-12-02T11:37:22.577Z">
+<meta property="article:modified_time" content="2022-12-09T10:20:22.620Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="HPC">
 <meta name="twitter:card" content="summary_large_image">
@@ -202,7 +205,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.1k 字
+      3k 字
     </span>
   
 
@@ -211,7 +214,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      18 分钟
+      25 分钟
     </span>
   
 
@@ -252,13 +255,16 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：几秒前
+                  本文最后更新于：16 天前
                 
               </p>
             
             <div class="markdown-body">
               <h1 id="rdma简介"><a class="markdownIt-Anchor" href="#rdma简介"></a> RDMA简介</h1>
+<blockquote>
 <p>参考 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/55142557">https://zhuanlan.zhihu.com/p/55142557</a></p>
+<p>参考 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Aq4y1C7Fh">https://www.bilibili.com/video/BV1Aq4y1C7Fh</a></p>
+</blockquote>
 <h2 id="dma和rdma概念"><a class="markdownIt-Anchor" href="#dma和rdma概念"></a> DMA和RDMA概念</h2>
 <p>DMA(直接内存访问)是一种能力，允许在计算机主板上的设备直接把数据发送到内存中去，数据搬运不需要CPU的参与</p>
 <p>传统内存访问需要通过CPU进行数据copy来移动数据，通过CPU将内存中的Buffer1移动到Buffer2中。DMA模式：可以同DMA Engine之间通过硬件将数据从Buffer1移动到Buffer2,而不需要操作系统CPU的参与，大大降低了CPU Copy的开销</p>
@@ -266,9 +272,8 @@
 <h2 id="rmda"><a class="markdownIt-Anchor" href="#rmda"></a> RMDA</h2>
 <p>RDMA是一种概念，在两个或者多个计算机进行通讯的时候使用DMA， 从一个主机的内存直接访问另一个主机的内存</p>
 <p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20221202173152.png" srcset="/img/loading.gif" lazyload alt="20221202173152" /></p>
-<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20221202173243.png" srcset="/img/loading.gif" lazyload alt="20221202173243" /></p>
-<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20221202173358.png" srcset="/img/loading.gif" lazyload alt="20221202173358" /></p>
 <p>数据发生多次拷贝,中间的处理过程都需要CPU参与,如果不绕过操作系统内核对于CPU来说就是持续的开销</p>
+<p>RDMA是一种host-offload, host-bypass技术，允许应用程序(包括存储)在它们的内存空间之间直接做数据传输。具有RDMA引擎的以太网卡(RNIC)–而不是host–负责管理源和目标之间的可靠连接。使用RNIC的应用程序之间使用专注的QP和CQ进行通讯</p>
 <p>RDMA 直接绕过内核,让数据在应用层传递到网络接口.可以将数据从应用层直接</p>
 <p>INFINIBAND TRADE ASSOCIATION (IBTA) 制定IB标准, openfabrics 开发IB 软件</p>
 <p>硬件和软件配合为应用提供加速服务</p>
@@ -292,7 +297,7 @@
 <p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20221202191151.png" srcset="/img/loading.gif" lazyload alt="20221202191151" /></p>
 <p>如果一个应用想要从另外一个节点的伙伴应用获取数据,IB可以通过HCA管理QP在两个节点之间建立虚拟通道,可以使发起应用的数据获取到想要得到的数据,否则就需要调用OS的传输协议栈,经过多次的传输拷贝才能从网络发送过来,infiniband提供了更好的传输服务</p>
 <p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20221202191207.png" srcset="/img/loading.gif" lazyload alt="20221202191207" /></p>
-<p>传输层需要提供的一个服务是把一段发送的message进行切分,假如发送2G的数据,传输层会由HCA将数据切分成package(mtu 4k),发送到对面再由对面的HCA组装package成message写入到应用中去,整个的过程都是由网卡来卸载的,不需要CPU去做消息切分,发送,整合,复制</p>
+<p>传输层需要提供的一个服务是把一段发送的message进行切分,假如发送2G的数据,传输层会由HCA将数据切分成package(mtu 最大传输单元 4k),发送到对面再由对面的HCA组装package成message写入到应用中去,整个的过程都是由网卡来卸载的,不需要CPU去做消息切分,发送,整合,复制</p>
 <p>QP(queue pair)可以建立不同模式的队列对,面向连接的,不面向连接的</p>
 <p>面向连接指的是一个QP会和另外一个节点的QP组成关联,读写是一对一的</p>
 <p>datagram不面向连接都需要指定具体是发送给哪一个QP,建立一对多</p>
@@ -313,8 +318,31 @@
 <p>数据 -&gt; host memory -&gt; host to device copy</p>
 <p>将数据写到GPU memory,host memory 得到写入完成的通知即可,全部完成启动下一阶段的并行计算</p>
 <p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20221202193241.png" srcset="/img/loading.gif" lazyload alt="20221202193241" /></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/1213.gif" srcset="/img/loading.gif" lazyload alt="1213" /></th>
+<th style="text-align:center"><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/4123.gif" srcset="/img/loading.gif" lazyload alt="4123" /></th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
 <h2 id="mpi"><a class="markdownIt-Anchor" href="#mpi"></a> MPI</h2>
-<p>数据发送给伙伴节点进行计算</p>
+<blockquote>
+<p>MPI是高性能计算常用的实现方式，它的全名叫做 Message Passing Interface</p>
+</blockquote>
+<p>在MPI超级计算中,所有的MPI进程齐头并进的做计算,它计算出来的数据需要发送给伙伴节点,去支持伙伴节点的计算</p>
+<p>以及当它自己计算到某些节点的时候,也要得到伙伴节点的数据才可以进行下一步的计算,这种时候就需要MPI运行时提供 tag matching 的服务</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20221204105418.png" srcset="/img/loading.gif" lazyload alt="20221204105418" /></p>
+<p>这种服务需要分两块buffer管理</p>
+<p>软件上需要实现,如果我已经在请求接收远端的某些buffer,那么我需要注册一个tag,如果还没有算到并且数据已经到了那么就临时的放在一个buffer中.目前这种匹配机制可以完全由infinband网卡进行卸载</p>
+<p>也就是说网卡接收到一个数据之后,他回去检查该数据是否存在匹配的receive,如果存在则网卡直接将数据送给应用.反之,如果没有发现对应的tag,他会直接放到软件的buffer中去</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20221204105822.png" srcset="/img/loading.gif" lazyload alt="20221204105822" /></p>
+<p>另外一种高级的卸载是,如果我的伙伴通知数据已经计算完毕并且提供了发送了 Rendezvous 的消息头, 则网卡在接收到该信息之后会根据该消息头直接去远端的伙伴节点读取数据并写入指定应用中,以上过程都不需要CPU参与</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20221204110450.png" srcset="/img/loading.gif" lazyload alt="20221204110450" /></p>
+<p>例如在 OpenMPI 通信库中,在infiniband的网络之上调用 OpenUCX 进行点对点的RDMA传输,这种传输可以再去控制可靠的,不可靠的,面向连接的,不面向连接,都可以通过不同的UCX配置</p>
+<p>tag matching ,GPU RDMA都可以在UCX中配置</p>
+<p>在UCX之上有OpenMPI,由OpenMPI去构建点对点的 PML (p2p messageing layer), 再去支持上层的MPI,API</p>
 
             </div>
             <hr>
@@ -341,6 +369,12 @@
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2022/12/04/HPC/infiniband/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">infiniband</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

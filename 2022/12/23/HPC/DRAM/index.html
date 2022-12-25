@@ -1,0 +1,597 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://raw.githubusercontent.com/learner-lu/picbed/master/logo.png">
+  <link rel="icon" href="https://raw.githubusercontent.com/learner-lu/picbed/master/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#4a00e0">
+  <meta name="author" content="luzhixing12345">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="文章开始之前先推荐一个B站的3D科普视频【计算机是如何工作的？探索主内存，以DDR5为例】 https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1vP411c7pt&#x2F;?share_source&#x3D;copy_web&amp;vd_source&#x3D;33e283fd587efff3f4345e881f063588  随机访问存储器 随机访问存储器(Random Access Memory, R">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DRAM">
+<meta property="og:url" content="https://luzhixing12345.github.io/2022/12/23/HPC/DRAM/index.html">
+<meta property="og:site_name" content="kamilu的博客">
+<meta property="og:description" content="文章开始之前先推荐一个B站的3D科普视频【计算机是如何工作的？探索主内存，以DDR5为例】 https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1vP411c7pt&#x2F;?share_source&#x3D;copy_web&amp;vd_source&#x3D;33e283fd587efff3f4345e881f063588  随机访问存储器 随机访问存储器(Random Access Memory, R">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221223205730.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221223210953.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221223212747.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221223214442.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221223215211.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221224205731.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221224205751.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221224210004.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221224210045.png">
+<meta property="article:published_time" content="2022-12-23T12:48:28.000Z">
+<meta property="article:modified_time" content="2022-12-24T13:00:48.160Z">
+<meta property="article:author" content="luzhixing12345">
+<meta property="article:tag" content="HPC">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221223205730.png">
+  
+  
+  <title>DRAM - kamilu的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"luzhixing12345.github.io","root":"/","version":"1.8.14","typing":{"enable":false,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"fEy8W8VvIoc26nT53dV2157j-gzGzoHsz","app_key":"s9HXuqmvBWrOaAiLA07Jg59A","server_url":"https://fey8w8vv.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Kamilu-blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://raw.githubusercontent.com/learner-lu/picbed/master/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="DRAM">
+              
+                DRAM
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-12-23 20:48" pubdate>
+        2022年12月23日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      34 分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">DRAM</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：21 小时前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>文章开始之前先推荐一个B站的3D科普视频【计算机是如何工作的？探索主内存，以DDR5为例】 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1vP411c7pt/?share_source=copy_web&amp;vd_source=33e283fd587efff3f4345e881f063588">https://www.bilibili.com/video/BV1vP411c7pt/?share_source=copy_web&amp;vd_source=33e283fd587efff3f4345e881f063588</a></p>
+<h2 id="随机访问存储器"><a class="markdownIt-Anchor" href="#随机访问存储器"></a> 随机访问存储器</h2>
+<p>随机访问存储器(Random Access Memory, RAM)分为两类,静态和动态的.静态RAM(SRAM)比动态RAM(DRAM)更快,也贵得多.SRAM用来作为高速缓冲存储器,既可以在CPU芯片上,也可以在片外.DRAM用来作为贮存一级图形系统的帧缓冲区.</p>
+<h3 id="静态ram"><a class="markdownIt-Anchor" href="#静态ram"></a> 静态RAM</h3>
+<p>SRAM将每个为存储在一个双稳态的存储器单元,每一个单元使用一个六晶体管电路来实现的,这个电路有这样一个属性,它可以无限期的保持在两个不同的电压配置或者状态之一.其他任何状态都是不稳定的.</p>
+<p>从不稳定的状态开始,电路会迅速的转移到两个稳定的状态中的一个.</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20221223205730.png" srcset="/img/loading.gif" lazyload alt="20221223205730" /></p>
+<p>由于SRAM存储器单元的双稳态特性,只要有电就会保持它的值,即使有干扰来扰乱电压,当干扰消除时电路就会恢复到稳定的值.</p>
+<h3 id="动态ram"><a class="markdownIt-Anchor" href="#动态ram"></a> 动态RAM</h3>
+<p>DRAM将每个为存储为一个对电容的充电,这个电容非常小,通常只有大约30x10^-15F. DRAM存储器可以制造的非常密集,每个电源有一个电容和一个访问晶体管组成,但是与SRAM不同,DRAM存储器单元对干扰非常敏感,当电容的的电压被扰乱之后,它基本就永远不会恢复了.暴露在光线下会导致电容电压的改变.</p>
+<blockquote>
+<p>实际上数码照相机和摄影机中的传感器本质就是DRAM单元的阵列</p>
+</blockquote>
+<p>很多原因会导致漏电,值得DRAM单元在10-100毫秒时间内失去电荷,幸运的是计算机运行的时钟周期都是纳秒来衡量的.所以相对而言这个保持时间是比较长的,内存系统必须周期性的通过读出,然后重写来刷新内存的每一位.有些系统也是用纠错码,其中计算机的字会被多编码几个位.这样电路可以发现并且纠正一个字中任何单个的错误位.</p>
+<p>下图总结了SRAM和DRAM存储器的特性,只要有点,SRAM就会保持不变,与DRAM不同SRAM不需要刷新.SRAM的存取更快,对光电噪声干扰不敏感.带解释SRAM单元比DRAM单元使用更多的晶体管,因为密集度低,更贵,功耗更大</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20221223210953.png" srcset="/img/loading.gif" lazyload alt="20221223210953" /></p>
+<h2 id="传统dram"><a class="markdownIt-Anchor" href="#传统dram"></a> 传统DRAM</h2>
+<p>DRAM芯片中的单元被分为d个超单元(supercell),每一个超单元都有w个DRAM单元组成,一个d x w 的DRAM总共存储了dw位信息,超单元被组织成一个r行c列的长方形阵列,之类的rc=d</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20221223212747.png" srcset="/img/loading.gif" lazyload alt="20221223212747" /></p>
+<p>上图是一个16x8的DRAM芯片的组织,一共有d=16个超单元,每一个超单元有w=8位</p>
+<p>被组织成r=4,c=4的格式. 图中给出了两组引脚,8个data引脚,可以传送一个字节到芯片或者从芯片传出一个字节. 以及两个addr引脚,他们携带两位的行列超单元地址,可以找到相应的超单元</p>
+<div class="note note-info">
+            <p>存储领域从来没有为DRAM的阵列元素确定一个标准的名字,计算机架构师倾向于称之为单元.使这个术语具有DRAM存储单元之意.单路设计师倾向于称之为字,使之具有主存一个字之意.这里使用 <strong>超单元</strong> 为了避免歧义</p>
+          </div>
+<p>每个DRAM芯片被连接到一个称为内存控制器的电路,这个电路可以依次传送w位到每个DRAM芯片,或者依次从每个DRAM芯片传出w位.为了读出超单元(i,j)的内容,内存控制器将行地址i发送到DRAM,然后是列地址j. DRAM把超单元(i,j)的内容发挥控制器作为响应.</p>
+<blockquote>
+<p>行地址i称为RAS(Row Access Strobe,行访问选通脉冲)请求.</p>
+<p>列地址j称为CAS(Column Access Strobe,列访问选通脉冲)请求.</p>
+<p>注意RAS和CAS请求共享相同的DRAM地址引脚</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20221223214442.png" srcset="/img/loading.gif" lazyload alt="20221223214442" /></p>
+<p>例如,要从上图中的16x8的DRAM中读出超单元(2,1),内存控制器发送行地址2,DRAM的响应是将行2的 <strong>整个内容</strong> 都复制到一个内部行缓冲区,接下来内存控制器发送列地址1,DRAM的响应是从行缓冲区复制出超单元(2,1)中的8位,并把它们发送到内存控制器中</p>
+<div class="note note-info">
+            <p>电路设计设将DRAM组织成二维阵列而不是线性数组的一个原因是降低芯片上的地址引脚数量</p><p>例如128位DRAM被组织成一个16个超单元的线性数组,地址为0-15,那么芯片会需要四个地址引脚而不是两个,二维阵列组织的确定是必须分成两步发送地址,这增加了访问时间</p>
+          </div>
+<h2 id="内存模块"><a class="markdownIt-Anchor" href="#内存模块"></a> 内存模块</h2>
+<p>DRAM芯片封装在内存模块,它插到主板的扩展槽上</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20221223215211.png" srcset="/img/loading.gif" lazyload alt="20221223215211" /></p>
+<p>上图展示了一个内存模块的基本思想,示例模块用了8个8MX9的DRAM芯片,总共存储64MB. 这8个芯片编号分别为0-7,每一个超单元存储主存的一个字节,而用相应的超单元地址为(i,j)的8个超单元来表示主存中的地址A处的64位字. <strong>注意这里的64位字是通过8个DRAM芯片分别存储8个8位字来实现的</strong></p>
+<p>要去除内存地址A处的一个字,内存控制器将A转换成一个超单元地址(i,j), 并将它发送到内存模块,燃火内存模块再将i,j广播到每个DRAM,每个DRAM输出他的(i,j)超单元的8位内容,模块中的电路收集这些输出并把它们合并成一个64字,再返回给内存控制器.</p>
+<h2 id="增强的dram"><a class="markdownIt-Anchor" href="#增强的dram"></a> 增强的DRAM</h2>
+<p>有许多种DRAM存储器,而生产厂商为了跟上迅速增长的处理器速度,市场上就会定期推出新的种类.每种都是基于传统DRAM单元进行一些优化,提高访问基本DRAM单元的速度</p>
+<ul>
+<li>
+<p>快页模式DRAM(Fast Page Mode DRAM, FPM DRAM)</p>
+<p>传统DRAM将超单元的一行复制到它的内部行缓冲区,使用一个然后丢弃剩余的</p>
+<p>FPM DRAM允许对同一行连续的访问,可以直接从行缓冲中的得到服务.例如要从一个传统DRAM的行i连续读取四个超单元,内存控制器必须发送四个RAS/CAS请求,即使行地址i在每个情况都是一样的.</p>
+<p>而要从一个FPM DRAM的同一行中读取超单元,内从控制器发送第一个RAS/CAS请求,后面跟三个CAS请求,出事的RAS/CAS请求将行i复制到行缓冲区,并返回CAS那个超单元,后面的三个超单元可以直接在行缓冲区中获得,因此返回的更快</p>
+</li>
+<li>
+<p>扩展数据输出DRAM(Extended Data Out DRAM, EDO DRAM)</p>
+<p>FPM DRAM的一个增强的形式,它允许各个CAS信号在时间上靠的更近一些</p>
+</li>
+<li>
+<p>同步DRAM (Synchronous DRAM, SDRAM)</p>
+<p>在与内存控制器通信时使用的一组显式控制信号来说,传统DRAM FPM和EDO DRAM都是异步的.</p>
+<p>SDRAM用与驱动内存控制器相同的外部时钟信号的上升沿来代替许多这样的控制信号</p>
+</li>
+<li>
+<p>双倍数据速率同步DRAM(Double Data-Rate Synchronouse DRAM, DDR SDRAM)</p>
+<p>DDR SDRAM是对于SDRAM的一种增强,使用两个时钟沿作为控制信号使得DRAM的速度翻倍</p>
+<p>不同类型的DDR SDRAM是用预取缓冲区的大小来划分的, DDR2 3 4 5</p>
+</li>
+<li>
+<p>视频RAM(Video RAM, VRAM)</p>
+<p>它用在图形系统的帧缓冲区中,VRAM的思想和FPM DRAM类似,两个主要区别是</p>
+<ul>
+<li>VRAM的输出是通过依次对内部缓冲区的整个内容进行移位得到的</li>
+<li>VRAM允许对内存并行的读写,因此系统可以在新值写入的同时用帧缓冲区中的相似刷新屏幕(读)</li>
+</ul>
+</li>
+</ul>
+<h2 id="访问主存"><a class="markdownIt-Anchor" href="#访问主存"></a> 访问主存</h2>
+<p>数据流通过称为总线的共享电子电路在处理器和DRAM主存之间传送.每次CPU和主存之间的数据传送都是通过一系列步骤完成的,这些步骤称为总线事务.</p>
+<ul>
+<li>读事务:从主存传送数据到CPU</li>
+<li>写事务:从CPU传送数据到主存</li>
+</ul>
+<p>总线是一组并行的导线,<strong>可以携带地址,数据和控制信号</strong>,取决于总线的设计,<strong>数据和地址信号可以共享同一组导线,也可以使用不同的</strong>.**同时两个以上的设备也能共享同一总线.**控制线携带的信号会同步事务,并标示出当前正在被执行的事务的类型.例如当前关注的这个事务是到主存的么?还是到诸如磁盘控制器这样的其他IO设备的.是读还是写,总线上的信息是地址还是数据项</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20221224205731.png" srcset="/img/loading.gif" lazyload alt="20221224205731" /></p>
+<p>上图展示了一个示例计算机系统的配置,主要部件是CPU芯片,被称为IO桥接器的芯片组(包括内存控制器),以及组成主存的DRAM内存模块.这些部件由一对总线连接起来,其中一条总线是系统总线,他连接CPU和IO桥接器. 另一条总线是内存总线,他链接IO桥接器和主存,IO桥接器将系统总线和电子信号翻译成内存总线和电子信号.</p>
+<p>IO桥也将系统总线和内存总线连接到IO总线,像磁盘和图形卡这样的IO设备共享IO总线</p>
+<div class="note note-info">
+            <p>总线设计是计算机系统一个复杂而且变化迅速的方面,不同的厂商提出了不同的总线体系结构作为产片差异化的一种方法.</p><p>例如Intel系统使用北桥和南桥的芯片组分别将CPU连接到内存和IO设备</p><p>关于主板的南桥芯片推荐一个B站科普视频:【硬件科普】电脑主板右下角的散热片下面究竟隐藏着什么？详解主板南桥芯片组的功能和作用】 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1cJ411K7HW/?share_source=copy_web&amp;vd_source=33e283fd587efff3f4345e881f063588">https://www.bilibili.com/video/BV1cJ411K7HW/?share_source=copy_web&amp;vd_source=33e283fd587efff3f4345e881f063588</a></p><p>这些不同的总线体系结构的细节超出了存储器结构层次的返回,我们将使用上图中的高级总线体系结构作为一个运行示例贯穿时钟,这是一个简单但是有用的抽象,使得我们可以很具体,并且可以掌握主要思想而不必与任何私有设计的细节绑得太紧</p>
+          </div>
+<p>考虑当CPU执行如下一个加载操作时会发生什么?</p>
+<p>movq A, %rax</p>
+<p>这里地址A的内容被加载到寄存器%rax中</p>
+<p>CPU芯片上称为总线接口的电路在总线发起读事务.读事务由三个步骤组成</p>
+<ul>
+<li>
+<p>首先CPU将地址A放到系统总线上,IO桥将信号传递到内存总线</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20221224205751.png" srcset="/img/loading.gif" lazyload alt="20221224205751" /></p>
+</li>
+<li>
+<p>接下来主存感知到内存总线上的地址信号,内存总线读地址,从DRAM取出数据字,并将数据写到内存总线,IO桥将内存总线信号翻译成系统总线信号,然后然后沿着系统总线传递</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20221224210004.png" srcset="/img/loading.gif" lazyload alt="20221224210004" /></p>
+</li>
+<li>
+<p>最后CPU感知到系统总线上的数据,从总线上读数据,并将数据复制到寄存器%rax</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20221224210045.png" srcset="/img/loading.gif" lazyload alt="20221224210045" /></p>
+</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/HPC/">HPC</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/12/24/HPC/NVM/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">NVM</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/12/22/CSAPP/09-shellLab/">
+                        <span class="hidden-mobile">09-shellLab</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"fEy8W8VvIoc26nT53dV2157j-gzGzoHsz","appKey":"s9HXuqmvBWrOaAiLA07Jg59A","path":"window.location.pathname","placeholder":"欢迎讨论,留下163邮箱我才能看到回复哦~","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
