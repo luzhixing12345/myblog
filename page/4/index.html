@@ -183,46 +183,6 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/07/11/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday13/" target="_self">
-          自制操作系统day13-定时器(2)
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/07/11/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday13/" target="_self">
-          
-          定时器(2) 开始是一些结构化的调整和测试速度,我也就没测懒 然后是对缓冲区的调整FIFO32,将所有外部IO的输入和输出全部整合到一个缓冲区的队列中 这一部分我重点说明一下线性表和哨兵,这里的处理思路很好  线性表的处理 由于中断处理中不应该耗时过长,而作者提及的这两处都涉及到了内存单元的读写,这显然是不希望看到的   那么如何避免这种内存单元的移动呢? 新加了一个指针next struct
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-07-11 22:41" pubdate>
-              2022-07-11
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/OS/">OS</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
         <a href="/2022/07/11/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday12/" target="_self">
           自制操作系统day12-定时器(1)
         </a>
@@ -570,6 +530,46 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/06/13/pytorch/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2-2/" target="_self">
+          深度学习模型部署(2)-服务器与本地
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/06/13/pytorch/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2-2/" target="_self">
+          
+          既然是深度学习,那想必Python是主力开发语言了,这里我们暂时不考虑性能啊,响应啊,多线程高并发那么多,我们也不用什么java&#x2F;c++写一个后台服务器,我们的任务就只是单纯的部署到服务器上,能用就行啊.  毕竟我都用python了,还要啥性能呢,对吧  那么,我们接下来就来使用以下python的一个库: flask  flask入门 我们先来构建一个网页,和专业的的Web,Nodejs功能相似,
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-06-13 19:50" pubdate>
+              2022-06-13
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/pytorch/">pytorch</a>
             
           </div>
         
