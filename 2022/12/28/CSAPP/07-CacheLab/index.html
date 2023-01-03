@@ -1,0 +1,722 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://raw.githubusercontent.com/learner-lu/picbed/master/logo.png">
+  <link rel="icon" href="https://raw.githubusercontent.com/learner-lu/picbed/master/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#4a00e0">
+  <meta name="author" content="luzhixing12345">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;142942823 https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;79058089 https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;387662272  前言 本次实验是针对第六章Cache的内容,涉及到对于缓存替换策略的理解和具体代码的编写. 本次实验分为两个部分,Part A是编写一个缓存模拟器,Part B是优化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="07-CacheLab">
+<meta property="og:url" content="https://luzhixing12345.github.io/2022/12/28/CSAPP/07-CacheLab/index.html">
+<meta property="og:site_name" content="kamilu的博客">
+<meta property="og:description" content="https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;142942823 https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;79058089 https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;387662272  前言 本次实验是针对第六章Cache的内容,涉及到对于缓存替换策略的理解和具体代码的编写. 本次实验分为两个部分,Part A是编写一个缓存模拟器,Part B是优化">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221230111233.png">
+<meta property="article:published_time" content="2022-12-28T10:54:10.000Z">
+<meta property="article:modified_time" content="2022-12-30T03:12:36.754Z">
+<meta property="article:author" content="luzhixing12345">
+<meta property="article:tag" content="CSAPP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221230111233.png">
+  
+  
+  <title>07-CacheLab - kamilu的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"luzhixing12345.github.io","root":"/","version":"1.8.14","typing":{"enable":false,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"fEy8W8VvIoc26nT53dV2157j-gzGzoHsz","app_key":"s9HXuqmvBWrOaAiLA07Jg59A","server_url":"https://fey8w8vv.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Kamilu-blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://raw.githubusercontent.com/learner-lu/picbed/master/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="07-CacheLab">
+              
+                07-CacheLab
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-12-28 18:54" pubdate>
+        2022年12月28日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      46 分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- LeanCloud 统计文章PV -->
+      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="leancloud-page-views"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">07-CacheLab</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：4 天前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/142942823">https://zhuanlan.zhihu.com/p/142942823</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/79058089">https://zhuanlan.zhihu.com/p/79058089</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/387662272">https://zhuanlan.zhihu.com/p/387662272</a></p>
+<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>本次实验是针对第六章Cache的内容,涉及到对于缓存替换策略的理解和具体代码的编写.</p>
+<p>本次实验分为两个部分,Part A是编写一个缓存模拟器,Part B是优化矩阵变换</p>
+<h2 id="实验报告"><a class="markdownIt-Anchor" href="#实验报告"></a> 实验报告</h2>
+<p>下载valgrind</p>
+<div class="code-wrapper"><pre><code class="hljs bash">sudo apt install valgrind</code></pre></div>
+<p>运行指令,这条指令会执行<code>ls -l</code>指令并且记录相应的内存访存时的信息</p>
+<div class="code-wrapper"><pre><code class="hljs bash">valgrind --log-fd=1 --tool=lackey -v --trace-mem=<span class="hljs-built_in">yes</span> <span class="hljs-built_in">ls</span> -l</code></pre></div>
+<blockquote>
+<p>注:这条指令会执行一小段时间,并且输出很多信息</p>
+</blockquote>
+<p>在输出的信息之中,I表示 instruction load, L表示 data load, S 表示data store, M表示data modify,接着是一个64位地址和操作的字节数</p>
+<p>这里有一个比较恶心的点是直接使用make然后make clean是存在问题的,因为在Makefile中为了提交作业将最后的文件打包成<code>$(USER)-handin.tar</code>,但实际上USER变量还没有定义,所以生成的文件是 <code>-handin.tar</code>,那么在执行make clean使用rm命令就会报错解析不了-h</p>
+<p>一个比较好的解决办法是修改Makefile文件定义USER变量,或者每次执行make带着USER变量,比如 <code>make USER=123</code></p>
+<div class="code-wrapper"><pre><code class="hljs Makefile">USER = user
+
+<span class="hljs-section">all: csim test-trans tracegen</span>
+        <span class="hljs-comment"># Generate a handin tar file each time you compile</span>
+        -tar -cvf $&#123;USER&#125;-handin.tar  csim.c trans.c</code></pre></div>
+<h3 id="part-a-writing-a-cache-simulator"><a class="markdownIt-Anchor" href="#part-a-writing-a-cache-simulator"></a> Part A: Writing a Cache Simulator</h3>
+<p>Part A相对来说比较简单,就是去实现一个简单的cache,模拟<code>csim-ref</code>的输入和输出格式,参数sEb也都是书中介绍过的</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Mculover666/article/details/106646339">getopt使用方法</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/afei__/article/details/81261879">getopt方法解析</a></p>
+</blockquote>
+<p>这里的代码实现思路参考<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/142942823">CSAPP:Lab4-Cache Lab</a></p>
+<p>由于只是模拟计算cache的miss hit eviction,并不需要真的保存数据,trace文件中也没有数据用于缓存,所以CacheLine没有定义缓存块B</p>
+<p>CacheLine的标记位tag正常来说是可以通过64-b-s来计算的,但由于是变长用char*处理起来有些麻烦所以使用了unsigned long 一个64位无符号整数来简化处理</p>
+<p>整个程序的执行过程大致思路是,首先通过argparser解析命令行参数,initCache根据s,E初始化一个Cache对象.simulate中visitCache函数是关键,根据s,b划分标记位,索引位,并且通过索引位(set_index)找到cache中的索引块</p>
+<p>判断有效位,如果为1继续判断标记位.如果为0则认为是一个空块.这里的LRU算法的实现很精巧,最近被访问的lru设为1,在遍历的过程中每个块的lru++,evict块标记为所有块中lru值最大的,这样如果没有空块可以直接找到evict块进行一个lru替换</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;cachelab.h&quot;</span></span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;getopt.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;math.h&gt;</span></span>
+
+<span class="hljs-type">const</span> <span class="hljs-type">char</span>* usage = <span class="hljs-string">&quot;Usage: %s [-hv] -s &lt;s&gt; -E &lt;E&gt; -b &lt;b&gt; -t &lt;tracefile&gt;\n&quot;</span>;
+
+<span class="hljs-type">int</span> verbose = <span class="hljs-number">0</span>; <span class="hljs-comment">//verbose flag </span>
+<span class="hljs-type">int</span> s=<span class="hljs-number">-1</span>;  <span class="hljs-comment">//number of set index bits </span>
+<span class="hljs-type">int</span> E=<span class="hljs-number">-1</span>;  <span class="hljs-comment">//number of lines per set</span>
+<span class="hljs-type">int</span> b=<span class="hljs-number">-1</span>;  <span class="hljs-comment">//number of block bits</span>
+FILE* fp = <span class="hljs-literal">NULL</span>;
+
+<span class="hljs-type">int</span> hits = <span class="hljs-number">0</span>;
+<span class="hljs-type">int</span> misses = <span class="hljs-number">0</span>;
+<span class="hljs-type">int</span> evictions = <span class="hljs-number">0</span>;
+
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> HIT 1</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> MISS 2</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> EVICTION 3</span>
+
+<span class="hljs-keyword">typedef</span> <span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> <span class="hljs-type">uint64_t</span>;
+
+<span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> &#123;</span>
+    <span class="hljs-type">int</span> valid;
+    <span class="hljs-type">int</span> lru;
+    <span class="hljs-type">uint64_t</span> tag;
+&#125; CacheLine;
+
+<span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> &#123;</span>
+    <span class="hljs-comment">// int E;</span>
+    CacheLine *cache_lines;
+&#125; CacheGroup;
+
+<span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> &#123;</span>
+    <span class="hljs-comment">// int S;</span>
+    CacheGroup *cache_groups;
+&#125; Cache;
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">argparser</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span>* argv[])</span> &#123;
+    <span class="hljs-type">int</span> opt;
+    <span class="hljs-keyword">while</span> ((opt = getopt(argc, argv, <span class="hljs-string">&quot;hvs:E:b:t:&quot;</span>)) != <span class="hljs-number">-1</span>)
+    &#123;
+        <span class="hljs-keyword">switch</span>(opt)
+        &#123;
+            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;h&#x27;</span>:
+                <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stdout</span>, usage, argv[<span class="hljs-number">0</span>]);
+                <span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>);
+            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;v&#x27;</span>:
+                verbose = <span class="hljs-number">1</span>;
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;s&#x27;</span>:
+                s = atoi(optarg);
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;E&#x27;</span>:
+                E = atoi(optarg);
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;b&#x27;</span>:
+                b = atoi(optarg);
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;t&#x27;</span>:
+                fp = fopen(optarg, <span class="hljs-string">&quot;r&quot;</span>);
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">default</span>:
+                <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stdout</span>, usage, argv[<span class="hljs-number">0</span>]);
+                <span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>);
+        &#125;
+    &#125;
+    <span class="hljs-keyword">if</span> (s == <span class="hljs-number">-1</span> || E == <span class="hljs-number">-1</span> || b == <span class="hljs-number">-1</span>) &#123;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;s E b are required\n&quot;</span>);
+        <span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>);
+    &#125;
+&#125;
+
+Cache* <span class="hljs-title function_">initCache</span><span class="hljs-params">()</span> &#123;
+    <span class="hljs-comment">// 根据s,E初始化cache</span>
+    <span class="hljs-type">int</span> S = <span class="hljs-number">1</span> &lt;&lt; s;
+    Cache *cache = <span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(Cache));
+    cache-&gt;cache_groups = <span class="hljs-built_in">calloc</span>(S,<span class="hljs-keyword">sizeof</span>(CacheGroup));
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;S;i++) &#123;
+        cache-&gt;cache_groups[i].cache_lines = (CacheLine*)<span class="hljs-built_in">calloc</span>(E,<span class="hljs-keyword">sizeof</span>(CacheLine));
+    &#125;
+    <span class="hljs-keyword">return</span> cache;
+&#125;
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">visitCache</span><span class="hljs-params">(Cache *cache, <span class="hljs-type">uint64_t</span> address)</span> &#123;
+
+    <span class="hljs-type">uint64_t</span> set_index = address &gt;&gt; b &amp; ((<span class="hljs-number">1</span> &lt;&lt; s) - <span class="hljs-number">1</span>);
+    <span class="hljs-type">uint64_t</span> tag = address &gt;&gt; (b+s);
+
+    <span class="hljs-comment">// printf(&quot;address = %lx, set_index = %lx, tag = %lx\n&quot;,address,set_index,tag);</span>
+
+    CacheGroup cache_group = cache-&gt;cache_groups[set_index];
+    <span class="hljs-type">int</span> evict = <span class="hljs-number">0</span>;
+    <span class="hljs-type">int</span> empty = <span class="hljs-number">-1</span>;
+
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;E;i++) &#123;
+        <span class="hljs-keyword">if</span> (cache_group.cache_lines[i].valid) &#123;
+            <span class="hljs-keyword">if</span> (cache_group.cache_lines[i].tag == tag) &#123;
+                hits++;
+                cache_group.cache_lines[i].lru = <span class="hljs-number">1</span>;
+                <span class="hljs-keyword">return</span> HIT;
+            &#125;
+            cache_group.cache_lines[i].lru++;
+            <span class="hljs-keyword">if</span> (cache_group.cache_lines[evict].lru &lt;= cache_group.cache_lines[i].lru) &#123;
+                evict = i;
+            &#125;
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            empty = i;
+        &#125;
+    &#125;
+    misses++;
+    <span class="hljs-keyword">if</span> (empty != <span class="hljs-number">-1</span>) &#123;
+        cache_group.cache_lines[empty].valid = <span class="hljs-number">1</span>;
+        cache_group.cache_lines[empty].tag = tag;
+        cache_group.cache_lines[empty].lru = <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">return</span> MISS;
+    &#125; <span class="hljs-keyword">else</span> &#123;
+        cache_group.cache_lines[evict].tag = tag;
+        cache_group.cache_lines[evict].lru = <span class="hljs-number">1</span>;
+        evictions++;
+        <span class="hljs-keyword">return</span> EVICTION;
+    &#125;
+
+&#125;
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">simulate</span><span class="hljs-params">(Cache *cache)</span> &#123;
+
+    <span class="hljs-type">char</span> buf[<span class="hljs-number">30</span>];
+    <span class="hljs-type">char</span> operation;
+    <span class="hljs-type">uint64_t</span> address;
+    <span class="hljs-type">int</span> size;
+
+    <span class="hljs-type">int</span> result;
+    <span class="hljs-keyword">while</span> (fgets(buf, <span class="hljs-keyword">sizeof</span>(buf), fp) != <span class="hljs-literal">NULL</span>) &#123;
+        <span class="hljs-keyword">if</span> (buf[<span class="hljs-number">0</span>] == <span class="hljs-string">&#x27;I&#x27;</span>) <span class="hljs-keyword">continue</span>;
+
+        <span class="hljs-built_in">sscanf</span>(buf, <span class="hljs-string">&quot; %c %lx,%d&quot;</span>, &amp;operation, &amp;address, &amp;size);
+        result = visitCache(cache, address);
+        <span class="hljs-keyword">if</span> (operation == <span class="hljs-string">&#x27;M&#x27;</span>) hits++;
+        
+        <span class="hljs-keyword">if</span> (verbose) &#123;
+            <span class="hljs-keyword">switch</span> (result) &#123;
+                <span class="hljs-keyword">case</span> HIT:
+                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c %lx,%d hit\n&quot;</span>, operation, address, size);
+                    <span class="hljs-keyword">break</span>;
+                <span class="hljs-keyword">case</span> MISS:
+                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c %lx,%d miss\n&quot;</span>, operation, address, size);
+                    <span class="hljs-keyword">break</span>;
+                <span class="hljs-keyword">case</span> EVICTION:
+                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c %lx,%d miss eviction\n&quot;</span>, operation, address, size);
+                    <span class="hljs-keyword">break</span>;
+                <span class="hljs-keyword">default</span>:
+                    <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stdout</span>, <span class="hljs-string">&quot;unknown cache behave&quot;</span>);
+                    <span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>);
+            &#125;
+        &#125;
+    &#125;
+    fclose(fp);
+&#125;
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">freeCache</span><span class="hljs-params">(Cache* cache)</span> &#123;
+    <span class="hljs-type">int</span> S = <span class="hljs-number">1</span>&lt;&lt;s;
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;S;i++) &#123;
+        <span class="hljs-built_in">free</span>(cache-&gt;cache_groups[i].cache_lines);
+    &#125;
+    <span class="hljs-built_in">free</span>(cache-&gt;cache_groups);
+    <span class="hljs-built_in">free</span>(cache);
+&#125;
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> **argv)</span>
+&#123;
+    argparser(argc,argv);
+    Cache *cache = initCache();
+    simulate(cache);
+    freeCache(cache);
+    printSummary(hits, misses, evictions);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;
+</code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs bash">root@da1811a84ddc:~/csapp/07Cache Lab/cachelab-handout<span class="hljs-comment"># ./test-csim</span>
+                        Your simulator     Reference simulator
+Points (s,E,b)    Hits  Misses  Evicts    Hits  Misses  Evicts
+     3 (1,1,1)       9       8       6       9       8       6  traces/yi2.trace
+     3 (4,2,4)       4       5       2       4       5       2  traces/yi.trace
+     3 (2,1,4)       2       3       1       2       3       1  traces/dave.trace
+     3 (2,1,3)     167      71      67     167      71      67  traces/trans.trace
+     3 (2,2,3)     201      37      29     201      37      29  traces/trans.trace
+     3 (2,4,3)     212      26      10     212      26      10  traces/trans.trace
+     3 (5,1,5)     231       7       0     231       7       0  traces/trans.trace
+     6 (5,1,5)  265189   21775   21743  265189   21775   21743  traces/long.trace
+    27
+
+TEST_CSIM_RESULTS=27</code></pre></div>
+<p>这里要补充一点的是,所有测试用例中的缓存块大小B都大于等于trace中的B,所以不存在访问一个连续单元的长度大于一个缓存块导致需要连续访存的情况.这种情况要复杂一些,可能还需要判断B大小划分成几块来计算.</p>
+<h2 id="part-b-optimizing-matrix-transpose"><a class="markdownIt-Anchor" href="#part-b-optimizing-matrix-transpose"></a> Part B: Optimizing Matrix Transpose</h2>
+<p>PartB 的任务是利用缓存实现对矩阵转置的优化,缓存的规格是s=5,E=1,b=5,也就是32组每组一行保存32B数据.由于矩阵的数据类型是int(4字节),所以缓存每行可以保存8个单元</p>
+<p>需要转置的矩阵的大小有三组,分别是32x32, 64x64, 61x67, 我们需要完成的函数是tran.s中的transpose_submit</p>
+<h3 id="32x32"><a class="markdownIt-Anchor" href="#32x32"></a> 32x32</h3>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20221230111233.png" srcset="/img/loading.gif" lazyload alt="20221230111233" /></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/CSAPP/">CSAPP</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/12/28/HPC/cache/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">cache</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/12/24/HPC/NVM/">
+                        <span class="hidden-mobile">NVM</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"fEy8W8VvIoc26nT53dV2157j-gzGzoHsz","appKey":"s9HXuqmvBWrOaAiLA07Jg59A","path":"window.location.pathname","placeholder":"欢迎讨论,留下163邮箱我才能看到回复哦~","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

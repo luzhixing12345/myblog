@@ -19,7 +19,7 @@
     <meta name="description" content="前言 笔者由于学习原因需要使用Ubuntu系统编译源码,但是服务器使用的系统是Debian,且使用docker编译内存不足.且考虑到后续修改和性能原因不希望使用虚拟机,于是决定安装双系统(Win11+Ubuntu22.04),本文记录一下安装过程  配置双系统  Ubuntu 双系统安装流程 Windows10安装ubuntu18.04双系统教程   0. 开始之前 由于开始安装双系统之后就离开">
 <meta property="og:type" content="article">
 <meta property="og:title" content="双系统安装">
-<meta property="og:url" content="https://luzhixing12345.github.io/2022/11/15/%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/index.html">
+<meta property="og:url" content="https://luzhixing12345.github.io/2022/11/15/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/index.html">
 <meta property="og:site_name" content="kamilu的博客">
 <meta property="og:description" content="前言 笔者由于学习原因需要使用Ubuntu系统编译源码,但是服务器使用的系统是Debian,且使用docker编译内存不足.且考虑到后续修改和性能原因不希望使用虚拟机,于是决定安装双系统(Win11+Ubuntu22.04),本文记录一下安装过程  配置双系统  Ubuntu 双系统安装流程 Windows10安装ubuntu18.04双系统教程   0. 开始之前 由于开始安装双系统之后就离开">
 <meta property="og:locale" content="zh_CN">
@@ -27,10 +27,11 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221115141134.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/asdq1342.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221115141134.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230101203444.png">
 <meta property="article:published_time" content="2022-11-15T08:24:28.000Z">
-<meta property="article:modified_time" content="2022-11-15T09:12:02.679Z">
+<meta property="article:modified_time" content="2023-01-03T04:31:18.286Z">
 <meta property="article:author" content="luzhixing12345">
-<meta property="article:tag" content="工作环境配置">
+<meta property="article:tag" content="环境配置">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221115140746.png">
   
@@ -192,7 +193,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.9k 字
+      4.1k 字
     </span>
   
 
@@ -201,7 +202,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      33 分钟
+      34 分钟
     </span>
   
 
@@ -242,7 +243,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：1 个月前
+                  本文最后更新于：1 分钟前
                 
               </p>
             
@@ -298,29 +299,27 @@
 <p>安装类型(Installation type)选择 <strong>Something else</strong>,因为需要自定义划分磁盘空间</p>
 <p>接下来进入一个磁盘空间的页面,找到之前划分的那一块未分配的空间(free space),我们将会对这一块空间进行再划分</p>
 <p>选中区域,点击左下角加号</p>
+<p><strong>以下所有的都是空间起始位置(Beginning of this space),不需要修改</strong></p>
 <ul>
 <li>
-<p>200MB 逻辑分区 空间起始位置 选择EFI,用于启动引导</p>
-<blockquote>
-<p>这里的选择efi是指切换ext4,找到EFI</p>
-</blockquote>
+<p>200MB Logical EFI,用于启动引导</p>
+<p>这里的选择EFI是指切换下面的<code>Ext4 journaling file system</code>,找到EFI</p>
 </li>
 <li>
-<p>8GB(8096MB) 逻辑分区 空间起始位置 选择 swap area(用于交换区)</p>
+<p>8GB(8096MB) Logical swap area(用于交换区)</p>
+<p>这里我建议有条件的把内存划分的大一些,16GB,32GB.linux内核编译就很占内存,分大一些对于软件和编译来说都比较友好</p>
 </li>
 </ul>
-<p>这两个的划分是固定的,除此之外你可以利用剩余的空间,划分 <code>/</code> 和 <code>/home</code>,其中 <code>/</code> 根目录,用于安装系统和软件相当于C盘,可以适当划分大一些</p>
+<p>除此之外你可以利用剩余的空间划分 <code>/</code> 和 <code>/home</code>,其中 <code>/</code> 根目录,用于安装系统和软件相当于C盘,可以适当划分大一些</p>
 <ul>
-<li>30GB(30720MB) 主分区 空间起始位置 最下边选择 <code>/</code></li>
-<li>剩余空间 主分区 空间起始位置 最下边选择 <code>/home</code></li>
+<li>30GB(30720MB) Primary <code>/</code></li>
+<li>剩下的 Primary <code>/home</code></li>
 </ul>
 <p><strong>下面的这一步非常重要</strong> : 在分区界面的下方，选择安装启动项的位置, <strong>这里要选择你刚刚划分的efi分区的编号</strong></p>
 <p>efi分区的大小是200MB,有一个是Windows的efi那个不要动! 找到你划分的那个分区的EFI. 目前划分的四个分区是连在一起的,你可以很容易的找到它(200MB),例如下图中的 <code>/dev/nvmeOn1p9</code></p>
 <p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/asdq1342.jpg" srcset="/img/loading.gif" lazyload alt="asdq1342" /></p>
 <p>然后选择安装启动引导器的设备,选择这个引导器,现在安装</p>
-<blockquote>
-<p>注意这里是中文的环境,不要用中文环境,使用英文环境!</p>
-</blockquote>
+<p><strong>注意不要用中文环境,使用英文环境!</strong></p>
 <h3 id="5安装完成"><a class="markdownIt-Anchor" href="#5安装完成"></a> 5.安装完成</h3>
 <p>接下来就是选地区,用户名密码这都没什么好说的. 等待安装全部完成之后,会提醒你重启,把U盘拔了,点&quot;restart now&quot;，如果卡死就强制关机再重启就好,不要慌没有问题的</p>
 <h3 id="6双系统收尾工作"><a class="markdownIt-Anchor" href="#6双系统收尾工作"></a> 6.双系统收尾工作</h3>
@@ -328,14 +327,8 @@
 <p>双系统的引导菜单是Ubuntu的引导其grub的菜单,所以重启之后排在第一位的是ubuntu系统的启动,第二位通常是ubuntu的高级选项,第三是windows,我们可以根据情况选择. 这里直接进入ubuntu即可</p>
 <p>如果第一次由Ubuntu安装完毕进入windows可能会需要输入Bitlock解锁,你可以在如下网址找到你的恢复密钥,不过这是笔者一开始0节处就提到过的内容</p>
 <div class="code-wrapper"><pre><code class="hljs txt">https://account.microsoft.com/devices/recoverykey</code></pre></div>
-<p>如果想要切换默认进入windows,可以修改开机引导grub</p>
-<p>在ubuntu命令行下输入</p>
-<div class="code-wrapper"><pre><code class="hljs bash">sudo gedit /etc/default/grub</code></pre></div>
-<p>在配置文件中，可以看到GRUB_DEFAULT这一项默认数值是0</p>
-<p>这四个启动项从上到下依次是0-3，第一项Ubuntu的启动项是序号0，而Windows的启动项是2，而GRUB_DEFAULT的默认数值是0，也就是我们现在看到的默认启动项是第一项ubuntu的启动项，所以我们只需要将GRUB_DEFAULT的数值改成2，就可以实现开机默认启动Windows</p>
-<blockquote>
-<p>通常情况下windows都是排在第三位,启动项为2的,不过修改前注意即可,不修改手动选择进入的操作系统也完全没问题(笔者就没有修改)</p>
-</blockquote>
+<p>如果想要切换默认进入windows,可以修改开机引导grub,但笔者习惯直接进入F2将windows的启动项移到ubuntu前面,这样默认进入的是windows的启动盘</p>
+<p>如果需要进入ubuntu就F12然后用ubuntu启动即可</p>
 <h4 id="卸载"><a class="markdownIt-Anchor" href="#卸载"></a> 卸载</h4>
 <p>如果不想使用ubuntu系统了就删除磁盘空间即可,右键删除卷</p>
 <p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20221115141134.png" srcset="/img/loading.gif" lazyload alt="20221115141134" /></p>
@@ -350,9 +343,19 @@
   --------  -------------  -------  -------  ---  ---
   磁盘 0    联机              476 GB    16 MB        *
   磁盘 1    联机              931 GB      0 B</code></pre></div>
+<p>当然你也有可能不是这样的,笔者的磁盘1是一块移动硬盘</p>
+<p>如果你手动增加了一块硬盘的话也可能是如下的情况,这里我新增了一块1TB的NVM SSD硬盘,并且分配了500GB,剩下453GB没有分配</p>
+<div class="code-wrapper"><pre><code class="hljs txt">DISKPART&gt; list disk
+
+磁盘 ###  状态           大小     可用     Dyn  Gpt
+--------  -------------  -------  -------  ---  ---
+磁盘 0    联机              476 GB    79 GB        *
+磁盘 1    联机              953 GB   453 GB        *
+磁盘 2    联机              931 GB      0 B</code></pre></div>
+<p>现在的状态是我已经之前分配的80GB空间删除卷,所以磁盘0剩余空间79GB,efi分区暂时没有删除,我想将双系统转移到磁盘1中的未分配的453GB中</p>
 </li>
 <li>
-<p>输入 <code>select disk 0</code> 选择磁盘0(即主磁盘),笔者的磁盘1是一块移动硬盘. 输入 <code>list partition</code> 查看所有分区</p>
+<p>输入 <code>select disk 0</code> 选择磁盘0(即主磁盘), 输入 <code>list partition</code> 查看所有分区</p>
 <div class="code-wrapper"><pre><code class="hljs bash">DISKPART&gt; select disk 0
 
 磁盘 0 现在是所选磁盘。
@@ -383,9 +386,18 @@ delete partition override</code></pre></div>
 </li>
 </ul>
 <p>下面看一下删除之后的效果，可以看到将EFI分区删除之后，未分配的80GB正是之前用来安装Ubuntu设置的空间大小</p>
-<div class="note note-info">
-            <p>如果使用 <code>delete partition override</code> 失败,则可使用下面的方式</p><p>选择分区6 <code>select partition 6</code></p><p>创建一个新的挂载盘 <code>assign letter=K</code>, 这时候可以看到计算机多出来了一个盘,但是这个盘无法进入</p><p>在开始菜单找到记事本，右键【记事本】，选择【<strong>以管理员身份运行</strong>】，点击【文件】，点击【打开】。在文件浏览器里面可以进入刚刚挂载的K盘，找到名为Ubuntu的文件夹删除即可</p><p>删除之后再把刚刚挂载的K盘卸载就行。输入</p><div class="code-wrapper"><pre><code class="hljs bash">remove letter=K</code></pre></div><blockquote><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/392633489">https://zhuanlan.zhihu.com/p/392633489</a></p><p><a target="_blank" rel="noopener" href="https://bbs.huaweicloud.com/blogs/303695">https://bbs.huaweicloud.com/blogs/303695</a></p></blockquote>
-          </div>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230101203444.png" srcset="/img/loading.gif" lazyload alt="20230101203444" /></p>
+<p>最后F2进BIOS把ubuntu的引导删掉即可,这样就彻底删除了~</p>
+<p>如果使用 <code>delete partition override</code> 失败,则可使用下面的方式</p>
+<p>选择分区6 <code>select partition 6</code></p>
+<p>创建一个新的挂载盘 <code>assign letter=K</code>, 这时候可以看到计算机多出来了一个盘,但是这个盘无法进入</p>
+<p>在开始菜单找到记事本，右键【记事本】，选择【<strong>以管理员身份运行</strong>】，点击【文件】，点击【打开】。在文件浏览器里面可以进入刚刚挂载的K盘，找到名为Ubuntu的文件夹删除即可</p>
+<p>删除之后再把刚刚挂载的K盘卸载就行。输入</p>
+<div class="code-wrapper"><pre><code class="hljs bash">remove letter=K</code></pre></div>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/392633489">https://zhuanlan.zhihu.com/p/392633489</a></p>
+<p><a target="_blank" rel="noopener" href="https://bbs.huaweicloud.com/blogs/303695">https://bbs.huaweicloud.com/blogs/303695</a></p>
+</blockquote>
 
             </div>
             <hr>
@@ -396,7 +408,7 @@ delete partition override</code></pre></div>
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">工作环境配置</a>
+                      <a class="hover-with-bg" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a>
                     
                   </div>
                 
@@ -423,8 +435,8 @@ delete partition override</code></pre></div>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/11/15/%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Ubuntu%E6%A1%8C%E9%9D%A2%E7%AB%AF%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/">
-                        <span class="hidden-mobile">Ubuntu桌面端软件安装</span>
+                      <a href="/2022/11/15/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Ubuntu%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">
+                        <span class="hidden-mobile">Ubuntu工作环境配置</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

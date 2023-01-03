@@ -32,8 +32,12 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221224205751.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221224210004.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221224210045.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221228074613.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221228084946.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221228085127.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221228085508.png">
 <meta property="article:published_time" content="2022-12-23T12:48:28.000Z">
-<meta property="article:modified_time" content="2022-12-24T13:00:48.160Z">
+<meta property="article:modified_time" content="2022-12-28T00:55:11.120Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="HPC">
 <meta name="twitter:card" content="summary_large_image">
@@ -197,7 +201,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4k 字
+      5.2k 字
     </span>
   
 
@@ -206,7 +210,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      34 分钟
+      44 分钟
     </span>
   
 
@@ -247,7 +251,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：3 天前
+                  本文最后更新于：6 天前
                 
               </p>
             
@@ -355,6 +359,40 @@
 <p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20221224210045.png" srcset="/img/loading.gif" lazyload alt="20221224210045" /></p>
 </li>
 </ul>
+<h2 id="连接io设备"><a class="markdownIt-Anchor" href="#连接io设备"></a> 连接IO设备</h2>
+<p>例如图形卡,显示器,鼠标键盘,磁盘等IO设备都是通过IO总线连接到CPU和主存的.例如Intel的PCI(Peripheral Component Interconnect)总线</p>
+<p>下图展示了一个典型的IO总线结构,虽然IO总线比系统总线和内存总线慢,但是他可以容纳种类繁多的第三方IO设备</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20221228074613.png" srcset="/img/loading.gif" lazyload alt="20221228074613" /></p>
+<ul>
+<li>
+<p>通用串行总线USB(Universal Serial Bus),USB总线是一个广泛使用的标准,连接各种外围设备,USB3.0总线最大带宽是625MB/s</p>
+</li>
+<li>
+<p>图形卡</p>
+</li>
+<li>
+<p>主机总线适配器:将一个或多个磁盘连接到IO总线,使用的是一个特别的主机总线接口定义的通信协议,两个最常用的磁盘接口是SCSI和SATA</p>
+<blockquote>
+<p>SCSI磁盘通常比SATA驱动器更快但是更贵,除此之外还有一种相对新的NVMe,目前市面上最常见的SSD产品，几乎都是SATA的，主流产品的读写通常都在550MB/s，而NVMe可以轻松打破这一限制，NVMe固态硬盘价格会比SATA固态贵一些</p>
+</blockquote>
+</li>
+<li>
+<p>其他:例如网络适配器,可以通过适配器查到主板上空的扩展槽中连接到IO总线,这些插槽提供了到总线的直接电路连接</p>
+</li>
+</ul>
+<blockquote>
+<p>上图的IO总线是一个简单的抽象,在现代系统中共享的PCI总线已经被PCIe(PCI express)总线取代,PCIe是一组高速串行,通过开关连接的点到点链路.PCIe总线最大吞吐量可到16GB/s,比PCI总下快一个数量级(PCI总线的最大吞吐量533MB/s)</p>
+</blockquote>
+<h2 id="访问磁盘"><a class="markdownIt-Anchor" href="#访问磁盘"></a> 访问磁盘</h2>
+<p>CPU使用一种称为内存映射的技术向IO设备发射命令,在使用内存映射的IO系统中,地址空间中有一块地址是为IO设备通信保留的,每个这样的地址称为一个IO端口,当一个设备连接到总线之后,它与一个或者多个端口相关联(或者它被映射到一个或多个端口)</p>
+<p>来看一个简单的例子:</p>
+<p>假设磁盘控制器映射到端口0xa0,随后CPU可能通过执行三个对地址0Xa0的存储指令来发起磁盘读.第一条指令是发送一个命令字以及其他参数,告诉磁盘发起一个读,第二条指令指明应该读的逻辑块号,第三条指令指明应该存储磁盘扇区内容的主存地址</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20221228084946.png" srcset="/img/loading.gif" lazyload alt="20221228084946" /></p>
+<p>当CPU发送请求之后,在磁盘执行读的时候他通常会做一些其他的工作.因为一个1GHz的处理器时钟周期是1ns,再用来读磁盘的16ms的时间里他潜在的可能执行1600万条指令,如果在传输进行的时候只是简单的等待什么也不做则是一种极大的浪费!</p>
+<p>磁盘控制器收到来自CPU的读命令之后将逻辑块号翻译成一个扇区地址,读该扇区的内容,然后将这些内容直接传送到主存,<strong>不需要CPU干涉</strong>.设备可以自己执行读或者写总线事务而不需要CPU干涉的过程称为直接内容访问DMA(Direct Memory Access),这种数据传送称为DMA传送</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20221228085127.png" srcset="/img/loading.gif" lazyload alt="20221228085127" /></p>
+<p>在DMA传送完成之后,磁盘扇区的内容被安全的存储在主存以后,磁盘控制器通过向CPU发送一个中断信号来通知CPU,这个中断信号会发送到CPU芯片的一个外部引脚,导致CPU暂停它当前的工作跳转到一个操作系统例程,这个程序会记录下IO已经完成,然后将控制返回到CPU被中断的地方</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20221228085508.png" srcset="/img/loading.gif" lazyload alt="20221228085508" /></p>
 
             </div>
             <hr>

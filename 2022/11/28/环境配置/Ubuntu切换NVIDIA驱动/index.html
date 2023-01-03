@@ -16,24 +16,25 @@
   <meta name="author" content="luzhixing12345">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Linux 代理配置  V2rayA 参考官方文档 v2rayA,已经比较详细了,笔者个人使用的是 Debian,ubuntu同理, 这里以它为例   下载并使用v2rayA 提供的镜像脚本 sudo apt install curl curl -Ls https:&#x2F;&#x2F;mirrors.v2raya.org&#x2F;go.sh | sudo bash 关闭服务 sudo systemctl disable">
+    <meta name="description" content="笔者使用 Ubuntu22.04 出现了卡死的情况,且网上提到的解决办法均不奏效  其他解决办法: https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_39779233&#x2F;article&#x2F;details&#x2F;114758689  所以参考文章: https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_38890593&#x2F;article&#x2F;details&#x2F;124795412 决定更换显卡驱动, ubuntu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux代理配置">
-<meta property="og:url" content="https://luzhixing12345.github.io/2022/11/08/%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Linux%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:title" content="Ubuntu切换NVIDIA驱动">
+<meta property="og:url" content="https://luzhixing12345.github.io/2022/11/28/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Ubuntu%E5%88%87%E6%8D%A2NVIDIA%E9%A9%B1%E5%8A%A8/index.html">
 <meta property="og:site_name" content="kamilu的博客">
-<meta property="og:description" content="Linux 代理配置  V2rayA 参考官方文档 v2rayA,已经比较详细了,笔者个人使用的是 Debian,ubuntu同理, 这里以它为例   下载并使用v2rayA 提供的镜像脚本 sudo apt install curl curl -Ls https:&#x2F;&#x2F;mirrors.v2raya.org&#x2F;go.sh | sudo bash 关闭服务 sudo systemctl disable">
+<meta property="og:description" content="笔者使用 Ubuntu22.04 出现了卡死的情况,且网上提到的解决办法均不奏效  其他解决办法: https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_39779233&#x2F;article&#x2F;details&#x2F;114758689  所以参考文章: https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_38890593&#x2F;article&#x2F;details&#x2F;124795412 决定更换显卡驱动, ubuntu">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221115170933.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221115170933.png">
-<meta property="article:published_time" content="2022-11-08T06:16:29.000Z">
-<meta property="article:modified_time" content="2022-11-15T09:31:52.449Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/Screenshot%20from%202023-01-03%2009-43-10.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/Screenshot%20from%202023-01-03%2009-48-25.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/Screenshot%20from%202023-01-03%2010-25-47.png">
+<meta property="article:published_time" content="2022-11-28T11:11:24.000Z">
+<meta property="article:modified_time" content="2023-01-03T04:15:51.192Z">
 <meta property="article:author" content="luzhixing12345">
-<meta property="article:tag" content="工作环境配置">
+<meta property="article:tag" content="环境配置">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221115170933.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/Screenshot%20from%202023-01-03%2009-43-10.png">
   
   
-  <title>Linux代理配置 - kamilu的博客</title>
+  <title>Ubuntu切换NVIDIA驱动 - kamilu的博客</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -167,9 +168,9 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Linux代理配置">
+            <span class="h2" id="subtitle" title="Ubuntu切换NVIDIA驱动">
               
-                Linux代理配置
+                Ubuntu切换NVIDIA驱动
               
             </span>
 
@@ -179,8 +180,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-11-08 14:16" pubdate>
-        2022年11月8日 下午
+      <time datetime="2022-11-28 19:11" pubdate>
+        2022年11月28日 晚上
       </time>
     </span>
   
@@ -190,7 +191,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.7k 字
+      1.4k 字
     </span>
   
 
@@ -199,7 +200,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      15 分钟
+      12 分钟
     </span>
   
 
@@ -236,96 +237,75 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Linux代理配置</h1>
+            <h1 style="display: none">Ubuntu切换NVIDIA驱动</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：1 个月前
+                  本文最后更新于：16 分钟前
                 
               </p>
             
             <div class="markdown-body">
-              <h2 id="linux-代理配置"><a class="markdownIt-Anchor" href="#linux-代理配置"></a> Linux 代理配置</h2>
-<h3 id="v2raya"><a class="markdownIt-Anchor" href="#v2raya"></a> V2rayA</h3>
-<p>参考官方文档 <a target="_blank" rel="noopener" href="https://v2raya.org/docs/prologue/introduction/">v2rayA</a>,已经比较详细了,笔者个人使用的是 Debian,ubuntu同理, 这里以它为例</p>
+              <p>笔者使用 Ubuntu22.04 出现了卡死的情况,且网上提到的解决办法均不奏效</p>
+<blockquote>
+<p>其他解决办法: <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39779233/article/details/114758689">https://blog.csdn.net/qq_39779233/article/details/114758689</a></p>
+</blockquote>
+<p>所以参考文章: <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38890593/article/details/124795412">https://blog.csdn.net/weixin_38890593/article/details/124795412</a> 决定更换显卡驱动, ubuntu 默认使用nouveau显卡驱动,安装NVIDIA的显卡驱动</p>
 <ol>
 <li>
-<p>下载并使用v2rayA 提供的镜像脚本</p>
-<div class="code-wrapper"><pre><code class="hljs bash">sudo apt install curl
-curl -Ls https://mirrors.v2raya.org/go.sh | sudo bash</code></pre></div>
-<p>关闭服务</p>
-<div class="code-wrapper"><pre><code class="hljs bash">sudo systemctl <span class="hljs-built_in">disable</span> v2ray --now</code></pre></div>
+<p>下载显卡驱动</p>
+<p>首先需要电脑是N卡,可以通过如下命令查看显卡型号,笔者这里是笔记本的3060</p>
+<div class="code-wrapper"><pre><code class="hljs bash">lspci |grep -E <span class="hljs-string">&quot;VGA|3D&quot;</span></code></pre></div>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/Screenshot%20from%202023-01-03%2009-43-10.png" srcset="/img/loading.gif" lazyload alt="Screenshot from 2023-01-03 09-43-10" /></p>
+<p>进入 <a target="_blank" rel="noopener" href="https://www.nvidia.cn/geforce/drivers/">https://www.nvidia.cn/geforce/drivers/</a></p>
+<p>根据电脑显卡型号下载对应的驱动安装包,这里笔记本是notebook</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/Screenshot%20from%202023-01-03%2009-48-25.png" srcset="/img/loading.gif" lazyload alt="Screenshot from 2023-01-03 09-48-25" /></p>
+<p>下载之后修改文件的权限</p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">chmod</span> +x /path/to/NVIDIA-Linux-*.run</code></pre></div>
 </li>
 <li>
-<p>添加公钥</p>
-<div class="code-wrapper"><pre><code class="hljs bash">wget -qO - https://apt.v2raya.org/key/public-key.asc | sudo <span class="hljs-built_in">tee</span> /etc/apt/trusted.gpg.d/v2raya.asc</code></pre></div>
+<p>根据文档执行,这里以 Ubuntu 的情况为例,如果是 Debian and Linux Mint 需要根据文档修改</p>
+<p><a target="_blank" rel="noopener" href="https://www.if-not-true-then-false.com/2021/debian-ubuntu-linux-mint-nvidia-guide/">https://www.if-not-true-then-false.com/2021/debian-ubuntu-linux-mint-nvidia-guide/</a></p>
+<p>进入root用户</p>
+<blockquote>
+<p>如果是vmware的话是不能su的,需要先sudo passwd root改一下密码(可以相同),然后以后就可以了</p>
+</blockquote>
+<div class="code-wrapper"><pre><code class="hljs bash">sudo -i
+apt update
+apt upgrade
+apt autoremove $(dpkg -l xserver-xorg-video-nvidia* |grep ii |awk <span class="hljs-string">&#x27;&#123;print $2&#125;&#x27;</span>)
+apt reinstall xserver-xorg-video-nouveau
+reboot</code></pre></div>
 </li>
 <li>
-<p>添加 V2RayA 软件源</p>
-<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;deb https://apt.v2raya.org/ v2raya main&quot;</span> | sudo <span class="hljs-built_in">tee</span> /etc/apt/sources.list.d/v2raya.list
-sudo apt update</code></pre></div>
+<p>重启之后</p>
+<div class="code-wrapper"><pre><code class="hljs bash">sudo -i
+apt install linux-headers-$(<span class="hljs-built_in">uname</span> -r) gcc make acpid dkms libglvnd-core-dev libglvnd0 libglvnd-dev dracut
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;blacklist nouveau&quot;</span> &gt;&gt; /etc/modprobe.d/blacklist.conf</code></pre></div>
+<p>修改grub配置文件</p>
+<div class="code-wrapper"><pre><code class="hljs bash">vim /etc/default/grub</code></pre></div>
+<p>修改配置文件</p>
+<div class="code-wrapper"><pre><code class="hljs txt">GRUB_CMDLINE_LINUX_DEFAULT=&quot;quiet splash rd.driver.blacklist=nouveau&quot;</code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs bash">update-grub2
+<span class="hljs-built_in">mv</span> /boot/initrd.img-$(<span class="hljs-built_in">uname</span> -r) /boot/initrd.img-$(<span class="hljs-built_in">uname</span> -r)-nouveau
+dracut -q /boot/initrd.img-$(<span class="hljs-built_in">uname</span> -r) $(<span class="hljs-built_in">uname</span> -r)
+systemctl set-default multi-user.target
+reboot</code></pre></div>
 </li>
 <li>
-<p>安装 V2RayA</p>
-<div class="code-wrapper"><pre><code class="hljs bash">sudo apt install v2raya</code></pre></div>
-</li>
-<li>
-<p>启动并设置开机自启</p>
-<div class="code-wrapper"><pre><code class="hljs bash">sudo systemctl start v2raya.service
-sudo systemctl <span class="hljs-built_in">enable</span> v2raya.service</code></pre></div>
+<p>再次重启之后</p>
+<p>再次重启之后就失去了开机的图形界面,接下来的操作在命令行中执行</p>
+<div class="code-wrapper"><pre><code class="hljs bash">sudo -i
+<span class="hljs-built_in">cd</span> 进入下载的NVIDIA驱动的目录,浏览器下的话默认在 ~/Download
+./NVIDIA-Linux-*.run</code></pre></div>
+<p>然后一路ENTER确认就可以了</p>
+<p>这部分时间很短,结束之后重新回到命令行,这里要注意重新回到的命令行很小很小,在屏幕的左下角,你可以按下回车看到</p>
+<div class="code-wrapper"><pre><code class="hljs bash">systemctl set-default graphical.target
+reboot</code></pre></div>
+<p>安装完成</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/Screenshot%20from%202023-01-03%2010-25-47.png" srcset="/img/loading.gif" lazyload alt="Screenshot from 2023-01-03 10-25-47" /></p>
 </li>
 </ol>
-<p>安装之后就可以访问到UI界面了 <a target="_blank" rel="noopener" href="http://localhost:2017">http://localhost:2017</a></p>
-<blockquote>
-<p>如果是服务器配置的话还需要打开这个端口,入方向规则和出方向规则</p>
-</blockquote>
-<p>创建账号,导入节点,这里直接使用<a target="_blank" rel="noopener" href="https://me.tofly.cyou/user">V2free</a>的用户的订阅链接即可</p>
-<p>导入成功后SERVER中全选,测试HTTP连接,选择几个延迟较低的,应用即可</p>
-<p>默认端口为</p>
-<p>20170(socks5), 20171(http), 20172(带分流规则的http) 端口</p>
-<p>如果是桌面端的Ubuntu系统需要手动开启网络代理应用于本机(127.0.0.1)</p>
-<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20221115170933.png" srcset="/img/loading.gif" lazyload alt="20221115170933" /></p>
-<blockquote>
-<p>注意这里端口不是7890,三个分别应该是 20171 20171 20170</p>
-</blockquote>
-<p>如果是服务器端可以在 <code>.bashrc</code> 最后加入配置代理端口(不要忘记如果云服务器没开放这个端口要去云服务器网站手动开启这个端口的入出方向规则)</p>
-<div class="code-wrapper"><pre><code class="hljs bash">vim ~/.bashrc</code></pre></div>
-<p>加入</p>
-<div class="code-wrapper"><pre><code class="hljs txt">export http_proxy=&quot;http://localhost:20171&quot;
-export https_proxy=&quot;http://localhost:20171&quot;</code></pre></div>
-<p>激活环境</p>
-<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">source</span> ~/.bashrc</code></pre></div>
-<h3 id="clash-for-linux"><a class="markdownIt-Anchor" href="#clash-for-linux"></a> clash for linux</h3>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://me.tofly.cyou/doc/#/linux/clash">https://me.tofly.cyou/doc/#/linux/clash</a></p>
-</blockquote>
-<p>进入clash的<a target="_blank" rel="noopener" href="https://github.com/Dreamacro/clash/releases">release</a>,根据系统选择对应的文件</p>
-<p>通常来说是linux-amd64,两个安装包都可以,选择第一个即可</p>
-<blockquote>
-<p>386是对于32位的,amd64是x86</p>
-</blockquote>
-<p>下载完成之后解压得到可执行文件</p>
-<div class="code-wrapper"><pre><code class="hljs bash">gzip -f &lt;zip name&gt; -d</code></pre></div>
-<p>授权可执行权限</p>
-<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">chmod</span> +x clash</code></pre></div>
-<p>初始化执行</p>
-<div class="code-wrapper"><pre><code class="hljs bash">./clash</code></pre></div>
-<p>初始化执行 clash 会默认在 ~/.config/clash/ 目录下生成配置文件和全球IP地址库：config.yaml 和 Country.mmdb</p>
-<p>如果初始化出现问题可以到原网站手动下载</p>
-<p>用wget下载clash配置文件，替换默认的配置文件，下面的wget命令后面的 你的Clash订阅链接网址 ，用上面的实际的clash订阅链接替换</p>
-<p>wget -U “Mozilla/6.0” -O ~/.config/clash/config.yaml  你的Clash订阅链接网址</p>
-<p>再次启动clash, 这里使用后台启动, 前台启动的话如果关闭当前终端则clash代理就终止了</p>
-<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">nohup</span> ./clash &amp;</code></pre></div>
-<p>clash 默认 http 端口默认监听 7890 , socks5 端口默认监听 7891</p>
-<p>如果是ubuntu桌面端手动配置代理端口即可</p>
-<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20221115170933.png" srcset="/img/loading.gif" lazyload alt="20221115170933" /></p>
-<p>如果是服务器端可以在 <code>.bashrc</code> 最后加入配置代理端口(不要忘记如果云服务器没开放这个端口要去云服务器网站手动开启这个端口的入出方向规则)</p>
-<div class="code-wrapper"><pre><code class="hljs bash">vim ~/.bashrc</code></pre></div>
-<p>加入</p>
-<div class="code-wrapper"><pre><code class="hljs txt">export http_proxy=&quot;http://localhost:7890&quot;
-export https_proxy=&quot;http://localhost:7890&quot;</code></pre></div>
-<p>激活环境</p>
-<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">source</span> ~/.bashrc</code></pre></div>
 
             </div>
             <hr>
@@ -336,7 +316,7 @@ export https_proxy=&quot;http://localhost:7890&quot;</code></pre></div>
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">工作环境配置</a>
+                      <a class="hover-with-bg" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a>
                     
                   </div>
                 
@@ -353,9 +333,9 @@ export https_proxy=&quot;http://localhost:7890&quot;</code></pre></div>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/11/10/CSAPP/03-AttackLab/">
+                      <a href="/2022/11/29/%E6%9D%82/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">03-AttackLab</span>
+                        <span class="hidden-mobile">我的世界</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -363,8 +343,8 @@ export https_proxy=&quot;http://localhost:7890&quot;</code></pre></div>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/11/08/%E6%9C%8D%E5%8A%A1%E5%99%A8/docker%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/">
-                        <span class="hidden-mobile">docker基本命令</span>
+                      <a href="/2022/11/19/Cpp/Makefile%E8%BF%9B%E9%98%B6/">
+                        <span class="hidden-mobile">Makefile进阶</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
