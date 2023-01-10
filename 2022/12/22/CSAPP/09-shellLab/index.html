@@ -16,17 +16,17 @@
   <meta name="author" content="luzhixing12345">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言 shell lab实验是对于CSAPP第八章的内容的代码补充,需要在开始之前阅读掌握异常控制流(ECF)这一部分内容.中文版第三版524页开始  实验报告  开始之前 在正式开始实验之前我们先从一个宏观的角度来审视一下这次实验  其中出现了几个my开头的c文件,mysplit.c mystop.c myspin.c myint.c 这些文件的代码相当简单,正如其文件名所示.这些函数并没有参">
+    <meta name="description" content="前言 shell lab实验是对于CSAPP第八章的内容的代码补充,需要在开始之前阅读掌握异常控制流(ECF)这一部分内容.中文版第三版524页开始  实验内容 本次实验推荐大家在本机WSL中完成  开始之前 在正式开始实验之前我们先从一个宏观的角度来审视一下这次实验  其中出现了几个my开头的c文件,mysplit.c mystop.c myspin.c myint.c 这些文件的代码相当简单">
 <meta property="og:type" content="article">
 <meta property="og:title" content="09-shellLab">
 <meta property="og:url" content="https://luzhixing12345.github.io/2022/12/22/CSAPP/09-shellLab/index.html">
 <meta property="og:site_name" content="kamilu的博客">
-<meta property="og:description" content="前言 shell lab实验是对于CSAPP第八章的内容的代码补充,需要在开始之前阅读掌握异常控制流(ECF)这一部分内容.中文版第三版524页开始  实验报告  开始之前 在正式开始实验之前我们先从一个宏观的角度来审视一下这次实验  其中出现了几个my开头的c文件,mysplit.c mystop.c myspin.c myint.c 这些文件的代码相当简单,正如其文件名所示.这些函数并没有参">
+<meta property="og:description" content="前言 shell lab实验是对于CSAPP第八章的内容的代码补充,需要在开始之前阅读掌握异常控制流(ECF)这一部分内容.中文版第三版524页开始  实验内容 本次实验推荐大家在本机WSL中完成  开始之前 在正式开始实验之前我们先从一个宏观的角度来审视一下这次实验  其中出现了几个my开头的c文件,mysplit.c mystop.c myspin.c myint.c 这些文件的代码相当简单">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221226224053.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221226211353.png">
 <meta property="article:published_time" content="2022-12-22T13:22:39.000Z">
-<meta property="article:modified_time" content="2022-12-28T16:09:45.660Z">
+<meta property="article:modified_time" content="2023-01-10T13:51:45.432Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="CSAPP">
 <meta name="twitter:card" content="summary_large_image">
@@ -199,7 +199,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      225 分钟
+      227 分钟
     </span>
   
 
@@ -232,14 +232,15 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：11 天前
+                  本文最后更新于：3 分钟前
                 
               </p>
             
             <div class="markdown-body">
               <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
 <p>shell lab实验是对于CSAPP第八章的内容的代码补充,需要在开始之前阅读掌握异常控制流(ECF)这一部分内容.中文版第三版524页开始</p>
-<h2 id="实验报告"><a class="markdownIt-Anchor" href="#实验报告"></a> 实验报告</h2>
+<h2 id="实验内容"><a class="markdownIt-Anchor" href="#实验内容"></a> 实验内容</h2>
+<p>本次实验推荐大家在本机WSL中完成</p>
 <h3 id="开始之前"><a class="markdownIt-Anchor" href="#开始之前"></a> 开始之前</h3>
 <p>在正式开始实验之前我们先从一个宏观的角度来审视一下这次实验</p>
 <p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20221226224053.png" srcset="/img/loading.gif" lazyload alt="20221226224053" /></p>
@@ -298,10 +299,14 @@
 <p>然后是一些本次实验中作者提供的一些辅助函数,我们需要在完成这几个函数的同时利用到作者提供的这些辅助函数来执行或者或许信息,具体的函数内容我们放到对应的出现位置再去讲解</p>
 <p>接下来就是main函数了,先判断一下有没有携带<code>-h</code> <code>-v</code> <code>-p</code>参数,如果使用了那么执行相关函数.接下来使用<code>Signal</code>将四个中断信号注册到对应的方法.<code>initjob</code>将所有的任务初始化,进入while(1)死循环,输出prompt即<code>tsh&gt;</code>,刷新标准输出流然后进入<code>eval</code>,接着再次刷新,进入循环.</p>
 <p>现在我们的eval函数暂时未完成,所以整个程序运行的流程大致如此.</p>
-<p>除此之外我们注意到Makefile中提供了很方便的测试指令,比如想要测试trace11是否通过,可以使用</p>
-<div class="code-wrapper"><pre><code class="hljs bash">make test11</code></pre></div>
+<p>你可以直接运行编译后的tsh进入shell然后一行一行输入对应内容</p>
+<div class="code-wrapper"><pre><code class="hljs bash">./tsh
+
+tsh&gt; ....</code></pre></div>
+<p>除此之外我们注意到Makefile中提供了很方便的测试指令,比如想要测试trace08是否通过,可以使用</p>
+<div class="code-wrapper"><pre><code class="hljs bash">make test08</code></pre></div>
 <p>检测是否正确,可以使用</p>
-<div class="code-wrapper"><pre><code class="hljs bash">make rtest11</code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs bash">make rtest08</code></pre></div>
 <p>这里由于两次pid不同所以输出会有一点点差异,我们可以对比两次结果来判断是否正确实现了shell</p>
 <h3 id="trace01"><a class="markdownIt-Anchor" href="#trace01"></a> trace01</h3>
 <div class="code-wrapper"><pre><code class="hljs txt">#
@@ -359,7 +364,7 @@ quit</code></pre></div>
     bg=parseline(buf,argv);
     <span class="hljs-keyword">if</span> (argv[<span class="hljs-number">0</span>] == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span>;
     <span class="hljs-keyword">if</span> (!builtin_cmd(argv)) &#123;
-        <span class="hljs-keyword">if</span> ((pid = fork() == <span class="hljs-number">0</span>)) &#123;
+        <span class="hljs-keyword">if</span> ((pid = fork()) == <span class="hljs-number">0</span>) &#123;
             <span class="hljs-keyword">if</span> (execve(argv[<span class="hljs-number">0</span>],argv,environ) &lt; <span class="hljs-number">0</span>) &#123;
                 <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s: Command not found\n&quot;</span>,argv[<span class="hljs-number">0</span>]);
                 <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);
@@ -369,6 +374,9 @@ quit</code></pre></div>
     <span class="hljs-keyword">return</span>;
 &#125;</code></pre></div>
 <p>先使用builtin_cmd判断是否是内置的指令,如果不是则fork一个子进程,使用execve函数去执行当前的参数.execve函数的三个参数分别是argv[0]即&quot;/bin/echo&quot;这个程序的名字,argv其余参数包括需要输出的字符串,environ环境变量信息,这个值直接使用整个shell中的环境变量信息</p>
+<blockquote>
+<p>注意这里有一点点小问题,如果运行make test03那么输出正常,但是如果进入tsh并且输入<code>/bin/echo tsh&gt; quit</code>你会发现出现了 <code>tsh&gt;</code>的前缀,<strong>这里是一个bug</strong>,因为我们现在还并没有去处理子进程,我们会在下一关中完善<code>sigchld_handler</code>来解决这个问题</p>
+</blockquote>
 <h3 id="trace04"><a class="markdownIt-Anchor" href="#trace04"></a> trace04</h3>
 <div class="code-wrapper"><pre><code class="hljs txt">#
 # trace04.txt - Run a background job.
@@ -526,10 +534,10 @@ INT</code></pre></div>
 	sigfillset(&amp;mask_all);
 	sigprocmask(SIG_SETMASK, &amp;mask_all, &amp;prev);
 	<span class="hljs-type">pid_t</span> pid = fgpid(jobs);
-	sigprocmask(SIG_SETMASK, &amp;prev, <span class="hljs-literal">NULL</span>);
 	<span class="hljs-keyword">if</span> (pid &gt; <span class="hljs-number">0</span>) &#123;
 		kill(-pid,sig);
 	&#125;
+  sigprocmask(SIG_SETMASK, &amp;prev, <span class="hljs-literal">NULL</span>);
 	<span class="hljs-keyword">return</span>;
 &#125;</code></pre></div>
 <p>这里修改了两个地方,首先是完成了sigint_handler,如果接收到了INT信号,则通过fgpid找到当前的前台进程,使用kill杀死这个进程.这里kill的第一个参数是负数,代表杀死这个进程组的所有进程,对子进程及其所有后代都发送终止信号</p>
@@ -574,15 +582,15 @@ jobs</code></pre></div>
     &#123;
       sigprocmask(SIG_BLOCK, &amp;mask_all, &amp;prev);
       <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Job [%d] (%d) terminated by signal %d\n&quot;</span>, pid2jid(pid), pid, WTERMSIG(status));
-	  deletejob(jobs, pid);
+      deletejob(jobs, pid);
       sigprocmask(SIG_SETMASK, &amp;prev, <span class="hljs-literal">NULL</span>);
     &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (WIFSTOPPED(status)) &#123;
-	  sigprocmask(SIG_BLOCK, &amp;mask_all, &amp;prev);
-	  <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">job_t</span> *<span class="hljs-title">job</span>=</span>getjobpid(jobs,pid);
+      sigprocmask(SIG_BLOCK, &amp;mask_all, &amp;prev);
+      <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">job_t</span> *<span class="hljs-title">job</span>=</span>getjobpid(jobs,pid);
       job-&gt;state=ST;
       <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Job [%d] (%d) stopped by signal %d\n&quot;</span>,pid2jid(pid),pid,WSTOPSIG(status));
       sigprocmask(SIG_SETMASK, &amp;prev, <span class="hljs-literal">NULL</span>);
-	&#125;
+    &#125;
   &#125;
   <span class="hljs-keyword">return</span>;
 &#125;
@@ -592,10 +600,10 @@ jobs</code></pre></div>
 	sigfillset(&amp;mask_all);
 	sigprocmask(SIG_SETMASK, &amp;mask_all, &amp;prev);
 	<span class="hljs-type">pid_t</span> pid = fgpid(jobs);
-	sigprocmask(SIG_SETMASK, &amp;prev, <span class="hljs-literal">NULL</span>);
 	<span class="hljs-keyword">if</span> (pid &gt; <span class="hljs-number">0</span>) &#123;
 		kill(-pid,sig);
 	&#125;
+    sigprocmask(SIG_SETMASK, &amp;prev, <span class="hljs-literal">NULL</span>);
 	<span class="hljs-keyword">return</span>;
 &#125;</code></pre></div>
 <p>其中sigtstp_handler与sigint_handler实现完全相同,在sigchld_handler中找到对于TSTP(WIFSTOPPED)的信号,通过getjobpid找到对应任务并将其state修改为ST即可</p>
@@ -1146,15 +1154,15 @@ jobs</code></pre></div>
     &#123;
       sigprocmask(SIG_BLOCK, &amp;mask_all, &amp;prev);
       <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Job [%d] (%d) terminated by signal %d\n&quot;</span>, pid2jid(pid), pid, WTERMSIG(status));
-	  deletejob(jobs, pid);
+      deletejob(jobs, pid);
       sigprocmask(SIG_SETMASK, &amp;prev, <span class="hljs-literal">NULL</span>);
     &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (WIFSTOPPED(status)) &#123;
-	  sigprocmask(SIG_BLOCK, &amp;mask_all, &amp;prev);
-	  <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">job_t</span> *<span class="hljs-title">job</span>=</span>getjobpid(jobs,pid);
+      sigprocmask(SIG_BLOCK, &amp;mask_all, &amp;prev);
+      <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">job_t</span> *<span class="hljs-title">job</span>=</span>getjobpid(jobs,pid);
       job-&gt;state=ST;
       <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Job [%d] (%d) stopped by signal %d\n&quot;</span>,pid2jid(pid),pid,WSTOPSIG(status));
       sigprocmask(SIG_SETMASK, &amp;prev, <span class="hljs-literal">NULL</span>);
-	&#125;
+    &#125;
   &#125;
   <span class="hljs-keyword">return</span>;
 &#125;
@@ -1169,10 +1177,10 @@ jobs</code></pre></div>
 	sigfillset(&amp;mask_all);
 	sigprocmask(SIG_SETMASK, &amp;mask_all, &amp;prev);
 	<span class="hljs-type">pid_t</span> pid = fgpid(jobs);
-	sigprocmask(SIG_SETMASK, &amp;prev, <span class="hljs-literal">NULL</span>);
 	<span class="hljs-keyword">if</span> (pid &gt; <span class="hljs-number">0</span>) &#123;
 		kill(-pid,sig);
 	&#125;
+    sigprocmask(SIG_SETMASK, &amp;prev, <span class="hljs-literal">NULL</span>);
 	<span class="hljs-keyword">return</span>;
 &#125;
 
@@ -1186,10 +1194,10 @@ jobs</code></pre></div>
 	sigfillset(&amp;mask_all);
 	sigprocmask(SIG_SETMASK, &amp;mask_all, &amp;prev);
 	<span class="hljs-type">pid_t</span> pid = fgpid(jobs);
-	sigprocmask(SIG_SETMASK, &amp;prev, <span class="hljs-literal">NULL</span>);
 	<span class="hljs-keyword">if</span> (pid &gt; <span class="hljs-number">0</span>) &#123;
 		kill(-pid,sig);
 	&#125;
+    sigprocmask(SIG_SETMASK, &amp;prev, <span class="hljs-literal">NULL</span>);
 	<span class="hljs-keyword">return</span>;
 &#125;
 

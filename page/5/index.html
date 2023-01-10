@@ -183,253 +183,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/07/08/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday10/" target="_self">
-          自制操作系统day10-叠加处理
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/07/08/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday10/" target="_self">
-          
-          day10 叠加处理  向下舍入和向上舍入 这里作者讲的很清楚,例子举得也十分恰当 核心思想就是一个 i &#x3D; (i+0xfff) &amp; 0xfffff000,这种做法确实很巧妙  叠加处理  果然如我在day8中所料,在多窗口中准备做处理  首先我觉得很重要的一点是数据结构的清晰明了,窗口的阶段新定义的数据结构有两个 #define MAX_SHEETS		256 struct SHEET
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-07-08 03:58" pubdate>
-              2022-07-08
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/OS/">OS</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/07/07/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday9/" target="_self">
-          自制操作系统day9-内存管理
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/07/07/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday9/" target="_self">
-          
-          day9 内存管理  作者这里的思路还是蛮有趣的,从编译器优化后的汇编语言代码反推编译器对C语言代码的优化过程 最后既想保留编译器的优化,也想实现按页对内存进行访问,所以直接手写了汇编   挑战内存管理 作者这里介绍了两种内存管理的方式,一种是位图(bit map),一种是空闲链表  位图 对于第一种方式,先使用char的数组存储,每个数组元素代表该页(4KB)是否占用,0代表未占用,1代表占用
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-07-07 15:20" pubdate>
-              2022-07-07
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/OS/">OS</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/07/03/%E6%9D%82/pws/" target="_self">
-          Windows PowerShell美化以及 Vscode 终端美化配置
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/07/03/%E6%9D%82/pws/" target="_self">
-          
-          Windows Powershell美化以及 Vscode 终端美化配置 效果展示   下载 首先我们配置 Powershell, windows本身的Windows powershell(蓝色的)操作系统自带的并不是我们需要的 微软推出了一个新的终端terminal,是一个跨平台的应用程序,界面与之前的terminal相同但是增加了一些功能 点进去之后有两种下载方式,一种是官方推荐的使用 mi
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-07-03 22:12" pubdate>
-              2022-07-03
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%9D%82/">杂</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/06/27/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9F%BA%E7%A1%80%E8%BD%AF%E4%BB%B6%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%92%8C%E7%94%A8%E6%B3%95/" target="_self">
-          服务器基础软件环境搭建和用法
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/06/27/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9F%BA%E7%A1%80%E8%BD%AF%E4%BB%B6%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%92%8C%E7%94%A8%E6%B3%95/" target="_self">
-          
-          基本环境的安装 一般来说购买服务器的环节就有了安装操作系统的环节,你可以选择不同的操作系统.Centos,ubuntu等等其他unix系统 我个人是习惯使用debian操作系统的,比较稳定,网上的文档也很多.遇到的问题基本可以解决. 不同的操作系统确实有所差异,如果你遇到了什么问题不要忘记加上你的linux操作系统名字,或许才能搜索到正确的答案 选择一个操作系统之后稍事等待就帮你一键安装成功了,
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-06-27 13:13" pubdate>
-              2022-06-27
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/06/25/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday8/" target="_self">
-          自制操作系统day8-鼠标控制与32位模式切换
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/06/25/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday8/" target="_self">
-          
-          day8 鼠标控制与32位模式切换 如作者所言,左右键&#x2F;移动鼠标传出的三个值都有变化,鼠标键的状态取出低三位来判断,然后赋值给X Y 照葫芦画瓢就完事了   asmhead.nas的讲解 这段汇编还是很有难度的,要是看不懂就一听一过就行了 我比较关心的是这里,之前提到的 bootpack.hrb复制到0x00280000地址的处理,512KB. ; 所有剩下的,也就是 bootpack.hrb
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-06-25 15:48" pubdate>
-              2022-06-25
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/OS/">OS</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/06/14/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%85%A5%E9%97%A8/" target="_self">
-          服务器入门
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/06/14/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%85%A5%E9%97%A8/" target="_self">
-          
-          服务器的购买  如果你已经购买了一台服务器并且已经可以成功连接上服务器那么可以跳过这一部分  听起来服务器这个名字很厉害,总是听别人大谈特谈,一些专家技术骨干也是几句不离服务器,拥有一台服务器好像似乎是一件很酷的事情. 确实,拥有一台服务器可以实现很多有趣的功能,你可以通过https:&#x2F;&#x2F;kamilu.top访问我的网页,他目前还在建设当中,但你不觉得很酷吗? 那么我们废话不多说,直接开始吧~
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-06-14 01:39" pubdate>
-              2022-06-14
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/06/13/pytorch/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2-2/" target="_self">
+        <a href="/2022/06/13/python/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2-2/" target="_self">
           深度学习模型部署(2)-服务器与本地
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/06/13/pytorch/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2-2/" target="_self">
+        <a href="/2022/06/13/python/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2-2/" target="_self">
           
           既然是深度学习,那想必Python是主力开发语言了,这里我们暂时不考虑性能啊,响应啊,多线程高并发那么多,我们也不用什么java&#x2F;c++写一个后台服务器,我们的任务就只是单纯的部署到服务器上,能用就行啊.  毕竟我都用python了,还要啥性能呢,对吧  那么,我们接下来就来使用以下python的一个库: flask  flask入门 我们先来构建一个网页,和专业的的Web,Nodejs功能相似,
         </a>
@@ -449,7 +209,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/pytorch/">pytorch</a>
+              <a href="/tags/python/">python</a>
             
           </div>
         
@@ -463,13 +223,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/06/13/pytorch/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2-1/" target="_self">
+        <a href="/2022/06/13/python/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2-1/" target="_self">
           深度学习模型部署(1)-前言及基本介绍
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/06/13/pytorch/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2-1/" target="_self">
+        <a href="/2022/06/13/python/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2-1/" target="_self">
           
           本系列以pytorch为例,其他框架请移步别处.   前言 深度学习的教程很多,网上也有很多现成的简单的模型训练的例子和预训练模型,然而在实际的工业场景中,我们往往更加关注如何部署一个已经训练好的模型.  我们希望可以客户端&#x2F;移动端访问网页就可以看到模型的效果,计算由服务器帮我们处理. 我们希望在一个没有python环境的地方依然可以执行模型的效果 我们希望加速模型的计算,python换成c++
         </a>
@@ -489,7 +249,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/pytorch/">pytorch</a>
+              <a href="/tags/python/">python</a>
             
           </div>
         
@@ -577,11 +337,251 @@
     </article>
   </div>
 
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/05/26/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday5/" target="_self">
+          自制操作系统day5-结构体/文字显示与GDT/IDT初始化
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/05/26/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday5/" target="_self">
+          
+          day5 结构体&#x2F;文字显示与GDT&#x2F;IDT初始化 到现在看到这个结构体就能明白作者当初的用意了 struct BOOTINFO &amp;#123; 	char cyls, leds, vmode, reserve; 	short scrnx, scrny; 	char *vram; &amp;#125;; 与asmhead.nas中的 CYLS        EQU     0x0ff0 LEDS
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-05-26 01:54" pubdate>
+              2022-05-26
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/OS/">OS</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/05/26/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday4/" target="_self">
+          自制操作系统day4-C语言与画面显示
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/05/26/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday4/" target="_self">
+          
+          day4 C语言与画面显示 _write_mem8:    ; void write_mem8(int addr, int data)         MOV     ECX,[ESP+4]     ; [ESP+4] &#x3D; addr         MOV     AL,[ESP+8]      ; [ESP+8] &#x3D; data         MOV     [ECX],AL
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-05-26 00:29" pubdate>
+              2022-05-26
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/OS/">OS</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/05/24/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday3/" target="_self">
+          自制操作系统day3-进入32位模式并导入C语言
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/05/24/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday3/" target="_self">
+          
+          day3 自制操作系统day3-进入32位模式并导入C语言  start 这里遇到一个很难过的事情,如果我们向往常一样使用nask + qemu,会发现显示load error 正常来说看这个汇编代码JC应该是不执行,所以进入fin进入循环等待CPU启动,只使用nask直接生成img文件没有磁盘映像这个过程所以说出现问题,JC会直接跳转,显示load error  所以需要一个磁盘映像加入,da
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-05-24 21:55" pubdate>
+              2022-05-24
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/OS/">OS</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/05/19/GAN/GAN%E7%BD%91%E7%BB%9C%E8%AF%A6%E8%A7%A3(%E5%9B%9B)/" target="_self">
+          GAN网络详解(四) - 使用WGAN生成动漫头像
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/05/19/GAN/GAN%E7%BD%91%E7%BB%9C%E8%AF%A6%E8%A7%A3(%E5%9B%9B)/" target="_self">
+          
+          本文将会介绍一个我的项目,使用WGAN-GP生成动漫头像. 项目地址: Github-Anime-WGAN   简介 其实这个项目的起因很简单,就是想动手实践一下,顺着GAN往下学就到了WGAN-GP,然后就搜了搜代码找了一个很不错的项目跟着改了改,然后完成了这次任务 关于具体的训练细节,实验结果,潜在空间探索等等内容我都在项目的README里面写的很详细了,这里不再赘述,主要想讲一讲一些细节的部
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-05-19 17:38" pubdate>
+              2022-05-19
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/GAN/">GAN</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/05/19/%E6%9D%82/vscode%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/" target="_self">
+          vscode基本配置
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/05/19/%E6%9D%82/vscode%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/" target="_self">
+          
+          添加snipplet 在settings.json中添加如下设置启用markdown的snippets &quot;[markdown]&quot;: &amp;#123;    &quot;editor.formatOnSave&quot;: true,    &quot;editor.renderWhitespace&quot;: &quot;all&quot;,    &quot;editor.
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-05-19 03:14" pubdate>
+              2022-05-19
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%9D%82/">杂</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/05/18/GAN/GAN%E7%BD%91%E7%BB%9C%E8%AF%A6%E8%A7%A3(%E4%B8%89)/" target="_self">
+          GAN网络详解(三) - WGAN-CP 与 WGAN-GP
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/05/18/GAN/GAN%E7%BD%91%E7%BB%9C%E8%AF%A6%E8%A7%A3(%E4%B8%89)/" target="_self">
+          
+          本文将会介绍WGAN-CP和它的改进版本WGAN-GP  WGAN-CP  参考文章GAN到WGAN,作者连续五篇文章非常详尽的分析了WGAN,读完之后受益匪浅  鉴于GAN网络存在的种种问题,那么我们应该寻求一个新的距离来替代JS.该文认为需要对“生成分布与真实分布之间的距离”探索一种更合适的度量方法。作者们把眼光转向了Earth-Mover距离,简称EM距离,又称Wasserstein距离
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-05-18 23:08" pubdate>
+              2022-05-18
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/GAN/">GAN</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/4/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/#board">6</a><a class="page-number" href="/page/7/#board">7</a><a class="page-number" href="/page/8/#board">8</a><a class="extend next" rel="next" href="/page/6/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/4/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/#board">6</a><a class="page-number" href="/page/7/#board">7</a><a class="extend next" rel="next" href="/page/6/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
