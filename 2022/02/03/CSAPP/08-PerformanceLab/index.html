@@ -1,0 +1,644 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://raw.githubusercontent.com/learner-lu/picbed/master/logo.png">
+  <link rel="icon" href="https://raw.githubusercontent.com/learner-lu/picbed/master/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#4a00e0">
+  <meta name="author" content="luzhixing12345">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="前言 performance lab 实验用于理解一些程序中的优化手段, 但是本身这个实验设计的比较粗糙, 甚至没有一个很好的评判标准, 程序使用的计时器甚至每次运行得分都会有所波动… 看了些其他的文章也都说这个实验已经被Cachelab取代了,不过这个实验本身并不算很难,简单的花一点时间就可以搞定  做下来感觉价值确实不是很高   实验背景 实验pdf里写的比较清晰了,需要完成kernels.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="08-PerformanceLab">
+<meta property="og:url" content="https://luzhixing12345.github.io/2022/02/03/CSAPP/08-PerformanceLab/index.html">
+<meta property="og:site_name" content="kamilu的博客">
+<meta property="og:description" content="前言 performance lab 实验用于理解一些程序中的优化手段, 但是本身这个实验设计的比较粗糙, 甚至没有一个很好的评判标准, 程序使用的计时器甚至每次运行得分都会有所波动… 看了些其他的文章也都说这个实验已经被Cachelab取代了,不过这个实验本身并不算很难,简单的花一点时间就可以搞定  做下来感觉价值确实不是很高   实验背景 实验pdf里写的比较清晰了,需要完成kernels.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230203204608.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230203204709.png">
+<meta property="article:published_time" content="2022-02-03T13:22:39.000Z">
+<meta property="article:modified_time" content="2023-02-04T08:42:49.659Z">
+<meta property="article:author" content="luzhixing12345">
+<meta property="article:tag" content="CSAPP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230203204608.png">
+  
+  
+  <title>08-PerformanceLab - kamilu的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"luzhixing12345.github.io","root":"/","version":"1.8.14","typing":{"enable":false,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"fEy8W8VvIoc26nT53dV2157j-gzGzoHsz","app_key":"s9HXuqmvBWrOaAiLA07Jg59A","server_url":"https://fey8w8vv.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Kamilu-blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://raw.githubusercontent.com/learner-lu/picbed/master/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="08-PerformanceLab">
+              
+                08-PerformanceLab
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-02-03 21:22" pubdate>
+        2022年2月3日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7.2k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      61 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">08-PerformanceLab</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：5 天前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>performance lab 实验用于理解一些程序中的优化手段, 但是本身这个实验设计的比较粗糙, 甚至没有一个很好的评判标准, 程序使用的计时器甚至每次运行得分都会有所波动…</p>
+<p>看了些其他的文章也都说这个实验已经被Cachelab取代了,不过这个实验本身并不算很难,简单的花一点时间就可以搞定</p>
+<blockquote>
+<p>做下来感觉价值确实不是很高</p>
+</blockquote>
+<h2 id="实验背景"><a class="markdownIt-Anchor" href="#实验背景"></a> 实验背景</h2>
+<p>实验pdf里写的比较清晰了,需要完成kernels.c里面的两个函数rotate和smooth,是两个图像处理里面十分常用的函数</p>
+<p>图片是一个NxN的矩阵,其中rotate函数就是将图片逆时针旋转九十度</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230203204608.png" srcset="/img/loading.gif" lazyload alt="20230203204608" /></p>
+<p>smooth函数就是计算每个像素块3x3范围内的平均值</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230203204709.png" srcset="/img/loading.gif" lazyload alt="20230203204709" /></p>
+<p>在kernels.c中给出了两个naive的函数实现,但明显存在不足之处以及可以优化的地方</p>
+<p>本身在优化里面课本上给出了几种常见的程序优化方式</p>
+<ul>
+<li>代码移动(code motion):例如将for循环中的a.size()提取出来</li>
+<li>循环展开(loop unrolling): 减少了索引计算的次数(i++)和条件分支的判断次数(i&lt;100),同时在cache映射方面也会有好处</li>
+<li>分块(blocking):cachelab的核心部分,充分利用缓存,减少访存次数和miss次数</li>
+<li>消除内存引用: 例如用一个temp变量计算和,然后再赋值给A[dst]而不是每次都A[dst]+=value</li>
+<li>累积变量和重新组合，提高指令并行性</li>
+<li>功能性风格重写条件操作，即用三元运算符</li>
+</ul>
+<p>两个函数分别50分满分</p>
+<h2 id="实验报告"><a class="markdownIt-Anchor" href="#实验报告"></a> 实验报告</h2>
+<h3 id="rotate"><a class="markdownIt-Anchor" href="#rotate"></a> rotate</h3>
+<p>很显然src dst两个矩阵的旋转变换分块的方式要好很多,分块之后再循环展开,其他的优化方法确实这里也用不上</p>
+<p>参考<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000038753527">分块优化思路</a>,从8x8分块优化到32x32,然后再展开</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">rotate</span><span class="hljs-params">(<span class="hljs-type">int</span> dim, pixel* src, pixel* dst)</span>
+&#123;
+    <span class="hljs-type">int</span> i,j;
+    <span class="hljs-type">int</span> dst_base = (dim<span class="hljs-number">-1</span>)*dim;
+    dst +=dst_base;
+    <span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span>;i &lt; dim;i += <span class="hljs-number">32</span>)&#123;
+        <span class="hljs-keyword">for</span>(j = <span class="hljs-number">0</span>;j &lt; dim;j++)&#123;
+            *dst = *src; src +=dim; dst++;
+            *dst = *src; src +=dim; dst++;
+            *dst = *src; src +=dim; dst++;
+            *dst = *src; src +=dim; dst++;
+            *dst = *src; src +=dim; dst++;
+            *dst = *src; src +=dim; dst++;
+            *dst = *src; src +=dim; dst++;
+            *dst = *src; src +=dim; dst++;
+            *dst = *src; src +=dim; dst++;
+            *dst = *src; src +=dim; dst++;
+            *dst = *src; src +=dim; dst++;
+            *dst = *src; src +=dim; dst++;
+            *dst = *src; src +=dim; dst++;
+            *dst = *src; src +=dim; dst++;
+            *dst = *src; src +=dim; dst++;
+            *dst = *src; src +=dim; dst++;
+            *dst = *src; src +=dim; dst++;
+            *dst = *src; src +=dim; dst++;
+            *dst = *src; src +=dim; dst++;
+            *dst = *src; src +=dim; dst++;
+            *dst = *src; src +=dim; dst++;
+            *dst = *src; src +=dim; dst++;
+            *dst = *src; src +=dim; dst++;
+            *dst = *src; src +=dim; dst++;
+            *dst = *src; src +=dim; dst++;
+            *dst = *src; src +=dim; dst++;
+            *dst = *src; src +=dim; dst++;
+            *dst = *src; src +=dim; dst++;
+            *dst = *src; src +=dim; dst++;
+            *dst = *src; src +=dim; dst++;
+            *dst = *src; src +=dim; dst++;
+            *dst = *src; src++;
+            src -= (dim&lt;&lt;<span class="hljs-number">5</span>)-dim;              <span class="hljs-comment">//src -=31*dim;</span>
+            dst -=<span class="hljs-number">31</span>+dim;
+        &#125;
+        dst +=dst_base + dim;
+        dst +=<span class="hljs-number">32</span>;
+        src +=(dim&lt;&lt;<span class="hljs-number">5</span>)-dim;                    <span class="hljs-comment">//src +=31*dim;</span>
+    &#125;
+&#125;</code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs bash">Rotate: Version = rotate() <span class="hljs-keyword">function</span>:
+Dim             64      128     256     512     1024    Mean
+Your CPEs       2.3     2.2     2.2     2.3     3.3
+Baseline CPEs   14.7    40.1    46.4    65.9    94.5
+Speedup         6.5     18.0    21.0    28.8    28.7    18.2</code></pre></div>
+<p>最后可以得到18.2/50分,不是很好提升了…</p>
+<h3 id="smooth"><a class="markdownIt-Anchor" href="#smooth"></a> smooth</h3>
+<p>对于smooth函数的优化思路就比较明显了,首先每次都调用avg算一个3x3没必要,用一个变量保存移动的时候仅更新6个即可</p>
+<p>减少函数调用等等,这里直接给出代码修改</p>
+<p>先处理角,处理边的情况,然后处理中心区域,最后再处理边角的情况</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">smooth</span><span class="hljs-params">(<span class="hljs-type">int</span> dim, pixel* src, pixel* dst)</span>
+&#123;
+    <span class="hljs-type">int</span> i, j;
+    <span class="hljs-type">int</span> dim0 = dim;
+    <span class="hljs-type">int</span> dim1 = dim - <span class="hljs-number">1</span>;
+    <span class="hljs-type">int</span> dim2 = dim - <span class="hljs-number">2</span>;
+    pixel *P1, *P2, *P3;
+    pixel* dst1;
+    P1 = src;
+    P2 = P1 + dim0;
+    <span class="hljs-comment">// 左上角像素处理</span>
+    dst-&gt;red = (P1-&gt;red + (P1 + <span class="hljs-number">1</span>)-&gt;red + P2-&gt;red + (P2 + <span class="hljs-number">1</span>)-&gt;red) &gt;&gt; <span class="hljs-number">2</span>;
+    dst-&gt;green = (P1-&gt;green + (P1 + <span class="hljs-number">1</span>)-&gt;green + P2-&gt;green + (P2 + <span class="hljs-number">1</span>)-&gt;green) &gt;&gt; <span class="hljs-number">2</span>;
+    dst-&gt;blue = (P1-&gt;blue + (P1 + <span class="hljs-number">1</span>)-&gt;blue + P2-&gt;blue + (P2 + <span class="hljs-number">1</span>)-&gt;blue) &gt;&gt; <span class="hljs-number">2</span>;
+    dst++;
+    <span class="hljs-comment">// 上边界处理</span>
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">1</span>; i &lt; dim1; i++) &#123;
+        dst-&gt;red = (P1-&gt;red + (P1 + <span class="hljs-number">1</span>)-&gt;red + (P1 + <span class="hljs-number">2</span>)-&gt;red + P2-&gt;red + (P2 + <span class="hljs-number">1</span>)-&gt;red + (P2 + <span class="hljs-number">2</span>)-&gt;red) / <span class="hljs-number">6</span>;
+        dst-&gt;green = (P1-&gt;green + (P1 + <span class="hljs-number">1</span>)-&gt;green + (P1 + <span class="hljs-number">2</span>)-&gt;green + P2-&gt;green + (P2 + <span class="hljs-number">1</span>)-&gt;green + (P2 + <span class="hljs-number">2</span>)-&gt;green) / <span class="hljs-number">6</span>;
+        dst-&gt;blue = (P1-&gt;blue + (P1 + <span class="hljs-number">1</span>)-&gt;blue + (P1 + <span class="hljs-number">2</span>)-&gt;blue + P2-&gt;blue + (P2 + <span class="hljs-number">1</span>)-&gt;blue + (P2 + <span class="hljs-number">2</span>)-&gt;blue) / <span class="hljs-number">6</span>;
+        dst++;
+        P1++;
+        P2++;
+    &#125;
+    <span class="hljs-comment">// 右上角像素处理</span>
+    dst-&gt;red = (P1-&gt;red + (P1 + <span class="hljs-number">1</span>)-&gt;red + P2-&gt;red + (P2 + <span class="hljs-number">1</span>)-&gt;red) &gt;&gt; <span class="hljs-number">2</span>;
+    dst-&gt;green = (P1-&gt;green + (P1 + <span class="hljs-number">1</span>)-&gt;green + P2-&gt;green + (P2 + <span class="hljs-number">1</span>)-&gt;green) &gt;&gt; <span class="hljs-number">2</span>;
+    dst-&gt;blue = (P1-&gt;blue + (P1 + <span class="hljs-number">1</span>)-&gt;blue + P2-&gt;blue + (P2 + <span class="hljs-number">1</span>)-&gt;blue) &gt;&gt; <span class="hljs-number">2</span>;
+    dst++;
+    P1 = src;
+    P2 = P1 + dim0;
+    P3 = P2 + dim0;
+    <span class="hljs-comment">// 左边界处理</span>
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">1</span>; i &lt; dim1; i++) &#123;
+        dst-&gt;red = (P1-&gt;red + (P1 + <span class="hljs-number">1</span>)-&gt;red + P2-&gt;red + (P2 + <span class="hljs-number">1</span>)-&gt;red + P3-&gt;red + (P3 + <span class="hljs-number">1</span>)-&gt;red) / <span class="hljs-number">6</span>;
+        dst-&gt;green = (P1-&gt;green + (P1 + <span class="hljs-number">1</span>)-&gt;green + P2-&gt;green + (P2 + <span class="hljs-number">1</span>)-&gt;green + P3-&gt;green + (P3 + <span class="hljs-number">1</span>)-&gt;green) / <span class="hljs-number">6</span>;
+        dst-&gt;blue = (P1-&gt;blue + (P1 + <span class="hljs-number">1</span>)-&gt;blue + P2-&gt;blue + (P2 + <span class="hljs-number">1</span>)-&gt;blue + P3-&gt;blue + (P3 + <span class="hljs-number">1</span>)-&gt;blue) / <span class="hljs-number">6</span>;
+        dst++;
+        dst1 = dst + <span class="hljs-number">1</span>;
+        <span class="hljs-comment">// 中间主体部分处理</span>
+        <span class="hljs-keyword">for</span> (j = <span class="hljs-number">1</span>; j &lt; dim2; j += <span class="hljs-number">2</span>) &#123;
+            <span class="hljs-comment">// 同时处理两个像素</span>
+            dst-&gt;red = (P1-&gt;red + (P1 + <span class="hljs-number">1</span>)-&gt;red + (P1 + <span class="hljs-number">2</span>)-&gt;red + P2-&gt;red + (P2 + <span class="hljs-number">1</span>)-&gt;red + (P2 + <span class="hljs-number">2</span>)-&gt;red + P3-&gt;red + (P3 + <span class="hljs-number">1</span>)-&gt;red + (P3 + <span class="hljs-number">2</span>)-&gt;red) / <span class="hljs-number">9</span>;
+            dst-&gt;green = (P1-&gt;green + (P1 + <span class="hljs-number">1</span>)-&gt;green + (P1 + <span class="hljs-number">2</span>)-&gt;green + P2-&gt;green + (P2 + <span class="hljs-number">1</span>)-&gt;green + (P2 + <span class="hljs-number">2</span>)-&gt;green + P3-&gt;green + (P3 + <span class="hljs-number">1</span>)-&gt;green + (P3 + <span class="hljs-number">2</span>)-&gt;green) / <span class="hljs-number">9</span>;
+            dst-&gt;blue = (P1-&gt;blue + (P1 + <span class="hljs-number">1</span>)-&gt;blue + (P1 + <span class="hljs-number">2</span>)-&gt;blue + P2-&gt;blue + (P2 + <span class="hljs-number">1</span>)-&gt;blue + (P2 + <span class="hljs-number">2</span>)-&gt;blue + P3-&gt;blue + (P3 + <span class="hljs-number">1</span>)-&gt;blue + (P3 + <span class="hljs-number">2</span>)-&gt;blue) / <span class="hljs-number">9</span>;
+            dst1-&gt;red = ((P1 + <span class="hljs-number">3</span>)-&gt;red + (P1 + <span class="hljs-number">1</span>)-&gt;red + (P1 + <span class="hljs-number">2</span>)-&gt;red + (P2 + <span class="hljs-number">3</span>)-&gt;red + (P2 + <span class="hljs-number">1</span>)-&gt;red + (P2 + <span class="hljs-number">2</span>)-&gt;red + (P3 + <span class="hljs-number">3</span>)-&gt;red + (P3 + <span class="hljs-number">1</span>)-&gt;red + (P3 + <span class="hljs-number">2</span>)-&gt;red) / <span class="hljs-number">9</span>;
+            dst1-&gt;green = ((P1 + <span class="hljs-number">3</span>)-&gt;green + (P1 + <span class="hljs-number">1</span>)-&gt;green + (P1 + <span class="hljs-number">2</span>)-&gt;green + (P2 + <span class="hljs-number">3</span>)-&gt;green + (P2 + <span class="hljs-number">1</span>)-&gt;green + (P2 + <span class="hljs-number">2</span>)-&gt;green + (P3 + <span class="hljs-number">3</span>)-&gt;green + (P3 + <span class="hljs-number">1</span>)-&gt;green + (P3 + <span class="hljs-number">2</span>)-&gt;green) / <span class="hljs-number">9</span>;
+            dst1-&gt;blue = ((P1 + <span class="hljs-number">3</span>)-&gt;blue + (P1 + <span class="hljs-number">1</span>)-&gt;blue + (P1 + <span class="hljs-number">2</span>)-&gt;blue + (P2 + <span class="hljs-number">3</span>)-&gt;blue + (P2 + <span class="hljs-number">1</span>)-&gt;blue + (P2 + <span class="hljs-number">2</span>)-&gt;blue + (P3 + <span class="hljs-number">3</span>)-&gt;blue + (P3 + <span class="hljs-number">1</span>)-&gt;blue + (P3 + <span class="hljs-number">2</span>)-&gt;blue) / <span class="hljs-number">9</span>;
+            dst += <span class="hljs-number">2</span>;
+            dst1 += <span class="hljs-number">2</span>;
+            P1 += <span class="hljs-number">2</span>;
+            P2 += <span class="hljs-number">2</span>;
+            P3 += <span class="hljs-number">2</span>;
+        &#125;
+        <span class="hljs-keyword">for</span> (; j &lt; dim1; j++) &#123;
+            dst-&gt;red = (P1-&gt;red + (P1 + <span class="hljs-number">1</span>)-&gt;red + (P1 + <span class="hljs-number">2</span>)-&gt;red + P2-&gt;red + (P2 + <span class="hljs-number">1</span>)-&gt;red + (P2 + <span class="hljs-number">2</span>)-&gt;red + P3-&gt;red + (P3 + <span class="hljs-number">1</span>)-&gt;red + (P3 + <span class="hljs-number">2</span>)-&gt;red) / <span class="hljs-number">9</span>;
+            dst-&gt;green = (P1-&gt;green + (P1 + <span class="hljs-number">1</span>)-&gt;green + (P1 + <span class="hljs-number">2</span>)-&gt;green + P2-&gt;green + (P2 + <span class="hljs-number">1</span>)-&gt;green + (P2 + <span class="hljs-number">2</span>)-&gt;green + P3-&gt;green + (P3 + <span class="hljs-number">1</span>)-&gt;green + (P3 + <span class="hljs-number">2</span>)-&gt;green) / <span class="hljs-number">9</span>;
+            dst-&gt;blue = (P1-&gt;blue + (P1 + <span class="hljs-number">1</span>)-&gt;blue + (P1 + <span class="hljs-number">2</span>)-&gt;blue + P2-&gt;blue + (P2 + <span class="hljs-number">1</span>)-&gt;blue + (P2 + <span class="hljs-number">2</span>)-&gt;blue + P3-&gt;blue + (P3 + <span class="hljs-number">1</span>)-&gt;blue + (P3 + <span class="hljs-number">2</span>)-&gt;blue) / <span class="hljs-number">9</span>;
+            dst++;
+            P1++;
+            P2++;
+            P3++;
+        &#125;
+        <span class="hljs-comment">// 右侧边界处理</span>
+        dst-&gt;red = (P1-&gt;red + (P1 + <span class="hljs-number">1</span>)-&gt;red + P2-&gt;red + (P2 + <span class="hljs-number">1</span>)-&gt;red + P3-&gt;red + (P3 + <span class="hljs-number">1</span>)-&gt;red) / <span class="hljs-number">6</span>;
+        dst-&gt;green = (P1-&gt;green + (P1 + <span class="hljs-number">1</span>)-&gt;green + P2-&gt;green + (P2 + <span class="hljs-number">1</span>)-&gt;green + P3-&gt;green + (P3 + <span class="hljs-number">1</span>)-&gt;green) / <span class="hljs-number">6</span>;
+        dst-&gt;blue = (P1-&gt;blue + (P1 + <span class="hljs-number">1</span>)-&gt;blue + P2-&gt;blue + (P2 + <span class="hljs-number">1</span>)-&gt;blue + P3-&gt;blue + (P3 + <span class="hljs-number">1</span>)-&gt;blue) / <span class="hljs-number">6</span>;
+        dst++;
+        P1 += <span class="hljs-number">2</span>;
+        P2 += <span class="hljs-number">2</span>;
+        P3 += <span class="hljs-number">2</span>;
+    &#125;
+    <span class="hljs-comment">// 右下角处理</span>
+    dst-&gt;red = (P1-&gt;red + (P1 + <span class="hljs-number">1</span>)-&gt;red + P2-&gt;red + (P2 + <span class="hljs-number">1</span>)-&gt;red) &gt;&gt; <span class="hljs-number">2</span>;
+    dst-&gt;green = (P1-&gt;green + (P1 + <span class="hljs-number">1</span>)-&gt;green + P2-&gt;green + (P2 + <span class="hljs-number">1</span>)-&gt;green) &gt;&gt; <span class="hljs-number">2</span>;
+    dst-&gt;blue = (P1-&gt;blue + (P1 + <span class="hljs-number">1</span>)-&gt;blue + P2-&gt;blue + (P2 + <span class="hljs-number">1</span>)-&gt;blue) &gt;&gt; <span class="hljs-number">2</span>;
+    dst++;
+    <span class="hljs-comment">// 下边界处理</span>
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">1</span>; i &lt; dim1; i++) &#123;
+        dst-&gt;red = (P1-&gt;red + (P1 + <span class="hljs-number">1</span>)-&gt;red + (P1 + <span class="hljs-number">2</span>)-&gt;red + P2-&gt;red + (P2 + <span class="hljs-number">1</span>)-&gt;red + (P2 + <span class="hljs-number">2</span>)-&gt;red) / <span class="hljs-number">6</span>;
+        dst-&gt;green = (P1-&gt;green + (P1 + <span class="hljs-number">1</span>)-&gt;green + (P1 + <span class="hljs-number">2</span>)-&gt;green + P2-&gt;green + (P2 + <span class="hljs-number">1</span>)-&gt;green + (P2 + <span class="hljs-number">2</span>)-&gt;green) / <span class="hljs-number">6</span>;
+        dst-&gt;blue = (P1-&gt;blue + (P1 + <span class="hljs-number">1</span>)-&gt;blue + (P1 + <span class="hljs-number">2</span>)-&gt;blue + P2-&gt;blue + (P2 + <span class="hljs-number">1</span>)-&gt;blue + (P2 + <span class="hljs-number">2</span>)-&gt;blue) / <span class="hljs-number">6</span>;
+        dst++;
+        P1++;
+        P2++;
+    &#125;
+    <span class="hljs-comment">// 右下角像素处理</span>
+    dst-&gt;red = (P1-&gt;red + (P1 + <span class="hljs-number">1</span>)-&gt;red + P2-&gt;red + (P2 + <span class="hljs-number">1</span>)-&gt;red) &gt;&gt; <span class="hljs-number">2</span>;
+    dst-&gt;green = (P1-&gt;green + (P1 + <span class="hljs-number">1</span>)-&gt;green + P2-&gt;green + (P2 + <span class="hljs-number">1</span>)-&gt;green) &gt;&gt; <span class="hljs-number">2</span>;
+    dst-&gt;blue = (P1-&gt;blue + (P1 + <span class="hljs-number">1</span>)-&gt;blue + P2-&gt;blue + (P2 + <span class="hljs-number">1</span>)-&gt;blue) &gt;&gt; <span class="hljs-number">2</span>;
+&#125;</code></pre></div>
+<p>这里其实还可以用三个unsigned int变量记录sum_r,sum_g, sum_b,然后每次移动的时候只更新最右侧三个和减去最左侧三个</p>
+<div class="code-wrapper"><pre><code class="hljs bash">root@da1811a84ddc:~/csapp/08Performance Lab/perflab<span class="hljs-comment"># ./driver</span>
+Teamname: bovik1
+Member 1: Harry Q. Bovik
+Email 1: bovik@nowhere.edu
+
+Rotate: Version = naive_rotate: Naive baseline implementation:
+Dim             64      128     256     512     1024    Mean
+Your CPEs       2.9     4.3     6.5     10.2    11.4
+Baseline CPEs   14.7    40.1    46.4    65.9    94.5
+Speedup         5.1     9.3     7.1     6.5     8.3     7.1
+
+Rotate: Version = rotate: Current working version:
+Dim             64      128     256     512     1024    Mean
+Your CPEs       2.3     2.2     2.2     2.3     3.2
+Baseline CPEs   14.7    40.1    46.4    65.9    94.5
+Speedup         6.5     17.9    20.9    28.8    29.2    18.3
+
+Smooth: Version = smooth: Current working version:
+Dim             32      64      128     256     512     Mean
+Your CPEs       15.3    15.7    16.1    15.8    15.9
+Baseline CPEs   695.0   698.0   702.0   717.0   722.0
+Speedup         45.5    44.5    43.7    45.4    45.4    44.9
+
+Smooth: Version = naive_smooth: Naive baseline implementation:
+Dim             32      64      128     256     512     Mean
+Your CPEs       60.2    50.7    61.6    60.4    60.9
+Baseline CPEs   695.0   698.0   702.0   717.0   722.0
+Speedup         11.5    13.8    11.4    11.9    11.9    12.1
+
+Summary of Your Best Scores:
+  Rotate: 18.3 (rotate: Current working version)
+  Smooth: 44.9 (smooth: Current working version)</code></pre></div>
+<p>最后得分44.9/50</p>
+<h2 id="参考"><a class="markdownIt-Anchor" href="#参考"></a> 参考</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/488141606">CSAPP | Lab6-Performance Lab 深入解析</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/Exely/CSAPP-Labs/blob/master/notes/perflab.md">github Performance Lab 笔记</a></li>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000038753527">perf lab</a></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/CSAPP/">CSAPP</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/02/04/CSAPP/10-MallocLab/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">10-MallocLab</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

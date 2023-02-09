@@ -183,286 +183,6 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/07/11/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday13/" target="_self">
-          自制操作系统day13-定时器(2)
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/07/11/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday13/" target="_self">
-          
-          定时器(2) 开始是一些结构化的调整和测试速度,我也就没测懒 然后是对缓冲区的调整FIFO32,将所有外部IO的输入和输出全部整合到一个缓冲区的队列中 这一部分我重点说明一下线性表和哨兵,这里的处理思路很好  线性表的处理 由于中断处理中不应该耗时过长,而作者提及的这两处都涉及到了内存单元的读写,这显然是不希望看到的   那么如何避免这种内存单元的移动呢? 新加了一个指针next struct
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-07-11 22:41" pubdate>
-              2022-07-11
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/OS/">OS</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/07/11/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday12/" target="_self">
-          自制操作系统day12-定时器(1)
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/07/11/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday12/" target="_self">
-          
-          定时器(1) 说起来定时器这个话题倒是让我想起来之前在知乎看到的一个问题,如何设计一个定时装置,多少多少秒记录一次.因为之前考虑到CPU主频的问题,时钟周期这个东西也没办法具有通用性.看起来似乎作者给了我答案  这里直接引用作者书中的原话  在电脑中管理定时器需要对PIT进行设定,PIT是&quot;Programmable Interval Timer&quot;的缩写,可编程的间隔型定时器.
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-07-11 22:41" pubdate>
-              2022-07-11
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/OS/">OS</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/07/10/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%90%84%E9%A1%B9%E9%85%8D%E7%BD%AE/" target="_self">
-          服务器的各项配置
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/07/10/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%90%84%E9%A1%B9%E9%85%8D%E7%BD%AE/" target="_self">
-          
-          本文以华为的云服务器为例,各大服务器平台基本流程类似.本文默认已经购买了一台服务器,并且完成了基本的操作系统搭建,具体可以参考本系列之前的两篇文章   服务器端口  如果你对服务器的基本端口&#x2F;域名&#x2F;端口号尚且不清楚,可以先阅读这篇科普文章,IP,域名和端口号之间的联系,我觉得说的还是清晰的  我们现在来运行一个服务吧,在&#x2F;home&#x2F;目录下新建一个project文件夹,新建 server.js文件
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-07-10 10:38" pubdate>
-              2022-07-10
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/07/08/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday11/" target="_self">
-          自制操作系统day11-制作窗口
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/07/08/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday11/" target="_self">
-          
-          day11 制作窗口  绘图与窗口 对于画面外的支持就是简单的处理一下sheet_refreshsub这个函数,将显示的范围和(0 0 ct1-&gt;xsize ct1-&gt;ysize)比较,进行约束 然后就是调整一下函数的结构,参数之类的,这里传参调整一下就可以了.  然后是绘制一个窗口,就是调用了之前的一些函数,这一部分也没什么特别好说的  然后一个计数器,疯狂刷新闪屏.闪屏的原因作者
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-07-08 12:59" pubdate>
-              2022-07-08
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/OS/">OS</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/07/08/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday10/" target="_self">
-          自制操作系统day10-叠加处理
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/07/08/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday10/" target="_self">
-          
-          day10 叠加处理  向下舍入和向上舍入 这里作者讲的很清楚,例子举得也十分恰当 核心思想就是一个 i &#x3D; (i+0xfff) &amp; 0xfffff000,这种做法确实很巧妙  叠加处理  果然如我在day8中所料,在多窗口中准备做处理  首先我觉得很重要的一点是数据结构的清晰明了,窗口的阶段新定义的数据结构有两个 #define MAX_SHEETS		256 struct SHEET
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-07-08 03:58" pubdate>
-              2022-07-08
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/OS/">OS</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/07/07/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday9/" target="_self">
-          自制操作系统day9-内存管理
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/07/07/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday9/" target="_self">
-          
-          day9 内存管理  作者这里的思路还是蛮有趣的,从编译器优化后的汇编语言代码反推编译器对C语言代码的优化过程 最后既想保留编译器的优化,也想实现按页对内存进行访问,所以直接手写了汇编   挑战内存管理 作者这里介绍了两种内存管理的方式,一种是位图(bit map),一种是空闲链表  位图 对于第一种方式,先使用char的数组存储,每个数组元素代表该页(4KB)是否占用,0代表未占用,1代表占用
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-07-07 15:20" pubdate>
-              2022-07-07
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/OS/">OS</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/07/03/%E6%9D%82/pws/" target="_self">
-          Windows PowerShell美化以及 Vscode 终端美化配置
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/07/03/%E6%9D%82/pws/" target="_self">
-          
-          Windows Powershell美化以及 Vscode 终端美化配置 效果展示   下载 首先我们配置 Powershell, windows本身的Windows powershell(蓝色的)操作系统自带的并不是我们需要的 微软推出了一个新的终端terminal,是一个跨平台的应用程序,界面与之前的terminal相同但是增加了一些功能 点进去之后有两种下载方式,一种是官方推荐的使用 mi
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-07-03 22:12" pubdate>
-              2022-07-03
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%9D%82/">杂</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
         <a href="/2022/06/27/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9F%BA%E7%A1%80%E8%BD%AF%E4%BB%B6%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%92%8C%E7%94%A8%E6%B3%95/" target="_self">
           服务器基础软件环境搭建和用法
         </a>
@@ -490,46 +210,6 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/06/25/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday8/" target="_self">
-          自制操作系统day8-鼠标控制与32位模式切换
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/06/25/OS/%E8%87%AA%E5%88%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9Fday8/" target="_self">
-          
-          day8 鼠标控制与32位模式切换 如作者所言,左右键&#x2F;移动鼠标传出的三个值都有变化,鼠标键的状态取出低三位来判断,然后赋值给X Y 照葫芦画瓢就完事了   asmhead.nas的讲解 这段汇编还是很有难度的,要是看不懂就一听一过就行了 我比较关心的是这里,之前提到的 bootpack.hrb复制到0x00280000地址的处理,512KB. ; 所有剩下的,也就是 bootpack.hrb
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-06-25 15:48" pubdate>
-              2022-06-25
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/OS/">OS</a>
             
           </div>
         
@@ -577,11 +257,331 @@
     </article>
   </div>
 
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/06/13/python/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2-2/" target="_self">
+          深度学习模型部署(2)-服务器与本地
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/06/13/python/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2-2/" target="_self">
+          
+          既然是深度学习,那想必Python是主力开发语言了,这里我们暂时不考虑性能啊,响应啊,多线程高并发那么多,我们也不用什么java&#x2F;c++写一个后台服务器,我们的任务就只是单纯的部署到服务器上,能用就行啊.  毕竟我都用python了,还要啥性能呢,对吧  那么,我们接下来就来使用以下python的一个库: flask  flask入门 我们先来构建一个网页,和专业的的Web,Nodejs功能相似,
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-06-13 19:50" pubdate>
+              2022-06-13
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/python/">python</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/06/13/python/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2-1/" target="_self">
+          深度学习模型部署(1)-前言及基本介绍
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/06/13/python/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2-1/" target="_self">
+          
+          本系列以pytorch为例,其他框架请移步别处.   前言 深度学习的教程很多,网上也有很多现成的简单的模型训练的例子和预训练模型,然而在实际的工业场景中,我们往往更加关注如何部署一个已经训练好的模型.  我们希望可以客户端&#x2F;移动端访问网页就可以看到模型的效果,计算由服务器帮我们处理. 我们希望在一个没有python环境的地方依然可以执行模型的效果 我们希望加速模型的计算,python换成c++
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-06-13 16:12" pubdate>
+              2022-06-13
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/python/">python</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/05/19/GAN/GAN%E7%BD%91%E7%BB%9C%E8%AF%A6%E8%A7%A3(%E5%9B%9B)/" target="_self">
+          GAN网络详解(四) - 使用WGAN生成动漫头像
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/05/19/GAN/GAN%E7%BD%91%E7%BB%9C%E8%AF%A6%E8%A7%A3(%E5%9B%9B)/" target="_self">
+          
+          本文将会介绍一个我的项目,使用WGAN-GP生成动漫头像. 项目地址: Github-Anime-WGAN   简介 其实这个项目的起因很简单,就是想动手实践一下,顺着GAN往下学就到了WGAN-GP,然后就搜了搜代码找了一个很不错的项目跟着改了改,然后完成了这次任务 关于具体的训练细节,实验结果,潜在空间探索等等内容我都在项目的README里面写的很详细了,这里不再赘述,主要想讲一讲一些细节的部
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-05-19 17:38" pubdate>
+              2022-05-19
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/GAN/">GAN</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/05/19/%E6%9D%82/vscode%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/" target="_self">
+          vscode基本配置
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/05/19/%E6%9D%82/vscode%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/" target="_self">
+          
+          添加snipplet 在settings.json中添加如下设置启用markdown的snippets &quot;[markdown]&quot;: &amp;#123;    &quot;editor.formatOnSave&quot;: true,    &quot;editor.renderWhitespace&quot;: &quot;all&quot;,    &quot;editor.
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-05-19 03:14" pubdate>
+              2022-05-19
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%9D%82/">杂</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/05/18/GAN/GAN%E7%BD%91%E7%BB%9C%E8%AF%A6%E8%A7%A3(%E4%B8%89)/" target="_self">
+          GAN网络详解(三) - WGAN-CP 与 WGAN-GP
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/05/18/GAN/GAN%E7%BD%91%E7%BB%9C%E8%AF%A6%E8%A7%A3(%E4%B8%89)/" target="_self">
+          
+          本文将会介绍WGAN-CP和它的改进版本WGAN-GP  WGAN-CP  参考文章GAN到WGAN,作者连续五篇文章非常详尽的分析了WGAN,读完之后受益匪浅  鉴于GAN网络存在的种种问题,那么我们应该寻求一个新的距离来替代JS.该文认为需要对“生成分布与真实分布之间的距离”探索一种更合适的度量方法。作者们把眼光转向了Earth-Mover距离,简称EM距离,又称Wasserstein距离
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-05-18 23:08" pubdate>
+              2022-05-18
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/GAN/">GAN</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/05/18/GAN/GAN%E7%BD%91%E7%BB%9C%E8%AF%A6%E8%A7%A3(%E4%BA%8C)/" target="_self">
+          GAN网络详解(二) - DCGAN以及GAN网络存在的一些问题
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/05/18/GAN/GAN%E7%BD%91%E7%BB%9C%E8%AF%A6%E8%A7%A3(%E4%BA%8C)/" target="_self">
+          
+          本文将会介绍DCGAN以及GAN网络存在的一些问题  DCGAN 这篇论文主要针对于GAN网络的经典问题: GANs have been known to be unstable to train, often resulting in generators that produce nonsensical outputs. 进而提出了使用深度卷积神经网络来改进 作者在论文中提出了了一些改进措施,
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-05-18 00:12" pubdate>
+              2022-05-18
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/GAN/">GAN</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/05/13/python/%E4%BC%98%E9%9B%85%E7%9A%84%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95-logging/" target="_self">
+          优雅的日志记录-logging
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/05/13/python/%E4%BC%98%E9%9B%85%E7%9A%84%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95-logging/" target="_self">
+          
+          前言 最近在写代码的过程中遇到了一些问题,如果我想输出一些信息,如果使用print函数的话,由于深度学习项目时间较长,我会将它提交到超算进行计算,但是它并不会实时输出,我必须要等到运行结束才能看到结果,如果一点有任何异常报错退出,那么我也看不到所有的print信息. 况且使用print是一种比较简单的输出格式,输出到控制台的话无法记录下来,如果使用txt单独保存信息似乎过于原始,我希望选择一种更
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-05-13 15:11" pubdate>
+              2022-05-13
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/python/">python</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/05/12/GAN/GAN%E7%BD%91%E7%BB%9C%E8%AF%A6%E8%A7%A3(%E4%B8%80)/" target="_self">
+          GAN网络详解(一) - 基本原理及数学推导
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/05/12/GAN/GAN%E7%BD%91%E7%BB%9C%E8%AF%A6%E8%A7%A3(%E4%B8%80)/" target="_self">
+          
+          生成对抗网络(GAN)的出现可以说在深度学习领域具有划时代的意义,如今GAN也被广泛应用于各种机器学习的场景之中.GAN系列也是我个人学习过程的收获和心得,分享出来希望可以学习进步,欢迎批评指正 本系列预计使用四个部分分别介绍:  GAN的基本原理及数学推导 GAN的不足之处 WGAN-CP,以及后续的改进版本WGAN-GP 一个我的Github项目,使用WGAN-GP生成动漫头像    GAN的
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-05-12 00:00" pubdate>
+              2022-05-12
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/GAN/">GAN</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/3/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/#board">5</a><a class="page-number" href="/page/6/#board">6</a><a class="page-number" href="/page/7/#board">7</a><a class="extend next" rel="next" href="/page/5/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/3/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/#board">5</a><a class="page-number" href="/page/6/#board">6</a><a class="extend next" rel="next" href="/page/5/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

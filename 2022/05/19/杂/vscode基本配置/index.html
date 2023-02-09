@@ -24,7 +24,7 @@
 <meta property="og:description" content="添加snipplet 在settings.json中添加如下设置启用markdown的snippets &quot;[markdown]&quot;: &amp;#123;    &quot;editor.formatOnSave&quot;: true,    &quot;editor.renderWhitespace&quot;: &quot;all&quot;,    &quot;editor.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-18T19:14:31.000Z">
-<meta property="article:modified_time" content="2022-11-17T17:24:21.363Z">
+<meta property="article:modified_time" content="2023-02-01T05:36:10.234Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="杂">
 <meta name="twitter:card" content="summary_large_image">
@@ -187,7 +187,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.1k 字
+      4.7k 字
     </span>
   
 
@@ -196,7 +196,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      18 分钟
+      39 分钟
     </span>
   
 
@@ -229,7 +229,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2 个月前
+                  本文最后更新于：8 天前
                 
               </p>
             
@@ -322,6 +322,107 @@
 <span class="hljs-punctuation">&#125;</span></code></pre></div>
 <p>重启即可</p>
 </li>
+<li>
+<p>clang-format</p>
+<div class="code-wrapper"><pre><code class="hljs bash">sudo apt install clang-format</code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs bash">clang-format -style=Google -i main.c</code></pre></div>
+<blockquote>
+<p>使用clang-format -h 查看所有style</p>
+</blockquote>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/">https://www.cnblogs.com/</a><strong>tudou</strong>/p/13322854.html</p>
+</blockquote>
+<p>导出clang-format,我个人倾向于WebKit的风格</p>
+<div class="code-wrapper"><pre><code class="hljs bash">clang-format -style=WebKit -dump-config &gt; .clang-format</code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs txt">---
+Language:        Cpp
+# BasedOnStyle:  WebKit
+AccessModifierOffset: -4
+AlignAfterOpenBracket: DontAlign
+AlignConsecutiveAssignments: false
+AlignConsecutiveDeclarations: false
+AlignEscapedNewlinesLeft: false
+AlignOperands:   false
+AlignTrailingComments: false
+AllowAllParametersOfDeclarationOnNextLine: true
+AllowShortBlocksOnASingleLine: false
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: All
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+AlwaysBreakAfterDefinitionReturnType: None
+AlwaysBreakAfterReturnType: None
+AlwaysBreakBeforeMultilineStrings: false
+AlwaysBreakTemplateDeclarations: false
+BinPackArguments: true
+BinPackParameters: true
+BraceWrapping:   
+  AfterClass:      false
+  AfterControlStatement: false
+  AfterEnum:       false
+  AfterFunction:   true
+  AfterNamespace:  false
+  AfterObjCDeclaration: false
+  AfterStruct:     false
+  AfterUnion:      false
+  BeforeCatch:     false
+  BeforeElse:      false
+  IndentBraces:    false
+BreakBeforeBinaryOperators: All
+BreakBeforeBraces: WebKit
+BreakBeforeTernaryOperators: true
+BreakConstructorInitializersBeforeComma: true
+ColumnLimit:     0
+CommentPragmas:  &#x27;^ IWYU pragma:&#x27;
+ConstructorInitializerAllOnOneLineOrOnePerLine: false
+ConstructorInitializerIndentWidth: 4
+ContinuationIndentWidth: 4
+Cpp11BracedListStyle: false
+DerivePointerAlignment: false
+DisableFormat:   false
+ExperimentalAutoDetectBinPacking: false
+ForEachMacros:   [ foreach, Q_FOREACH, BOOST_FOREACH ]
+IncludeCategories: 
+  - Regex:           &#x27;^&quot;(llvm|llvm-c|clang|clang-c)/&#x27;
+    Priority:        2
+  - Regex:           &#x27;^(&lt;|&quot;(gtest|isl|json)/)&#x27;
+    Priority:        3
+  - Regex:           &#x27;.*&#x27;
+    Priority:        1
+IndentCaseLabels: false
+IndentWidth:     4
+IndentWrappedFunctionNames: false
+KeepEmptyLinesAtTheStartOfBlocks: true
+MacroBlockBegin: &#x27;&#x27;
+MacroBlockEnd:   &#x27;&#x27;
+MaxEmptyLinesToKeep: 1
+NamespaceIndentation: Inner
+ObjCBlockIndentWidth: 4
+ObjCSpaceAfterProperty: true
+ObjCSpaceBeforeProtocolList: true
+PenaltyBreakBeforeFirstCallParameter: 19
+PenaltyBreakComment: 300
+PenaltyBreakFirstLessLess: 120
+PenaltyBreakString: 1000
+PenaltyExcessCharacter: 1000000
+PenaltyReturnTypeOnItsOwnLine: 60
+PointerAlignment: Left
+ReflowComments:  true
+SortIncludes:    true
+SpaceAfterCStyleCast: false
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeParens: ControlStatements
+SpaceInEmptyParentheses: false
+SpacesBeforeTrailingComments: 1
+SpacesInAngles:  false
+SpacesInContainerLiterals: true
+SpacesInCStyleCastParentheses: false
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+Standard:        Cpp03
+TabWidth:        8
+UseTab:          Never
+...</code></pre></div></li>
 </ol>
 
             </div>
