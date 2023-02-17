@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221108011126.png">
 <meta property="article:published_time" content="2022-11-07T17:06:27.000Z">
-<meta property="article:modified_time" content="2022-12-29T01:35:16.723Z">
+<meta property="article:modified_time" content="2023-02-15T16:52:31.227Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="服务器">
 <meta name="twitter:card" content="summary_large_image">
@@ -189,7 +189,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.9k 字
+      4.7k 字
     </span>
   
 
@@ -198,7 +198,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      24 分钟
+      39 分钟
     </span>
   
 
@@ -231,7 +231,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：1 个月前
+                  本文最后更新于：2 天前
                 
               </p>
             
@@ -278,6 +278,8 @@ da1811a84ddc   ubuntu:16.04   <span class="hljs-string">&quot;/bin/bash&quot;</s
 <div class="note note-info">
             <p>如果在gdb调试的时候遇到了<code>warning: Error disabling address space randomization: Operation not permitted</code>的报错,需要在OPTION中加入如下参数,后面一样不变</p><div class="code-wrapper"><pre><code class="hljs bash">docker run --cap-add=SYS_PTRACE --security-opt seccomp=unconfined</code></pre></div>
           </div>
+<p>重启一个已关闭的容器使用</p>
+<div class="code-wrapper"><pre><code class="hljs bash">docker restart &lt;CONTAINER_ID&gt;</code></pre></div>
 <h2 id="进入容器"><a class="markdownIt-Anchor" href="#进入容器"></a> 进入容器</h2>
 <p>进入容器之前容器需要处于正在运行的状态,进入有两种方式 <code>attach</code> 和 <code>exec</code></p>
 <ul>
@@ -323,6 +325,21 @@ docker <span class="hljs-built_in">rm</span> -f &lt;CONTAINER_ID&gt;</code></pre
 <div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> csapp.tar | docker import - another_csapp:v1.0</code></pre></div>
 <h2 id="删除镜像"><a class="markdownIt-Anchor" href="#删除镜像"></a> 删除镜像</h2>
 <div class="code-wrapper"><pre><code class="hljs bash">docker rmi another_csapp:v1.0</code></pre></div>
+<h2 id="上传容器"><a class="markdownIt-Anchor" href="#上传容器"></a> 上传容器</h2>
+<p>首先需要前往<a target="_blank" rel="noopener" href="https://hub.docker.com/">docker hub</a>注册一个账号,假设账号名为kamidalu</p>
+<p>你希望上传的容器名为miniCRT,你需要先将其打包成 Docker 镜像,注意打包的名字里面不能有大写字符</p>
+<div class="code-wrapper"><pre><code class="hljs bash">docker commit miniCRT kamidalu/minicrt</code></pre></div>
+<p>登录docker账号</p>
+<div class="code-wrapper"><pre><code class="hljs bash">docker login</code></pre></div>
+<p>如下结果为登录成功</p>
+<div class="code-wrapper"><pre><code class="hljs bash">Authenticating with existing credentials...
+WARNING! Your password will be stored unencrypted <span class="hljs-keyword">in</span> /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/<span class="hljs-comment">#credentials-store</span>
+
+Login Succeeded</code></pre></div>
+<p>上传你的docker镜像</p>
+<div class="code-wrapper"><pre><code class="hljs bash">docker push kamidalu/minicrt</code></pre></div>
 <h2 id="基础环境搭建"><a class="markdownIt-Anchor" href="#基础环境搭建"></a> 基础环境搭建</h2>
 <p>纯docker容器相当的干净,可以快速地把常用软件安装一下,以便后续使用</p>
 <ul>
@@ -345,6 +362,8 @@ sudo apt -y install build-essential gdb
 sudo apt -y install gcc-multilib</code></pre></div>
 <h2 id="docker-代理配置"><a class="markdownIt-Anchor" href="#docker-代理配置"></a> Docker 代理配置</h2>
 <p>docker代理配置的也很简单,并且官方提供了镜像,我们只需要直接运行就可以拉取镜像创建容器了</p>
+<p>如果你的本机已经配置了代理,那么只需要在创建的时候加入<code>--network=host</code> 即可(不过似乎有点小问题…)</p>
+<div class="code-wrapper"><pre><code class="hljs bash">docker run -itd --network=host --name=&lt;NAME&gt; ubuntu</code></pre></div>
 <div class="code-wrapper"><pre><code class="hljs bash">docker run -d \
   --restart=always \
   --privileged \
@@ -365,6 +384,31 @@ sudo apt -y install gcc-multilib</code></pre></div>
 <p>alpine linux下载使用的是 <code>apk add &lt;name&gt;</code> 而不是 <code>apt install &lt;name&gt;</code></p>
 </blockquote>
 <div class="code-wrapper"><pre><code class="hljs bash">apt-get install apt-transport-https ca-certificates</code></pre></div>
+<p>最后分享一个个人的新容器初始化的shell脚本</p>
+<div class="code-wrapper"><pre><code class="hljs bash">apt-get -y update
+apt-get -y install sudo
+sudo apt install ca-certificates
+sudo <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;deb https://mirrors.ustc.edu.cn/ubuntu/ jammy main restricted universe multiverse</span>
+<span class="hljs-string">deb-src https://mirrors.ustc.edu.cn/ubuntu/ jammy main restricted universe multiverse</span>
+<span class="hljs-string">deb https://mirrors.ustc.edu.cn/ubuntu/ jammy-updates main restricted universe multiverse</span>
+<span class="hljs-string">deb-src https://mirrors.ustc.edu.cn/ubuntu/ jammy-updates main restricted universe multiverse</span>
+<span class="hljs-string">deb https://mirrors.ustc.edu.cn/ubuntu/ jammy-backports main restricted universe multiverse</span>
+<span class="hljs-string">deb-src https://mirrors.ustc.edu.cn/ubuntu/ jammy-backports main restricted universe multiverse</span>
+<span class="hljs-string">deb https://mirrors.ustc.edu.cn/ubuntu/ jammy-security main restricted universe multiverse</span>
+<span class="hljs-string">deb-src https://mirrors.ustc.edu.cn/ubuntu/ jammy-security main restricted universe multiverse</span>
+<span class="hljs-string">deb https://mirrors.ustc.edu.cn/ubuntu/ jammy-proposed main restricted universe multiverse</span>
+<span class="hljs-string">deb-src https://mirrors.ustc.edu.cn/ubuntu/ jammy-proposed main restricted universe multiverse&quot;</span> &gt; /etc/apt/sources.list
+sudo apt -y update
+sudo apt -y upgrade
+sudo apt -y install vim
+sudo apt -y install wget
+sudo apt -y install unzip
+sudo apt -y install gcc
+sudo apt -y install build-essential gdb
+sudo apt -y install gcc-multilib git</code></pre></div>
+<p>保存为 <a target="_blank" rel="noopener" href="http://dockerinit.sh">dockerinit.sh</a></p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">chmod</span> +x dockerinit.sh
+./dockerinit.sh</code></pre></div>
             </div>
             <hr>
             <div>
