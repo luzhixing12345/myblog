@@ -16,18 +16,19 @@
   <meta name="author" content="luzhixing12345">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言 如今Linux发行版不少,也有各种好看的Linux桌面.如果只是想使用一个Linux的环境+bash那么无论是WSL还是SSH到一台远程服务器都是比较方便的,或者docker创建一个Linux的环境等等,配合Vscode做各种代码开发我想应该都是老生常谈的事情了. 本文用于记录笔者在Ubuntu22.04桌面版的工作环境配置,包括各种笔者认为必要的软件的安装,配置修改和个人偏好,主要目的有">
+    <meta name="description" content="前言 如今Linux发行版不少,也有各种好看的Linux桌面.如果只是想使用一个Linux的环境+bash那么无论是WSL还是SSH到一台远程服务器都是比较方便的,或者docker创建一个Linux的环境等等,配合Vscode做各种代码开发我想应该都是老生常谈的事情了. 本文用于记录笔者在Ubuntu20.04桌面版的工作环境配置,包括各种笔者认为必要的软件的安装,配置修改和个人偏好,主要目的有">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ubuntu工作环境配置">
 <meta property="og:url" content="https://luzhixing12345.github.io/2022/11/15/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Ubuntu%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="kamilu的博客">
-<meta property="og:description" content="前言 如今Linux发行版不少,也有各种好看的Linux桌面.如果只是想使用一个Linux的环境+bash那么无论是WSL还是SSH到一台远程服务器都是比较方便的,或者docker创建一个Linux的环境等等,配合Vscode做各种代码开发我想应该都是老生常谈的事情了. 本文用于记录笔者在Ubuntu22.04桌面版的工作环境配置,包括各种笔者认为必要的软件的安装,配置修改和个人偏好,主要目的有">
+<meta property="og:description" content="前言 如今Linux发行版不少,也有各种好看的Linux桌面.如果只是想使用一个Linux的环境+bash那么无论是WSL还是SSH到一台远程服务器都是比较方便的,或者docker创建一个Linux的环境等等,配合Vscode做各种代码开发我想应该都是老生常谈的事情了. 本文用于记录笔者在Ubuntu20.04桌面版的工作环境配置,包括各种笔者认为必要的软件的安装,配置修改和个人偏好,主要目的有">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/Screenshot%20from%202023-01-01%2022-49-50.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/Screenshot%20from%202023-01-01%2022-08-22.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/Screenshot%20from%202023-01-01%2022-07-08.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/Screenshot%20from%202023-01-01%2022-53-31.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230103111043.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230222182331.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/Screenshot%20from%202023-01-01%2022-08-42.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/Screenshot%20from%202023-01-01%2022-35-04.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/Screenshot%20from%202023-01-01%2022-37-00.png">
@@ -35,7 +36,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/Screenshot%20from%202023-01-01%2023-39-39.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/Screenshot%20from%202023-01-01%2023-40-06.png">
 <meta property="article:published_time" content="2022-11-15T07:59:08.000Z">
-<meta property="article:modified_time" content="2023-01-14T16:29:27.884Z">
+<meta property="article:modified_time" content="2023-02-25T15:28:39.003Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="环境配置">
 <meta name="twitter:card" content="summary_large_image">
@@ -199,7 +200,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      5.1k 字
+      5k 字
     </span>
   
 
@@ -208,7 +209,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      43 分钟
+      42 分钟
     </span>
   
 
@@ -241,21 +242,15 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：1 个月前
+                  本文最后更新于：1 分钟前
                 
               </p>
             
             <div class="markdown-body">
               <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
 <p>如今Linux发行版不少,也有各种好看的Linux桌面.如果只是想使用一个Linux的环境+bash那么无论是WSL还是SSH到一台远程服务器都是比较方便的,或者docker创建一个Linux的环境等等,配合Vscode做各种代码开发我想应该都是老生常谈的事情了.</p>
-<p>本文用于记录笔者在Ubuntu22.04桌面版的工作环境配置,包括各种笔者认为<strong>必要的软件的安装,配置修改和个人偏好</strong>,主要目的有两个</p>
-<ol>
-<li>记录相关的指令和修改内容,为日后切换一台电脑重新配置工作环境之际留作参考,不用到处翻到处查</li>
-<li><a target="_blank" rel="noopener" href="http://xn--github-9g5jl5wxykpj4g3ewb.io">博客部署在github.io</a>,在知乎留个国内的地址访问</li>
-</ol>
-<p>当然,如果只是建一个虚拟机简单用用,中文输入法都不需要安装的那种,甚至连桌面环境都不需要的那没有必要再往下看了.</p>
-<p><strong>本文主要针对的是类似双系统,或者长期需要的Linux Ubuntu桌面工作开发环境的搭建.另外本文包含许多个人偏好,例如快捷键的修改,配置的修改,也请各位自行选择</strong></p>
-<p>另外笔者使用的是Ubuntu22.04的操作系统,对于老版本和更新的版本或许会有出入,还请各位注意</p>
+<p>本文用于记录笔者在Ubuntu20.04桌面版的工作环境配置,包括各种笔者认为<strong>必要的软件的安装,配置修改和个人偏好</strong>,主要目的有两个</p>
+<p>另外笔者使用的是Ubuntu20.04的操作系统,对于老版本和更新的版本或许会有出入,还请各位注意</p>
 <h2 id="换源"><a class="markdownIt-Anchor" href="#换源"></a> 换源</h2>
 <div class="code-wrapper"><pre><code class="hljs bash">sudo apt install vim git
 sudo <span class="hljs-built_in">cp</span> /etc/apt/sources.list /etc/apt/sources.list.bak
@@ -350,6 +345,7 @@ sudo systemctl <span class="hljs-built_in">enable</span> v2raya.service</code></
 </blockquote>
 <p>创建账号,导入节点,这里直接使用<a target="_blank" rel="noopener" href="https://me.tofly.cyou/user">V2free</a>的用户的订阅链接即可</p>
 <p>导入成功后SERVER中全选,测试HTTP连接,选择几个延迟较低的,应用即可</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230222182331.png" srcset="/img/loading.gif" lazyload alt="20230222182331" /></p>
 <p>默认端口为20170(socks5), 20171(http), 20172(带分流规则的http) 端口</p>
 <p>桌面端的Ubuntu系统需要手动开启网络代理应用于本机(127.0.0.1)</p>
 <p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/Screenshot%20from%202023-01-01%2022-08-42.png" srcset="/img/loading.gif" lazyload alt="Screenshot from 2023-01-01 22-08-42" /></p>
@@ -358,6 +354,7 @@ sudo systemctl <span class="hljs-built_in">enable</span> v2raya.service</code></
 <p><a href="https://luzhixing12345.github.io/2022/10/23/%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/WSL2%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE/">windows下v2rayN+wsl2代理配置</a></p>
 </blockquote>
 <h2 id="安装中文输入法"><a class="markdownIt-Anchor" href="#安装中文输入法"></a> 安装中文输入法</h2>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/529892064">https://zhuanlan.zhihu.com/p/529892064</a></p>
 <blockquote>
 <p>参考<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/508797663">Ubuntu22.04安装Fcitx5中文输入法（详细）</a></p>
 </blockquote>
