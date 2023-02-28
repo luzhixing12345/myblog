@@ -16,12 +16,12 @@
   <meta name="author" content="luzhixing12345">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言 笔者由于学习原因需要使用Ubuntu系统编译源码,但是服务器使用的系统是Debian,且使用docker编译内存不足.且考虑到后续修改和性能原因不希望使用虚拟机,于是决定安装双系统(Win11+Ubuntu22.04),本文记录一下安装过程  配置双系统  Ubuntu 双系统安装流程 Windows10安装ubuntu18.04双系统教程   0. 开始之前 由于开始安装双系统之后就离开">
+    <meta name="description" content="前言 笔者由于学习原因需要使用Ubuntu系统编译源码,但是服务器使用的系统是Debian,且使用docker编译内存不足.且考虑到后续修改和性能原因不希望使用虚拟机,于是决定安装双系统(Win11+Ubuntu22.04),本文记录一下安装过程  配置双系统  Ubuntu 双系统安装流程 Windows10安装ubuntu22.04双系统教程   0. 开始之前 由于开始安装双系统之后就离开">
 <meta property="og:type" content="article">
 <meta property="og:title" content="双系统安装">
 <meta property="og:url" content="https://luzhixing12345.github.io/2022/11/15/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/index.html">
 <meta property="og:site_name" content="kamilu的博客">
-<meta property="og:description" content="前言 笔者由于学习原因需要使用Ubuntu系统编译源码,但是服务器使用的系统是Debian,且使用docker编译内存不足.且考虑到后续修改和性能原因不希望使用虚拟机,于是决定安装双系统(Win11+Ubuntu22.04),本文记录一下安装过程  配置双系统  Ubuntu 双系统安装流程 Windows10安装ubuntu18.04双系统教程   0. 开始之前 由于开始安装双系统之后就离开">
+<meta property="og:description" content="前言 笔者由于学习原因需要使用Ubuntu系统编译源码,但是服务器使用的系统是Debian,且使用docker编译内存不足.且考虑到后续修改和性能原因不希望使用虚拟机,于是决定安装双系统(Win11+Ubuntu22.04),本文记录一下安装过程  配置双系统  Ubuntu 双系统安装流程 Windows10安装ubuntu22.04双系统教程   0. 开始之前 由于开始安装双系统之后就离开">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221115140746.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221115141134.png">
@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221115141134.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230101203444.png">
 <meta property="article:published_time" content="2022-11-15T08:24:28.000Z">
-<meta property="article:modified_time" content="2023-02-19T02:52:55.012Z">
+<meta property="article:modified_time" content="2023-02-28T03:32:54.024Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="环境配置">
 <meta name="twitter:card" content="summary_large_image">
@@ -193,7 +193,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4.1k 字
+      4.6k 字
     </span>
   
 
@@ -202,7 +202,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      34 分钟
+      39 分钟
     </span>
   
 
@@ -235,7 +235,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：7 天前
+                  本文最后更新于：33 分钟前
                 
               </p>
             
@@ -245,7 +245,7 @@
 <h2 id="配置双系统"><a class="markdownIt-Anchor" href="#配置双系统"></a> 配置双系统</h2>
 <blockquote>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Flag_ing/article/details/121908340">Ubuntu 双系统安装流程</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/masbay/p/11627727.html">Windows10安装ubuntu18.04双系统教程</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/masbay/p/11627727.html">Windows10安装ubuntu22.04双系统教程</a></p>
 </blockquote>
 <h3 id="0-开始之前"><a class="markdownIt-Anchor" href="#0-开始之前"></a> 0. 开始之前</h3>
 <p>由于开始安装双系统之后就离开了Windows,所以如果需要对照文档你还需要另一台设备. 由于本博客挂载在 Github 的域名之下,所以请考虑你的另一台设备能否打开这个网址</p>
@@ -280,9 +280,7 @@
 <p>右键磁盘,压缩卷,根据1GB = 1024MB换算计算应该划分的大小,笔者这里分配了80GB的空间.划分之后的空间变为黑色(未分配)</p>
 <h3 id="4ubuntu启动安装"><a class="markdownIt-Anchor" href="#4ubuntu启动安装"></a> 4.Ubuntu启动安装</h3>
 <p>插入U盘,重启. 在启动界面 <strong>连续多次</strong> 按F2或者F12可以进入Bios设置界面</p>
-<div class="note note-info">
-            <p>笔者电脑是DELL,使用F2进入的是bios的设置,F12进入的是boot menu,后者才是我们选择U盘启动盘的正确地方,读者可以根据电脑型号自行查找,不外乎这两个</p>
-          </div>
+<p>笔者电脑是DELL,使用F2进入的是bios的设置,<strong>F12进入的是boot menu</strong>,<strong>后者才是我们选择U盘启动盘的正确地方</strong>,读者可以根据电脑型号自行查找,不外乎这两个</p>
 <p>进入界面之后可以看到一个Windows的启动选项,一个U盘型号的启动选项,选择U盘的选项进入</p>
 <p>然后就会进入系统选择界面,选择 Install Ubuntu 安装系统</p>
 <p><strong>语言环境一定要选择英文</strong> <strong>语言环境一定要选择英文</strong> <strong>语言环境一定要选择英文</strong>,重要的话说三遍. 我们可以后续安装中文拼音输入法,也可以使用各种翻译软件工具辅助,但是一定要选择英文环境安装,不然后续出现一些字符编码问题,路径问题都是极其头痛的,<strong>切记!!!</strong></p>
@@ -315,10 +313,15 @@
 <h3 id="5安装完成"><a class="markdownIt-Anchor" href="#5安装完成"></a> 5.安装完成</h3>
 <p>接下来就是选地区,用户名密码这都没什么好说的. 等待安装全部完成之后,会提醒你重启,把U盘拔了,点&quot;restart now&quot;，如果卡死就强制关机再重启就好,不要慌没有问题的</p>
 <h3 id="6双系统收尾工作"><a class="markdownIt-Anchor" href="#6双系统收尾工作"></a> 6.双系统收尾工作</h3>
+<p>注意,刚刚安装好的双系统不要马上有特别大的动作, 稍微等电脑凉一凉, 风扇不转了再配环境等等, 不然容易死机…</p>
 <h4 id="开机引导"><a class="markdownIt-Anchor" href="#开机引导"></a> 开机引导</h4>
-<p>双系统的引导菜单是Ubuntu的引导其grub的菜单,所以重启之后排在第一位的是ubuntu系统的启动,第二位通常是ubuntu的高级选项,第三是windows,我们可以根据情况选择. 这里直接进入ubuntu即可</p>
-<p>如果第一次由Ubuntu安装完毕进入windows可能会需要输入Bitlock解锁,你可以在如下网址找到你的恢复密钥,不过这是笔者一开始0节处就提到过的内容</p>
-<div class="code-wrapper"><pre><code class="hljs txt">https://account.microsoft.com/devices/recoverykey</code></pre></div>
+<p>双系统的引导菜单是Ubuntu的引导其grub的菜单,所以重启之后排在第一位的是ubuntu系统的启动,第二位通常是ubuntu的高级选项,第三是windows,我们可以根据情况选择.</p>
+<p>你可以在开机的时候使用F2进入boot configuration调整windows boot manager的优先级到ubuntu的上面,这样开机默认进入windows了</p>
+<p>第一次由Ubuntu安装完毕再进入windows可能会需要输入Bitlock解锁,你可以在如下网址找到你的恢复密钥,不过这是笔者一开始0节处就提到过的内容</p>
+<p>如果你不想被反复的bitlock困扰, 可以使用 F2 进入 boot configuration 取消勾选 security</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://account.microsoft.com/devices/recoverykey">https://account.microsoft.com/devices/recoverykey</a></p>
+</blockquote>
 <p>如果想要切换默认进入windows,可以修改开机引导grub,但笔者习惯直接进入F2将windows的启动项移到ubuntu前面,这样默认进入的是windows的启动盘</p>
 <p>如果需要进入ubuntu就F12然后选择ubuntu启动即可</p>
 <h4 id="卸载"><a class="markdownIt-Anchor" href="#卸载"></a> 卸载</h4>
@@ -379,17 +382,47 @@ delete partition override</code></pre></div>
 </ul>
 <p>下面看一下删除之后的效果，可以看到将EFI分区删除之后，未分配的80GB正是之前用来安装Ubuntu设置的空间大小</p>
 <p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230101203444.png" srcset="/img/loading.gif" lazyload alt="20230101203444" /></p>
-<p>最后F2进BIOS把ubuntu的引导删掉即可,这样就彻底删除了~</p>
+<p><strong>最后F2进BIOS把ubuntu的引导删掉即可</strong>,这样就彻底删除了~</p>
+<h2 id="可能遇到的问题"><a class="markdownIt-Anchor" href="#可能遇到的问题"></a> 可能遇到的问题</h2>
+<h3 id="ubuntu-efi删除失败"><a class="markdownIt-Anchor" href="#ubuntu-efi删除失败"></a> Ubuntu efi删除失败</h3>
 <p>如果使用 <code>delete partition override</code> 失败,则可使用下面的方式</p>
 <p>选择分区6 <code>select partition 6</code></p>
 <p>创建一个新的挂载盘 <code>assign letter=K</code>, 这时候可以看到计算机多出来了一个盘,但是这个盘无法进入</p>
 <p>在开始菜单找到记事本，右键【记事本】，选择【<strong>以管理员身份运行</strong>】，点击【文件】，点击【打开】。在文件浏览器里面可以进入刚刚挂载的K盘，找到名为Ubuntu的文件夹删除即可</p>
 <p>删除之后再把刚刚挂载的K盘卸载就行。输入</p>
 <div class="code-wrapper"><pre><code class="hljs bash">remove letter=K</code></pre></div>
+<h3 id="windows-boot-manager-丢失"><a class="markdownIt-Anchor" href="#windows-boot-manager-丢失"></a> Windows Boot Manager 丢失</h3>
+<p>误删除Windows Boot Manager电脑会进入grub终端</p>
+<ol>
+<li>
+<p>导入模块</p>
+<div class="code-wrapper"><pre><code class="hljs bash">insmod part_gpt</code></pre></div>
+</li>
+<li>
+<p>查看子目录</p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">ls</span></code></pre></div>
+<p>此时应该会列出一些 hd, gpt, (hd,gpt)的文件</p>
+</li>
+<li>
+<p>找到windows的所在目录</p>
+<p>通常来说是(hd0, gpt1), 如果不是的话你可以一个一个试</p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">set</span> root=(hd0,gpt1)
+chainloader /efi/Microsoft/Boot/bootmgfw.efi</code></pre></div>
+<p>如果chainloader这一步没有报错,则说明成功. 如果报错了那就换一个</p>
+</li>
+<li>
+<p>chainloader成功后重启</p>
+<div class="code-wrapper"><pre><code class="hljs bash">boot</code></pre></div>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/392633489">https://zhuanlan.zhihu.com/p/392633489</a></p>
-<p><a target="_blank" rel="noopener" href="https://bbs.huaweicloud.com/blogs/303695">https://bbs.huaweicloud.com/blogs/303695</a></p>
+<p>如果一次chainloader就成功了那么没有问题了,如果chainloader失败过几次那么你的引导项会出现好几个Windows,删掉前面的保留最后一个就行, 最后一个是成功的</p>
 </blockquote>
+</li>
+</ol>
+<h2 id="参考"><a class="markdownIt-Anchor" href="#参考"></a> 参考</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/392633489">https://zhuanlan.zhihu.com/p/392633489</a></li>
+<li><a target="_blank" rel="noopener" href="https://bbs.huaweicloud.com/blogs/303695">https://bbs.huaweicloud.com/blogs/303695</a></li>
+</ul>
 
             </div>
             <hr>

@@ -16,21 +16,21 @@
   <meta name="author" content="luzhixing12345">
   <meta name="keywords" content="">
   
-    <meta name="description" content="基本环境的安装 一般来说购买服务器的环节就有了安装操作系统的环节,你可以选择不同的操作系统.Centos,ubuntu等等其他unix系统 我个人是习惯使用debian操作系统的,比较稳定,网上的文档也很多.遇到的问题基本可以解决. 不同的操作系统确实有所差异,如果你遇到了什么问题不要忘记加上你的linux操作系统名字,或许才能搜索到正确的答案 选择一个操作系统之后稍事等待就帮你一键安装成功了,">
+    <meta name="description" content="目录架构  &#x2F;bin: 存放系统基本命令和可执行文件，例如 ls、cp、mkdir 等。 &#x2F;boot: 存放启动 Linux 内核所需的文件，包括内核映像文件和引导加载程序。 &#x2F;dev: 存放设备文件，例如硬盘、CD-ROM、鼠标和键盘等设备。在 Linux 中，所有设备都被视为文件。 &#x2F;etc: 存放系统的配置文件，例如用户账号、网络配置、软件包管理等。 &#x2F;home: 存放用户的主目录，每个用">
 <meta property="og:type" content="article">
-<meta property="og:title" content="服务器基础软件环境搭建和用法">
-<meta property="og:url" content="https://luzhixing12345.github.io/2022/06/27/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9F%BA%E7%A1%80%E8%BD%AF%E4%BB%B6%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%92%8C%E7%94%A8%E6%B3%95/index.html">
+<meta property="og:title" content="Linux常识">
+<meta property="og:url" content="https://luzhixing12345.github.io/2023/02/28/Linux/Linux%E5%B8%B8%E8%AF%86/index.html">
 <meta property="og:site_name" content="kamilu的博客">
-<meta property="og:description" content="基本环境的安装 一般来说购买服务器的环节就有了安装操作系统的环节,你可以选择不同的操作系统.Centos,ubuntu等等其他unix系统 我个人是习惯使用debian操作系统的,比较稳定,网上的文档也很多.遇到的问题基本可以解决. 不同的操作系统确实有所差异,如果你遇到了什么问题不要忘记加上你的linux操作系统名字,或许才能搜索到正确的答案 选择一个操作系统之后稍事等待就帮你一键安装成功了,">
+<meta property="og:description" content="目录架构  &#x2F;bin: 存放系统基本命令和可执行文件，例如 ls、cp、mkdir 等。 &#x2F;boot: 存放启动 Linux 内核所需的文件，包括内核映像文件和引导加载程序。 &#x2F;dev: 存放设备文件，例如硬盘、CD-ROM、鼠标和键盘等设备。在 Linux 中，所有设备都被视为文件。 &#x2F;etc: 存放系统的配置文件，例如用户账号、网络配置、软件包管理等。 &#x2F;home: 存放用户的主目录，每个用">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-06-27T05:13:42.000Z">
-<meta property="article:modified_time" content="2022-11-08T05:55:11.553Z">
+<meta property="article:published_time" content="2023-02-28T03:57:02.000Z">
+<meta property="article:modified_time" content="2023-02-28T03:57:48.580Z">
 <meta property="article:author" content="luzhixing12345">
-<meta property="article:tag" content="服务器">
+<meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>服务器基础软件环境搭建和用法 - kamilu的博客</title>
+  <title>Linux常识 - kamilu的博客</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -164,9 +164,9 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="服务器基础软件环境搭建和用法">
+            <span class="h2" id="subtitle" title="Linux常识">
               
-                服务器基础软件环境搭建和用法
+                Linux常识
               
             </span>
 
@@ -176,8 +176,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-06-27 13:13" pubdate>
-        2022年6月27日 下午
+      <time datetime="2023-02-28 11:57" pubdate>
+        2023年2月28日 中午
       </time>
     </span>
   
@@ -187,7 +187,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.1k 字
+      714 字
     </span>
   
 
@@ -196,7 +196,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10 分钟
+      6 分钟
     </span>
   
 
@@ -225,82 +225,35 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">服务器基础软件环境搭建和用法</h1>
+            <h1 style="display: none">Linux常识</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：4 个月前
+                  本文最后更新于：8 分钟前
                 
               </p>
             
             <div class="markdown-body">
-              <h2 id="基本环境的安装"><a class="markdownIt-Anchor" href="#基本环境的安装"></a> 基本环境的安装</h2>
-<p>一般来说购买服务器的环节就有了安装操作系统的环节,你可以选择不同的操作系统.Centos,ubuntu等等其他unix系统</p>
-<p>我个人是习惯使用debian操作系统的,比较稳定,网上的文档也很多.遇到的问题基本可以解决.</p>
-<p>不同的操作系统确实有所差异,如果你遇到了什么问题不要忘记加上你的linux操作系统名字,或许才能搜索到正确的答案</p>
-<p>选择一个操作系统之后稍事等待就帮你一键安装成功了,比较方便.</p>
-<blockquote>
-<p>以下所有命令均在Debian操作系统中适用,Debian是我个人比较喜欢使用在服务器上的一个操作系统</p>
-</blockquote>
-<p>每一个程序都有他们自身的用法,这里必然不可能展开讲解,如果你有兴趣的话可以查看对应的教程,这里仅仅提供了安装的方式.更加具体的配置方法和使用方法还是要各位自行摸索.</p>
-<h2 id="基本命令"><a class="markdownIt-Anchor" href="#基本命令"></a> 基本命令</h2>
-<p>查看 Debian 版本</p>
-<div class="code-wrapper"><pre><code class="hljs bash">hostnamectl</code></pre></div>
-<h3 id="sudo"><a class="markdownIt-Anchor" href="#sudo"></a> sudo</h3>
-<div class="code-wrapper"><pre><code class="hljs bash">apt-get install sudo</code></pre></div>
-<p>更新</p>
-<div class="code-wrapper"><pre><code class="hljs bash">sudo apt update</code></pre></div>
-<p>查看操作系统版本</p>
-<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> /etc/os-release</code></pre></div>
-<h3 id="ssh"><a class="markdownIt-Anchor" href="#ssh"></a> SSH</h3>
-<p>这个是默认安装的</p>
-<p>重启服务</p>
-<div class="code-wrapper"><pre><code class="hljs bash">service sshd restart</code></pre></div>
-<p>配置信息在<code>/etc/ssh/sshd_config</code></p>
-<p>记录在<code>/var/log/auth.log</code></p>
-<p>基本信息在<code>/root/.ssh/</code></p>
-<h2 id="软件安装"><a class="markdownIt-Anchor" href="#软件安装"></a> 软件安装</h2>
-<h3 id="git"><a class="markdownIt-Anchor" href="#git"></a> git</h3>
-<div class="code-wrapper"><pre><code class="hljs bash">sudo apt install git</code></pre></div>
-<p>检查</p>
-<div class="code-wrapper"><pre><code class="hljs bash">git --version</code></pre></div>
-<p><a href="https://luzhixing12345.github.io/2022/04/29/git/git%E7%9A%84SSH%E8%BF%9E%E6%8E%A5/">git的SSH配置</a></p>
-<h3 id="anaconda"><a class="markdownIt-Anchor" href="#anaconda"></a> Anaconda</h3>
-<p>visit <a target="_blank" rel="noopener" href="https://www.anaconda.com/products/distribution#linux">https://www.anaconda.com/products/distribution#linux</a> and download the lastest,最下面</p>
-<p>通过FTP/SCP发送到服务器</p>
-<div class="code-wrapper"><pre><code class="hljs bash">bash Anaconda(TAB补全)</code></pre></div>
-<p>安装过后conda init,这个默认的不好使,需要手动将这个路径加入到环境变量中</p>
-<blockquote>
-<p>通常来说anaconda的环境在linux中安装的位置默认是root/anaconda3,如果你更改了这个默认路径那就把下面的换成你的路径</p>
-</blockquote>
-<div class="code-wrapper"><pre><code class="hljs bash">vim ~/.bashrc
-<span class="hljs-built_in">export</span> PATH=root/anaconda3/bin:<span class="hljs-variable">$PATH</span>
-<span class="hljs-built_in">source</span> ~/.bashrc</code></pre></div>
-<h3 id="npm"><a class="markdownIt-Anchor" href="#npm"></a> npm</h3>
-<div class="code-wrapper"><pre><code class="hljs bash">sudo apt install nodejs npm</code></pre></div>
-<div class="code-wrapper"><pre><code class="hljs bash">nodejs --version</code></pre></div>
-<h3 id="nginx"><a class="markdownIt-Anchor" href="#nginx"></a> nginx</h3>
-<div class="code-wrapper"><pre><code class="hljs bash">sudo apt install nginx</code></pre></div>
-<p>启动Nginx服务</p>
-<div class="code-wrapper"><pre><code class="hljs bash">systemctl start nginx</code></pre></div>
-<p>重启</p>
-<div class="code-wrapper"><pre><code class="hljs bash">systemctl reload nginx</code></pre></div>
-<p>停止服务</p>
-<div class="code-wrapper"><pre><code class="hljs bash">systemctl stop nginx</code></pre></div>
-<p>查看配置信息</p>
-<div class="code-wrapper"><pre><code class="hljs bash">nginx -t</code></pre></div>
-<h3 id="docker"><a class="markdownIt-Anchor" href="#docker"></a> <a target="_blank" rel="noopener" href="https://hub.docker.com/">docker</a></h3>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.runoob.com/docker/debian-docker-install.html">docker教程</a></p>
-</blockquote>
-<p>安装docker</p>
-<div class="code-wrapper"><pre><code class="hljs bash">curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun</code></pre></div>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://yeasy.gitbook.io/docker_practice/install/mirror">换源</a></p>
-</blockquote>
-<h3 id="vcpkg"><a class="markdownIt-Anchor" href="#vcpkg"></a> vcpkg</h3>
+              <h2 id="目录架构"><a class="markdownIt-Anchor" href="#目录架构"></a> 目录架构</h2>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/microsoft/vcpkg/blob/master/README_zh_CN.md#%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B-windows">下载</a></li>
+<li>/bin: 存放系统基本命令和可执行文件，例如 ls、cp、mkdir 等。</li>
+<li>/boot: 存放启动 Linux 内核所需的文件，包括内核映像文件和引导加载程序。</li>
+<li>/dev: 存放设备文件，例如硬盘、CD-ROM、鼠标和键盘等设备。在 Linux 中，所有设备都被视为文件。</li>
+<li>/etc: 存放系统的配置文件，例如用户账号、网络配置、软件包管理等。</li>
+<li>/home: 存放用户的主目录，每个用户都有一个独立的子文件夹，用于存放用户的文件和配置信息。</li>
+<li>/lib 和 /lib64: 存放系统库文件，这些库文件是许多程序所必需的，例如 C 库、动态链接库等。</li>
+<li>/media: 存放可移动媒体设备（如 USB 驱动器、光盘、磁带等）的挂载点。</li>
+<li>/mnt: 存放临时挂载文件系统的挂载点。</li>
+<li>/opt: 存放第三方软件包，这些软件包不随操作系统一起安装，通常由用户自己安装和维护。</li>
+<li>/proc: 一个虚拟的文件系统，提供有关系统运行状态的信息，例如进程信息、系统负载、内存信息等。</li>
+<li>/root: 存放 root 用户的主目录，与 /home 目录类似。</li>
+<li>/run: 用于存放系统运行时需要的数据，例如进程 ID、套接字文件等。</li>
+<li>/sbin: 存放系统管理员命令和可执行文件，这些命令和文件通常只能由 root 用户执行。</li>
+<li>/srv: 存放系统提供的服务所需的数据，例如网站的文件、数据库等。</li>
+<li>/sys: 一个虚拟的文件系统，提供有关系统硬件和设备的信息，例如 CPU、内存、硬盘等。</li>
+<li>/tmp: 存放临时文件，这些文件通常只存在于系统重启前。</li>
+<li>/usr: 存放用户安装的应用程序和数据文件。该目录包括多个子目录，例如 /usr/bin、/usr/lib、/usr/share 等。</li>
+<li>/var: 存放系统运行时产生的文件，例如日志文件、邮件、数据库等。</li>
 </ul>
 
             </div>
@@ -312,7 +265,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
+                      <a class="hover-with-bg" href="/tags/Linux/">Linux</a>
                     
                   </div>
                 
@@ -329,18 +282,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/07/03/%E6%9D%82/pws/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Windows PowerShell美化以及 Vscode 终端美化配置</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/06/14/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%85%A5%E9%97%A8/">
-                        <span class="hidden-mobile">服务器入门</span>
+                      <a href="/2023/02/28/Linux/Linux%E5%86%85%E6%A0%B8%E9%A9%B1%E5%8A%A8/">
+                        <span class="hidden-mobile">Linux内核驱动</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

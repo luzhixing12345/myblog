@@ -16,12 +16,12 @@
   <meta name="author" content="luzhixing12345">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言 如今Linux发行版不少,也有各种好看的Linux桌面.如果只是想使用一个Linux的环境+bash那么无论是WSL还是SSH到一台远程服务器都是比较方便的,或者docker创建一个Linux的环境等等,配合Vscode做各种代码开发我想应该都是老生常谈的事情了. 本文用于记录笔者在Ubuntu20.04桌面版的工作环境配置,包括各种笔者认为必要的软件的安装,配置修改和个人偏好,主要目的有">
+    <meta name="description" content="前言 如今Linux发行版不少,也有各种好看的Linux桌面.如果只是想使用一个Linux的环境+bash那么无论是WSL还是SSH到一台远程服务器都是比较方便的,或者docker创建一个Linux的环境等等,配合Vscode做各种代码开发我想应该都是老生常谈的事情了. 本文用于记录笔者在Ubuntu22.04桌面版的工作环境配置,包括各种笔者认为必要的软件的安装,配置修改和个人偏好,主要目的有">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ubuntu工作环境配置">
 <meta property="og:url" content="https://luzhixing12345.github.io/2022/11/15/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Ubuntu%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="kamilu的博客">
-<meta property="og:description" content="前言 如今Linux发行版不少,也有各种好看的Linux桌面.如果只是想使用一个Linux的环境+bash那么无论是WSL还是SSH到一台远程服务器都是比较方便的,或者docker创建一个Linux的环境等等,配合Vscode做各种代码开发我想应该都是老生常谈的事情了. 本文用于记录笔者在Ubuntu20.04桌面版的工作环境配置,包括各种笔者认为必要的软件的安装,配置修改和个人偏好,主要目的有">
+<meta property="og:description" content="前言 如今Linux发行版不少,也有各种好看的Linux桌面.如果只是想使用一个Linux的环境+bash那么无论是WSL还是SSH到一台远程服务器都是比较方便的,或者docker创建一个Linux的环境等等,配合Vscode做各种代码开发我想应该都是老生常谈的事情了. 本文用于记录笔者在Ubuntu22.04桌面版的工作环境配置,包括各种笔者认为必要的软件的安装,配置修改和个人偏好,主要目的有">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/Screenshot%20from%202023-01-01%2022-49-50.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/Screenshot%20from%202023-01-01%2022-08-22.png">
@@ -35,8 +35,9 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/Screenshot%20from%202023-01-01%2023-43-55.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/Screenshot%20from%202023-01-01%2023-39-39.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/Screenshot%20from%202023-01-01%2023-40-06.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230228113320.png">
 <meta property="article:published_time" content="2022-11-15T07:59:08.000Z">
-<meta property="article:modified_time" content="2023-02-25T15:28:39.003Z">
+<meta property="article:modified_time" content="2023-02-28T03:35:26.293Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="环境配置">
 <meta name="twitter:card" content="summary_large_image">
@@ -242,15 +243,15 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：1 分钟前
+                  本文最后更新于：30 分钟前
                 
               </p>
             
             <div class="markdown-body">
               <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
 <p>如今Linux发行版不少,也有各种好看的Linux桌面.如果只是想使用一个Linux的环境+bash那么无论是WSL还是SSH到一台远程服务器都是比较方便的,或者docker创建一个Linux的环境等等,配合Vscode做各种代码开发我想应该都是老生常谈的事情了.</p>
-<p>本文用于记录笔者在Ubuntu20.04桌面版的工作环境配置,包括各种笔者认为<strong>必要的软件的安装,配置修改和个人偏好</strong>,主要目的有两个</p>
-<p>另外笔者使用的是Ubuntu20.04的操作系统,对于老版本和更新的版本或许会有出入,还请各位注意</p>
+<p>本文用于记录笔者在Ubuntu22.04桌面版的工作环境配置,包括各种笔者认为<strong>必要的软件的安装,配置修改和个人偏好</strong>,主要目的有两个</p>
+<p>另外笔者使用的是Ubuntu22.04的操作系统,对于老版本和更新的版本有一些出入,还请各位注意</p>
 <h2 id="换源"><a class="markdownIt-Anchor" href="#换源"></a> 换源</h2>
 <div class="code-wrapper"><pre><code class="hljs bash">sudo apt install vim git
 sudo <span class="hljs-built_in">cp</span> /etc/apt/sources.list /etc/apt/sources.list.bak
@@ -272,8 +273,7 @@ deb-src https://mirrors.ustc.edu.cn/ubuntu/ jammy-proposed main restricted unive
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/61228593">18.04源</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/b2288ef3f11e">16.04源</a></li>
 </ul>
-<div class="code-wrapper"><pre><code class="hljs bash">sudo apt update
-sudo apt upgrade</code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs bash">sudo apt update</code></pre></div>
 <h2 id="ubuntu基础配置"><a class="markdownIt-Anchor" href="#ubuntu基础配置"></a> Ubuntu基础配置</h2>
 <ul>
 <li>
@@ -348,16 +348,30 @@ sudo systemctl <span class="hljs-built_in">enable</span> v2raya.service</code></
 <p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230222182331.png" srcset="/img/loading.gif" lazyload alt="20230222182331" /></p>
 <p>默认端口为20170(socks5), 20171(http), 20172(带分流规则的http) 端口</p>
 <p>桌面端的Ubuntu系统需要手动开启网络代理应用于本机(127.0.0.1)</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">127.0.0.1</th>
+<th style="text-align:center">20171</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">127.0.0.1</td>
+<td style="text-align:center">20171</td>
+</tr>
+<tr>
+<td style="text-align:center">空</td>
+<td style="text-align:center">空</td>
+</tr>
+<tr>
+<td style="text-align:center">127.0.0.1</td>
+<td style="text-align:center">20170</td>
+</tr>
+</tbody>
+</table>
 <p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/Screenshot%20from%202023-01-01%2022-08-42.png" srcset="/img/loading.gif" lazyload alt="Screenshot from 2023-01-01 22-08-42" /></p>
-<blockquote>
-<p><a href="https://luzhixing12345.github.io/2022/11/08/%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Linux%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE/">Linux代理配置</a></p>
-<p><a href="https://luzhixing12345.github.io/2022/10/23/%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/WSL2%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE/">windows下v2rayN+wsl2代理配置</a></p>
-</blockquote>
 <h2 id="安装中文输入法"><a class="markdownIt-Anchor" href="#安装中文输入法"></a> 安装中文输入法</h2>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/529892064">https://zhuanlan.zhihu.com/p/529892064</a></p>
-<blockquote>
-<p>参考<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/508797663">Ubuntu22.04安装Fcitx5中文输入法（详细）</a></p>
-</blockquote>
 <ul>
 <li>
 <p>setting-&gt;region and language-&gt;manage installed language(打开之后会让你安装)</p>
@@ -368,6 +382,9 @@ sudo systemctl <span class="hljs-built_in">enable</span> v2raya.service</code></
 fcitx5-chinese-addons \
 fcitx5-frontend-gtk3 fcitx5-frontend-gtk2 \
 fcitx5-frontend-qt5 kde-config-fcitx5</code></pre></div>
+<blockquote>
+<p>如果不是ubuntu22.04版本的话最后一项会报错找不到, 其他版本的中文输入法安装见: <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/529892064">https://zhuanlan.zhihu.com/p/529892064</a></p>
+</blockquote>
 </li>
 <li>
 <p>中文词库</p>
@@ -418,7 +435,7 @@ gnome-tweaks</code></pre></div>
 <li>
 <p>输入法美化</p>
 <p>这个因人而异,可以<a target="_blank" rel="noopener" href="https://github.com/search?q=fcitx5+theme&amp;type=Repositories">搜索fcitx5</a>其他主题</p>
-<p>笔者这里使用的是<a target="_blank" rel="noopener" href="https://github.com/tonyfettes/fcitx5-nord">nord</a>主题</p>
+<p>笔者这里使用的是<a target="_blank" rel="noopener" href="https://github.com/tonyfettes/fcitx5-nord">nord</a>主题,<a target="_blank" rel="noopener" href="https://github.com/sxqsfun/fcitx5-sogou-themes">alpha-black</a>这款我也比较喜欢</p>
 <div class="code-wrapper"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/tonyfettes/fcitx5-nord.git
 <span class="hljs-built_in">mkdir</span> -p ~/.local/share/fcitx5/themes/
 <span class="hljs-built_in">cd</span> fcitx5-nord
@@ -432,10 +449,7 @@ gnome-tweaks</code></pre></div>
 <h2 id="chrome"><a class="markdownIt-Anchor" href="#chrome"></a> Chrome</h2>
 <div class="code-wrapper"><pre><code class="hljs bash">wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome-stable_current_amd64.deb</code></pre></div>
-<p>接着就可以找到chrome了,这里有可能出现chrome图标找不到的问题,打开chrome也可能卡死,不过重启一下或者重新dpkg装一下似乎就好了</p>
-<blockquote>
-<p>然后就可以把firefox卸了</p>
-</blockquote>
+<p>接着就可以找到chrome了,这里有可能出现chrome图标找不到的问题,打开chrome也可能卡死,不过重启一下或者重新dpkg装一下似乎就好了,<s>然后就可以把firefox卸了</s></p>
 <p>ubuntu的话默认fn键是启用的,所以F12这里会调整音量,永久禁用(重启生效)</p>
 <div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> options hid_apple fnmode=0 | sudo <span class="hljs-built_in">tee</span> -a /etc/modprobe.d/hid_apple.conf
 sudo update-initramfs -u -k all</code></pre></div>
@@ -447,17 +461,21 @@ sudo update-initramfs -u -k all</code></pre></div>
 <p>这里直接用了我的个人vimrc配置,大家可以换成自己的,我改的不是很多</p>
 <div class="code-wrapper"><pre><code class="hljs bash">curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 wget https://raw.githubusercontent.com/luzhixing12345/vimrc/main/.vimrc
-vim .vimrc</code></pre></div>
+vim .vimrc
+:PlugInstall</code></pre></div>
+<h2 id="软件安装"><a class="markdownIt-Anchor" href="#软件安装"></a> 软件安装</h2>
+<p>deepin-wine</p>
+<div class="code-wrapper"><pre><code class="hljs bash">sudo apt-get update
+wget -O- https://deepin-wine.i-m.dev/setup.sh | sh</code></pre></div>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230228113320.png" srcset="/img/loading.gif" lazyload alt="20230228113320" /></p>
+<p>看到如下界面说明成功了,然后 <strong>关闭当前终端新开一个终端</strong></p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 微信</span>
+sudo apt-get install com.qq.weixin.deepin
+<span class="hljs-comment"># QQ</span>
+sudo apt-get install com.qq.im.deepin</code></pre></div>
 <blockquote>
-<p>如果这里提示 ^M 那是因为windows和unix换行的问题,使用 <code>:set fileformat=unix</code> 解决即可</p>
+<p>全部列表: <a target="_blank" rel="noopener" href="https://deepin-wine.i-m.dev/">https://deepin-wine.i-m.dev/</a></p>
 </blockquote>
-<p>先下载插件</p>
-<div class="code-wrapper"><pre><code class="hljs vim">PlugInstall</code></pre></div>
-<p>一些简单的键映射</p>
-<div class="code-wrapper"><pre><code class="hljs txt">nnoremap &lt;Leader&gt;q :q&lt;CR&gt;
-nnoremap &lt;Leader&gt;w :w&lt;CR&gt;
-nnoremap &lt;Leader&gt;g :NERDTreeToggle&lt;CR&gt;
-nnoremap &lt;Leader&gt;f :NERDTreeFind&lt;CR&gt;</code></pre></div>
 <h2 id="其他"><a class="markdownIt-Anchor" href="#其他"></a> 其他</h2>
 <p>其他配置的话也有很多,不过笔者之前已经有文章记录了,现在已经解决网络代理的问题了所以访问博客应该也没有问题了</p>
 <ul>
@@ -471,12 +489,13 @@ nnoremap &lt;Leader&gt;f :NERDTreeFind&lt;CR&gt;</code></pre></div>
 </ul>
 <p>连接服务器的SSH免密配置一下</p>
 <p>然后切一下双系统默认Windows,笔者电脑是DELL,使用F2进入的是bios的设置,F12进入的是boot menu.这里就是用F2进入bios把windows的调到ubuntu前面即可</p>
-<blockquote>
-<p>当然这里也可以修改grub,我个人一般windows用的多一些,ubuntu主要就写写C,用的不算特别频繁,所以还是windows第一启动项.如果需要的话进F12选ubuntu启动就可以了</p>
-</blockquote>
-<blockquote>
-<p><a href="https://luzhixing12345.github.io/2022/11/15/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/">双系统安装</a></p>
-</blockquote>
+<h2 id="参考"><a class="markdownIt-Anchor" href="#参考"></a> 参考</h2>
+<ul>
+<li><a href="https://luzhixing12345.github.io/2022/11/08/%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Linux%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE/">Linux代理配置</a></li>
+<li><a href="https://luzhixing12345.github.io/2022/10/23/%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/WSL2%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE/">windows下v2rayN+wsl2代理配置</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/508797663">Ubuntu22.04安装Fcitx5中文输入法（详细）</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38493195/article/details/124870781">ubuntu 22.04 安装 微信、QQ</a></li>
+</ul>
 
             </div>
             <hr>
