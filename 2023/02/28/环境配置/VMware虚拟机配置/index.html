@@ -16,21 +16,27 @@
   <meta name="author" content="luzhixing12345">
   <meta name="keywords" content="">
   
-    <meta name="description" content="目录架构  &#x2F;bin: 存放系统基本命令和可执行文件，例如 ls、cp、mkdir 等。 &#x2F;boot: 存放启动 Linux 内核所需的文件，包括内核映像文件和引导加载程序。 &#x2F;dev: 存放设备文件，例如硬盘、CD-ROM、鼠标和键盘等设备。在 Linux 中，所有设备都被视为文件。 &#x2F;etc: 存放系统的配置文件，例如用户账号、网络配置、软件包管理等。 &#x2F;home: 存放用户的主目录，每个用">
+    <meta name="description" content="VMware与主机SSH kamilu@ubuntu:~$ ifconfig 这里的 192.168.179.139 为虚拟机的ip地址, 这里需要改为你的 ens33     Link encap:Ethernet  HWaddr 00:0c:29:2a:5e:ef             inet addr:192.168.179.139  Bcast:192.168.179.255  Ma">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux常识">
-<meta property="og:url" content="https://luzhixing12345.github.io/2023/02/28/Linux/Linux%E5%B8%B8%E8%AF%86/index.html">
+<meta property="og:title" content="VMware虚拟机配置">
+<meta property="og:url" content="https://luzhixing12345.github.io/2023/02/28/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="kamilu的博客">
-<meta property="og:description" content="目录架构  &#x2F;bin: 存放系统基本命令和可执行文件，例如 ls、cp、mkdir 等。 &#x2F;boot: 存放启动 Linux 内核所需的文件，包括内核映像文件和引导加载程序。 &#x2F;dev: 存放设备文件，例如硬盘、CD-ROM、鼠标和键盘等设备。在 Linux 中，所有设备都被视为文件。 &#x2F;etc: 存放系统的配置文件，例如用户账号、网络配置、软件包管理等。 &#x2F;home: 存放用户的主目录，每个用">
+<meta property="og:description" content="VMware与主机SSH kamilu@ubuntu:~$ ifconfig 这里的 192.168.179.139 为虚拟机的ip地址, 这里需要改为你的 ens33     Link encap:Ethernet  HWaddr 00:0c:29:2a:5e:ef             inet addr:192.168.179.139  Bcast:192.168.179.255  Ma">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-02-28T03:57:02.000Z">
-<meta property="article:modified_time" content="2023-02-28T03:57:48.580Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230228234333.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230228234503.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230228234609.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230228234937.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230306162523.png">
+<meta property="article:published_time" content="2023-02-28T03:44:19.000Z">
+<meta property="article:modified_time" content="2023-03-06T08:51:39.485Z">
 <meta property="article:author" content="luzhixing12345">
-<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="环境配置">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230228234333.png">
   
   
-  <title>Linux常识 - kamilu的博客</title>
+  <title>VMware虚拟机配置 - kamilu的博客</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -164,9 +170,9 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Linux常识">
+            <span class="h2" id="subtitle" title="VMware虚拟机配置">
               
-                Linux常识
+                VMware虚拟机配置
               
             </span>
 
@@ -176,7 +182,7 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2023-02-28 11:57" pubdate>
+      <time datetime="2023-02-28 11:44" pubdate>
         2023年2月28日 中午
       </time>
     </span>
@@ -187,7 +193,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      714 字
+      2.1k 字
     </span>
   
 
@@ -196,7 +202,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      6 分钟
+      18 分钟
     </span>
   
 
@@ -225,35 +231,104 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Linux常识</h1>
+            <h1 style="display: none">VMware虚拟机配置</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：6 小时前
+                  本文最后更新于：19 小时前
                 
               </p>
             
             <div class="markdown-body">
-              <h2 id="目录架构"><a class="markdownIt-Anchor" href="#目录架构"></a> 目录架构</h2>
+              <h2 id="vmware与主机ssh"><a class="markdownIt-Anchor" href="#vmware与主机ssh"></a> VMware与主机SSH</h2>
+<div class="code-wrapper"><pre><code class="hljs bash">kamilu@ubuntu:~$ ifconfig</code></pre></div>
+<p>这里的 <code>192.168.179.139</code> 为虚拟机的ip地址, <strong>这里需要改为你的</strong></p>
+<div class="code-wrapper"><pre><code class="hljs bash">ens33     Link encap:Ethernet  HWaddr 00:0c:29:2a:5e:ef  
+          inet addr:192.168.179.139  Bcast:192.168.179.255  Mask:255.255.255.0
+          inet6 addr: fe80::a63f:f3c5:d9cb:1489/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:62 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:106 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:23047 (23.0 KB)  TX bytes:12551 (12.5 KB)
+
+lo        Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          inet6 addr: ::1/128 Scope:Host
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:200 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:200 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:16319 (16.3 KB)  TX bytes:16319 (16.3 KB)</code></pre></div>
+<p>安装ssh相关的 client server</p>
+<div class="code-wrapper"><pre><code class="hljs bash">sudo apt-get install openssh-client
+sudo apt-get install openssh-server
+sudo /etc/init.d/ssh restart
+netstat -tpl</code></pre></div>
+<p>看到ssh成功启动即为成功</p>
+<div class="code-wrapper"><pre><code class="hljs bash">root@ubuntu:/home/kamilu<span class="hljs-comment"># sudo /etc/init.d/ssh restart</span>
+[ ok ] Restarting ssh (via systemctl): ssh.service.
+root@ubuntu:/home/kamilu<span class="hljs-comment"># netstate -tpl</span>
+No <span class="hljs-built_in">command</span> <span class="hljs-string">&#x27;netstate&#x27;</span> found, did you mean:
+ Command <span class="hljs-string">&#x27;netstat&#x27;</span> from package <span class="hljs-string">&#x27;net-tools&#x27;</span> (main)
+netstate: <span class="hljs-built_in">command</span> not found
+root@ubuntu:/home/kamilu<span class="hljs-comment"># netstat -tpl</span>
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 ubuntu:domain           *:*                     LISTEN      1016/dnsmasq    
+tcp        0      0 *:ssh                   *:*                     LISTEN      3174/sshd       
+tcp        0      0 localhost:ipp           *:*                     LISTEN      783/cupsd       
+tcp6       0      0 [::]:ssh                [::]:*                  LISTEN      3174/sshd       
+tcp6       0      0 ip6-localhost:ipp       [::]:*                  LISTEN      783/cupsd</code></pre></div>
+<p>最后检查一下防火墙是不是关闭了</p>
+<div class="code-wrapper"><pre><code class="hljs bash">sudo ufw state
+<span class="hljs-comment"># inactive 表示关闭</span></code></pre></div>
+<h2 id="主机的操作"><a class="markdownIt-Anchor" href="#主机的操作"></a> 主机的操作</h2>
 <ul>
-<li>/bin: 存放系统基本命令和可执行文件，例如 ls、cp、mkdir 等。</li>
-<li>/boot: 存放启动 Linux 内核所需的文件，包括内核映像文件和引导加载程序。</li>
-<li>/dev: 存放设备文件，例如硬盘、CD-ROM、鼠标和键盘等设备。在 Linux 中，所有设备都被视为文件。</li>
-<li>/etc: 存放系统的配置文件，例如用户账号、网络配置、软件包管理等。</li>
-<li>/home: 存放用户的主目录，每个用户都有一个独立的子文件夹，用于存放用户的文件和配置信息。</li>
-<li>/lib 和 /lib64: 存放系统库文件，这些库文件是许多程序所必需的，例如 C 库、动态链接库等。</li>
-<li>/media: 存放可移动媒体设备（如 USB 驱动器、光盘、磁带等）的挂载点。</li>
-<li>/mnt: 存放临时挂载文件系统的挂载点。</li>
-<li>/opt: 存放第三方软件包，这些软件包不随操作系统一起安装，通常由用户自己安装和维护。</li>
-<li>/proc: 一个虚拟的文件系统，提供有关系统运行状态的信息，例如进程信息、系统负载、内存信息等。</li>
-<li>/root: 存放 root 用户的主目录，与 /home 目录类似。</li>
-<li>/run: 用于存放系统运行时需要的数据，例如进程 ID、套接字文件等。</li>
-<li>/sbin: 存放系统管理员命令和可执行文件，这些命令和文件通常只能由 root 用户执行。</li>
-<li>/srv: 存放系统提供的服务所需的数据，例如网站的文件、数据库等。</li>
-<li>/sys: 一个虚拟的文件系统，提供有关系统硬件和设备的信息，例如 CPU、内存、硬盘等。</li>
-<li>/tmp: 存放临时文件，这些文件通常只存在于系统重启前。</li>
-<li>/usr: 存放用户安装的应用程序和数据文件。该目录包括多个子目录，例如 /usr/bin、/usr/lib、/usr/share 等。</li>
-<li>/var: 存放系统运行时产生的文件，例如日志文件、邮件、数据库等。</li>
+<li>
+<p>vmware workstation -&gt; 编辑 -&gt; 虚拟网络适配器 -&gt; 更改设置(管理员权限)</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230228234333.png" srcset="/img/loading.gif" lazyload alt="20230228234333" /></p>
+</li>
+<li>
+<p>选择VMnet8, 点击 NAT设置</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230228234503.png" srcset="/img/loading.gif" lazyload alt="20230228234503" /></p>
+</li>
+<li>
+<p>点击添加</p>
+<p>主机端口22, 虚拟机IP(刚刚ifconfig看到的192.168.179.139), 虚拟机端口22</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230228234609.png" srcset="/img/loading.gif" lazyload alt="20230228234609" /></p>
+</li>
+<li>
+<p>退出, 应用, 确定</p>
+</li>
+<li>
+<p>主机处终端使用ssh连接</p>
+<div class="code-wrapper"><pre><code class="hljs bash">ssh &lt;NAME&gt;@&lt;IP&gt;
+<span class="hljs-comment"># ssh kamilu@192.168.179.139</span></code></pre></div>
+<p>选择yes,连接成功</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230228234937.png" srcset="/img/loading.gif" lazyload alt="20230228234937" /></p>
+</li>
+</ul>
+<h2 id="vscode-ssh"><a class="markdownIt-Anchor" href="#vscode-ssh"></a> Vscode + SSH</h2>
+<p>Vscode的环境就是使用远程资源管理器登录,由于过程比较简单,推荐几个比较详细的配置流程,如果新手小白遇到了一些问题可以参考</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/68577071">https://zhuanlan.zhihu.com/p/68577071</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/huoyanCC/p/14730244.html">https://www.cnblogs.com/huoyanCC/p/14730244.html</a></li>
+</ul>
+<h2 id="443端口"><a class="markdownIt-Anchor" href="#443端口"></a> 443端口</h2>
+<p>这个问题很恶心, 就是会出现443端口被占用导致出现一些问题</p>
+<p>如下两个方法并没有解决我的问题</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/bwlab/article/details/46953569">https://blog.csdn.net/bwlab/article/details/46953569</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/376328486">https://zhuanlan.zhihu.com/p/376328486</a></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230306162523.png" srcset="/img/loading.gif" lazyload alt="20230306162523" /></p>
+<p>我的VMware是16.2, 没有 <code>C:\ProgramData\VMware\hostd</code>, 也没有共享虚拟机</p>
+<p>一种暂时的解决措施是配置网络代理,然后配置主机的network代理http映射到20171,走代理</p>
+<p>这个问题暂时搁置, 等以后学明白了再回来解决</p>
+<h2 id="参考"><a class="markdownIt-Anchor" href="#参考"></a> 参考</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1679861">windows宿主机如何SSH连接VMware的Linux虚拟机</a></li>
 </ul>
 
             </div>
@@ -265,7 +340,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Linux/">Linux</a>
+                      <a class="hover-with-bg" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a>
                     
                   </div>
                 
@@ -292,8 +367,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/02/28/Linux/Linux%E5%86%85%E6%A0%B8%E9%A9%B1%E5%8A%A8/">
-                        <span class="hidden-mobile">Linux内核驱动</span>
+                      <a href="/2023/02/28/%E6%9C%8D%E5%8A%A1%E5%99%A8/SSH/">
+                        <span class="hidden-mobile">SSH</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
