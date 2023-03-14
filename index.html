@@ -183,6 +183,126 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2023/03/14/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/gcc%E7%89%88%E6%9C%AC%E5%88%87%E6%8D%A2/" target="_self">
+          gcc版本切换
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2023/03/14/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/gcc%E7%89%88%E6%9C%AC%E5%88%87%E6%8D%A2/" target="_self">
+          
+          本文简单记录一下gcc版本的选择 在编译qemu的过程中提示gcc版本至少是7, 我个人的ubuntu使用的是16.04, 默认gcc5.4, 所以还需要更换一下gcc版本 sudo add-apt-repository ppa:ubuntu-toolchain-r&#x2F;test sudo apt-get update sudo apt-get install gcc-8 安装完成之后可以看到已经有两
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-03-14 14:55" pubdate>
+              2023-03-14
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/03/14/Linux/linux%E5%86%85%E6%A0%B8%E8%B0%83%E8%AF%95/" target="_self">
+          linux内核调试
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2023/03/14/Linux/linux%E5%86%85%E6%A0%B8%E8%B0%83%E8%AF%95/" target="_self">
+          
+          前言 vscode + qemu 调试linux内核, 废话不多说直接开始吧  基础环境 windows + VMware + Ubuntu20.04 + Vscode  编译内核 编译linux内核的部分已经介绍过了, 见本系列的 linux内核编译  qemu 对于qemu应该不用过多介绍, 关心linux kernel的不会不知道qemu, 操作系统实验什么的也应该接触过, 简单来说就是一
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-03-14 13:24" pubdate>
+              2023-03-14
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Linux/">Linux</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/03/14/Linux/linux%E5%86%85%E6%A0%B8%E7%BC%96%E8%AF%91/" target="_self">
+          linux内核编译
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2023/03/14/Linux/linux%E5%86%85%E6%A0%B8%E7%BC%96%E8%AF%91/" target="_self">
+          
+          编译内核  下载Linux内核源代码 The Linux Kernel Archives 提供了所有Linux内核的历史版本,你可以使用git下载一个巨大的仓库,但笔者建议使用HTTP协议选择一个Linux版本使用即可 以5.4.19版本Linux内核源代码为例, 可以在 Linux Kernel 找到v5.x版本, 搜索5.4.19.gz 即可  版本选择 那么应该选择哪个版本呢? 实际上很多
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-03-14 11:54" pubdate>
+              2023-03-14
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Linux/">Linux</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2023/03/13/Linux/linux%E9%82%AE%E4%BB%B6%E8%AE%A2%E9%98%85/" target="_self">
           linux邮件订阅
         </a>
@@ -311,7 +431,7 @@
       <p class="index-excerpt">
         <a href="/2023/02/28/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%85%8D%E7%BD%AE/" target="_self">
           
-          VMware与主机SSH kamilu@ubuntu:~$ ifconfig 这里的 192.168.179.139 为虚拟机的ip地址, 这里需要改为你的 ens33     Link encap:Ethernet  HWaddr 00:0c:29:2a:5e:ef             inet addr:192.168.179.139  Bcast:192.168.179.255  Ma
+          VMware与主机SSH sudo apt update sudo apt install net-tools kamilu@ubuntu:~$ ifconfig 这里的 192.168.179.139 为虚拟机的ip地址, 这里需要改为你的 ens33     Link encap:Ethernet  HWaddr 00:0c:29:2a:5e:ef             inet addr
         </a>
       </p>
 
@@ -450,126 +570,6 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/CSAPP/">CSAPP</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/02/03/CSAPP/08-PerformanceLab/" target="_self">
-          08-PerformanceLab
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2023/02/03/CSAPP/08-PerformanceLab/" target="_self">
-          
-          前言 performance lab 实验用于理解一些程序中的优化手段, 但是本身这个实验设计的比较粗糙, 甚至没有一个很好的评判标准, 程序使用的计时器甚至每次运行得分都会有所波动… 看了些其他的文章也都说这个实验已经被Cachelab取代了,不过这个实验本身并不算很难,简单的花一点时间就可以搞定  做下来感觉价值确实不是很高   实验背景 实验pdf里写的比较清晰了,需要完成kernels.
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-02-03 21:22" pubdate>
-              2023-02-03
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/CSAPP/">CSAPP</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/01/03/Linux/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" target="_self">
-          常用命令总结
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2023/01/03/Linux/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" target="_self">
-          
-          查询linux命令 解释shell   查看操作系统版本 cat &#x2F;etc&#x2F;os-release  find: 搜索  在文件夹中递归的搜索某个文件名 find &lt;PATH&gt; -name &quot;NAME&quot;  # 从此目录下递归的搜索文件名为cdev.h的文件 find .&#x2F; -name &quot;cdev.h&quot;  查找一个带文件夹的文件名 例如要找 con
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-01-03 21:33" pubdate>
-              2023-01-03
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Linux/">Linux</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/12/28/HPC/cache/" target="_self">
-          cache
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/12/28/HPC/cache/" target="_self">
-          
-          局部性 一个编写良好的计算机程序常常具有良好的局部性.他们抢相遇引用林进屿其他最近引用过的数据项的数据项,或者引用最近引用过的数据项本身.这种倾向性被称为局部性原理,是一个持久的概念,对硬件和软件系统的设计和性能都用这极大的影响 局部性通常有两种不同的形式,时间局部性和空间局部性  时间局部性:被引用过一次的内存位置很可能在将来不久的位置再被多次引用 空间局部性:如果一个内存位置被引用了一次,那
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-12-28 20:18" pubdate>
-              2022-12-28
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/HPC/">HPC</a>
             
           </div>
         
