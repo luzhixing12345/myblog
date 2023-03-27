@@ -16,16 +16,16 @@
   <meta name="author" content="luzhixing12345">
   <meta name="keywords" content="">
   
-    <meta name="description" content="编译内核  下载Linux内核源代码 The Linux Kernel Archives 提供了所有Linux内核的历史版本,你可以使用git下载一个巨大的仓库,但笔者建议使用HTTP协议选择一个Linux版本使用即可 以5.4.19版本Linux内核源代码为例, 可以在 Linux Kernel 找到v5.x版本, 搜索5.4.19.gz 即可  版本选择 那么应该选择哪个版本呢? 实际上很多">
+    <meta name="description" content="编译内核 linux内核的使用和调试不建议直接使用真机, 使用虚拟机在绝大多数情况下都可以方便的处理问题 笔者的开发环境是 Windows11 + WMware Workstation Pro17 + Vscode   您可以前往VMware官网下载其最新版  license key: MC60H-DWHD5-H80U9-6V85M-8280D    Vscode    VMware + Ubu">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux内核编译">
 <meta property="og:url" content="https://luzhixing12345.github.io/2023/03/14/Linux/linux%E5%86%85%E6%A0%B8%E7%BC%96%E8%AF%91/index.html">
 <meta property="og:site_name" content="kamilu的博客">
-<meta property="og:description" content="编译内核  下载Linux内核源代码 The Linux Kernel Archives 提供了所有Linux内核的历史版本,你可以使用git下载一个巨大的仓库,但笔者建议使用HTTP协议选择一个Linux版本使用即可 以5.4.19版本Linux内核源代码为例, 可以在 Linux Kernel 找到v5.x版本, 搜索5.4.19.gz 即可  版本选择 那么应该选择哪个版本呢? 实际上很多">
+<meta property="og:description" content="编译内核 linux内核的使用和调试不建议直接使用真机, 使用虚拟机在绝大多数情况下都可以方便的处理问题 笔者的开发环境是 Windows11 + WMware Workstation Pro17 + Vscode   您可以前往VMware官网下载其最新版  license key: MC60H-DWHD5-H80U9-6V85M-8280D    Vscode    VMware + Ubu">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230301013759.png">
 <meta property="article:published_time" content="2023-03-14T03:54:14.000Z">
-<meta property="article:modified_time" content="2023-03-14T11:06:22.761Z">
+<meta property="article:modified_time" content="2023-03-16T09:25:31.364Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary_large_image">
@@ -189,7 +189,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4.1k 字
+      4.6k 字
     </span>
   
 
@@ -198,7 +198,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      35 分钟
+      38 分钟
     </span>
   
 
@@ -231,12 +231,37 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：6 小时前
+                  本文最后更新于：11 天前
                 
               </p>
             
             <div class="markdown-body">
               <h1 id="编译内核"><a class="markdownIt-Anchor" href="#编译内核"></a> 编译内核</h1>
+<p>linux内核的使用和调试不建议直接使用真机, 使用虚拟机在绝大多数情况下都可以方便的处理问题</p>
+<p>笔者的开发环境是 Windows11 + WMware Workstation Pro17 + Vscode</p>
+<ul>
+<li>
+<p>您可以前往<a target="_blank" rel="noopener" href="https://www.vmware.com/products/workstation-pro.html">VMware官网</a>下载其最新版</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://gist.github.com/PurpleVibe32/30a802c3c8ec902e1487024cdea26251">license key</a>: <code>MC60H-DWHD5-H80U9-6V85M-8280D</code></p>
+</blockquote>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://code.visualstudio.com/">Vscode</a></p>
+</li>
+</ul>
+<h2 id="vmware-ubuntu"><a class="markdownIt-Anchor" href="#vmware-ubuntu"></a> VMware + Ubuntu</h2>
+<p>Linux发行版的选择是<a target="_blank" rel="noopener" href="https://releases.ubuntu.com/16.04/">Ubuntu16.04.7LTS</a>, 直接下载镜像<a target="_blank" rel="noopener" href="https://releases.ubuntu.com/16.04/ubuntu-16.04.7-desktop-amd64.iso">Ubuntu Desktop image</a></p>
+<p>创建虚拟机的过程比较简单这里就不赘述了, 磁盘空间给大一些40GB, 交换区需要调整一下给8GB</p>
+<h2 id="ubuntu开发环境"><a class="markdownIt-Anchor" href="#ubuntu开发环境"></a> Ubuntu开发环境</h2>
+<p>这台虚拟机只是用于辅助编译的, 并不需要特别复杂的配置, 我的个人习惯是使用Vscode+SSH连接到这台虚拟机,在Windows中工作</p>
+<p>这部分的配置相对来说比较繁琐, 做不做都可以, 笔者这里贴出个人的一些笔记以供参考</p>
+<ul>
+<li><a href="https://luzhixing12345.github.io/2022/11/15/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Ubuntu%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">Ubuntu工作环境配置</a></li>
+<li><a href="https://luzhixing12345.github.io/2023/02/28/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%85%8D%E7%BD%AE/">VMware虚拟机配置</a></li>
+<li><a href="https://luzhixing12345.github.io/2023/02/28/%E6%9C%8D%E5%8A%A1%E5%99%A8/SSH/">SSH</a></li>
+</ul>
+<p>接下来就可以正式进入编译阶段了!</p>
 <h2 id="下载linux内核源代码"><a class="markdownIt-Anchor" href="#下载linux内核源代码"></a> 下载Linux内核源代码</h2>
 <p><a target="_blank" rel="noopener" href="https://www.kernel.org/">The Linux Kernel Archives</a> 提供了所有Linux内核的历史版本,你可以使用git下载一个巨大的仓库,但笔者建议使用HTTP协议选择一个Linux版本使用即可</p>
 <p>以5.4.19版本Linux内核源代码为例, 可以在 <a target="_blank" rel="noopener" href="https://mirrors.edge.kernel.org/pub/linux/kernel/">Linux Kernel</a> 找到v5.x版本, 搜索<code>5.4.19.gz</code> 即可</p>

@@ -16,20 +16,18 @@
   <meta name="author" content="luzhixing12345">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言 malloc lab是设计一个自己的用于分配和管理内存的malloc free的实验 在编译之前首先需要添加 tracefiles&#x2F; 文件, 可以clone仓库然后将tracefiles&#x2F;文件夹移动到根目录, 然后修改config.h中的 #define TRACEDIR &quot;tracefiles&#x2F;&quot; 重新编译即可  实验报告">
+    <meta name="description" content="前言 malloc lab是设计一个自己的用于分配和管理内存的malloc free的实验 在文件夹内可以看到两个short1-bal.rep short2-bal.rep的测试文件, 但这里的测试文件并不全, 在编译之前首先需要添加 traces&#x2F; 文件夹, 可以clone仓库然后将其malloclab的traces文件夹移动到本实验的根目录, 然后修改config.h中的路径 #define">
 <meta property="og:type" content="article">
 <meta property="og:title" content="10-MallocLab">
 <meta property="og:url" content="https://luzhixing12345.github.io/2023/02/05/CSAPP/10-MallocLab/index.html">
 <meta property="og:site_name" content="kamilu的博客">
-<meta property="og:description" content="前言 malloc lab是设计一个自己的用于分配和管理内存的malloc free的实验 在编译之前首先需要添加 tracefiles&#x2F; 文件, 可以clone仓库然后将tracefiles&#x2F;文件夹移动到根目录, 然后修改config.h中的 #define TRACEDIR &quot;tracefiles&#x2F;&quot; 重新编译即可  实验报告">
+<meta property="og:description" content="前言 malloc lab是设计一个自己的用于分配和管理内存的malloc free的实验 在文件夹内可以看到两个short1-bal.rep short2-bal.rep的测试文件, 但这里的测试文件并不全, 在编译之前首先需要添加 traces&#x2F; 文件夹, 可以clone仓库然后将其malloclab的traces文件夹移动到本实验的根目录, 然后修改config.h中的路径 #define">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230204173652.png">
 <meta property="article:published_time" content="2023-02-05T13:22:39.000Z">
-<meta property="article:modified_time" content="2023-02-12T09:14:25.211Z">
+<meta property="article:modified_time" content="2023-03-24T13:42:32.087Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="CSAPP">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230204173652.png">
   
   
   <title>10-MallocLab - kamilu的博客</title>
@@ -189,7 +187,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      162 字
+      1.5k 字
     </span>
   
 
@@ -198,7 +196,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      2 分钟
+      13 分钟
     </span>
   
 
@@ -231,18 +229,72 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：1 个月前
+                  本文最后更新于：3 天前
                 
               </p>
             
             <div class="markdown-body">
               <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
 <p>malloc lab是设计一个自己的用于分配和管理内存的malloc free的实验</p>
-<p>在编译之前首先需要添加 <code>tracefiles/</code> 文件, 可以clone<a href="?">仓库</a>然后将tracefiles/文件夹移动到根目录, 然后修改config.h中的</p>
-<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">define</span> TRACEDIR <span class="hljs-string">&quot;tracefiles/&quot;</span></span></code></pre></div>
-<p>重新编译即可</p>
+<p>在文件夹内可以看到两个short1-bal.rep short2-bal.rep的测试文件, 但这里的测试文件并不全, 在编译之前首先需要添加 <code>traces/</code> 文件夹, 可以clone<a target="_blank" rel="noopener" href="https://github.com/Ethan-Yan27/CSAPP-Labs">仓库</a>然后将其malloclab的traces文件夹移动到本实验的根目录, 然后修改config.h中的路径</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">define</span> TRACEDIR <span class="hljs-string">&quot;traces/&quot;</span></span></code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs bash">└── traces
+    ├── amptjp-bal.rep
+    ├── binary-bal.rep
+    ├── binary2-bal.rep
+    ├── cccp-bal.rep
+    ├── coalescing-bal.rep
+    ├── cp-decl-bal.rep
+    ├── expr-bal.rep
+    ├── random-bal.rep
+    ├── random2-bal.rep
+    ├── realloc-bal.rep
+    └── realloc2-bal.rep</code></pre></div>
+<p>make编译即可</p>
 <h2 id="实验报告"><a class="markdownIt-Anchor" href="#实验报告"></a> 实验报告</h2>
-<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230204173652.png" srcset="/img/loading.gif" lazyload alt="20230204173652" /></p>
+<h3 id="预备知识"><a class="markdownIt-Anchor" href="#预备知识"></a> 预备知识</h3>
+<p>我们需要完成的是mm.h中声明的四个函数, 在mm.c中实现</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-keyword">extern</span> <span class="hljs-type">int</span> <span class="hljs-title function_">mm_init</span> <span class="hljs-params">(<span class="hljs-type">void</span>)</span>;
+<span class="hljs-keyword">extern</span> <span class="hljs-type">void</span> *<span class="hljs-title function_">mm_malloc</span> <span class="hljs-params">(<span class="hljs-type">size_t</span> size)</span>;
+<span class="hljs-keyword">extern</span> <span class="hljs-type">void</span> <span class="hljs-title function_">mm_free</span> <span class="hljs-params">(<span class="hljs-type">void</span> *ptr)</span>;
+<span class="hljs-keyword">extern</span> <span class="hljs-type">void</span> *<span class="hljs-title function_">mm_realloc</span><span class="hljs-params">(<span class="hljs-type">void</span> *ptr, <span class="hljs-type">size_t</span> size)</span>;</code></pre></div>
+<ul>
+<li>
+<p><strong>mm_init</strong>: 测试程序会首先调用 mm_init 分配一块内存, 我们之后的所有 mm_malloc mmrealloc mm_free 都是在分配的这段内存中进行操作, 即创建一个内存池</p>
+</li>
+<li>
+<p><strong>mm_malloc</strong>: 与malloc类似, 在堆中分配一段 size 大小的连续内存, 测试程序会将mm_malloc与libc中的malloc实现对比, 并且由于malloc返回的指针是八字节对齐的, 所以我们的mm_malloc实现也应该是八字节对齐</p>
+</li>
+<li>
+<p><strong>mm_free</strong>: 与free类似, 释放 ptr 指针指向的内存. 同时我们必须要保证指针指向的地址是之前通过 mm_malloc 或 mm_realloc 分配的, 并且没有被释放过的</p>
+</li>
+<li>
+<p><strong>mm_realloc</strong>: 与realloc 相似</p>
+<ul>
+<li>ptr == NULL, 等同于 mm_malloc</li>
+<li>size == 0, 等同于 mm_free</li>
+<li>ptr != NULL &amp;&amp; size != 0, 将原先 ptr 指针指向的内存重分配为 size 大小, 返回一个 ptr 指针可能与原先相同, 可能与原先不同, 这取决于 mm_realloc 的实现以及新老内存块的大小</li>
+</ul>
+</li>
+</ul>
+<p>由于动态内存分配器的设计, 在编写代码的过程中很容易导致一些内存未释放, 指针悬挂等问题. 为了更好的检查我们的内存分配器的正确性, 作者建议我们在开始之前先完成一个 堆检查器(heap checker), <code>int mm_check(void)</code> 主要用于检查</p>
+<ul>
+<li>空闲列表中标记的空闲块都是空闲的么?</li>
+<li>是否有连续的空闲块没有被合并?</li>
+<li>所有的空闲块都在空闲列表中么?</li>
+<li>空闲列表中的所有指针都指向了合法的空闲块么?</li>
+<li>已分配的块是否存在重叠?</li>
+<li>在堆上的指针是否指向的是合法的地址(已分配块的开头)?</li>
+</ul>
+<p>在最后提交答案的时候不要运行 mm_check, 它仅用于在编写过程中的调试</p>
+<p>我们并不能直接使用 malloc free realloc 等函数, 在 memlib.c 中提供了如下函数使用</p>
+<ul>
+<li><strong>mem_sbrk</strong>: 扩展堆</li>
+<li><strong>mem_heap_lo</strong>: 堆的最低地址(起始地址)</li>
+<li><strong>mem_heap_hi</strong>: 堆的最高地址(结尾地址)</li>
+<li><strong>mem_heapsize</strong>: 堆大小</li>
+<li><strong>mem_pagesize</strong>: 返回系统页大小(linux 4kb)</li>
+</ul>
 
             </div>
             <hr>
