@@ -23,11 +23,17 @@
 <meta property="og:site_name" content="kamilu的博客">
 <meta property="og:description" content="前言 malloc lab是设计一个自己的用于分配和管理内存的malloc free的实验 在文件夹内可以看到两个short1-bal.rep short2-bal.rep的测试文件, 但这里的测试文件并不全, 在编译之前首先需要添加 traces&#x2F; 文件夹, 可以clone仓库然后将其malloclab的traces文件夹移动到本实验的根目录, 然后修改config.h中的路径 #define">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330194139.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330194355.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330194954.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330200747.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330214335.png">
 <meta property="article:published_time" content="2023-02-05T13:22:39.000Z">
-<meta property="article:modified_time" content="2023-03-24T13:42:32.087Z">
+<meta property="article:modified_time" content="2023-03-30T15:53:54.810Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="CSAPP">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330194139.png">
   
   
   <title>10-MallocLab - kamilu的博客</title>
@@ -187,7 +193,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.5k 字
+      2.8k 字
     </span>
   
 
@@ -196,7 +202,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      13 分钟
+      24 分钟
     </span>
   
 
@@ -229,7 +235,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：3 天前
+                  本文最后更新于：1 个月前
                 
               </p>
             
@@ -295,6 +301,43 @@
 <li><strong>mem_heapsize</strong>: 堆大小</li>
 <li><strong>mem_pagesize</strong>: 返回系统页大小(linux 4kb)</li>
 </ul>
+<h2 id="前置知识"><a class="markdownIt-Anchor" href="#前置知识"></a> 前置知识</h2>
+<blockquote>
+<p>开始本实验之前建议先复习一下虚拟内存动态内存分配 9.9 节, 下面对本节中的知识点做一个简要性的复习</p>
+</blockquote>
+<p>为了更好的组织已分配的块和空闲块, 我们可以使用隐式空闲链表来串联整个堆, 下图为隐式链表的每个节点的数据结构图</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330194139.png" srcset="/img/loading.gif" lazyload alt="20230330194139" /></p>
+<p>其中开头使用 4 字节(32位) 来表示整个块的相关数据, 开头的 32 位用于表示整个块实际分配了多大. 需要注意的是, <strong>每一个分配的块必须要是8字节对齐</strong>, 所以实际上分配块一定的 8 的整数倍, 所以最后 3 位一定全为 0, 这样最后三位就空闲了出来, 我们将最后一位设置为标记位用于区分该块是已分配的还是空闲的</p>
+<p>举个例子: 对于 malloc(1) 的分配请求, 虽然只请求了 1 个字节, 但是我们需要先加 4 字节的头部信息, 所以目前是 4+1 = 5 字节,  但是为了满足 8 字节(64位)对齐以提高数据访问的效率，避免不必要的内存访问操作, 实际分配的块大小是 8 字节, 对应的实际块情况如下所示</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330194355.png" srcset="/img/loading.gif" lazyload alt="20230330194355" /></p>
+<blockquote>
+<p>图中字节的面积比例有点不对,应该是 4:1:3 , 大家理解我的意思就好…</p>
+</blockquote>
+<p>开头的 4 字节是 0x00 00 00 09, 由于分配块一定是 8 位对齐, 所以最后 3 位空出来, 0x1000 表示分配块的实际大小, 最后一位表示分配(1)还是未分配(0), 最后填充3B对齐</p>
+<p>再举一个例子: 如果是 malloc(13) 的话, 分配块的结构如下所示</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330194954.png" srcset="/img/loading.gif" lazyload alt="20230330194954" /></p>
+<p>接下来我们来看一下堆中隐式链表的块是如何组织起来的, 以书上这张图为例</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330200747.png" srcset="/img/loading.gif" lazyload alt="20230330200747" /></p>
+<p>其中每一个正方形块代表 4 字节, 这里的 8/0 16/1 表示的意思是 <code>分配块的大小/已分配位</code>, 红色块为链表头, 蓝色块为实际申请的内存大小, 灰色块为填充位. 所以整个堆被划分为了几部分, 4字节空闲 + 8字节已分配 + 24字节空闲 + 12字节已分配, 中间穿插着一些头部信息块和填充块. 再创建一个链表结构保存头节点的相关信息, 以实现后续的分配释放</p>
+<h4 id="分割"><a class="markdownIt-Anchor" href="#分割"></a> 分割</h4>
+<p>对于一个 k 字节的内存申请, 分配器搜索空闲链表块找到一个足够大的可以放置请求块的空闲块. 分配器执行这种搜索的方式是由放置策略决定的, 一些常见的策略是:</p>
+<ul>
+<li>首次适配(first fit): 选择第一个合适的空闲块</li>
+<li>下一次适配(next fit): 从上一次查询结束的地方开始首次适配</li>
+<li>最佳适配(best fit): 检查每个空闲块, 选择适合所需请求大小的最小空闲块</li>
+</ul>
+<p>如果分配器不能找到合适的空闲块, 那么一个选择是合并哪些在物理上相邻的空闲块, 把他们合并为一个大块. 如果依然不可以, 那么分配器会调用 sbrk 函数向内核申请额外的堆内存. 分配器将额外的内存转化为一个大的空闲块, 将这个块插入到空闲链表中, 然后将被申请的块放置在这个新的空闲块中</p>
+<h4 id="合并"><a class="markdownIt-Anchor" href="#合并"></a> 合并</h4>
+<p>当分配器释放一个已分配的块, 这时候如果有其他空闲块和这个新释放的空闲块相邻, 这些相邻的空闲块会造成一种现象 “假碎片”: 有许多可用的空闲块被切割成小的, 无法使用的空闲块</p>
+<p>为了解决这个问题, 分配器必须考虑合并相邻的空闲块, 但这时候存在一个重要的策略决定就是 <strong>何时执行合并?</strong></p>
+<ul>
+<li>立即合并: 这种方式简单明了, 可以在常数时间内完成, 但是对于某些请求模式, 这种方式会产生一种形式的抖动, 块会反复的合并, 然后再次分割, 如下图所示</li>
+<li>推迟合并: 直到某个分配请求失败, 扫描整个堆, 合并所有的空闲块</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330214335.png" srcset="/img/loading.gif" lazyload alt="20230330214335" /></p>
+<blockquote>
+<p>我们假设会使用立即合并, 但是同时也应该清楚快速的分配器通常会选择某种形式的推迟合并</p>
+</blockquote>
 
             </div>
             <hr>

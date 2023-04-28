@@ -1,0 +1,619 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://raw.githubusercontent.com/learner-lu/picbed/master/logo.png">
+  <link rel="icon" href="https://raw.githubusercontent.com/learner-lu/picbed/master/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#4a00e0">
+  <meta name="author" content="luzhixing12345">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="前言 本节继续前文虚拟内存的内容, 深入的讨论一下内存分配的相关技术细节  动态内存分配 我们可以使用较为低级的 mmap 和 munmap 函数来创建和删除虚拟内存区域, 但是 C 程序员还是会觉得当需要额外虚拟内存的时候, 使用动态内存分配器更加方便 动态内存分配器维护着一个进程的虚拟内存区域, 称为堆 (heap). 堆是一个区域, 它紧接着在未初始化的数据区域后开始, 并向高地址处生长.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动态内存分配">
+<meta property="og:url" content="https://luzhixing12345.github.io/2023/03/30/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/index.html">
+<meta property="og:site_name" content="kamilu的博客">
+<meta property="og:description" content="前言 本节继续前文虚拟内存的内容, 深入的讨论一下内存分配的相关技术细节  动态内存分配 我们可以使用较为低级的 mmap 和 munmap 函数来创建和删除虚拟内存区域, 但是 C 程序员还是会觉得当需要额外虚拟内存的时候, 使用动态内存分配器更加方便 动态内存分配器维护着一个进程的虚拟内存区域, 称为堆 (heap). 堆是一个区域, 它紧接着在未初始化的数据区域后开始, 并向高地址处生长.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330154606.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330160520.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330164551.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330164312.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330194139.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330194355.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330194954.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330200747.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330214335.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230331005342.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230331014333.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230331005342.png">
+<meta property="article:published_time" content="2023-03-30T07:35:21.000Z">
+<meta property="article:modified_time" content="2023-04-23T06:57:36.966Z">
+<meta property="article:author" content="luzhixing12345">
+<meta property="article:tag" content="体系结构">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330154606.png">
+  
+  
+  <title>动态内存分配 - kamilu的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"luzhixing12345.github.io","root":"/","version":"1.8.14","typing":{"enable":false,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"fEy8W8VvIoc26nT53dV2157j-gzGzoHsz","app_key":"s9HXuqmvBWrOaAiLA07Jg59A","server_url":"https://fey8w8vv.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Kamilu-blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://raw.githubusercontent.com/learner-lu/picbed/master/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="动态内存分配">
+              
+                动态内存分配
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-03-30 15:35" pubdate>
+        2023年3月30日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      6.1k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      52 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">动态内存分配</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：5 天前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>本节继续前文虚拟内存的内容, 深入的讨论一下内存分配的相关技术细节</p>
+<h2 id="动态内存分配"><a class="markdownIt-Anchor" href="#动态内存分配"></a> 动态内存分配</h2>
+<p>我们可以使用较为低级的 mmap 和 munmap 函数来创建和删除虚拟内存区域, 但是 C 程序员还是会觉得当需要额外虚拟内存的时候, 使用动态内存分配器更加方便</p>
+<p>动态内存分配器维护着一个进程的虚拟内存区域, 称为堆 (heap). 堆是一个区域, 它紧接着在未初始化的数据区域后开始, 并向高地址处生长. 对于每一个进程, 内核维护着一个变量 brk 指向堆的顶部, 整个虚拟内存的视图如下所示</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330154606.png" srcset="/img/loading.gif" lazyload alt="20230330154606" /></p>
+<p>分配器将堆视为一组不同大小的块, 每个块就是一段连续的虚拟内存片, 要么是已分配的要么是空闲的. 已分配的块显式的为保留为供应用程序使用, 空闲的块可以用来分配. 一个已分配的块保持已分配的状态直到它被释放. 这种释放要么是应用程序显式执行的(free), 要么是内存分配器自身隐式执行的</p>
+<p>分配器有两种风格, 这两种风格都要求应用显式的分配块, 但区别在于</p>
+<ul>
+<li><strong>显式分配器</strong>: 要求应用显式的释放任何已分配的块, 例如 C 程序通过 malloc 分配一个块并通过 free 释放</li>
+<li><strong>隐式分配器</strong>: 要求分配器检测一个已分配的块何时不再被应用程序使用, 那么就释放这个块. 这种隐式分配器也叫做 <strong>垃圾收集(garbage collection)</strong>, 诸如 java python js等高级语言就依赖垃圾收集释放已分配的块</li>
+</ul>
+<h2 id="显式分配器"><a class="markdownIt-Anchor" href="#显式分配器"></a> 显式分配器</h2>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-type">void</span> *<span class="hljs-title function_">malloc</span><span class="hljs-params">(<span class="hljs-type">size_t</span> size)</span>;
+<span class="hljs-type">void</span> <span class="hljs-title function_">free</span><span class="hljs-params">(<span class="hljs-type">void</span> *ptr)</span>;</code></pre></div>
+<p>malloc 函数返回一个指针, 指向大小至少为 size 字节的内存块, 这个块的地址会根据操作系统模式32(8)/64(16)做对齐以方便访存</p>
+<p>free 函数释放指针指向的堆块, 如果它合法</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span>
+<span class="hljs-type">void</span> *<span class="hljs-title function_">sbrk</span><span class="hljs-params">(<span class="hljs-type">intptr_t</span> incr)</span>;</code></pre></div>
+<p>sbrk 函数将内核的 brk 指针增加 incr 来扩展/收缩堆, 成功返回 brk 的旧值, 否则返回 -1 (void * 强转 int), incr 可正可负可0</p>
+<p>下图展示了一个简单的动态内存分配的过程</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330160520.png" srcset="/img/loading.gif" lazyload alt="20230330160520" /></p>
+<p>这里有两点需要说明:</p>
+<ol>
+<li>b 中虽然只申请了 5 字节的堆大小, 由于整个堆空间需要双字节补齐, 所以填补了一个字节的空间, 实际上分配的是一个 6 字节的块</li>
+<li>d 中虽然释放了 p2 指针指向的堆块, 但是 p2 指针仍然指向这个位置, 应用有责任不再使用 p2 指针访问一个已经被释放的堆空间</li>
+</ol>
+<blockquote>
+<p>使用动态内存分配的最主要原因就是我们并不清楚某些数据结构的大小, 或者数量等等. 比如拆分一个字符串保存在一个数组中, 诸如此类的问题我相信不必赘述</p>
+</blockquote>
+<h3 id="要求和目标"><a class="markdownIt-Anchor" href="#要求和目标"></a> 要求和目标</h3>
+<p>显式分配器必须在一些相当严格的约束条件下工作</p>
+<ul>
+<li><strong>处理任意请求序列</strong>: 一个引用可以以任意的顺序发送分配请求和释放请求, 分配器不可以假设分配和释放请求的顺序, 例如分配器不能假设所有分配请求都有相匹配的释放请求</li>
+<li><strong>立即响应请求</strong>: 分配器必须立即响应分配请求, 因此不允许分配器为了提高性能重排序或者缓冲请求</li>
+<li><strong>只使用堆</strong>: 为了使分配器可扩展, 分配器使用的任何非标量数据结构必须保存在堆中</li>
+<li><strong>对齐块</strong></li>
+<li><strong>不修改已分配的块</strong>: 分配器只能操作或者改变空闲块, 特别的是一旦块被分配了, 就不允许修改或者移动它了. 因此诸如压缩已分配块这样的技术是不允许使用的</li>
+</ul>
+<blockquote>
+<p>非标量数据例如数组、结构体、类、对象等。这些数据类型通常需要在堆内存中动态分配内存空间，并且它们的大小和形状在编译时通常是未知的. 相对应的，标量数据指的是只包含单一值的数据类型，例如整型、浮点型、字符型等。这些数据类型的大小和形状在编译时通常是已知的，并且它们可以在栈内存中被直接分配和访问</p>
+</blockquote>
+<p>在计算机系统中，数据存储时需要遵循一定的对齐规则。对齐是指将数据的起始地址与某个固定的值对齐，通常为2的整数次幂。例如，对于4字节的数据类型，通常需要将其对齐到4字节的边界。这样可以提高数据访问的效率，避免不必要的内存访问操作。</p>
+<p>对于内存分配器而言，它需要对分配的内存块进行对齐，以保证内存块能够存储任何类型的数据结构。例如，如果内存分配器分配的内存块不满足对齐要求，那么当程序员试图将一个需要对齐的数据类型存储在这个内存块中时，就可能会发生数据对齐错误的问题，导致程序出错或崩溃。</p>
+<p>因此，内存分配器需要对齐分配的内存块，以保证内存块能够存储任何类型的数据结构，并且程序能够正常地访问和操作这些数据结构</p>
+<p>内存分配器的目标有如下两个</p>
+<ol>
+<li>最大化吞吐率: 吞吐率定义为单位时间内完成的请求数, 比如 1s 内完成 500 次分配请求和 500 次释放请求那么吞吐率是 1000</li>
+<li>最大化内存利用率</li>
+</ol>
+<p>分配器设计中的一个有趣的挑战就是在两个目标之间找到一个适当的平衡</p>
+<p>造成堆利用率很低的主要原因是一种被称为 <strong>碎片</strong> 的现象:</p>
+<ul>
+<li>
+<p>内部碎片: 一个已分配块比有效载荷大</p>
+<p>很多情况可能导致这个情况, 例如一个分配器的实现对分配块强加一个最小值, 这个值比实际申请的要大. 或者为了满足对齐要求而补齐</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330164551.png" srcset="/img/loading.gif" lazyload alt="20230330164551" /></p>
+</li>
+<li>
+<p>外部碎片:</p>
+<p>如下图, 由于多次的分配和释放, 现在堆中已分配的块被划分为一块一块的, 此时如果希望申请一个 40MB 的堆块, 虽然空闲块的总量足够但是没有一块连续的空间. 注意到分配器的要求不可以修改已分配的块, 即 <strong>压缩排列块</strong> 是不合法的. 这种情况只能使用 sbrk 向操作系统申请扩大堆</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330164312.png" srcset="/img/loading.gif" lazyload alt="20230330164312" /></p>
+</li>
+</ul>
+<h3 id="隐式空闲链表"><a class="markdownIt-Anchor" href="#隐式空闲链表"></a> 隐式空闲链表</h3>
+<p>为了更好的组织已分配的块和空闲块, 我们可以使用隐式空闲链表来串联整个堆, 下图为隐式链表的每个节点的数据结构图</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330194139.png" srcset="/img/loading.gif" lazyload alt="20230330194139" /></p>
+<p>其中开头使用 4 字节(32位) 来表示整个块的相关数据, 开头的 32 位用于表示整个块实际分配了多大. 需要注意的是, <strong>每一个分配的块必须要是8字节对齐</strong>, 所以实际上分配块一定的 8 的整数倍, 所以最后 3 位一定全为 0, 这样最后三位就空闲了出来, 我们将最后一位设置为标记位用于区分该块是已分配的还是空闲的</p>
+<p>举个例子: 对于 malloc(1) 的分配请求, 虽然只请求了 1 个字节, 但是我们需要先加 4 字节的头部信息, 所以目前是 4+1 = 5 字节,  但是为了满足 8 字节(64位)对齐以提高数据访问的效率，避免不必要的内存访问操作, 实际分配的块大小是 8 字节, 对应的实际块情况如下所示</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330194355.png" srcset="/img/loading.gif" lazyload alt="20230330194355" /></p>
+<blockquote>
+<p>图中字节的面积比例有点不对,应该是 4:1:3 , 大家理解我的意思就好…</p>
+</blockquote>
+<p>开头的 4 字节是 0x00 00 00 09, 由于分配块一定是 8 位对齐, 所以最后 3 位空出来, 0x1000 表示分配块的实际大小, 最后一位表示分配(1)还是未分配(0), 最后填充3B对齐</p>
+<p>再举一个例子: 如果是 malloc(13) 的话, 分配块的结构如下所示</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330194954.png" srcset="/img/loading.gif" lazyload alt="20230330194954" /></p>
+<p>接下来我们来看一下堆中隐式链表的块是如何组织起来的, 以书上这张图为例</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330200747.png" srcset="/img/loading.gif" lazyload alt="20230330200747" /></p>
+<p>其中每一个正方形块代表 4 字节, 这里的 8/0 16/1 表示的意思是 <code>分配块的大小/已分配位</code>, 红色块为链表头, 蓝色块为实际申请的内存大小, 灰色块为填充位. 所以整个堆被划分为了几部分, 4字节空闲 + 8字节已分配 + 24字节空闲 + 12字节已分配, 中间穿插着一些头部信息块和填充块. 再创建一个链表结构保存头节点的相关信息, 以实现后续的分配释放</p>
+<h4 id="分割"><a class="markdownIt-Anchor" href="#分割"></a> 分割</h4>
+<p>对于一个 k 字节的内存申请, 分配器搜索空闲链表块找到一个足够大的可以放置请求块的空闲块. 分配器执行这种搜索的方式是由放置策略决定的, 一些常见的策略是:</p>
+<ul>
+<li>首次适配(first fit): 选择第一个合适的空闲块</li>
+<li>下一次适配(next fit): 从上一次查询结束的地方开始首次适配</li>
+<li>最佳适配(best fit): 检查每个空闲块, 选择适合所需请求大小的最小空闲块</li>
+</ul>
+<p>如果分配器不能找到合适的空闲块, 那么一个选择是合并哪些在物理上相邻的空闲块, 把他们合并为一个大块. 如果依然不可以, 那么分配器会调用 sbrk 函数向内核申请额外的堆内存. 分配器将额外的内存转化为一个大的空闲块, 将这个块插入到空闲链表中, 然后将被申请的块放置在这个新的空闲块中</p>
+<h4 id="合并"><a class="markdownIt-Anchor" href="#合并"></a> 合并</h4>
+<p>当分配器释放一个已分配的块, 这时候如果有其他空闲块和这个新释放的空闲块相邻, 这些相邻的空闲块会造成一种现象 “假碎片”: 有许多可用的空闲块被切割成小的, 无法使用的空闲块</p>
+<p>为了解决这个问题, 分配器必须考虑合并相邻的空闲块, 但这时候存在一个重要的策略决定就是 <strong>何时执行合并?</strong></p>
+<ul>
+<li>立即合并: 这种方式简单明了, 可以在常数时间内完成, 但是对于某些请求模式, 这种方式会产生一种形式的抖动, 块会反复的合并, 然后再次分割, 如下图所示</li>
+<li>推迟合并: 直到某个分配请求失败, 扫描整个堆, 合并所有的空闲块</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330214335.png" srcset="/img/loading.gif" lazyload alt="20230330214335" /></p>
+<blockquote>
+<p>我们假设会使用立即合并, 但是同时也应该清楚快速的分配器通常会选择某种形式的推迟合并</p>
+</blockquote>
+<p>如果当前被释放的块的链表指针指向的下一个块是空闲块, 那么我们很容易将其合并, 只需要修改当前块的头中的块大小, 加上后面块的大小即可</p>
+<p>但是如果当前被释放的块的前一个块是空闲块, 那么情况稍微有些棘手. 因为我们使用的是一个单链表, 无法在常数时间内找到前一个块. 一个非常聪明且通用的技术叫做 “边界标记”, 如下图所示, 我们修改之前的分配块结构, 在结尾补充一个四字节, 与头完全相同, 这样分配器就可以通过检查它的尾部来判断前一个块的起始位置和状态了</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230331005342.png" srcset="/img/loading.gif" lazyload alt="20230331005342" /></p>
+<blockquote>
+<p>这里可能有人会有一些疑惑</p>
+<p>第一: 为什么使用的是单链表呢? 正常来说如果我们改成双链表的话就可以在常数时间内找到前一个块了, 主要是因为单链表相对于双链表来说，具有更小的存储开销和更快的插入和删除操作。在单链表中每个节点只包含一个指针，而双链表每个节点包含两个指针。因此，使用单链表可以节省存储空间，并且在插入和删除节点时具有更高的效率. 但实际上我们使用的这种 “边界标记” 相当于把这部分开销放到了堆块上了, 有舍有得</p>
+<p>第二: 加一个尾部怎么就能判断了呢? 如果没有尾部, 我们无法找到前一个块的主要原因就是因为我们不知道前一个块是不是空闲的, 或者分配了多少, 但是如果有了尾部的四字节, 我们就可以向前读四个字节来查看前一个块的信息, (块大小 - 8)就是块的空间, 由于分配块的结构固定所以相对位置都是固定的</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230331014333.png" srcset="/img/loading.gif" lazyload alt="20230331014333" /></p>
+<p>当分配器释放一个块的时候有如上四种情况, 其中中间空白处+前后的头/尾组成了一个完整的分配块, m1 m2为块大小, a/f 表示这个块是已分配的还是空闲的. 蓝色的块是当前分配器考虑释放的块</p>
+<ul>
+<li>前后都是已分配的</li>
+<li>前是已分配的, 后是空闲的</li>
+<li>前是空闲的, 后是已分配的</li>
+<li>前后都是空闲的</li>
+</ul>
+<p>当释放当前块的时候, 分配器只需要检查当前块的前一个块的尾部, 和后一个块的头部, 就可以判断当前块所处的状态, 以右侧的状态完成合并, 我相信不难理解</p>
+<p>虽然边界标记的设计简单优雅, 但是它要求每个块都保持一个头部和尾部, 所以在应用程序操作许多个小块的时候会产生显著的内存开销. 例如当一个图形节点反复的调用 malloc free 来动态的创建和销毁节点, 如果每个节点都只 malloc(8), 那么头部和尾部将占据已分配块一半的空间</p>
+<h2 id="实验报告"><a class="markdownIt-Anchor" href="#实验报告"></a> 实验报告</h2>
+<h3 id="基础定义"><a class="markdownIt-Anchor" href="#基础定义"></a> 基础定义</h3>
+<p>代码中的 memlib.c 是一个简易的内存池, 其中 mem_init 使用 malloc 从堆中申请了一块 MAX_HEAP(20MB)大小的空间作为内存池, 实验的内存分配全部在这里进行</p>
+<p><code>mem_start_brk</code> 是堆的起始地址, <code>mem_max_addr</code> 是最大地址, <code>mem_brk</code> 是堆顶的地址. 初始化时 mem_brk = mem_start_brk 也就是堆的大小为 0. 当堆空间不足时需要使用 mem_sbrk 进行扩张, 如果堆扩张大小超过了 mem_max_addr, 也就是超过了 20MB 的最大限度则失败. 否则将堆顶地址增加并返回原堆顶地址.</p>
+<blockquote>
+<p>与 sbrk 不同的是 incr 要求大于等于 0, 也就是不会收缩堆, 当然本次实验中也不需要考虑收缩堆的情况</p>
+</blockquote>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* private variables */</span>
+<span class="hljs-type">static</span> <span class="hljs-type">char</span> *mem_start_brk; <span class="hljs-comment">/* points to first byte of heap */</span>
+<span class="hljs-type">static</span> <span class="hljs-type">char</span> *mem_brk;       <span class="hljs-comment">/* points to last byte of heap */</span>
+<span class="hljs-type">static</span> <span class="hljs-type">char</span> *mem_max_addr;  <span class="hljs-comment">/* largest legal heap address */</span>
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">mem_init</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> &#123;
+    <span class="hljs-comment">/* allocate the storage we will use to model the available VM */</span>
+    <span class="hljs-keyword">if</span> ((mem_start_brk = (<span class="hljs-type">char</span> *)<span class="hljs-built_in">malloc</span>(MAX_HEAP)) == <span class="hljs-literal">NULL</span>) &#123;
+        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;mem_init_vm: malloc error\n&quot;</span>);
+        <span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>);
+    &#125;
+
+    mem_max_addr = mem_start_brk + MAX_HEAP; <span class="hljs-comment">/* max legal heap address */</span>
+    mem_brk = mem_start_brk;                 <span class="hljs-comment">/* heap is empty initially */</span>
+&#125;
+
+<span class="hljs-type">void</span> *<span class="hljs-title function_">mem_sbrk</span><span class="hljs-params">(<span class="hljs-type">int</span> incr)</span> &#123;
+    <span class="hljs-type">char</span> *old_brk = mem_brk;
+    <span class="hljs-keyword">if</span> ((incr &lt; <span class="hljs-number">0</span>) || ((mem_brk + incr) &gt; mem_max_addr)) &#123;
+        errno = ENOMEM;
+        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;ERROR: mem_sbrk failed. Ran out of memory...\n&quot;</span>);
+        <span class="hljs-keyword">return</span> (<span class="hljs-type">void</span> *)<span class="hljs-number">-1</span>;
+    &#125;
+    mem_brk += incr;
+    <span class="hljs-keyword">return</span> (<span class="hljs-type">void</span> *)old_brk;
+&#125;</code></pre></div>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230331005342.png" srcset="/img/loading.gif" lazyload alt="20230331005342" /></p>
+<p>空闲链表节点的结构如上图所示, 接着定义一些宏用于快速操作地址和取值</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">define</span> WSIZE 4              <span class="hljs-comment">// 单字大小</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> DSIZE 8              <span class="hljs-comment">// 双字大小</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> CHUNKSIZE (1 &lt;&lt; 12)  <span class="hljs-comment">// 扩展堆时的默认大小</span></span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> MAX(x, y) ((x) &gt; (y) ? (x) : (y))</span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> GET(p) (*(unsigned int *)(p))</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> PUT(p, val) (*(unsigned int *)(p) == (val))</span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> GET_SIZE(p) (GET(p) &amp; ~0x7)</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> GET_ALLOC(p) (GET(p) &amp; 0x1)</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> PACK(size, alloc) ((size) | (alloc))</span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> HDRP(bp) ((char *)(bp)-WSIZE)</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> FTRP(bp) ((char *)(bp) + GET_SIZE(HDRP(bp)) - DSIZE)</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> NEXT_BLKP(bp) ((char *)(bp) + GET_SIZE(((char *)(bp)-WSIZE)))</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> PREV_BLKP(bp) ((char *)(bp) - GET_SIZE(((char *)(bp)-DSIZE)))</span></code></pre></div>
+<p>其中 WSIZE 就是指头部/尾部的 4 字节空间, DSIZE 就是一个头+尾. GET做一个类型转换, PUT做一个类型转换的赋值操作.</p>
+<p>GET_SIZE 和 GET_ALLOC 分别针对块头部的数据取值, 得到块大小和是否分配, PACK 负责将块大小和分配位结合到一起得到一个4字节的值用于写入头部.</p>
+<p>HDRP 根据实际块指针向前推4字节得到链表块的头部, 这里的堆是从低地址向高地址增长,所以是-WSIZE. FTPR 同理, 块指针加上块大小, 再向后推一个头一个尾8字节得到当前块的尾部地址. NEXT_BLKP 和 PREV_BLKP 分别是得到前一个和后一个块指针, 也不难理解</p>
+<p>到此为止我们完成了基础的宏定义, 接下来就可以了利用这些编写代码了</p>
+<h3 id="mem_init"><a class="markdownIt-Anchor" href="#mem_init"></a> mem_init</h3>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/">体系结构</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/04/23/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">文件系统</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/03/26/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/">
+                        <span class="hidden-mobile">虚拟内存</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
