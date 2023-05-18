@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221023180045.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221023180208.png">
 <meta property="article:published_time" content="2022-10-06T09:35:04.000Z">
-<meta property="article:modified_time" content="2023-02-28T10:00:37.204Z">
+<meta property="article:modified_time" content="2023-05-18T09:32:36.684Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="环境配置">
 <meta name="twitter:card" content="summary_large_image">
@@ -196,7 +196,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.5k 字
+      3.3k 字
     </span>
   
 
@@ -205,7 +205,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      22 分钟
+      28 分钟
     </span>
   
 
@@ -238,7 +238,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2 个月前
+                  本文最后更新于：6 小时前
                 
               </p>
             
@@ -364,7 +364,25 @@ wget https://raw.githubusercontent.com/luzhixing12345/MyScripts/main/main.py</co
 <p>得到两个文件即为成功</p>
 <h3 id="直连域名配置"><a class="markdownIt-Anchor" href="#直连域名配置"></a> 直连域名配置</h3>
 <p>正常使用v2ray会出现访问一些服务器的域名无法访问,但是直连可以访问.这时候需要 设置-路由设置-直连的Domain/IP</p>
-
+<h2 id="ssh-失败"><a class="markdownIt-Anchor" href="#ssh-失败"></a> SSH 失败</h2>
+<p>之前有一段时间突然发现 git 一直push不上去, 也pull不下来</p>
+<p>然后使用 <code>ssh -vT git@github.com</code> 查看发现原来是 SSH 的问题, 一直卡在下面的这个地方</p>
+<div class="code-wrapper"><pre><code class="hljs bash">debug1: expecting SSH2_MSG_KEX_ECDH_REPLY</code></pre></div>
+<p>后来查阅了一些资料, 在 <a target="_blank" rel="noopener" href="https://github.com/microsoft/WSL/issues/4253">Github cloning error in wsl2 (driver MTU)</a> 得到了解决</p>
+<p>总结一下就是先<a target="_blank" rel="noopener" href="https://www.intel.com/content/www/us/en/download/19351/windows-10-and-windows-11-wi-fi-drivers-for-intel-wireless-adapters.html?product=99446">下载网卡驱动</a></p>
+<p>正常来说你安装完网卡驱动应该就可以解决了, 重启一下, 要不就等一下</p>
+<p>如果仍然有问题: 用 <code>ip addr | grep mtu</code> 看下 eth0 的 mtu</p>
+<div class="code-wrapper"><pre><code class="hljs bash">(base) kamilu@LZX:~$ ip addr | grep mtu
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+2: bond0: &lt;BROADCAST,MULTICAST,MASTER&gt; mtu 1500 qdisc noop state DOWN group default qlen 1000
+3: dummy0: &lt;BROADCAST,NOARP&gt; mtu 1500 qdisc noop state DOWN group default qlen 1000
+4: tunl0@NONE: &lt;NOARP&gt; mtu 1480 qdisc noop state DOWN group default qlen 1000
+5: sit0@NONE: &lt;NOARP&gt; mtu 1480 qdisc noop state DOWN group default qlen 1000
+6: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc mq state UP group default qlen 1000</code></pre></div>
+<p>改成</p>
+<div class="code-wrapper"><pre><code class="hljs bash">sudo ifconfig eth0 mtu 1350</code></pre></div>
+<p>或者</p>
+<div class="code-wrapper"><pre><code class="hljs bash">sudo ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> eth0 mtu 1400</code></pre></div>
             </div>
             <hr>
             <div>
