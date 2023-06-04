@@ -16,12 +16,12 @@
   <meta name="author" content="luzhixing12345">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言 本次实验是针对第六章Cache的内容,涉及到对于缓存替换策略的理解和具体代码的编写. 本次实验分为两个部分,Part A是编写一个缓存模拟器,Part B是优化矩阵变换  实验报告 下载valgrind sudo apt install valgrind 下面这条指令会执行ls -l指令并且记录相应的内存访存时的信息 valgrind --log-fd&#x3D;1 --tool&#x3D;lackey -v">
+    <meta name="description" content="CacheLab  前言 本次实验是针对第六章Cache的内容,涉及到对于缓存替换策略的理解和具体代码的编写. 本次实验分为两个部分,Part A是编写一个缓存模拟器,Part B是优化矩阵变换  实验报告 下载valgrind sudo apt install valgrind 下面这条指令会执行ls -l指令并且记录相应的内存访存时的信息 valgrind --log-fd&#x3D;1 --tool">
 <meta property="og:type" content="article">
 <meta property="og:title" content="07-CacheLab">
 <meta property="og:url" content="https://luzhixing12345.github.io/2022/12/28/CSAPP/07-CacheLab/index.html">
 <meta property="og:site_name" content="kamilu的博客">
-<meta property="og:description" content="前言 本次实验是针对第六章Cache的内容,涉及到对于缓存替换策略的理解和具体代码的编写. 本次实验分为两个部分,Part A是编写一个缓存模拟器,Part B是优化矩阵变换  实验报告 下载valgrind sudo apt install valgrind 下面这条指令会执行ls -l指令并且记录相应的内存访存时的信息 valgrind --log-fd&#x3D;1 --tool&#x3D;lackey -v">
+<meta property="og:description" content="CacheLab  前言 本次实验是针对第六章Cache的内容,涉及到对于缓存替换策略的理解和具体代码的编写. 本次实验分为两个部分,Part A是编写一个缓存模拟器,Part B是优化矩阵变换  实验报告 下载valgrind sudo apt install valgrind 下面这条指令会执行ls -l指令并且记录相应的内存访存时的信息 valgrind --log-fd&#x3D;1 --tool">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221230111233.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230201201847.png">
@@ -52,7 +52,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230203175422.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/asdsqqqa.gif">
 <meta property="article:published_time" content="2022-12-28T10:54:10.000Z">
-<meta property="article:modified_time" content="2023-04-28T13:20:26.492Z">
+<meta property="article:modified_time" content="2023-06-04T11:37:52.725Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="CSAPP">
 <meta name="twitter:card" content="summary_large_image">
@@ -225,7 +225,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      167 分钟
+      165 分钟
     </span>
   
 
@@ -258,12 +258,13 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：20 天前
+                  本文最后更新于：1 分钟前
                 
               </p>
             
             <div class="markdown-body">
-              <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+              <h1 id="cachelab"><a class="markdownIt-Anchor" href="#cachelab"></a> CacheLab</h1>
+<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
 <p>本次实验是针对第六章Cache的内容,涉及到对于缓存替换策略的理解和具体代码的编写.</p>
 <p>本次实验分为两个部分,Part A是编写一个缓存模拟器,Part B是优化矩阵变换</p>
 <h2 id="实验报告"><a class="markdownIt-Anchor" href="#实验报告"></a> 实验报告</h2>
@@ -275,13 +276,6 @@
 <p>注:这条指令会执行一小段时间,并且输出很多信息</p>
 </blockquote>
 <p>在输出的信息之中,I表示 instruction load, L表示 data load, S 表示data store, M表示data modify,接着是一个64位地址和操作的字节数</p>
-<p>这里有一个比较恶心的点是直接使用make然后make clean是存在问题的,因为在Makefile中为了提交作业将最后的文件打包成<code>$(USER)-handin.tar</code>,但实际上USER变量还没有定义,所以生成的文件是 <code>-handin.tar</code>,那么在执行make clean使用rm命令就会报错解析不了-h</p>
-<p>一个比较好的解决办法是修改Makefile文件定义USER变量,或者每次执行make带着USER变量,比如 <code>make USER=123</code></p>
-<div class="code-wrapper"><pre><code class="hljs Makefile">USER = user
-
-<span class="hljs-section">all: csim test-trans tracegen</span>
-        <span class="hljs-comment"># Generate a handin tar file each time you compile</span>
-        -tar -cvf $&#123;USER&#125;-handin.tar  csim.c trans.c</code></pre></div>
 <h3 id="part-a-writing-a-cache-simulator"><a class="markdownIt-Anchor" href="#part-a-writing-a-cache-simulator"></a> Part A: Writing a Cache Simulator</h3>
 <p>Part A是实现一个简单的cache,模拟<code>csim-ref</code>的输入和输出格式,参数sEb也都是书中介绍过的</p>
 <blockquote>
@@ -1277,6 +1271,8 @@ TEST_TRANS_RESULTS=1:1027</code></pre></div>
             &#125;
     &#125;
 &#125;</code></pre></div>
+<p>最后的实验结果直接用 <a target="_blank" rel="noopener" href="http://driver.py">driver.py</a> 运行就行, 这个需要 python2, 如果没有的话可以先装一个</p>
+<div class="code-wrapper"><pre><code class="hljs bash">sudo apt install python</code></pre></div>
 <div class="code-wrapper"><pre><code class="hljs bash">$ ./driver.py
 Part A: Testing cache simulator
 Running ./test-csim
@@ -1305,6 +1301,9 @@ Trans perf 32x32           8.0         8         259
 Trans perf 64x64           8.0         8        1027
 Trans perf 61x67          10.0        10        1905
           Total points    53.0        53</code></pre></div>
+<blockquote>
+<p>最后的 misses 的数量会稍微多几次, 这个没有什么影响, 大概是运行期间的一些无关的 miss</p>
+</blockquote>
 <h2 id="参考"><a class="markdownIt-Anchor" href="#参考"></a> 参考</h2>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/142942823">CSAPP:Lab4-Cache Lab</a></li>

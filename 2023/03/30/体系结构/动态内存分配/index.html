@@ -34,9 +34,8 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330214335.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230331005342.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230331014333.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230331005342.png">
 <meta property="article:published_time" content="2023-03-30T07:35:21.000Z">
-<meta property="article:modified_time" content="2023-04-23T06:57:36.966Z">
+<meta property="article:modified_time" content="2023-05-21T08:40:28.683Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="体系结构">
 <meta name="twitter:card" content="summary_large_image">
@@ -200,7 +199,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      6.1k 字
+      4.6k 字
     </span>
   
 
@@ -209,7 +208,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      52 分钟
+      39 分钟
     </span>
   
 
@@ -242,7 +241,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：25 天前
+                  本文最后更新于：14 天前
                 
               </p>
             
@@ -362,65 +361,18 @@
 <li>前是空闲的, 后是已分配的</li>
 <li>前后都是空闲的</li>
 </ul>
-<p>当释放当前块的时候, 分配器只需要检查当前块的前一个块的尾部, 和后一个块的头部, 就可以判断当前块所处的状态, 以右侧的状态完成合并, 我相信不难理解</p>
+<p>当释放当前块的时候, 分配器只需要检查当前块的前一个块的尾部, 和后一个块的头部, 就可以判断当前块所处的状态, 以右侧的状态完成合并</p>
 <p>虽然边界标记的设计简单优雅, 但是它要求每个块都保持一个头部和尾部, 所以在应用程序操作许多个小块的时候会产生显著的内存开销. 例如当一个图形节点反复的调用 malloc free 来动态的创建和销毁节点, 如果每个节点都只 malloc(8), 那么头部和尾部将占据已分配块一半的空间</p>
-<h2 id="实验报告"><a class="markdownIt-Anchor" href="#实验报告"></a> 实验报告</h2>
-<h3 id="基础定义"><a class="markdownIt-Anchor" href="#基础定义"></a> 基础定义</h3>
-<p>代码中的 memlib.c 是一个简易的内存池, 其中 mem_init 使用 malloc 从堆中申请了一块 MAX_HEAP(20MB)大小的空间作为内存池, 实验的内存分配全部在这里进行</p>
-<p><code>mem_start_brk</code> 是堆的起始地址, <code>mem_max_addr</code> 是最大地址, <code>mem_brk</code> 是堆顶的地址. 初始化时 mem_brk = mem_start_brk 也就是堆的大小为 0. 当堆空间不足时需要使用 mem_sbrk 进行扩张, 如果堆扩张大小超过了 mem_max_addr, 也就是超过了 20MB 的最大限度则失败. 否则将堆顶地址增加并返回原堆顶地址.</p>
+<h3 id="brk-sbrk"><a class="markdownIt-Anchor" href="#brk-sbrk"></a> brk sbrk</h3>
+<p>brk 的全称是 “break”，而 sbrk 的全称是 “set break”。这两个函数的名称都与操作系统的内存管理机制中的 “break” 概念有关。</p>
+<p>在早期的操作系统中，堆空间被划分为低地址区域（Low Memory）和高地址区域（High Memory），两者之间的边界被称为 “break”。这个边界指示了堆空间的结束位置，也就是可用内存的末尾。通过调整 “break” 的位置，操作系统可以动态分配和释放堆空间。</p>
+<p>因此，“break” 在这里表示堆空间的边界或结束地址。brk 和 sbrk 这两个函数提供了在用户程序中直接操作 “break” 的接口，以动态分配和释放堆内存。</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">brk</span><span class="hljs-params">(<span class="hljs-type">void</span> *addr)</span>;
+<span class="hljs-type">void</span> *<span class="hljs-title function_">sbrk</span><span class="hljs-params">(<span class="hljs-type">intptr_t</span> increment)</span>;</code></pre></div>
 <blockquote>
-<p>与 sbrk 不同的是 incr 要求大于等于 0, 也就是不会收缩堆, 当然本次实验中也不需要考虑收缩堆的情况</p>
+<p>通常不直接使用, 高级语言和标准库提供了更方便和安全的内存管理机制比如 malloc, new</p>
 </blockquote>
-<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* private variables */</span>
-<span class="hljs-type">static</span> <span class="hljs-type">char</span> *mem_start_brk; <span class="hljs-comment">/* points to first byte of heap */</span>
-<span class="hljs-type">static</span> <span class="hljs-type">char</span> *mem_brk;       <span class="hljs-comment">/* points to last byte of heap */</span>
-<span class="hljs-type">static</span> <span class="hljs-type">char</span> *mem_max_addr;  <span class="hljs-comment">/* largest legal heap address */</span>
-
-<span class="hljs-type">void</span> <span class="hljs-title function_">mem_init</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> &#123;
-    <span class="hljs-comment">/* allocate the storage we will use to model the available VM */</span>
-    <span class="hljs-keyword">if</span> ((mem_start_brk = (<span class="hljs-type">char</span> *)<span class="hljs-built_in">malloc</span>(MAX_HEAP)) == <span class="hljs-literal">NULL</span>) &#123;
-        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;mem_init_vm: malloc error\n&quot;</span>);
-        <span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>);
-    &#125;
-
-    mem_max_addr = mem_start_brk + MAX_HEAP; <span class="hljs-comment">/* max legal heap address */</span>
-    mem_brk = mem_start_brk;                 <span class="hljs-comment">/* heap is empty initially */</span>
-&#125;
-
-<span class="hljs-type">void</span> *<span class="hljs-title function_">mem_sbrk</span><span class="hljs-params">(<span class="hljs-type">int</span> incr)</span> &#123;
-    <span class="hljs-type">char</span> *old_brk = mem_brk;
-    <span class="hljs-keyword">if</span> ((incr &lt; <span class="hljs-number">0</span>) || ((mem_brk + incr) &gt; mem_max_addr)) &#123;
-        errno = ENOMEM;
-        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;ERROR: mem_sbrk failed. Ran out of memory...\n&quot;</span>);
-        <span class="hljs-keyword">return</span> (<span class="hljs-type">void</span> *)<span class="hljs-number">-1</span>;
-    &#125;
-    mem_brk += incr;
-    <span class="hljs-keyword">return</span> (<span class="hljs-type">void</span> *)old_brk;
-&#125;</code></pre></div>
-<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230331005342.png" srcset="/img/loading.gif" lazyload alt="20230331005342" /></p>
-<p>空闲链表节点的结构如上图所示, 接着定义一些宏用于快速操作地址和取值</p>
-<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">define</span> WSIZE 4              <span class="hljs-comment">// 单字大小</span></span>
-<span class="hljs-meta">#<span class="hljs-keyword">define</span> DSIZE 8              <span class="hljs-comment">// 双字大小</span></span>
-<span class="hljs-meta">#<span class="hljs-keyword">define</span> CHUNKSIZE (1 &lt;&lt; 12)  <span class="hljs-comment">// 扩展堆时的默认大小</span></span>
-
-<span class="hljs-meta">#<span class="hljs-keyword">define</span> MAX(x, y) ((x) &gt; (y) ? (x) : (y))</span>
-
-<span class="hljs-meta">#<span class="hljs-keyword">define</span> GET(p) (*(unsigned int *)(p))</span>
-<span class="hljs-meta">#<span class="hljs-keyword">define</span> PUT(p, val) (*(unsigned int *)(p) == (val))</span>
-
-<span class="hljs-meta">#<span class="hljs-keyword">define</span> GET_SIZE(p) (GET(p) &amp; ~0x7)</span>
-<span class="hljs-meta">#<span class="hljs-keyword">define</span> GET_ALLOC(p) (GET(p) &amp; 0x1)</span>
-<span class="hljs-meta">#<span class="hljs-keyword">define</span> PACK(size, alloc) ((size) | (alloc))</span>
-
-<span class="hljs-meta">#<span class="hljs-keyword">define</span> HDRP(bp) ((char *)(bp)-WSIZE)</span>
-<span class="hljs-meta">#<span class="hljs-keyword">define</span> FTRP(bp) ((char *)(bp) + GET_SIZE(HDRP(bp)) - DSIZE)</span>
-<span class="hljs-meta">#<span class="hljs-keyword">define</span> NEXT_BLKP(bp) ((char *)(bp) + GET_SIZE(((char *)(bp)-WSIZE)))</span>
-<span class="hljs-meta">#<span class="hljs-keyword">define</span> PREV_BLKP(bp) ((char *)(bp) - GET_SIZE(((char *)(bp)-DSIZE)))</span></code></pre></div>
-<p>其中 WSIZE 就是指头部/尾部的 4 字节空间, DSIZE 就是一个头+尾. GET做一个类型转换, PUT做一个类型转换的赋值操作.</p>
-<p>GET_SIZE 和 GET_ALLOC 分别针对块头部的数据取值, 得到块大小和是否分配, PACK 负责将块大小和分配位结合到一起得到一个4字节的值用于写入头部.</p>
-<p>HDRP 根据实际块指针向前推4字节得到链表块的头部, 这里的堆是从低地址向高地址增长,所以是-WSIZE. FTPR 同理, 块指针加上块大小, 再向后推一个头一个尾8字节得到当前块的尾部地址. NEXT_BLKP 和 PREV_BLKP 分别是得到前一个和后一个块指针, 也不难理解</p>
-<p>到此为止我们完成了基础的宏定义, 接下来就可以了利用这些编写代码了</p>
-<h3 id="mem_init"><a class="markdownIt-Anchor" href="#mem_init"></a> mem_init</h3>
 
             </div>
             <hr>

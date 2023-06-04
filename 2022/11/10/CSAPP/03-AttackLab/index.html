@@ -16,12 +16,12 @@
   <meta name="author" content="luzhixing12345">
   <meta name="keywords" content="">
   
-    <meta name="description" content="基本知识 Attack lab考察的是对缓冲区溢出攻击的理解,x86_64结构以及gdb调试 解压之后可以看到五个文件  README.txt 工具的用途介绍 cookie.txt 作为个人学习者使用的密钥 0x59b997fa ctarget 123关攻击的对象,代码注入攻击 rtarget 45关攻击的对象,返回值攻击 farm.c 小工具农场,我们会在45关中利用这里的汇编字节码 hex2">
+    <meta name="description" content="AttackLab  基本知识 Attack lab考察的是对缓冲区溢出攻击的理解,x86_64结构以及gdb调试 解压之后可以看到五个文件  README.txt 工具的用途介绍 cookie.txt 作为个人学习者使用的密钥 0x59b997fa ctarget 123关攻击的对象,代码注入攻击 rtarget 45关攻击的对象,返回值攻击 farm.c 小工具农场,我们会在45关中利用这里">
 <meta property="og:type" content="article">
 <meta property="og:title" content="03-AttackLab">
 <meta property="og:url" content="https://luzhixing12345.github.io/2022/11/10/CSAPP/03-AttackLab/index.html">
 <meta property="og:site_name" content="kamilu的博客">
-<meta property="og:description" content="基本知识 Attack lab考察的是对缓冲区溢出攻击的理解,x86_64结构以及gdb调试 解压之后可以看到五个文件  README.txt 工具的用途介绍 cookie.txt 作为个人学习者使用的密钥 0x59b997fa ctarget 123关攻击的对象,代码注入攻击 rtarget 45关攻击的对象,返回值攻击 farm.c 小工具农场,我们会在45关中利用这里的汇编字节码 hex2">
+<meta property="og:description" content="AttackLab  基本知识 Attack lab考察的是对缓冲区溢出攻击的理解,x86_64结构以及gdb调试 解压之后可以看到五个文件  README.txt 工具的用途介绍 cookie.txt 作为个人学习者使用的密钥 0x59b997fa ctarget 123关攻击的对象,代码注入攻击 rtarget 45关攻击的对象,返回值攻击 farm.c 小工具农场,我们会在45关中利用这里">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221110211517.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221110224424.png">
@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221110235850.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221111002949.png">
 <meta property="article:published_time" content="2022-11-10T06:35:55.000Z">
-<meta property="article:modified_time" content="2022-11-11T15:29:09.850Z">
+<meta property="article:modified_time" content="2023-06-04T11:37:21.881Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="CSAPP">
 <meta name="twitter:card" content="summary_large_image">
@@ -203,7 +203,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      72 分钟
+      73 分钟
     </span>
   
 
@@ -236,12 +236,13 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：6 个月前
+                  本文最后更新于：2 分钟前
                 
               </p>
             
             <div class="markdown-body">
-              <h2 id="基本知识"><a class="markdownIt-Anchor" href="#基本知识"></a> 基本知识</h2>
+              <h1 id="attacklab"><a class="markdownIt-Anchor" href="#attacklab"></a> AttackLab</h1>
+<h2 id="基本知识"><a class="markdownIt-Anchor" href="#基本知识"></a> 基本知识</h2>
 <p>Attack lab考察的是对缓冲区溢出攻击的理解,x86_64结构以及gdb调试</p>
 <p>解压之后可以看到五个文件</p>
 <ul>
@@ -255,9 +256,7 @@
 <blockquote>
 <p>相关gdb调试命令和x86_64参数传递等基础知识请参阅BombLab的内容,不再赘述</p>
 </blockquote>
-<div class="note note-info">
-            <p>如果运行 <code>./ctarget -q</code> 没有进入输入环节,而是报错 Segment fault 那么有可能是因为使用的操作系统是Ubuntu22.04及更新,更换为16.04即可解决</p>
-          </div>
+<p><strong>请注意!</strong> 如果运行 <code>./ctarget -q</code> 没有进入输入环节,而是报错 Segmentation fault, 那么有可能是因为 WSL2 的问题, 我使用的是 WSL2 ubuntu2204, 会有这个问题. 换一个</p>
 <h2 id="实验报告"><a class="markdownIt-Anchor" href="#实验报告"></a> 实验报告</h2>
 <p>本次实验五关是需要根据实验的文档来依次解决的,开始之前请仔细阅读文档</p>
 <h3 id="level1"><a class="markdownIt-Anchor" href="#level1"></a> Level1</h3>
@@ -301,9 +300,11 @@ PASS: Would have posted the following:
 <blockquote>
 <p>注意运行时应带上<code>-q</code>参数表示不提交给服务器,同时使用管道符利用<code>hex2raw</code>工具</p>
 </blockquote>
-<div class="note note-info">
-            <p>这里有一个小细节,touch1函数地址完整写法应该是</p><div class="code-wrapper"><pre><code class="hljs txt">c0 17 40 00 00 00 00 00</code></pre></div><p>后四字节(即高四字节的00 00 00 00)可以省略</p><p>虽然原先返回地址也是0x0040开头的,但是后面的两字节 <code>40 00</code> 并不能省略,准确来说<code>00</code>也可以省略但是<code>40</code>不能省略.</p><p>我个人推测有可能是零扩展的原因,不过阅读Gets的汇编源码并没有解决这个问题</p>
-          </div>
+<p>这里有一个小细节,touch1函数地址完整写法应该是</p>
+<div class="code-wrapper"><pre><code class="hljs txt">c0 17 40 00 00 00 00 00</code></pre></div>
+<p>后四字节(即高四字节的00 00 00 00)可以省略</p>
+<p>虽然原先返回地址也是0x0040开头的,但是后面的两字节 <code>40 00</code> 并不能省略,准确来说<code>00</code>也可以省略但是<code>40</code>不能省略.</p>
+<p>我个人推测有可能是零扩展的原因,不过阅读Gets的汇编源码并没有解决这个问题</p>
 <h3 id="level2"><a class="markdownIt-Anchor" href="#level2"></a> Level2</h3>
 <p>第二关的任务是返回到<code>touch2</code>,并且传入的参数val==cookie的值</p>
 <p>显然跳转的过程很容易,但是如果想传入参数,即给rdi赋值那肯定是无法通过简单的栈溢出来做到,我们需要汇编的帮助</p>
@@ -455,9 +456,9 @@ PASS: Would have posted the following:
 <p>文件 <code>farm.c</code> 就提供了这样一组函数&quot;农场&quot;,它们看起来不知所云,但是汇编的字节码充满着可以攻击的手段.我们的任务就是利用这些返回值来攻击</p>
 <hr />
 <p>那回到本题,要求是再去执行 <code>touch2</code>, 也就是说我们只需要跳转到 <code>touch2</code> 的地址,并且将我们的cookie赋值给 %rdi 即可</p>
-<div class="note note-info">
-            <p>查找汇编对应的字节码可以使用如下指令将整个程序反汇编保存到 <code>asm.txt</code> 中,然后在vim中查询</p><div class="code-wrapper"><pre><code class="hljs bash">objdump -d rtarget &gt; asm.txt</code></pre></div><p>vim中查询高亮明显可以使用 <code>set hlsearch</code> 使选中的高亮</p>
-          </div>
+<p>查找汇编对应的字节码可以使用如下指令将整个程序反汇编保存到 <code>asm.txt</code> 中,然后在vim中查询</p>
+<div class="code-wrapper"><pre><code class="hljs bash">objdump -d rtarget &gt; asm.txt</code></pre></div>
+<p>vim中查询高亮明显可以使用 <code>set hlsearch</code> 使选中的高亮</p>
 <p>那么赋值操作显然是popq,最理想的就是直接将栈中保存的值<code>0x59b997fa</code> 通过 <code>popq %rdi</code> 赋值给rdi,但是找不到对应的字节码(5f)在合理的位置</p>
 <p>但是我们可以找到 <code>popq rax</code>(0x58),后面的(0x90)是nop空指令</p>
 <div class="code-wrapper"><pre><code class="hljs txt">00000000004019a7 &lt;addval_219&gt;:

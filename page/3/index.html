@@ -311,7 +311,7 @@
       <p class="index-excerpt">
         <a href="/2022/11/11/CSAPP/04-BufferLab/" target="_self">
           
-          前言 本次实验和上次03-AttackLab很相似,同样考察的是缓冲区溢出,只不过实验的环境换成了32位(IA32) 本文默认读者已有03-AttackLab的实验经历,背景知识不再赘述,相关过程简略 本次实验采用 bovik 用户,cookie值为 0x1005b2b7  实验报告 本次实验五关是需要根据实验的文档来依次解决的,开始之前请仔细阅读文档  Level0 第一关的要求是返回到smo
+          BufferLab  前言 本次实验和上次03-AttackLab很相似,同样考察的是缓冲区溢出,只不过实验的环境换成了32位(IA32) 本文默认读者已有03-AttackLab的实验经历,背景知识不再赘述,相关过程简略 本次实验采用 bovik 用户,cookie值为 0x1005b2b7 需要 32 位工具链 sudo apt-get install gcc-multilib  实验报告
         </a>
       </p>
 
@@ -351,7 +351,7 @@
       <p class="index-excerpt">
         <a href="/2022/11/10/CSAPP/03-AttackLab/" target="_self">
           
-          基本知识 Attack lab考察的是对缓冲区溢出攻击的理解,x86_64结构以及gdb调试 解压之后可以看到五个文件  README.txt 工具的用途介绍 cookie.txt 作为个人学习者使用的密钥 0x59b997fa ctarget 123关攻击的对象,代码注入攻击 rtarget 45关攻击的对象,返回值攻击 farm.c 小工具农场,我们会在45关中利用这里的汇编字节码 hex2
+          AttackLab  基本知识 Attack lab考察的是对缓冲区溢出攻击的理解,x86_64结构以及gdb调试 解压之后可以看到五个文件  README.txt 工具的用途介绍 cookie.txt 作为个人学习者使用的密钥 0x59b997fa ctarget 123关攻击的对象,代码注入攻击 rtarget 45关攻击的对象,返回值攻击 farm.c 小工具农场,我们会在45关中利用这里
         </a>
       </p>
 
@@ -471,7 +471,7 @@
       <p class="index-excerpt">
         <a href="/2022/10/24/CSAPP/02-BombLab/" target="_self">
           
-          《深入理解计算机系统》Bomb Lab实验解析 CS:APP - Bomb Lab               如果在gdb调试的出现Permission deny的问题可以调整bomb的权限chmod 777 bomb             基本知识 Bomb lab 主要考察对应汇编代码的阅读和理解能力,以及使用gdb调试工具  x86-64架构调用函数时参数传递使用的寄存器和栈地址
+          BombLab  《深入理解计算机系统》Bomb Lab实验解析 CS:APP - Bomb Lab  如果在gdb调试的出现Permission deny的问题可以调整bomb的权限 chmod 777 bomb  基本知识 Bomb lab 主要考察对应汇编代码的阅读和理解能力,以及使用gdb调试工具  x86-64架构调用函数时参数传递使用的寄存器和栈地址    %rdi %rsi %rd
         </a>
       </p>
 
@@ -551,7 +551,7 @@
       <p class="index-excerpt">
         <a href="/2022/10/22/CSAPP/01-DataLab/" target="_self">
           
-          前言 tar xvf datalab-handout.tar 解压缩之后可以看到本次实验使用的是gcc工具,打开Makefile文件可以看到使用了-m32进行了编译 所以如果在编译的时候报错了还需要安装32位的gcc编译器 sudo apt-get install gcc-multilib 位运算运算符优先级    运算符 优先级     () 1   -(单目) ! ~ 2   * &#x2F; % 3
+          datalab  前言 tar xvf datalab-handout.tar 解压缩之后可以看到本次实验使用的是gcc工具,打开Makefile文件可以看到使用了-m32进行了编译 所以如果在编译的时候报错了还需要安装32位的gcc编译器 sudo apt-get install gcc-multilib 位运算运算符优先级    运算符 优先级     () 1   -(单目) ! ~ 2
         </a>
       </p>
 

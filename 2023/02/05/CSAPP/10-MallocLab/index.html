@@ -16,24 +16,40 @@
   <meta name="author" content="luzhixing12345">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言 malloc lab是设计一个自己的用于分配和管理内存的malloc free的实验 在文件夹内可以看到两个short1-bal.rep short2-bal.rep的测试文件, 但这里的测试文件并不全, 在编译之前首先需要添加 traces&#x2F; 文件夹, 可以clone仓库然后将其malloclab的traces文件夹移动到本实验的根目录, 然后修改config.h中的路径 #define">
+    <meta name="description" content="MallocLab  前言 malloc lab是设计一个自己的用于分配和管理内存的malloc free的实验 在文件夹内可以看到两个short1-bal.rep short2-bal.rep的测试文件, 但这里的测试文件并不全, 在编译之前首先需要添加 traces&#x2F; 文件夹, 可以在这里找到 traces, 然后将移动到本实验的根目录, 然后修改config.h中的路径 #define T">
 <meta property="og:type" content="article">
 <meta property="og:title" content="10-MallocLab">
 <meta property="og:url" content="https://luzhixing12345.github.io/2023/02/05/CSAPP/10-MallocLab/index.html">
 <meta property="og:site_name" content="kamilu的博客">
-<meta property="og:description" content="前言 malloc lab是设计一个自己的用于分配和管理内存的malloc free的实验 在文件夹内可以看到两个short1-bal.rep short2-bal.rep的测试文件, 但这里的测试文件并不全, 在编译之前首先需要添加 traces&#x2F; 文件夹, 可以clone仓库然后将其malloclab的traces文件夹移动到本实验的根目录, 然后修改config.h中的路径 #define">
+<meta property="og:description" content="MallocLab  前言 malloc lab是设计一个自己的用于分配和管理内存的malloc free的实验 在文件夹内可以看到两个short1-bal.rep short2-bal.rep的测试文件, 但这里的测试文件并不全, 在编译之前首先需要添加 traces&#x2F; 文件夹, 可以在这里找到 traces, 然后将移动到本实验的根目录, 然后修改config.h中的路径 #define T">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330194139.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330194355.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330194954.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230331005342.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330200747.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330214335.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230331014333.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230331005342.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230521183701.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230521184918.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230331014333.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230522233023.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230523003450.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230523015859.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230523025234.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230525145017.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230525145404.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230525145800.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230525152508.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230524152405.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230527151548.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230527152257.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230527151814.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230527155630.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230527160237.png">
 <meta property="article:published_time" content="2023-02-05T13:22:39.000Z">
-<meta property="article:modified_time" content="2023-03-30T15:53:54.810Z">
+<meta property="article:modified_time" content="2023-06-04T11:38:26.076Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="CSAPP">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330194139.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230331005342.png">
   
   
   <title>10-MallocLab - kamilu的博客</title>
@@ -193,7 +209,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.8k 字
+      28k 字
     </span>
   
 
@@ -202,7 +218,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      24 分钟
+      233 分钟
     </span>
   
 
@@ -235,14 +251,15 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2 个月前
+                  本文最后更新于：1 分钟前
                 
               </p>
             
             <div class="markdown-body">
-              <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+              <h1 id="malloclab"><a class="markdownIt-Anchor" href="#malloclab"></a> MallocLab</h1>
+<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
 <p>malloc lab是设计一个自己的用于分配和管理内存的malloc free的实验</p>
-<p>在文件夹内可以看到两个short1-bal.rep short2-bal.rep的测试文件, 但这里的测试文件并不全, 在编译之前首先需要添加 <code>traces/</code> 文件夹, 可以clone<a target="_blank" rel="noopener" href="https://github.com/Ethan-Yan27/CSAPP-Labs">仓库</a>然后将其malloclab的traces文件夹移动到本实验的根目录, 然后修改config.h中的路径</p>
+<p>在文件夹内可以看到两个short1-bal.rep short2-bal.rep的测试文件, 但这里的测试文件并不全, 在编译之前首先需要添加 <code>traces/</code> 文件夹, 可以在<a target="_blank" rel="noopener" href="https://github.com/luzhixing12345/csapplab/tree/main/10_malloclab/traces">这里</a>找到 traces, 然后将移动到本实验的根目录, 然后修改config.h中的路径</p>
 <div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">define</span> TRACEDIR <span class="hljs-string">&quot;traces/&quot;</span></span></code></pre></div>
 <div class="code-wrapper"><pre><code class="hljs bash">└── traces
     ├── amptjp-bal.rep
@@ -257,8 +274,7 @@
     ├── realloc-bal.rep
     └── realloc2-bal.rep</code></pre></div>
 <p>make编译即可</p>
-<h2 id="实验报告"><a class="markdownIt-Anchor" href="#实验报告"></a> 实验报告</h2>
-<h3 id="预备知识"><a class="markdownIt-Anchor" href="#预备知识"></a> 预备知识</h3>
+<h3 id="任务目标"><a class="markdownIt-Anchor" href="#任务目标"></a> 任务目标</h3>
 <p>我们需要完成的是mm.h中声明的四个函数, 在mm.c中实现</p>
 <div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-keyword">extern</span> <span class="hljs-type">int</span> <span class="hljs-title function_">mm_init</span> <span class="hljs-params">(<span class="hljs-type">void</span>)</span>;
 <span class="hljs-keyword">extern</span> <span class="hljs-type">void</span> *<span class="hljs-title function_">mm_malloc</span> <span class="hljs-params">(<span class="hljs-type">size_t</span> size)</span>;
@@ -283,6 +299,15 @@
 </ul>
 </li>
 </ul>
+<p>我们并不能直接使用 malloc free realloc 等函数, 在 memlib.c 中提供了如下函数使用</p>
+<ul>
+<li><strong>mem_sbrk</strong>: 扩展堆</li>
+<li><strong>mem_heap_lo</strong>: 堆的最低地址(起始地址)</li>
+<li><strong>mem_heap_hi</strong>: 堆的最高地址(结尾地址)</li>
+<li><strong>mem_heapsize</strong>: 堆大小</li>
+<li><strong>mem_pagesize</strong>: 返回系统页大小(linux 4kb)</li>
+</ul>
+<h3 id="堆检查器"><a class="markdownIt-Anchor" href="#堆检查器"></a> 堆检查器</h3>
 <p>由于动态内存分配器的设计, 在编写代码的过程中很容易导致一些内存未释放, 指针悬挂等问题. 为了更好的检查我们的内存分配器的正确性, 作者建议我们在开始之前先完成一个 堆检查器(heap checker), <code>int mm_check(void)</code> 主要用于检查</p>
 <ul>
 <li>空闲列表中标记的空闲块都是空闲的么?</li>
@@ -292,52 +317,1024 @@
 <li>已分配的块是否存在重叠?</li>
 <li>在堆上的指针是否指向的是合法的地址(已分配块的开头)?</li>
 </ul>
-<p>在最后提交答案的时候不要运行 mm_check, 它仅用于在编写过程中的调试</p>
-<p>我们并不能直接使用 malloc free realloc 等函数, 在 memlib.c 中提供了如下函数使用</p>
-<ul>
-<li><strong>mem_sbrk</strong>: 扩展堆</li>
-<li><strong>mem_heap_lo</strong>: 堆的最低地址(起始地址)</li>
-<li><strong>mem_heap_hi</strong>: 堆的最高地址(结尾地址)</li>
-<li><strong>mem_heapsize</strong>: 堆大小</li>
-<li><strong>mem_pagesize</strong>: 返回系统页大小(linux 4kb)</li>
-</ul>
+<p>关于这部分的设计与实现笔者将会放到最后面介绍, 笔者完成了此部分并扩展实现了一个堆内存的检查器: <a target="_blank" rel="noopener" href="https://github.com/luzhixing12345/valloc">valloc</a></p>
+<h3 id="memlibc"><a class="markdownIt-Anchor" href="#memlibc"></a> memlib.c</h3>
+<p>memlib.c 中包含着实验内存模型的设计, 其中关键函数 <code>mem_init</code> 和 <code>mem_sbrk</code> 如下所示. 其中初始化阶段程序调用 mem_init 构建了整个实验内存系统. 宏 MAX_HEAP 的值是 <code>(20 * (1 &lt;&lt; 20))</code> 也就是 20MB, mem_start_brk, mem_brk, mem_max_addr 分别代表堆的起始地址, 堆顶位置, 最高地址</p>
+<blockquote>
+<p>这里说的初始化阶段调用 mem_init 是指测试程序 mdriver.c(289行) 去初始化整个实验, 整个实验是在 20MB 的一个堆内存中再做一个动态内存分配器. 这一步并不是前文提到的 mm_init, mm_init 是指初始化我们需要实现的动态内存分配器的一些数据结构等东西</p>
+</blockquote>
+<p>注意这三个变量都是 static ,所以并不能在程序中直接调用, 需要依赖 memlib.c 中提供的函数间接调用.</p>
+<p>mem_init 初始化后 mem_brk = mem_start_brk, 也就是堆大小暂时为 0</p>
+<p>mem_sbrk 为堆扩容操作, 在函数内部将 mem_brk 堆顶指针上移, 返回扩容前的堆顶地址, 如果超过了最大堆大小则报错退出</p>
+<p>正常来说 mem_sbrk 的函数原型 <code>void *sbrk(intptr_t increment)</code> 中的 increment 是支持正负两个方向的变化的, 这里没有考虑那么多, 也没必要考虑那么多…</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">/* private variables */</span>
+<span class="hljs-type">static</span> <span class="hljs-type">char</span> *mem_start_brk; <span class="hljs-comment">/* points to first byte of heap */</span>
+<span class="hljs-type">static</span> <span class="hljs-type">char</span> *mem_brk;       <span class="hljs-comment">/* points to last byte of heap */</span>
+<span class="hljs-type">static</span> <span class="hljs-type">char</span> *mem_max_addr;  <span class="hljs-comment">/* largest legal heap address */</span>
+
+<span class="hljs-comment">/*</span>
+<span class="hljs-comment"> * mem_init - initialize the memory system model</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">mem_init</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> &#123;
+    <span class="hljs-comment">/* allocate the storage we will use to model the available VM */</span>
+    <span class="hljs-keyword">if</span> ((mem_start_brk = (<span class="hljs-type">char</span> *)<span class="hljs-built_in">malloc</span>(MAX_HEAP)) == <span class="hljs-literal">NULL</span>) &#123;
+        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;mem_init_vm: malloc error\n&quot;</span>);
+        <span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>);
+    &#125;
+
+    mem_max_addr = mem_start_brk + MAX_HEAP; <span class="hljs-comment">/* max legal heap address */</span>
+    mem_brk = mem_start_brk;                 <span class="hljs-comment">/* heap is empty initially */</span>
+&#125;
+
+<span class="hljs-type">void</span> *<span class="hljs-title function_">mem_sbrk</span><span class="hljs-params">(<span class="hljs-type">int</span> incr)</span> &#123;
+    <span class="hljs-type">char</span> *old_brk = mem_brk;
+
+    <span class="hljs-keyword">if</span> ((incr &lt; <span class="hljs-number">0</span>) || ((mem_brk + incr) &gt; mem_max_addr)) &#123;
+        errno = ENOMEM;
+        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;ERROR: mem_sbrk failed. Ran out of memory...\n&quot;</span>);
+        <span class="hljs-keyword">return</span> (<span class="hljs-type">void</span> *)<span class="hljs-number">-1</span>;
+    &#125;
+    mem_brk += incr;
+    <span class="hljs-keyword">return</span> (<span class="hljs-type">void</span> *)old_brk;
+&#125;</code></pre></div>
 <h2 id="前置知识"><a class="markdownIt-Anchor" href="#前置知识"></a> 前置知识</h2>
-<blockquote>
-<p>开始本实验之前建议先复习一下虚拟内存动态内存分配 9.9 节, 下面对本节中的知识点做一个简要性的复习</p>
-</blockquote>
-<p>为了更好的组织已分配的块和空闲块, 我们可以使用隐式空闲链表来串联整个堆, 下图为隐式链表的每个节点的数据结构图</p>
-<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330194139.png" srcset="/img/loading.gif" lazyload alt="20230330194139" /></p>
-<p>其中开头使用 4 字节(32位) 来表示整个块的相关数据, 开头的 32 位用于表示整个块实际分配了多大. 需要注意的是, <strong>每一个分配的块必须要是8字节对齐</strong>, 所以实际上分配块一定的 8 的整数倍, 所以最后 3 位一定全为 0, 这样最后三位就空闲了出来, 我们将最后一位设置为标记位用于区分该块是已分配的还是空闲的</p>
-<p>举个例子: 对于 malloc(1) 的分配请求, 虽然只请求了 1 个字节, 但是我们需要先加 4 字节的头部信息, 所以目前是 4+1 = 5 字节,  但是为了满足 8 字节(64位)对齐以提高数据访问的效率，避免不必要的内存访问操作, 实际分配的块大小是 8 字节, 对应的实际块情况如下所示</p>
-<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330194355.png" srcset="/img/loading.gif" lazyload alt="20230330194355" /></p>
-<blockquote>
-<p>图中字节的面积比例有点不对,应该是 4:1:3 , 大家理解我的意思就好…</p>
-</blockquote>
-<p>开头的 4 字节是 0x00 00 00 09, 由于分配块一定是 8 位对齐, 所以最后 3 位空出来, 0x1000 表示分配块的实际大小, 最后一位表示分配(1)还是未分配(0), 最后填充3B对齐</p>
-<p>再举一个例子: 如果是 malloc(13) 的话, 分配块的结构如下所示</p>
-<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330194954.png" srcset="/img/loading.gif" lazyload alt="20230330194954" /></p>
-<p>接下来我们来看一下堆中隐式链表的块是如何组织起来的, 以书上这张图为例</p>
+<p>开始本实验之前建议先复习一下虚拟内存动态内存分配 9.9 节, 读者也可以阅读笔者的一些文档</p>
+<ul>
+<li><a href="https://luzhixing12345.github.io/2023/03/30/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/#%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A">动态内存分配</a></li>
+<li><a href="https://luzhixing12345.github.io/2023/03/26/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/">虚拟内存</a></li>
+</ul>
+<p>这里做一个简要的回顾, 采用隐式静态链表连接各个块, 结构如下</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230331005342.png" srcset="/img/loading.gif" lazyload alt="20230331005342" /></p>
+<p>堆中隐式链表的上各个块的组织结构如下</p>
 <p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330200747.png" srcset="/img/loading.gif" lazyload alt="20230330200747" /></p>
 <p>其中每一个正方形块代表 4 字节, 这里的 8/0 16/1 表示的意思是 <code>分配块的大小/已分配位</code>, 红色块为链表头, 蓝色块为实际申请的内存大小, 灰色块为填充位. 所以整个堆被划分为了几部分, 4字节空闲 + 8字节已分配 + 24字节空闲 + 12字节已分配, 中间穿插着一些头部信息块和填充块. 再创建一个链表结构保存头节点的相关信息, 以实现后续的分配释放</p>
-<h4 id="分割"><a class="markdownIt-Anchor" href="#分割"></a> 分割</h4>
-<p>对于一个 k 字节的内存申请, 分配器搜索空闲链表块找到一个足够大的可以放置请求块的空闲块. 分配器执行这种搜索的方式是由放置策略决定的, 一些常见的策略是:</p>
+<p>当分配器释放一个块的时候有四种情况, 其中中间空白处+前后的头/尾组成了一个完整的分配块, m1 m2为块大小, a/f 表示这个块是已分配的还是空闲的. 蓝色的块是当前分配器考虑释放的块</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230331014333.png" srcset="/img/loading.gif" lazyload alt="20230331014333" /></p>
 <ul>
-<li>首次适配(first fit): 选择第一个合适的空闲块</li>
-<li>下一次适配(next fit): 从上一次查询结束的地方开始首次适配</li>
-<li>最佳适配(best fit): 检查每个空闲块, 选择适合所需请求大小的最小空闲块</li>
+<li>前后都是已分配的</li>
+<li>前是已分配的, 后是空闲的</li>
+<li>前是空闲的, 后是已分配的</li>
+<li>前后都是空闲的</li>
 </ul>
-<p>如果分配器不能找到合适的空闲块, 那么一个选择是合并哪些在物理上相邻的空闲块, 把他们合并为一个大块. 如果依然不可以, 那么分配器会调用 sbrk 函数向内核申请额外的堆内存. 分配器将额外的内存转化为一个大的空闲块, 将这个块插入到空闲链表中, 然后将被申请的块放置在这个新的空闲块中</p>
-<h4 id="合并"><a class="markdownIt-Anchor" href="#合并"></a> 合并</h4>
-<p>当分配器释放一个已分配的块, 这时候如果有其他空闲块和这个新释放的空闲块相邻, 这些相邻的空闲块会造成一种现象 “假碎片”: 有许多可用的空闲块被切割成小的, 无法使用的空闲块</p>
-<p>为了解决这个问题, 分配器必须考虑合并相邻的空闲块, 但这时候存在一个重要的策略决定就是 <strong>何时执行合并?</strong></p>
-<ul>
-<li>立即合并: 这种方式简单明了, 可以在常数时间内完成, 但是对于某些请求模式, 这种方式会产生一种形式的抖动, 块会反复的合并, 然后再次分割, 如下图所示</li>
-<li>推迟合并: 直到某个分配请求失败, 扫描整个堆, 合并所有的空闲块</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230330214335.png" srcset="/img/loading.gif" lazyload alt="20230330214335" /></p>
+<h2 id="隐式空闲链表"><a class="markdownIt-Anchor" href="#隐式空闲链表"></a> 隐式空闲链表</h2>
+<p>CSAPP 书中给出了相关的代码说明, 这里做一个补充总结</p>
 <blockquote>
-<p>我们假设会使用立即合并, 但是同时也应该清楚快速的分配器通常会选择某种形式的推迟合并</p>
+<p>完整代码实现见 <a target="_blank" rel="noopener" href="https://github.com/luzhixing12345/csapplab/blob/main/10_malloclab/mm_implicit.c">mm_implicit.c</a></p>
 </blockquote>
+<h3 id="宏定义"><a class="markdownIt-Anchor" href="#宏定义"></a> 宏定义</h3>
+<p>下面介绍一下代码中涉及到的宏定义</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">define</span> WSIZE 4              <span class="hljs-comment">// 单字大小</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> DSIZE 8              <span class="hljs-comment">// 双字大小</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> CHUNKSIZE (1 &lt;&lt; 12)  <span class="hljs-comment">// 扩展堆时的默认大小</span></span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> MAX(x, y) ((x) &gt; (y) ? (x) : (y)) <span class="hljs-comment">// 比较大小</span></span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> GET(p) (*(unsigned int *)(p))</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> PUT(p, val) (*(unsigned int *)(p) == (val))</span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> PACK(size, alloc) ((size) | (alloc))</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> GET_SIZE(p) (GET(p) &amp; ~0x7)</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> GET_ALLOC(p) (GET(p) &amp; 0x1)</span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> HDRP(bp) ((char *)(bp)-WSIZE)</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> FTRP(bp) ((char *)(bp) + GET_SIZE(HDRP(bp)) - DSIZE)</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> NEXT_BLKP(bp) ((char *)(bp) + GET_SIZE(((char *)(bp)-WSIZE)))</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> PREV_BLKP(bp) ((char *)(bp) - GET_SIZE(((char *)(bp)-DSIZE)))</span>
+
+<span class="hljs-type">void</span> *heap_listp;
+
+<span class="hljs-type">static</span> <span class="hljs-type">void</span> *<span class="hljs-title function_">extend_heap</span><span class="hljs-params">(<span class="hljs-type">size_t</span> words)</span>;  <span class="hljs-comment">// 堆空间不足时扩展</span>
+<span class="hljs-type">static</span> <span class="hljs-type">void</span> *<span class="hljs-title function_">coalesce</span><span class="hljs-params">(<span class="hljs-type">void</span> *bp)</span>;         <span class="hljs-comment">// 合并空闲块</span>
+
+<span class="hljs-type">static</span> <span class="hljs-type">void</span> *<span class="hljs-title function_">first_fit</span><span class="hljs-params">(<span class="hljs-type">size_t</span> size)</span>;
+<span class="hljs-comment">// static void *best_fit(size_t size);</span>
+
+<span class="hljs-type">void</span> *(*search_method)(<span class="hljs-type">size_t</span> size) = first_fit;  <span class="hljs-comment">// 搜索算法</span>
+
+<span class="hljs-type">static</span> <span class="hljs-type">void</span> <span class="hljs-title function_">place</span><span class="hljs-params">(<span class="hljs-type">void</span> *bp, <span class="hljs-type">size_t</span> size)</span>;</code></pre></div>
+<p>其中 WSIZE 和 DSIZE 分别为单字和双字, CHUNKSIZE 为默认的扩展堆大小(4MB). MAX 比较大小</p>
+<p>GET§ 和 PUT(p,val) 分别为取值和赋值, 注意因为 p 是 <code>void *</code> 类型所以这里使用了 <code>unsigned int*</code> 来做一个强制类型转换读取四字节的数据</p>
+<p>PACK GET_SIZE GETALLOC 这三个宏比较清晰, 对应上文提到的每一个块的头部的数据含义, 最低一位代表是否分配, 低三位因为对齐所以不考虑其对大小的影响</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230331005342.png" srcset="/img/loading.gif" lazyload alt="20230331005342" /></p>
+<p>HDRP 根据实际块指针向前推4字节得到链表块的头部, 这里的变量名 bp 代表块指针(payload部分), p 是整个块的指针</p>
+<blockquote>
+<p>这里的堆是从低地址向高地址增长,所以是-WSIZE.</p>
+</blockquote>
+<p>FTPR 得到链表块的尾部, 块指针加上块大小, 再向后推一个头一个尾8字节得到当前块的尾部地址.</p>
+<p>NEXT_BLKP 和 PREV_BLKP 分别是得到前一个和后一个块指针</p>
+<p>最后再定义一个全局符号 heap_listp 代表头指针, 用于后续查找. 全局符号 search_method 用于搜索算法的选择, 这样可以比较方便的切换 first_fit 和 best_fit 或者其他</p>
+<h3 id="mm_init"><a class="markdownIt-Anchor" href="#mm_init"></a> mm_init</h3>
+<p>mm_init 用于初始化动态内存分配器</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">mm_init</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> &#123;
+    <span class="hljs-keyword">if</span> ((heap_listp = mem_sbrk(<span class="hljs-number">4</span> * WSIZE)) == (<span class="hljs-type">void</span> *)<span class="hljs-number">-1</span>) &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+    &#125;
+    PUT(heap_listp, <span class="hljs-number">0</span>);
+    PUT(heap_listp + (<span class="hljs-number">1</span> * WSIZE), PACK(DSIZE, <span class="hljs-number">1</span>));
+    PUT(heap_listp + (<span class="hljs-number">2</span> * WSIZE), PACK(DSIZE, <span class="hljs-number">1</span>));
+    PUT(heap_listp + (<span class="hljs-number">3</span> * WSIZE), PACK(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>));
+    heap_listp += <span class="hljs-number">2</span> * WSIZE;
+
+    <span class="hljs-keyword">if</span> (extend_heap(CHUNKSIZE / WSIZE) == <span class="hljs-literal">NULL</span>) &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre></div>
+<p>首先使用 <code>mem_sbrk</code> 扩展堆, 申请四个块. 这四个块用于维护我们后续的链表</p>
+<ul>
+<li>块1 不使用, 只是作为填充位, 为了使分配的地址是 8 字节对齐的</li>
+<li>块2,3 是一个 <strong>序言块</strong>, 这是一个 8 字节的已分配的块, 只有头尾块没有申请块, 作为整个链表的头部</li>
+<li>块4 是一个结尾块, 这个块的设计比较巧妙</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230521183701.png" srcset="/img/loading.gif" lazyload alt="20230521183701" /></p>
+<p>回顾一下前面提到的宏的含义, PUT 用于赋值, PACK 合并size和分配位. 最后将 heap_listp 指向序言块的中间位置. 接着调用 <code>extend_heap</code> 扩展堆大小</p>
+<blockquote>
+<p>这里的 heap_listp 现在是 += 2 * WSIZE, 实际上改为 4 * WSIZE 更好, 因为跳过序言块直接指向第一个空闲块</p>
+</blockquote>
+<p><code>extend_heap</code> 传入的参数需要考虑 8 字节对齐, 所以传参的时候使用 <code>CHUNKSIZE / WSIZE</code> 然后在内部判断对于奇数补齐.</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">static</span> <span class="hljs-type">void</span> *<span class="hljs-title function_">extend_heap</span><span class="hljs-params">(<span class="hljs-type">size_t</span> words)</span> &#123;
+    <span class="hljs-type">char</span> *bp;
+    <span class="hljs-type">size_t</span> size;
+
+    size = (words % <span class="hljs-number">2</span>) ? (words + <span class="hljs-number">1</span>) * WSIZE : words * WSIZE;
+    <span class="hljs-keyword">if</span> ((<span class="hljs-type">long</span>)(bp = mem_sbrk(size)) == <span class="hljs-number">-1</span>) &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;
+    &#125;
+    PUT(HDRP(bp), PACK(size, <span class="hljs-number">0</span>));          <span class="hljs-comment">// 头部块置0</span>
+    PUT(FTRP(bp), PACK(size, <span class="hljs-number">0</span>));          <span class="hljs-comment">// 尾部块置0</span>
+    PUT(HDRP(NEXT_BLKP(bp)), PACK(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>));  <span class="hljs-comment">// 重置结尾块</span>
+
+    <span class="hljs-keyword">return</span> coalesce(bp);
+&#125;</code></pre></div>
+<p>接下来的操作比较有意思, 申请了一块 size 大小的堆空间, 返回 bp 为原先 mem_brk 的位置, 新的 mem_brk 移到尾部</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230521184918.png" srcset="/img/loading.gif" lazyload alt="20230521184918" /></p>
+<p>现在的结构如上图所示, 实际上分配的 size 是 (bp, mem_brk) 的区间, 但由于每一个块都是 WSIZE 大小, 所以相当于等效的前移一个块的位置. 因此可以直接将通过 mem_sbrk 返回的指针 bp 看作是一个空分配的区间块, PUT 设置其 HDRP 和 FTRP 为未分配0, 然后再通过 NEXT_BLKP(bp) 找到下一个的位置, 也就是新的结尾块.</p>
+<p><code>extend_heap</code> 会在两种情况下被调用</p>
+<ul>
+<li>初始化堆</li>
+<li>mm_malloc 找不到一个可用的(足够大)块, 扩容堆空间</li>
+</ul>
+<p>最后在结尾处调用了 <code>coalesce(bp)</code> 尝试合并块</p>
+<blockquote>
+<p>因为扩容的时候可能最后一个是空闲块, 但是大小不够分配. 所以需要把新扩容的空闲块和最后一个空闲块合并为一个空闲块</p>
+</blockquote>
+<p>考虑之前提到的合并的四种情况, 只需要考虑当前块前面和后面的块的状态</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230331014333.png" srcset="/img/loading.gif" lazyload alt="20230331014333" /></p>
+<p>对应下面四种情况的代码, 通过之前定义的宏, 可以比较方便的找到对应的头尾, 修改为更新后的 size</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">static</span> <span class="hljs-type">void</span> *<span class="hljs-title function_">coalesce</span><span class="hljs-params">(<span class="hljs-type">void</span> *bp)</span> &#123;
+    <span class="hljs-type">size_t</span> prev_alloc = GET_ALLOC(FTRP(PREV_BLKP(bp)));
+    <span class="hljs-type">size_t</span> next_alloc = GET_ALLOC(HDRP(NEXT_BLKP(bp)));
+    <span class="hljs-type">size_t</span> size = GET_SIZE(HDRP(bp));
+
+    <span class="hljs-comment">// case 1: 前后都被占用</span>
+    <span class="hljs-keyword">if</span> (prev_alloc &amp;&amp; next_alloc) &#123;
+        <span class="hljs-keyword">return</span> bp;
+    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (prev_alloc &amp;&amp; !next_alloc) &#123;
+        <span class="hljs-comment">// case 2: 前占后不占</span>
+        size += GET_SIZE(HDRP(NEXT_BLKP(bp)));
+        PUT(HDRP(bp), PACK(size, <span class="hljs-number">0</span>));
+        PUT(FTRP(bp), PACK(size, <span class="hljs-number">0</span>));
+        <span class="hljs-keyword">return</span> bp;
+    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!prev_alloc &amp;&amp; next_alloc) &#123;
+        <span class="hljs-comment">// case 3: 前不占后占</span>
+        size += GET_SIZE(HDRP(PREV_BLKP(bp)));
+        PUT(FTRP(bp), PACK(size, <span class="hljs-number">0</span>));
+        PUT(HDRP(PREV_BLKP(bp)), PACK(size, <span class="hljs-number">0</span>));
+        <span class="hljs-keyword">return</span> PREV_BLKP(bp);
+    &#125; <span class="hljs-keyword">else</span> &#123;
+        <span class="hljs-comment">// case 4: 前后都空</span>
+        size += GET_SIZE(HDRP(PREV_BLKP(bp))) + GET_SIZE(FTRP(NEXT_BLKP(bp)));
+        PUT(HDRP(PREV_BLKP(bp)), PACK(size, <span class="hljs-number">0</span>));
+        PUT(FTRP(NEXT_BLKP(bp)), PACK(size, <span class="hljs-number">0</span>));
+        <span class="hljs-keyword">return</span> PREV_BLKP(bp);
+    &#125;
+&#125;</code></pre></div>
+<p>另外现在回看使用的序言块和结尾块, 将开头和结尾都设置了已分配, 这样可以避免边界情况的判断, 省去不少麻烦</p>
+<p>同时也可以看到之前定义的一些宏相当有作用, 看起来代码很简洁可读</p>
+<p>值得一提的是, <strong>如果需要修改一个块的 HDRP 和 FTRP 的size, 应该先修改 HDRP</strong>, 因为 FTRP 的定位需要 GET_SIZE, 这依赖了 HDRP 的size的值</p>
+<h3 id="mm_malloc"><a class="markdownIt-Anchor" href="#mm_malloc"></a> mm_malloc</h3>
+<p>mm_malloc 的实现如下, 首先根据 size 重新计算一下实际上需要分配的块大小 block_size, 然后通过一个搜索算法找到一个合适的块, 使用 place 将这个块分配. 如果没有找到合适的块则扩容后 place</p>
+<blockquote>
+<p>扩容的大小是 MAX(block_size, CHUNKSIZE)</p>
+</blockquote>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> *<span class="hljs-title function_">mm_malloc</span><span class="hljs-params">(<span class="hljs-type">size_t</span> size)</span> &#123;
+    <span class="hljs-type">size_t</span> block_size;   <span class="hljs-comment">// 块大小</span>
+    <span class="hljs-type">size_t</span> extend_size;  <span class="hljs-comment">// 额外分配的堆空间</span>
+
+    <span class="hljs-type">void</span> *bp;
+
+    <span class="hljs-keyword">if</span> (size == <span class="hljs-number">0</span>) &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;
+    &#125;
+
+    <span class="hljs-comment">// 小于等于 DSIZE 的大小直接补齐 2*DSIZE</span>
+    <span class="hljs-keyword">if</span> (size &lt;= DSIZE) &#123;
+        block_size = <span class="hljs-number">2</span> * DSIZE;
+    &#125; <span class="hljs-keyword">else</span> &#123;
+        <span class="hljs-comment">// DSIZE 对齐 + 头尾 DSIZE</span>
+        block_size = (size + DSIZE - <span class="hljs-number">1</span>) / DSIZE * DSIZE + DSIZE;
+    &#125;
+
+    <span class="hljs-comment">// 通过搜索算法找到一个合适的空闲块</span>
+    <span class="hljs-keyword">if</span> ((bp = search_method(block_size)) != <span class="hljs-literal">NULL</span>) &#123;
+        place(bp, block_size);
+        <span class="hljs-keyword">return</span> bp;
+    &#125;
+
+    <span class="hljs-comment">// 如果没找到, 说明需要扩容堆空间</span>
+    extend_size = MAX(block_size, CHUNKSIZE);
+    <span class="hljs-keyword">if</span> ((bp = extend_heap(extend_size / WSIZE)) == <span class="hljs-literal">NULL</span>) &#123;
+        <span class="hljs-comment">// 扩容失败, 堆已达最大 MAX_HEAP</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;
+    &#125;
+    place(bp, block_size);
+    <span class="hljs-keyword">return</span> bp;
+&#125;</code></pre></div>
+<p>首次适配算法就是找到第一个 free 的, 并且 size 足够大的</p>
+<p>如果 block_size 是0, 那么就说明到达了结尾块</p>
+<blockquote>
+<p>注意之前在 mm_init 的时候将结尾块设置了 size = 0, 除了这个块之外的所有块的大小至少是 DSIZE</p>
+</blockquote>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> *<span class="hljs-title function_">first_fit</span><span class="hljs-params">(<span class="hljs-type">size_t</span> size)</span> &#123;
+    <span class="hljs-type">void</span> *bp = heap_listp;
+
+    <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) &#123;
+        <span class="hljs-comment">// 已被分配, 下一个</span>
+        <span class="hljs-type">size_t</span> block_size = GET_SIZE(HDRP(bp));
+        <span class="hljs-keyword">if</span> (GET_ALLOC(HDRP(bp))) &#123;
+            bp = NEXT_BLKP(bp);
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            <span class="hljs-comment">// 空闲块</span>
+            <span class="hljs-keyword">if</span> (block_size &gt;= size) &#123;
+                <span class="hljs-comment">// 大小足够, 直接返回</span>
+                <span class="hljs-keyword">return</span> bp;
+            &#125; <span class="hljs-keyword">else</span> &#123;
+                bp = NEXT_BLKP(bp);
+            &#125;
+        &#125;
+        <span class="hljs-keyword">if</span> (block_size == <span class="hljs-number">0</span>) &#123;
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;
+        &#125;
+    &#125;
+&#125;</code></pre></div>
+<p>最佳适配就是找到一个满足的 block_size 最小的块用于分配</p>
+<div class="code-wrapper"><pre><code class="hljs c">
+<span class="hljs-type">void</span> *<span class="hljs-title function_">best_fit</span><span class="hljs-params">(<span class="hljs-type">size_t</span> size)</span> &#123;
+    <span class="hljs-type">void</span> *bp = heap_listp;
+    <span class="hljs-type">void</span> *best_bp = <span class="hljs-literal">NULL</span>;
+    <span class="hljs-type">size_t</span> min_block_size = <span class="hljs-number">-1</span>;
+
+    <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) &#123;
+        <span class="hljs-comment">// 已被分配, 下一个</span>
+        <span class="hljs-type">size_t</span> block_size = GET_SIZE(HDRP(bp));
+        <span class="hljs-keyword">if</span> (GET_ALLOC(HDRP(bp))) &#123;
+            bp = NEXT_BLKP(bp);
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            <span class="hljs-comment">// 空闲块</span>
+            <span class="hljs-keyword">if</span> (block_size &gt;= size) &#123;
+                <span class="hljs-keyword">if</span> (block_size &lt; min_block_size) &#123;
+                    min_block_size = block_size;
+                    best_bp = bp;
+                &#125;
+            &#125;
+            bp = NEXT_BLKP(bp);
+        &#125;
+        <span class="hljs-keyword">if</span> (block_size == <span class="hljs-number">0</span>) &#123;
+            <span class="hljs-keyword">break</span>;
+        &#125;
+    &#125;
+    <span class="hljs-keyword">return</span> best_bp;
+&#125;</code></pre></div>
+<p>place 的实现如下, 需要判断一下当前块的剩余空间是否足够大, 是否分裂</p>
+<p>最小的块的大小应该是只有一个 header 和 footer, 也就是 DSIZE, 小于等于这个值就说明不值得被分裂. 直接将一整块都分配过去, 也就是修改的分配的 size 为 block_size</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">place</span><span class="hljs-params">(<span class="hljs-type">void</span> *bp, <span class="hljs-type">size_t</span> size)</span> &#123;
+    <span class="hljs-type">size_t</span> block_size = GET_SIZE(HDRP(bp));
+    <span class="hljs-type">size_t</span> block_rest_size = block_size - size;
+    <span class="hljs-comment">// 剩余块的大小 &lt;= 最小块大小</span>
+    <span class="hljs-keyword">if</span> (block_rest_size &lt;= DSIZE) &#123;
+        PUT(HDRP(bp), PACK(block_size, <span class="hljs-number">1</span>));
+        PUT(FTRP(bp), PACK(block_size, <span class="hljs-number">1</span>));
+    &#125; <span class="hljs-keyword">else</span> &#123;
+        <span class="hljs-comment">// 分裂</span>
+        PUT(HDRP(bp), PACK(size, <span class="hljs-number">1</span>));
+        PUT(FTRP(bp), PACK(size, <span class="hljs-number">1</span>));
+        PUT(HDRP(NEXT_BLKP(bp)), PACK(block_rest_size, <span class="hljs-number">0</span>));
+        PUT(FTRP(NEXT_BLKP(bp)), PACK(block_rest_size, <span class="hljs-number">0</span>));
+    &#125;
+&#125;</code></pre></div>
+<h3 id="mm_free"><a class="markdownIt-Anchor" href="#mm_free"></a> mm_free</h3>
+<p>mm_free 的实现就比较简单了, 直接将这里的分配位置为 0 即可</p>
+<blockquote>
+<p>当然, 这里的假设是free的ptr一定是之前已经分配过的, 真实情况的处理还需要考虑 double free 以及 ptr 地址无效的情况</p>
+</blockquote>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">mm_free</span><span class="hljs-params">(<span class="hljs-type">void</span> *ptr)</span> &#123;
+    <span class="hljs-type">size_t</span> size = GET_SIZE(HDRP(ptr));
+    PUT(HDRP(ptr), PACK(size, <span class="hljs-number">0</span>));
+    PUT(FTRP(ptr), PACK(size, <span class="hljs-number">0</span>));
+    coalesce(ptr);
+&#125;</code></pre></div>
+<h3 id="mm_realloc"><a class="markdownIt-Anchor" href="#mm_realloc"></a> mm_realloc</h3>
+<p>mm_realloc 的实现稍微复杂一些, 首先回顾一下 realloc 的时候可能出现的情况</p>
+<ul>
+<li>ptr == NULL, 等同于 mm_malloc</li>
+<li>size == 0, 等同于 mm_free</li>
+<li>ptr != NULL &amp;&amp; size != 0</li>
+</ul>
+<p>对于最后一种情况再分类讨论一下</p>
+<ol>
+<li>size == block_size: 直接返回</li>
+<li>size &lt; block_size: 在当前块中修改, 同时需要注意一下是否需要分裂</li>
+<li>size &gt; block_size:
+<ul>
+<li>下一个块是否是空闲且空间足够, 如果足够则合并后面的块, 同时需要注意一下是否需要分裂</li>
+<li>重新 mm_malloc 一个新的块, 然后把之前的使用 memcpy 复制到新的块, 释放原先的块</li>
+</ul>
+</li>
+</ol>
+<p>最后需要注意一点的是 <code>memcpy(bp, ptr, block_size - DSIZE)</code>, 这里的复制的大小是 block_size - DSIZE, 这是因为 block_size 实际上是整个分配块的大小, 也就是 header + payload + padding + footer 的大小, 实际有效的分配空间是 payload + padding, 这部分才是需要copy过去的大小, 因此对于 ptr 这个指针的位置复制 block_size - DSIZE 空间即可</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> *<span class="hljs-title function_">mm_realloc</span><span class="hljs-params">(<span class="hljs-type">void</span> *ptr, <span class="hljs-type">size_t</span> size)</span> &#123;
+    <span class="hljs-keyword">if</span> (ptr == <span class="hljs-literal">NULL</span>) &#123;
+        <span class="hljs-keyword">return</span> mm_malloc(size);
+    &#125;
+    <span class="hljs-keyword">if</span> (size == <span class="hljs-number">0</span>) &#123;
+        mm_free(ptr);
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;
+    &#125;
+
+    size = (size + DSIZE - <span class="hljs-number">1</span>) / DSIZE * DSIZE + DSIZE;
+
+    <span class="hljs-type">size_t</span> block_size = GET_SIZE(HDRP(ptr));
+
+    <span class="hljs-keyword">if</span> (size == block_size) &#123;
+        <span class="hljs-keyword">return</span> ptr;
+    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (size &lt; block_size) &#123;
+        <span class="hljs-comment">// 在当前分配块中修改大小</span>
+        <span class="hljs-type">size_t</span> block_rest_size = block_size - size;
+        <span class="hljs-comment">// 判断是否分裂</span>
+        <span class="hljs-keyword">if</span> (block_rest_size &gt; DSIZE) &#123;
+            PUT(HDRP(ptr), PACK(size, <span class="hljs-number">1</span>));
+            PUT(FTRP(ptr), PACK(size, <span class="hljs-number">1</span>));
+            PUT(HDRP(NEXT_BLKP(ptr)), PACK(block_rest_size, <span class="hljs-number">0</span>));
+            PUT(FTRP(NEXT_BLKP(ptr)), PACK(block_rest_size, <span class="hljs-number">0</span>));
+        &#125;
+        <span class="hljs-keyword">return</span> ptr;
+    &#125; <span class="hljs-keyword">else</span> &#123;
+        <span class="hljs-keyword">if</span> (!GET_ALLOC(HDRP(NEXT_BLKP(ptr))) &amp;&amp;
+            (GET_SIZE(HDRP(NEXT_BLKP(ptr))) &gt;= (size - block_size))) &#123;
+            <span class="hljs-comment">// 下一个块就有空间</span>
+            <span class="hljs-type">size_t</span> next_block_rest_size = GET_SIZE(HDRP(NEXT_BLKP(ptr))) + block_size - size;
+            <span class="hljs-keyword">if</span> (next_block_rest_size &lt;= DSIZE) &#123;
+                <span class="hljs-type">size_t</span> new_size = GET_SIZE(HDRP(NEXT_BLKP(ptr))) + block_size;
+                PUT(HDRP(ptr), PACK(new_size, <span class="hljs-number">1</span>));
+                PUT(FTRP(ptr), PACK(new_size, <span class="hljs-number">1</span>));
+                <span class="hljs-keyword">return</span> ptr;
+            &#125; <span class="hljs-keyword">else</span> &#123;
+                PUT(HDRP(ptr), PACK(size, <span class="hljs-number">1</span>));
+                PUT(FTRP(ptr), PACK(size, <span class="hljs-number">1</span>));
+                PUT(HDRP(NEXT_BLKP(ptr)), PACK(next_block_rest_size, <span class="hljs-number">0</span>));
+                PUT(FTRP(NEXT_BLKP(ptr)), PACK(next_block_rest_size, <span class="hljs-number">0</span>));
+                <span class="hljs-keyword">return</span> ptr;
+            &#125;
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            <span class="hljs-type">void</span> *bp = mm_malloc(size);
+            <span class="hljs-keyword">if</span> (bp == <span class="hljs-literal">NULL</span>) &#123;
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;
+            &#125;
+            <span class="hljs-built_in">memcpy</span>(bp, ptr, block_size - DSIZE);
+            mm_free(ptr);
+            <span class="hljs-keyword">return</span> bp;
+        &#125;
+    &#125;
+&#125;</code></pre></div>
+<h3 id="实验结果"><a class="markdownIt-Anchor" href="#实验结果"></a> 实验结果</h3>
+<div class="code-wrapper"><pre><code class="hljs bash">make
+./mdriver -V -t traces/</code></pre></div>
+<p>first_fit 的结果 75/100</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230522233023.png" srcset="/img/loading.gif" lazyload alt="20230522233023" /></p>
+<p>best_fit 的结果 68/100, 主要是因为 best_fit 需要扫描所有块</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230523003450.png" srcset="/img/loading.gif" lazyload alt="20230523003450" /></p>
+<p>显然 75 分并不够理想, 我们需要考虑一下如下优化程序. 观察一下测试结果, 其中手册中提到了评分标准, 正确性20%, 空间利用率 util 和操作数Kops 分别 35%, 最后 10% 是代码规范性</p>
+<div class="code-wrapper"><pre><code class="hljs bash">Results <span class="hljs-keyword">for</span> mm malloc:
+trace  valid  util     ops      secs  Kops
+ 0       <span class="hljs-built_in">yes</span>   99%    5694  0.004722  1206
+ 1       <span class="hljs-built_in">yes</span>   99%    5848  0.004367  1339
+ 2       <span class="hljs-built_in">yes</span>   99%    6648  0.007349   905
+ 3       <span class="hljs-built_in">yes</span>  100%    5380  0.005558   968
+ 4       <span class="hljs-built_in">yes</span>   66%   14400  0.000072200278
+ 5       <span class="hljs-built_in">yes</span>   92%    4800  0.004250  1129
+ 6       <span class="hljs-built_in">yes</span>   92%    4800  0.003929  1222
+ 7       <span class="hljs-built_in">yes</span>   55%   12000  0.064229   187
+ 8       <span class="hljs-built_in">yes</span>   51%   24000  0.215506   111
+ 9       <span class="hljs-built_in">yes</span>   92%   14401  0.000096150010
+10       <span class="hljs-built_in">yes</span>   86%   14401  0.000055260888
+Total          85%  112372  0.310133   362
+
+Perf index = 51 (util) + 24 (thru) = 75/100</code></pre></div>
+<p>考虑一下导致分数不佳的原因, 也就是整体拖慢程序的性能的根源, 在于 first_fit 的搜索.</p>
+<p>malloc 主要的难点就是在于如何在尽可能短的时间内找到一个合适的块用于分配, 目前的 first_fit 近乎 O(N) 的时间复杂度, 随着块的分配数量越来越多, 耗时会越来越长, 这显然是不甚理想的</p>
+<h2 id="显式空闲链表"><a class="markdownIt-Anchor" href="#显式空闲链表"></a> 显式空闲链表</h2>
+<blockquote>
+<p>完整代码实现见 <a target="_blank" rel="noopener" href="https://github.com/luzhixing12345/csapplab/blob/main/10_malloclab/mm_explicit.c">mm_explicit.c</a></p>
+</blockquote>
+<p>显式空闲链表的又进一步设置了两个小块, pred 和 succ 分别记录前驱和后继. 如下所示</p>
+<p>需要注意的是, <strong>只有空闲块会有这两个结构</strong>, 如果一个块被分配出去了, 那么还是在原先的 payload 的位置保存数据, 分配块是不需要记录前驱后继的信息的. 空闲块反正后面的空间也没有人使用, 占了也就占了. 这样就可以把 first_fit 搜索全部块优化为通过链表搜索空闲块.</p>
+<blockquote>
+<p>这里使用双向链表的原因是为了分配的时候可以在 O(1) 找到前一个和后一个空闲块, 否则只能不断地 NEXT/PRED + GET_ALLOC 的去找</p>
+</blockquote>
+<p>这样的一个显然的好处就是只会搜索空闲块, 如果在已分配块很多的情况下效率就会高很多.</p>
+<p>当然, 带来的一个问题就是又加入了新的结构, 每一个分配块的最小大小又增加了, 内部空间碎片率也会更高</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230523015859.png" srcset="/img/loading.gif" lazyload alt="20230523015859" /></p>
+<p>与此同时还需要考虑的一个问题就是如何更新和维护这个双向链表. 如下图A所示, “?” 块刚刚被释放, 它需要作为一个空闲块加入链表, 那么如何更新链表呢</p>
+<blockquote>
+<p>这里实际上是双向链表, 做了一步画图上的省略</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230523025234.png" srcset="/img/loading.gif" lazyload alt="20230523025234" /></p>
+<p>第一种方式 B 就是直接按照顺序加入, 但是显然这需要 O(N) 的时间搜索前一个空闲块的位置</p>
+<p>第二种方式 C 直接将释放的块插入到链表的头部, 这样就可以实现在 O(1) 时间内完成回收.</p>
+<h3 id="宏定义-2"><a class="markdownIt-Anchor" href="#宏定义-2"></a> 宏定义</h3>
+<p>对照原先的宏定义又添加了如下</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">define</span> PUT_ADDR(p, val) (*(unsigned long *)(p) = (unsigned long)(val))</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> VAL(val) (val == NULL ? 0 : (*(unsigned long *)val))</span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> PRED(bp) ((char *)(bp))</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> SUCC(bp) ((char *)(bp) + DSIZE)</span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> NEXT_FREE_BLKP(bp) ((void *)*(unsigned long *)SUCC(bp))</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> PREV_FREE_BLKP(bp) ((void *)*(unsigned long *)PRED(bp))</span></code></pre></div>
+<p>其中 PUT_ADDR 用于将一个值赋给一个指针, 这会在更新双向链表的时候使用到. VAL 用于取出当前地址的值(判断一下NULL的话取0). PRED 和 SUCC 分别用于得到两个链表指针的位置</p>
+<p>NEXT_FREE_BLKP PREV_FREE_BLKP 则是通过链表指针得到下一个和前一个空闲块的地址</p>
+<p><strong>这里需要注意的是, 笔者将 PRED SUCC 指针均看作 8 字节, 也就是 DSIZE 大小</strong>, 实际上在 Makefile 中看到编译选项使用了 -m32 作为一个 32 位地址来计算的. <strong>也就是说 PRED SUCC 指针使用 WSIZE 大小是完全没有问题的</strong>.</p>
+<blockquote>
+<p>这里是为了考虑 64 位兼容所以做的扩容, 也是考虑到 (void *) 的强制类型转换得到的地址 8 字节应该合理一些</p>
+</blockquote>
+<h3 id="mm_init-2"><a class="markdownIt-Anchor" href="#mm_init-2"></a> mm_init</h3>
+<p>整个堆的初始化结构基本没有变化, 唯一修改的位置是 <code>heap_listp = NULL;</code>, 之前 heap_listp 指向整个链表的头部, 显示空闲链表终稿则应该指向 第一个空闲块</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">mm_init</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> &#123;
+    <span class="hljs-keyword">if</span> ((heap_listp = mem_sbrk(<span class="hljs-number">4</span> * WSIZE)) == (<span class="hljs-type">void</span> *)<span class="hljs-number">-1</span>) &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+    &#125;
+    PUT(heap_listp, <span class="hljs-number">0</span>);
+    PUT(heap_listp + (<span class="hljs-number">1</span> * WSIZE), PACK(DSIZE, <span class="hljs-number">1</span>));
+    PUT(heap_listp + (<span class="hljs-number">2</span> * WSIZE), PACK(DSIZE, <span class="hljs-number">1</span>));
+    PUT(heap_listp + (<span class="hljs-number">3</span> * WSIZE), PACK(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>));
+    heap_listp = <span class="hljs-literal">NULL</span>;
+
+    <span class="hljs-keyword">if</span> (extend_heap(CHUNKSIZE / WSIZE) == <span class="hljs-literal">NULL</span>) &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre></div>
+<p>extend_heap 的部分没有变化, 但是在其中的 <code>coalesce</code> 需要大幅修改. 依然需要考虑 (前)/(后) x (占)/(空) 四种情况, <strong>但是还需要注意(前)/(后) 节点是否为 NULL</strong></p>
+<p>因为是一个双向链表, 所以需要同时考虑更新多个节点的指针值, 这里需要额外小心注意, 不然很容易空指针错误. 建议采用下面这种写法, 比较清晰的判断.</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-keyword">if</span> (PREV_FREE_BLKP(next_bp) &amp;&amp; NEXT_FREE_BLKP(next_bp)) &#123;
+  <span class="hljs-comment">// ...     </span>
+&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!PREV_FREE_BLKP(next_bp) &amp;&amp; NEXT_FREE_BLKP(next_bp)) &#123;
+  <span class="hljs-comment">// ...</span>
+&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (PREV_FREE_BLKP(next_bp) &amp;&amp; !NEXT_FREE_BLKP(next_bp)) &#123;
+  <span class="hljs-comment">// ...</span>
+&#125; <span class="hljs-keyword">else</span> &#123;
+  <span class="hljs-comment">// ...</span>
+&#125;</code></pre></div>
+<p>修改后的代码如下所示</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> *<span class="hljs-title function_">coalesce</span><span class="hljs-params">(<span class="hljs-type">void</span> *bp)</span> &#123;
+    <span class="hljs-type">size_t</span> size = GET_SIZE(HDRP(bp));
+    <span class="hljs-type">size_t</span> prev_alloc = GET_ALLOC(FTRP(PREV_BLKP(bp)));
+    <span class="hljs-type">size_t</span> next_alloc = GET_ALLOC(HDRP(NEXT_BLKP(bp)));
+
+    <span class="hljs-comment">// case 1: 前后都被占用, 加到链表头</span>
+    <span class="hljs-keyword">if</span> (prev_alloc &amp;&amp; next_alloc) &#123;
+        PUT_ADDR(PRED(bp), <span class="hljs-number">0</span>);
+        PUT_ADDR(SUCC(bp), heap_listp);
+        <span class="hljs-keyword">if</span> (NEXT_FREE_BLKP(bp)) &#123;
+            PUT_ADDR(PRED(NEXT_FREE_BLKP(bp)), bp);
+        &#125;
+        heap_listp = bp;
+    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (prev_alloc &amp;&amp; !next_alloc) &#123;
+        <span class="hljs-comment">// case 2: 前占后不占, 合并后面的块, 修改链表</span>
+        size += GET_SIZE(HDRP(NEXT_BLKP(bp)));
+        <span class="hljs-type">void</span> *next_bp = NEXT_BLKP(bp);
+        PUT(HDRP(bp), PACK(size, <span class="hljs-number">0</span>));
+        PUT(FTRP(bp), PACK(size, <span class="hljs-number">0</span>));
+        <span class="hljs-comment">// 更新链表</span>
+
+        <span class="hljs-keyword">if</span> (PREV_FREE_BLKP(next_bp) &amp;&amp; NEXT_FREE_BLKP(next_bp)) &#123;
+            PUT_ADDR(PRED(bp), PREV_FREE_BLKP(next_bp));
+            PUT_ADDR(SUCC(bp), NEXT_FREE_BLKP(next_bp));
+            PUT_ADDR(SUCC(PREV_FREE_BLKP(bp)), bp);
+            PUT_ADDR(PRED(NEXT_FREE_BLKP(bp)), bp);
+        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!PREV_FREE_BLKP(next_bp) &amp;&amp; NEXT_FREE_BLKP(next_bp)) &#123;
+            PUT_ADDR(PRED(bp), <span class="hljs-number">0</span>);
+            heap_listp = bp;
+            PUT_ADDR(SUCC(bp), NEXT_FREE_BLKP(next_bp));
+            PUT_ADDR(PRED(NEXT_FREE_BLKP(next_bp)), bp);
+        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (PREV_FREE_BLKP(next_bp) &amp;&amp; !NEXT_FREE_BLKP(next_bp)) &#123;
+            PUT_ADDR(PRED(bp), PREV_FREE_BLKP(next_bp));
+            PUT_ADDR(SUCC(PREV_FREE_BLKP(next_bp)), bp);
+            PUT_ADDR(SUCC(bp), <span class="hljs-number">0</span>);
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            PUT_ADDR(PRED(bp), <span class="hljs-number">0</span>);
+            heap_listp = bp;
+            PUT_ADDR(SUCC(bp), <span class="hljs-number">0</span>);
+        &#125;
+    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!prev_alloc &amp;&amp; next_alloc) &#123;
+        <span class="hljs-comment">// case 3: 前不占后占, 直接合并</span>
+        size += GET_SIZE(HDRP(PREV_BLKP(bp)));
+        bp = PREV_BLKP(bp);
+        PUT(HDRP(bp), PACK(size, <span class="hljs-number">0</span>));
+        PUT(FTRP(bp), PACK(size, <span class="hljs-number">0</span>));
+    &#125; <span class="hljs-keyword">else</span> &#123;
+        <span class="hljs-comment">// case 4: 前后都空, 合并三个空闲块, 更新第一个块的节点</span>
+        <span class="hljs-type">void</span> *pre_bp = PREV_BLKP(bp);
+        <span class="hljs-type">void</span> *next_bp = NEXT_BLKP(bp);
+        size += GET_SIZE(HDRP(pre_bp)) + GET_SIZE(FTRP(next_bp));
+        PUT(HDRP(pre_bp), PACK(size, <span class="hljs-number">0</span>));
+        PUT(FTRP(pre_bp), PACK(size, <span class="hljs-number">0</span>));
+        <span class="hljs-comment">// 更新链表</span>
+        <span class="hljs-keyword">if</span> (PREV_FREE_BLKP(next_bp) &amp;&amp; NEXT_FREE_BLKP(next_bp)) &#123;
+            PUT_ADDR(SUCC(PREV_FREE_BLKP(next_bp)), VAL(SUCC(next_bp)));
+            PUT_ADDR(PRED(NEXT_FREE_BLKP(next_bp)), PREV_FREE_BLKP(next_bp));
+        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (PREV_FREE_BLKP(next_bp) &amp;&amp; !NEXT_FREE_BLKP(next_bp)) &#123;
+            PUT_ADDR(SUCC(PREV_FREE_BLKP(next_bp)), <span class="hljs-number">0</span>);
+        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!PREV_FREE_BLKP(next_bp) &amp;&amp; NEXT_FREE_BLKP(next_bp)) &#123;
+            PUT_ADDR(PRED(NEXT_FREE_BLKP(next_bp)), <span class="hljs-number">0</span>);
+            heap_listp = NEXT_FREE_BLKP(next_bp);
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            <span class="hljs-comment">// 永远不应该到达这里...</span>
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%p\n&quot;</span>, heap_listp);
+        &#125;
+    &#125;
+    <span class="hljs-keyword">return</span> bp;
+&#125;</code></pre></div>
+<p>这里着重介绍一下最后一种, 前空后空的合并方式, 这个问题要比想象中的复杂一些</p>
+<p>看起来这个链表应该是下面这样的结构, A/B/C/D 分别代表 PRED SUCC 的出入节点</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230525145017.png" srcset="/img/loading.gif" lazyload alt="20230525145017" /></p>
+<p>但实际上由于可能存在空闲块插入到链表头部的情况, 所以两个相邻的空闲块并不一定在链表中就是相邻的, 它们之间还可能隔了 N 个块</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230525145404.png" srcset="/img/loading.gif" lazyload alt="20230525145404" /></p>
+<p>同时由于可能存在插入到头部的情况,所以甚至顺序可能都是反过来的</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230525145800.png" srcset="/img/loading.gif" lazyload alt="20230525145800" /></p>
+<p>但是不要慌, 情况虽然很多但思路一定要清晰. 合并之后的块一定是 (PERD + x + SUCC), 这个新块(暂且叫Y)的 pred 和 succ 指针一定原先 PRED 块的位置的, 因为块一定是地址小到大的, 所以需要更新的只有 PRED 块的 pred 和 succ. 目前 PRED 块已经有 pred 和 succ 指针使其存在在这个链表当中了, 所以我们需要做的就是更新 SUCC 块及其前后的空闲块节点指针, 具体来说就是 <code>把C指向D</code></p>
+<blockquote>
+<p>这里的 C 和 D 只是代指, 实际上是说更新 SUCC 块的前后空闲块的 pred 和 succ 指针, 让它们跳过 SUCC 块直接连接起来. 当然需要考虑边界情况</p>
+</blockquote>
+<h3 id="mm_malloc-2"><a class="markdownIt-Anchor" href="#mm_malloc-2"></a> mm_malloc</h3>
+<p>malloc 代码只有一个小变化, 由于增加了 pred succ 指针, 这两个指针虽然是在 payload 中不占空间, 但是最小块的大小也随之变化</p>
+<p>header + footer + pred + succ = WSIZE + WSIZE + DSIZE + DSIZE = 3 * DSIZE</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">// 小于等于 DSIZE 的大小直接补齐 3*DSIZE</span>
+<span class="hljs-keyword">if</span> (size &lt;= DSIZE) &#123;
+   block_size = <span class="hljs-number">3</span> * DSIZE;
+&#125; <span class="hljs-keyword">else</span> &#123;
+   <span class="hljs-comment">// DSIZE 对齐 + 头尾 DSIZE</span>
+   block_size = (size + DSIZE - <span class="hljs-number">1</span>) / DSIZE * DSIZE + DSIZE;
+&#125;</code></pre></div>
+<p>需要变化的是其中的 place 和 first_fit</p>
+<p>放置块的时候需要更新链表</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">place</span><span class="hljs-params">(<span class="hljs-type">void</span> *bp, <span class="hljs-type">size_t</span> size)</span> &#123;
+    <span class="hljs-type">size_t</span> block_size = GET_SIZE(HDRP(bp));
+    <span class="hljs-type">size_t</span> block_rest_size = block_size - size;
+    <span class="hljs-comment">// 剩余块的大小 &lt;= 最小块大小</span>
+    <span class="hljs-keyword">if</span> (block_rest_size &lt; <span class="hljs-number">3</span> * DSIZE) &#123;
+        PUT(HDRP(bp), PACK(block_size, <span class="hljs-number">1</span>));
+        PUT(FTRP(bp), PACK(block_size, <span class="hljs-number">1</span>));
+
+        <span class="hljs-keyword">if</span> (!PREV_FREE_BLKP(bp) &amp;&amp; !NEXT_FREE_BLKP(bp)) &#123;
+            heap_listp = <span class="hljs-literal">NULL</span>;
+        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (PREV_FREE_BLKP(bp) &amp;&amp; !NEXT_FREE_BLKP(bp)) &#123;
+            PUT_ADDR(SUCC(PREV_FREE_BLKP(bp)), <span class="hljs-number">0</span>);
+        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!PREV_FREE_BLKP(bp) &amp;&amp; NEXT_FREE_BLKP(bp)) &#123;
+            PUT_ADDR(PRED(NEXT_FREE_BLKP(bp)), <span class="hljs-number">0</span>);
+            heap_listp = NEXT_FREE_BLKP(bp);
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            PUT_ADDR(SUCC(PREV_FREE_BLKP(bp)), NEXT_FREE_BLKP(bp));
+            PUT_ADDR(PRED(NEXT_FREE_BLKP(bp)), PREV_FREE_BLKP(bp));
+        &#125;
+    &#125; <span class="hljs-keyword">else</span> &#123;
+        <span class="hljs-comment">// 分裂</span>
+        PUT(HDRP(bp), PACK(size, <span class="hljs-number">1</span>));
+        PUT(FTRP(bp), PACK(size, <span class="hljs-number">1</span>));
+        <span class="hljs-type">void</span> *next_bp = NEXT_BLKP(bp);
+        PUT(HDRP(next_bp), PACK(block_rest_size, <span class="hljs-number">0</span>));
+        PUT(FTRP(next_bp), PACK(block_rest_size, <span class="hljs-number">0</span>));
+        <span class="hljs-comment">// 更新链表</span>
+        PUT_ADDR(PRED(next_bp), VAL(PRED(bp)));
+        <span class="hljs-keyword">if</span> (PREV_FREE_BLKP(bp)) &#123;
+            PUT_ADDR(SUCC(PREV_FREE_BLKP(bp)), next_bp);
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            heap_listp = next_bp;
+        &#125;
+        PUT_ADDR(SUCC(next_bp), VAL(SUCC(bp)));
+        <span class="hljs-keyword">if</span> (NEXT_FREE_BLKP(bp)) &#123;
+            PUT_ADDR(PRED(NEXT_FREE_BLKP(bp)), next_bp);
+        &#125;
+    &#125;
+&#125;</code></pre></div>
+<p>首次适配的时候不再需要判断 alloc, 因为全部都是 free 的块, 只需要判断大小符合即可. 最后一个块的 succ 是 NULL 则说明到结尾了</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> *<span class="hljs-title function_">first_fit</span><span class="hljs-params">(<span class="hljs-type">size_t</span> size)</span> &#123;
+    <span class="hljs-type">void</span> *bp = heap_listp;
+
+    <span class="hljs-comment">// 没有空闲块</span>
+    <span class="hljs-keyword">if</span> (bp == <span class="hljs-literal">NULL</span>) &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;
+    &#125;
+
+    <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) &#123;
+        <span class="hljs-type">size_t</span> block_size = GET_SIZE(HDRP(bp));
+        <span class="hljs-keyword">if</span> (block_size &gt;= size) &#123;
+            <span class="hljs-keyword">return</span> bp;
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            bp = NEXT_FREE_BLKP(bp);
+            <span class="hljs-keyword">if</span> (bp == <span class="hljs-literal">NULL</span>) &#123;
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></pre></div>
+<h3 id="mm_realloc-2"><a class="markdownIt-Anchor" href="#mm_realloc-2"></a> mm_realloc</h3>
+<p>mm_free 没有变化, 因为修改的部分都在 coalesce 当中, mm_realloc 的变化也比较大, 主要是判断前后边界情况</p>
+<p>另外需要注意一点的是对于下一个块就是空闲块, 并且下一个块需要分裂的情况. 应该先记录 pred succ 指针的位置, 最后更新 header 和 footer, 因为如果先更新可能会覆盖原先的 pred 和 succ, 这样就会出现问题</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230525152508.png" srcset="/img/loading.gif" lazyload alt="20230525152508" /></p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> *<span class="hljs-title function_">mm_realloc</span><span class="hljs-params">(<span class="hljs-type">void</span> *ptr, <span class="hljs-type">size_t</span> size)</span> &#123;
+    <span class="hljs-keyword">if</span> (ptr == <span class="hljs-literal">NULL</span>) &#123;
+        <span class="hljs-keyword">return</span> mm_malloc(size);
+    &#125;
+    <span class="hljs-keyword">if</span> (size == <span class="hljs-number">0</span>) &#123;
+        mm_free(ptr);
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;
+    &#125;
+
+    <span class="hljs-keyword">if</span> (size &lt;= DSIZE) &#123;
+        size = <span class="hljs-number">3</span> * DSIZE;
+    &#125; <span class="hljs-keyword">else</span> &#123;
+        size = (size + DSIZE - <span class="hljs-number">1</span>) / DSIZE * DSIZE + DSIZE;
+    &#125;
+
+    <span class="hljs-type">size_t</span> block_size = GET_SIZE(HDRP(ptr));
+
+    <span class="hljs-keyword">if</span> (size == block_size) &#123;
+        <span class="hljs-keyword">return</span> ptr;
+    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (size &lt; block_size) &#123;
+        <span class="hljs-comment">// 在当前分配块中修改大小</span>
+        <span class="hljs-type">size_t</span> block_rest_size = block_size - size;
+        <span class="hljs-comment">// 判断是否分裂</span>
+        <span class="hljs-keyword">if</span> (block_rest_size &gt;= <span class="hljs-number">3</span> * DSIZE) &#123;
+            PUT(HDRP(ptr), PACK(size, <span class="hljs-number">1</span>));
+            PUT(FTRP(ptr), PACK(size, <span class="hljs-number">1</span>));
+            <span class="hljs-type">void</span> *next_bp = NEXT_BLKP(ptr);
+            <span class="hljs-comment">// 多出来的块直接放在链表最前面</span>
+            PUT(HDRP(next_bp), PACK(block_rest_size, <span class="hljs-number">0</span>));
+            PUT(FTRP(next_bp), PACK(block_rest_size, <span class="hljs-number">0</span>));
+            PUT_ADDR(PRED(next_bp), <span class="hljs-number">0</span>);
+            PUT_ADDR(SUCC(next_bp), heap_listp);
+            <span class="hljs-keyword">if</span> (NEXT_FREE_BLKP(next_bp)) &#123;
+                PUT_ADDR(PRED(NEXT_FREE_BLKP(next_bp)), next_bp);
+            &#125;
+            heap_listp = next_bp;
+        &#125;
+        <span class="hljs-keyword">return</span> ptr;
+    &#125; <span class="hljs-keyword">else</span> &#123;
+        <span class="hljs-keyword">if</span> (!GET_ALLOC(HDRP(NEXT_BLKP(ptr))) &amp;&amp; (GET_SIZE(HDRP(NEXT_BLKP(ptr))) &gt;= (size - block_size))) &#123;
+            <span class="hljs-comment">// 下一个块就有空间</span>
+            <span class="hljs-type">size_t</span> next_block_rest_size = GET_SIZE(HDRP(NEXT_BLKP(ptr))) + block_size - size;
+            <span class="hljs-keyword">if</span> (next_block_rest_size &lt; <span class="hljs-number">3</span> * DSIZE) &#123;
+                <span class="hljs-type">void</span> *bp = NEXT_BLKP(ptr);
+                <span class="hljs-type">size_t</span> new_size = GET_SIZE(HDRP(bp)) + block_size;
+                PUT(HDRP(ptr), PACK(new_size, <span class="hljs-number">1</span>));
+                PUT(FTRP(ptr), PACK(new_size, <span class="hljs-number">1</span>));
+                <span class="hljs-keyword">if</span> (!PREV_FREE_BLKP(bp) &amp;&amp; !NEXT_FREE_BLKP(bp)) &#123;
+                    heap_listp = <span class="hljs-literal">NULL</span>;
+                &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (PREV_FREE_BLKP(bp) &amp;&amp; !NEXT_FREE_BLKP(bp)) &#123;
+                    PUT_ADDR(SUCC(PREV_FREE_BLKP(bp)), <span class="hljs-number">0</span>);
+                &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!PREV_FREE_BLKP(bp) &amp;&amp; NEXT_FREE_BLKP(bp)) &#123;
+                    PUT_ADDR(PRED(NEXT_FREE_BLKP(bp)), <span class="hljs-number">0</span>);
+                    heap_listp = NEXT_FREE_BLKP(bp);
+                &#125; <span class="hljs-keyword">else</span> &#123;
+                    PUT_ADDR(SUCC(PREV_FREE_BLKP(bp)), NEXT_FREE_BLKP(bp));
+                    PUT_ADDR(PRED(NEXT_FREE_BLKP(bp)), PREV_FREE_BLKP(bp));
+                &#125;
+                <span class="hljs-keyword">return</span> ptr;
+            &#125; <span class="hljs-keyword">else</span> &#123;
+                <span class="hljs-comment">// 分裂</span>
+                <span class="hljs-type">void</span> *bp = NEXT_BLKP(ptr);
+                <span class="hljs-type">void</span> *new_bp = (<span class="hljs-type">char</span> *)ptr + size;
+                <span class="hljs-type">void</span> *pre_bp = PREV_FREE_BLKP(bp);
+                <span class="hljs-type">void</span> *next_bp = NEXT_FREE_BLKP(bp);
+
+                <span class="hljs-keyword">if</span> (!pre_bp &amp;&amp; !next_bp) &#123;
+                    PUT_ADDR(PRED(new_bp), <span class="hljs-number">0</span>);
+                    PUT_ADDR(SUCC(new_bp), <span class="hljs-number">0</span>);
+                    heap_listp = new_bp;
+                &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (pre_bp &amp;&amp; !next_bp) &#123;
+                    PUT_ADDR(PRED(new_bp), pre_bp);
+                    PUT_ADDR(SUCC(pre_bp), new_bp);
+                    PUT_ADDR(SUCC(new_bp), <span class="hljs-number">0</span>);
+                &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!pre_bp &amp;&amp; next_bp) &#123;
+                    PUT_ADDR(PRED(new_bp), <span class="hljs-number">0</span>);
+                    heap_listp = new_bp;
+                    PUT_ADDR(SUCC(new_bp), next_bp);
+                    PUT_ADDR(PRED(next_bp), new_bp);
+                &#125; <span class="hljs-keyword">else</span> &#123;
+                    PUT_ADDR(PRED(new_bp), pre_bp);
+                    PUT_ADDR(SUCC(pre_bp), new_bp);
+                    PUT_ADDR(SUCC(new_bp), next_bp);
+                    PUT_ADDR(PRED(next_bp), new_bp);
+                &#125;
+                PUT(HDRP(new_bp), PACK(next_block_rest_size, <span class="hljs-number">0</span>));
+                PUT(FTRP(new_bp), PACK(next_block_rest_size, <span class="hljs-number">0</span>));
+                PUT(HDRP(ptr), PACK(size, <span class="hljs-number">1</span>));
+                PUT(FTRP(ptr), PACK(size, <span class="hljs-number">1</span>));
+
+                <span class="hljs-keyword">return</span> ptr;
+            &#125;
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            <span class="hljs-type">void</span> *bp = mm_malloc(size);
+            <span class="hljs-keyword">if</span> (bp == <span class="hljs-literal">NULL</span>) &#123;
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;
+            &#125;
+            <span class="hljs-built_in">memcpy</span>(bp, ptr, block_size - DSIZE);
+            mm_free(ptr);
+            <span class="hljs-keyword">return</span> bp;
+        &#125;
+    &#125;
+&#125;</code></pre></div>
+<h3 id="实验结果-2"><a class="markdownIt-Anchor" href="#实验结果-2"></a> 实验结果</h3>
+<p>显式空闲链表就可以达到 90/100 的结果, 说实话有些令我惊讶. 这已经是一个可以令人接收的分数了, 不过既然书中也提到了其他的实现方式, 不妨也动手实现一下</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230524152405.png" srcset="/img/loading.gif" lazyload alt="20230524152405" /></p>
+<h2 id="简单分离存储"><a class="markdownIt-Anchor" href="#简单分离存储"></a> 简单分离存储</h2>
+<p>如果说显式空闲链表的也存在一些不足之处, 那就是所有的空闲链表都链接在一起. 如果合适的空闲块排在很后面, 那么每次寻找都需要依次比较.</p>
+<p>那么显然一种新的思路就是将这些空闲块按照大小分为几类, 也就是用多个空闲链表. 比如可以根据 2 的幂来划分: {1-31}, {32-63}, {64-127}, {128,255}, …</p>
+<p>简单分离存储的思路是: 将每一个 CHUNK 分为等大的块, 比如全是 8/16/32. 这些块<strong>不分割, 不合并</strong>. 也就是说如果需要分配一个 33 字节大小的空闲, 那么就选择 64 大小的空闲链表, 找到一个空闲块</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230527151548.png" srcset="/img/loading.gif" lazyload alt="20230527151548" /></p>
+<p>每一个空闲链表分别对应一类的块, 这样 malloc 寻找空闲块的时候可以先根据需要分配的 size 大小确定应该到哪一个链表中找, 再在这个链表中查询即可</p>
+<p>如下所示, 在堆的开头创建一小块数组用于存储分离链表头, 每一个链表指向一块区域, 区域中等大的分割为一个个小块, 单向链表连接</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230527152257.png" srcset="/img/loading.gif" lazyload alt="20230527152257" /></p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230527151814.png" srcset="/img/loading.gif" lazyload alt="20230527151814" /></p>
+<p><strong>看起来这个思路比较好, 但是实现起来会有很大的问题!</strong></p>
+<p>首先书中提到了 “不需要头部和脚部” “由于每一个片中只有相同大小的块, 所以一个已分配的块的大小就可以从它的地址推断出来”. 这句话是错的, 实际上当 free 的时候, 对于地址 32 它可能是 5th for 8/ 3rd for 16/ 1st for 32. 对于 0 来说他可能是任意大小的块的开头. <strong>如果不使用其他信息记录不可能判断的出来需要释放的块有多大</strong>. 笔者在 stackoverflow 找到了一个<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/75966600/memory-allocator-simple-segregated-storage-how-do-you-infer-the-size-of-an-al">相同的问题</a></p>
+<p>这里是笔者对这个问题的<a target="_blank" rel="noopener" href="https://stackoverflow.com/a/76334551/17869889">解答</a></p>
+<p>总结来说就是书上的说法有问题. 而且不建议读者尝试用这个方法实现, 笔者实现了一下, 使用的是添加头部. 虽然但是即使实现了测试用例也无法通过, realloc 的几个根本过不了, 因为这种方法就没有合并, 前面的 malloc 也可能会因为 out of memory 挂掉</p>
+<blockquote>
+<p>真是一段痛苦的经历, 读者不要尝试用这种方法了, 很不好!</p>
+</blockquote>
+<h2 id="分离适配"><a class="markdownIt-Anchor" href="#分离适配"></a> 分离适配</h2>
+<p>这部分实现了好几版, 分别是</p>
+<ul>
+<li>最初版本 84 分的做法 <a target="_blank" rel="noopener" href="https://github.com/luzhixing12345/csapplab/blob/main/10_malloclab/mm_seg_fit_84.c">mm_seg_fit_84.c</a></li>
+<li>修改后的 93 分的做法 <a target="_blank" rel="noopener" href="https://github.com/luzhixing12345/csapplab/blob/main/10_malloclab/mm_seg_fit_93.c">mm_seg_fit_93.c</a></li>
+<li>另一个修改也是 93 分的做法 <a target="_blank" rel="noopener" href="https://github.com/luzhixing12345/csapplab/blob/main/10_malloclab/mm_seg_fit_firstfit.c">mm_seg_fit_firstfit.c</a></li>
+</ul>
+<p>分离适配的方法思路也差不多, 不过更加合理的添加了对空闲块的分割和合并. 同样在开头添加一个数组用于存储分离链表头, 不过每一个链表都会指向一个对应的区间块, 比如根据 2 的幂来划分: {1-31}, {32-63}, {64-127}, {128,255}, 那么 0 号链表的所有空闲块都是 1-31 大小的, 2 号链表的所有空闲块都是 32-63 的.</p>
+<p>malloc 的时候先根据 size 判断应该到哪一个链表中找, 如果能找到一个合适的块那么直接分配. 如果找不到则到下一个链表中找, 如果都找不到那么扩展堆.</p>
+<p>与此同时考虑分割和合并的时候, 只需要把原先的块从对应的链表中删除, 再把合并后的块插入到合并后大小所对应的链表中即可.</p>
+<p>下面先来介绍一下最初版本 84 分的做法 <a target="_blank" rel="noopener" href="https://github.com/luzhixing12345/csapplab/blob/main/10_malloclab/mm_seg_fit_84.c">mm_seg_fit_84.c</a></p>
+<h3 id="mm_init-3"><a class="markdownIt-Anchor" href="#mm_init-3"></a> mm_init</h3>
+<p>初始化的时候只需要添加对于链表数组的初始化</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">define</span> MAX_FREELIST_NUMBER 16</span>
+
+<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; MAX_FREELIST_NUMBER; i++) &#123;
+   *(<span class="hljs-type">unsigned</span> <span class="hljs-type">long</span> *)((<span class="hljs-type">char</span> *)free_listp + DSIZE * i) = <span class="hljs-number">0</span>;
+&#125;</code></pre></div>
+<p>合并的时候有较大的修改</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> *<span class="hljs-title function_">coalesce</span><span class="hljs-params">(<span class="hljs-type">void</span> *bp)</span> &#123;
+    <span class="hljs-type">size_t</span> size = GET_SIZE(HDRP(bp));
+    <span class="hljs-type">size_t</span> prev_alloc = GET_ALLOC(FTRP(PREV_BLKP(bp)));
+    <span class="hljs-type">size_t</span> next_alloc = GET_ALLOC(HDRP(NEXT_BLKP(bp)));
+
+    <span class="hljs-comment">// case 1: 前后都被占用, 加到链表头</span>
+    <span class="hljs-keyword">if</span> (prev_alloc &amp;&amp; next_alloc) &#123;
+        insert(bp);
+    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (prev_alloc &amp;&amp; !next_alloc) &#123;
+        <span class="hljs-comment">// case 2: 前占后不占, 合并后面的块, 修改链表</span>
+        size += GET_SIZE(HDRP(NEXT_BLKP(bp)));
+        <span class="hljs-type">void</span> *next_bp = NEXT_BLKP(bp);
+        delete (next_bp);
+        PUT(HDRP(bp), PACK(size, <span class="hljs-number">0</span>));
+        PUT(FTRP(bp), PACK(size, <span class="hljs-number">0</span>));
+        <span class="hljs-comment">// 更新链表</span>
+        insert(bp);
+    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!prev_alloc &amp;&amp; next_alloc) &#123;
+        <span class="hljs-comment">// case 3: 前不占后占, 直接合并</span>
+        delete (PREV_BLKP(bp));
+        size += GET_SIZE(HDRP(PREV_BLKP(bp)));
+        bp = PREV_BLKP(bp);
+        PUT(HDRP(bp), PACK(size, <span class="hljs-number">0</span>));
+        PUT(FTRP(bp), PACK(size, <span class="hljs-number">0</span>));
+        insert(bp);
+    &#125; <span class="hljs-keyword">else</span> &#123;
+        <span class="hljs-comment">// case 4: 前后都空, 合并三个空闲块, 更新第一个块的节点</span>
+        <span class="hljs-type">void</span> *pre_bp = PREV_BLKP(bp);
+        <span class="hljs-type">void</span> *next_bp = NEXT_BLKP(bp);
+        delete (pre_bp);
+        delete (next_bp);
+        size += GET_SIZE(HDRP(pre_bp)) + GET_SIZE(FTRP(next_bp));
+        PUT(HDRP(pre_bp), PACK(size, <span class="hljs-number">0</span>));
+        PUT(FTRP(pre_bp), PACK(size, <span class="hljs-number">0</span>));
+        <span class="hljs-comment">// 更新链表</span>
+        insert(pre_bp);
+        bp = pre_bp;
+    &#125;
+    <span class="hljs-keyword">return</span> bp;
+&#125;</code></pre></div>
+<p>相比之前代码有了很大程度的精简, 其中函数 insert 和 delete 分别用于插入和删除</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">delete</span> <span class="hljs-params">(<span class="hljs-type">void</span> *bp)</span> &#123;
+    <span class="hljs-type">void</span> *free_listp_i = get_freelist_index(GET_SIZE(HDRP(bp)));
+    <span class="hljs-type">void</span> *pre_bp = PREV_FREE_BLKP(bp);
+    <span class="hljs-type">void</span> *next_bp = NEXT_FREE_BLKP(bp);
+    <span class="hljs-keyword">if</span> (pre_bp &amp;&amp; next_bp) &#123;
+        PUT_ADDR(SUCC(pre_bp), next_bp);
+        PUT_ADDR(PRED(next_bp), pre_bp);
+    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!pre_bp &amp;&amp; next_bp) &#123;
+        PUT_ADDR(PRED(next_bp), <span class="hljs-number">0</span>);
+        PUT_ADDR(free_listp_i, next_bp);
+    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (pre_bp &amp;&amp; !next_bp) &#123;
+        PUT_ADDR(SUCC(pre_bp), <span class="hljs-number">0</span>);
+    &#125; <span class="hljs-keyword">else</span> &#123;
+        PUT_ADDR(free_listp_i, <span class="hljs-number">0</span>);
+    &#125;
+&#125;
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">insert</span><span class="hljs-params">(<span class="hljs-type">void</span> *bp)</span> &#123;
+    <span class="hljs-type">void</span> *free_listp_i = get_freelist_index(GET_SIZE(HDRP(bp)));
+    PUT_ADDR(PRED(bp), <span class="hljs-number">0</span>);
+    PUT_ADDR(SUCC(bp), VAL(free_listp_i));
+    <span class="hljs-keyword">if</span> (NEXT_FREE_BLKP(bp)) &#123;
+        PUT_ADDR(PRED(NEXT_FREE_BLKP(bp)), bp);
+    &#125;
+    PUT_ADDR(free_listp_i, bp);
+&#125;</code></pre></div>
+<p>函数 get_freelist_index 的作用就是根据这个块找到对应的链表, 对于超大块的统一放在最后一个链表中</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> *<span class="hljs-title function_">get_freelist_index</span><span class="hljs-params">(<span class="hljs-type">size_t</span> size)</span> &#123;
+    size--;
+    <span class="hljs-type">int</span> index = <span class="hljs-number">-5</span>;
+    <span class="hljs-keyword">while</span> (size) &#123;
+        size = size &gt;&gt; <span class="hljs-number">1</span>;
+        index++;
+    &#125;
+    <span class="hljs-keyword">if</span> (index &gt; MAX_FREELIST_NUMBER - <span class="hljs-number">1</span>) &#123;
+        index = MAX_FREELIST_NUMBER - <span class="hljs-number">1</span>;
+    &#125;
+    <span class="hljs-keyword">return</span> (<span class="hljs-type">void</span> *)((<span class="hljs-type">char</span> *)free_listp + index * DSIZE);
+&#125;</code></pre></div>
+<h3 id="mm_malloc-3"><a class="markdownIt-Anchor" href="#mm_malloc-3"></a> mm_malloc</h3>
+<p>mm_malloc 函数主体没有改动, 其中的 place 函数有了变化</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">place</span><span class="hljs-params">(<span class="hljs-type">void</span> *bp, <span class="hljs-type">size_t</span> size)</span> &#123;
+    <span class="hljs-type">size_t</span> block_size = GET_SIZE(HDRP(bp));
+    <span class="hljs-type">size_t</span> block_rest_size = block_size - size;
+    <span class="hljs-comment">// 剩余块的大小 &lt;= 最小块大小</span>
+    <span class="hljs-keyword">if</span> (block_rest_size &lt; <span class="hljs-number">3</span> * DSIZE) &#123;
+        PUT(HDRP(bp), PACK(block_size, <span class="hljs-number">1</span>));
+        PUT(FTRP(bp), PACK(block_size, <span class="hljs-number">1</span>));
+        delete (bp);
+    &#125; <span class="hljs-keyword">else</span> &#123;
+        <span class="hljs-comment">// 分裂</span>
+        delete (bp);
+        PUT(HDRP(bp), PACK(size, <span class="hljs-number">1</span>));
+        PUT(FTRP(bp), PACK(size, <span class="hljs-number">1</span>));
+        <span class="hljs-type">void</span> *next_bp = NEXT_BLKP(bp);
+        PUT(HDRP(next_bp), PACK(block_rest_size, <span class="hljs-number">0</span>));
+        PUT(FTRP(next_bp), PACK(block_rest_size, <span class="hljs-number">0</span>));
+        <span class="hljs-comment">// 更新链表</span>
+        insert(next_bp);
+    &#125;
+&#125;</code></pre></div>
+<p>以及首次适配算法有了很大改动, 先找到对应的 list, 如果当前list不满足则继续向后找, 都找不到扩展</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> *<span class="hljs-title function_">first_fit</span><span class="hljs-params">(<span class="hljs-type">size_t</span> size)</span> &#123;
+    <span class="hljs-type">size_t</span> origin_size = size;
+    size--;
+    <span class="hljs-type">int</span> index = <span class="hljs-number">-5</span>;
+    <span class="hljs-keyword">while</span> (size) &#123;
+        size = size &gt;&gt; <span class="hljs-number">1</span>;
+        index++;
+    &#125;
+    <span class="hljs-keyword">if</span> (index &gt; MAX_FREELIST_NUMBER - <span class="hljs-number">1</span>) &#123;
+        index = MAX_FREELIST_NUMBER - <span class="hljs-number">1</span>;
+    &#125;
+
+    <span class="hljs-keyword">while</span> (index &lt; MAX_FREELIST_NUMBER) &#123;
+        <span class="hljs-type">void</span> *free_listp_i = (<span class="hljs-type">void</span> *)((<span class="hljs-type">char</span> *)free_listp + index * DSIZE);
+        <span class="hljs-keyword">if</span> (VAL(free_listp_i) == <span class="hljs-number">0</span>) &#123;
+            index++;
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            <span class="hljs-type">void</span> *bp = (<span class="hljs-type">void</span> *)VAL(free_listp_i);
+            <span class="hljs-keyword">while</span> (GET_SIZE(HDRP(bp)) &lt; origin_size) &#123;
+                bp = NEXT_FREE_BLKP(bp);
+                <span class="hljs-keyword">if</span> (bp == <span class="hljs-literal">NULL</span>) &#123;
+                    <span class="hljs-keyword">break</span>;
+                &#125;
+            &#125;
+            <span class="hljs-keyword">if</span> (bp) &#123;
+                <span class="hljs-keyword">return</span> bp;
+            &#125;
+            index++;
+        &#125;
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;
+&#125;</code></pre></div>
+<p>realloc 有变化, 不过也差不多, free 没有变化</p>
+<p>这个方法测试下来只有 84 分, 令我有点奇怪. 看了下最后的 realloc 的 util 利用率很低. 感觉是我代码写错了, 但是真找不到哪里有问题了…</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230527155630.png" srcset="/img/loading.gif" lazyload alt="20230527155630" /></p>
+<p>后来根据一位<a target="_blank" rel="noopener" href="https://github.com/sally20921/malloclab/blob/4a024b78140a14fef82943c8fc9a3e74e3ae737b/malloclab-handout/src/mm.c">大佬的实现</a>, 发现只需要在 place 中额外判断一下, 如果 size &gt;= 96 那么直接反过来, 把分配的块放到最后面</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> *<span class="hljs-title function_">place</span><span class="hljs-params">(<span class="hljs-type">void</span> *bp, <span class="hljs-type">size_t</span> size)</span> &#123;
+    <span class="hljs-type">size_t</span> block_size = GET_SIZE(HDRP(bp));
+    <span class="hljs-type">size_t</span> block_rest_size = block_size - size;
+    <span class="hljs-comment">// 剩余块的大小 &lt;= 最小块大小</span>
+    <span class="hljs-keyword">if</span> (block_rest_size &lt; <span class="hljs-number">3</span> * DSIZE) &#123;
+        PUT(HDRP(bp), PACK(block_size, <span class="hljs-number">1</span>));
+        PUT(FTRP(bp), PACK(block_size, <span class="hljs-number">1</span>));
+        delete (bp);
+    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (size &gt;= <span class="hljs-number">96</span>) &#123;
+        delete (bp);
+        PUT(HDRP(bp), PACK(block_rest_size, <span class="hljs-number">0</span>));
+        PUT(FTRP(bp), PACK(block_rest_size, <span class="hljs-number">0</span>));
+        insert(bp);
+        PUT(HDRP(NEXT_BLKP(bp)), PACK(size, <span class="hljs-number">1</span>));
+        PUT(FTRP(NEXT_BLKP(bp)), PACK(size, <span class="hljs-number">1</span>));
+        bp = NEXT_BLKP(bp);
+    &#125; <span class="hljs-keyword">else</span> &#123;
+        <span class="hljs-comment">// 分裂</span>
+        delete (bp);
+        PUT(HDRP(bp), PACK(size, <span class="hljs-number">1</span>));
+        PUT(FTRP(bp), PACK(size, <span class="hljs-number">1</span>));
+        <span class="hljs-type">void</span> *next_bp = NEXT_BLKP(bp);
+        PUT(HDRP(next_bp), PACK(block_rest_size, <span class="hljs-number">0</span>));
+        PUT(FTRP(next_bp), PACK(block_rest_size, <span class="hljs-number">0</span>));
+        <span class="hljs-comment">// 更新链表</span>
+        insert(next_bp);
+    &#125;
+    <span class="hljs-keyword">return</span> bp;
+&#125;</code></pre></div>
+<p>效果居然惊人的提到 93 分!</p>
+<blockquote>
+<p>修改后的 93 分的做法 <a target="_blank" rel="noopener" href="https://github.com/luzhixing12345/csapplab/blob/main/10_malloclab/mm_seg_fit_93.c">mm_seg_fit_93.c</a></p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230527160237.png" srcset="/img/loading.gif" lazyload alt="20230527160237" /></p>
+<p>最后又参考了<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/270267142">另一个大佬的题解</a>, 考虑修改 first_fit 的算法, 也就是在插入的时候按块大小排序, 然后这样 first_fit 的时候只需要判断第一个块是否满足即可</p>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">insert</span><span class="hljs-params">(<span class="hljs-type">void</span> *bp)</span> &#123;
+    <span class="hljs-type">void</span> *free_listp_i = get_freelist_index(GET_SIZE(HDRP(bp)));
+    <span class="hljs-type">void</span> *curr_bp = (<span class="hljs-type">void</span> *)VAL(free_listp_i);
+    <span class="hljs-keyword">if</span> (curr_bp == <span class="hljs-literal">NULL</span>) &#123;
+        PUT_ADDR(PRED(bp), <span class="hljs-number">0</span>);
+        PUT_ADDR(SUCC(bp), <span class="hljs-number">0</span>);
+        PUT_ADDR(free_listp_i, bp);
+    &#125; <span class="hljs-keyword">else</span> &#123;
+        <span class="hljs-keyword">if</span> (GET_SIZE(HDRP(curr_bp)) &lt;= GET_SIZE(HDRP(bp))) &#123;
+            PUT_ADDR(PRED(bp), <span class="hljs-number">0</span>);
+            PUT_ADDR(SUCC(bp), curr_bp);
+            PUT_ADDR(free_listp_i, bp);
+            PUT_ADDR(PRED(curr_bp), bp);
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            <span class="hljs-type">void</span> *pred_bp = curr_bp;
+            curr_bp = NEXT_FREE_BLKP(curr_bp);
+            <span class="hljs-keyword">while</span> (curr_bp &amp;&amp; GET_SIZE(HDRP(curr_bp)) &gt; GET_SIZE(HDRP(bp))) &#123;
+                pred_bp = curr_bp;
+                curr_bp = NEXT_FREE_BLKP(curr_bp);
+            &#125;
+            <span class="hljs-keyword">if</span> (curr_bp == <span class="hljs-literal">NULL</span>) &#123;
+                PUT_ADDR(SUCC(pred_bp), bp);
+                PUT_ADDR(PRED(bp), pred_bp);
+                PUT_ADDR(SUCC(bp), <span class="hljs-number">0</span>);
+            &#125; <span class="hljs-keyword">else</span> &#123;
+                PUT_ADDR(SUCC(pred_bp), bp);
+                PUT_ADDR(PRED(bp), pred_bp);
+                PUT_ADDR(PRED(curr_bp), bp);
+                PUT_ADDR(SUCC(bp), curr_bp);
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs c"><span class="hljs-type">void</span> *<span class="hljs-title function_">first_fit</span><span class="hljs-params">(<span class="hljs-type">size_t</span> size)</span> &#123;
+    <span class="hljs-type">size_t</span> origin_size = size;
+    size--;
+    <span class="hljs-type">int</span> index = <span class="hljs-number">-5</span>;
+    <span class="hljs-keyword">while</span> (size) &#123;
+        size = size &gt;&gt; <span class="hljs-number">1</span>;
+        index++;
+    &#125;
+    <span class="hljs-keyword">if</span> (index &gt; MAX_FREELIST_NUMBER - <span class="hljs-number">1</span>) &#123;
+        index = MAX_FREELIST_NUMBER - <span class="hljs-number">1</span>;
+    &#125;
+
+    <span class="hljs-keyword">while</span> (index &lt; MAX_FREELIST_NUMBER) &#123;
+        <span class="hljs-type">void</span> *free_listp_i = (<span class="hljs-type">void</span> *)((<span class="hljs-type">char</span> *)free_listp + index * DSIZE);
+        <span class="hljs-keyword">if</span> (VAL(free_listp_i) == <span class="hljs-number">0</span>) &#123;
+            index++;
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            <span class="hljs-keyword">if</span> (GET_SIZE(HDRP(VAL(free_listp_i))) &lt; origin_size) &#123;
+                index++;
+            &#125; <span class="hljs-keyword">else</span> &#123;
+                <span class="hljs-keyword">return</span> (<span class="hljs-type">void</span>*)VAL(free_listp_i);
+            &#125;
+            
+        &#125;
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;
+&#125;</code></pre></div>
+<p>这种做法也是 93 分没有变化</p>
+<p>也是 93 分的做法 <a target="_blank" rel="noopener" href="https://github.com/luzhixing12345/csapplab/blob/main/10_malloclab/mm_seg_fit_firstfit.c">mm_seg_fit_firstfit.c</a></p>
+<h2 id="参考"><a class="markdownIt-Anchor" href="#参考"></a> 参考</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/496366818">CSAPP | Lab8-Malloc Lab 深入解析 - kccxin的文章 - 知乎</a></li>
+<li><a target="_blank" rel="noopener" href="https://moss.cs.iit.edu/cs351/slides/slides-malloc.pdf">https://moss.cs.iit.edu/cs351/slides/slides-malloc.pdf</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/270267142">MallocLab详结 - Sisyphean的文章 - 知乎</a></li>
+</ul>
 
             </div>
             <hr>
