@@ -36,25 +36,6 @@
     
     
     <entry>
-      <title>文件系统</title>
-      <link href="/2023/04/23/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/"/>
-      <url>/2023/04/23/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/</url>
-      
-        <content type="html"><![CDATA[<h2 id="linux-文件系统"><a class="markdownIt-Anchor" href="#linux-文件系统"></a> Linux 文件系统</h2><h2 id="参考"><a class="markdownIt-Anchor" href="#参考"></a> 参考</h2><ul><li><a href="https://www.bilibili.com/video/BV1jM411W7jV">陈硕 Linux 文件系统</a></li><li><a href="https://www.bilibili.com/video/BV1V84y1A7or">ext2文件系统</a></li></ul>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 体系结构 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>动态内存分配</title>
       <link href="/2023/03/30/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/"/>
       <url>/2023/03/30/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/</url>
@@ -283,25 +264,6 @@
     
     
     <entry>
-      <title>Makefile进阶</title>
-      <link href="/2022/11/19/%E6%9D%82/Makefile%E8%BF%9B%E9%98%B6/"/>
-      <url>/2022/11/19/%E6%9D%82/Makefile%E8%BF%9B%E9%98%B6/</url>
-      
-        <content type="html"><![CDATA[<p>.PHONY: 伪目标</p><ul><li><p>条件赋值: ?=</p><p>条件赋值是指一个变量如果没有被定义过，就直接给它赋值；如果之前被定义过，那么这条赋值语句就什么都不做</p></li><li><p>追加赋值: +=</p></li></ul><h2 id="立即变量和延迟变量"><a class="markdownIt-Anchor" href="#立即变量和延迟变量"></a> 立即变量和延迟变量</h2><div class="code-wrapper"><pre><code class="hljs Makefile">a = 1b = 2val_a := <span class="hljs-variable">$(a)</span>val_b  = <span class="hljs-variable">$(b)</span>a = 10b = 20<span class="hljs-section">test:</span>    echo <span class="hljs-variable">$(val_a)</span>    echo <span class="hljs-variable">$(val_b)</span></code></pre></div><p>在上面的例子中，val_a是立即变量，当make解析到:=赋值符号时，会把<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mi mathvariant="normal">变</mi><mi mathvariant="normal">量</mi><mi mathvariant="normal">的</mi><mi mathvariant="normal">值</mi><mi mathvariant="normal">立</mi><mi mathvariant="normal">即</mi><mi mathvariant="normal">赋</mi><mi mathvariant="normal">值</mi><mi mathvariant="normal">给</mi><mi>v</mi><mi>a</mi><msub><mi>l</mi><mi>a</mi></msub><mi mathvariant="normal">，</mi><mi mathvariant="normal">虽</mi><mi mathvariant="normal">然</mi><mi mathvariant="normal">后</mi><mi mathvariant="normal">面</mi><mi>a</mi><mi mathvariant="normal">的</mi><mi mathvariant="normal">值</mi><mi mathvariant="normal">发</mi><mi mathvariant="normal">生</mi><mi mathvariant="normal">了</mi><mi mathvariant="normal">变</mi><mi mathvariant="normal">化</mi><mi mathvariant="normal">，</mi><mi mathvariant="normal">但</mi><mi>v</mi><mi>a</mi><msub><mi>l</mi><mi>a</mi></msub><mi mathvariant="normal">因</mi><mi mathvariant="normal">为</mi><mi mathvariant="normal">已</mi><mi mathvariant="normal">经</mi><mi mathvariant="normal">展</mi><mi mathvariant="normal">开</mi><mi mathvariant="normal">，</mi><mi mathvariant="normal">所</mi><mi mathvariant="normal">以</mi><mi mathvariant="normal">值</mi><mi mathvariant="normal">就</mi><mi mathvariant="normal">不</mi><mi mathvariant="normal">再</mi><mi mathvariant="normal">发</mi><mi mathvariant="normal">生</mi><mi mathvariant="normal">变</mi><mi mathvariant="normal">化</mi><mi mathvariant="normal">。</mi><mi mathvariant="normal">而</mi><mi>v</mi><mi>a</mi><msub><mi>l</mi><mi>b</mi></msub><mi mathvariant="normal">则</mi><mi mathvariant="normal">不</mi><mi mathvariant="normal">同</mi><mi mathvariant="normal">，</mi><mi mathvariant="normal">因</mi><mi mathvariant="normal">为</mi><mi mathvariant="normal">是</mi><mi mathvariant="normal">延</mi><mi mathvariant="normal">迟</mi><mi mathvariant="normal">展</mi><mi mathvariant="normal">开</mi><mi mathvariant="normal">变</mi><mi mathvariant="normal">量</mi><mi mathvariant="normal">，</mi><mi mathvariant="normal">所</mi><mi mathvariant="normal">以</mi><mi mathvariant="normal">，</mi><mi mathvariant="normal">当</mi><mi>m</mi><mi>a</mi><mi>k</mi><mi>e</mi><mi mathvariant="normal">解</mi><mi mathvariant="normal">析</mi><mi mathvariant="normal">到</mi><mo>=</mo><mi mathvariant="normal">符</mi><mi mathvariant="normal">号</mi><mi mathvariant="normal">时</mi><mi mathvariant="normal">，</mi><mi mathvariant="normal">并</mi><mi mathvariant="normal">没</mi><mi mathvariant="normal">有</mi><mi mathvariant="normal">立</mi><mi mathvariant="normal">即</mi><mi mathvariant="normal">把</mi></mrow><annotation encoding="application/x-tex">(a)变量的值立即赋值给val_a，虽然后面a的值发生了变化，但val_a因为已经展开，所以值就不再发生变化。而val_b则不同，因为是延迟展开变量，所以，当make解析到 = 符号时，并没有立即把</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">a</span><span class="mclose">)</span><span class="mord cjk_fallback">变</span><span class="mord cjk_fallback">量</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">值</span><span class="mord cjk_fallback">立</span><span class="mord cjk_fallback">即</span><span class="mord cjk_fallback">赋</span><span class="mord cjk_fallback">值</span><span class="mord cjk_fallback">给</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">a</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.01968em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">a</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">虽</span><span class="mord cjk_fallback">然</span><span class="mord cjk_fallback">后</span><span class="mord cjk_fallback">面</span><span class="mord mathdefault">a</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">值</span><span class="mord cjk_fallback">发</span><span class="mord cjk_fallback">生</span><span class="mord cjk_fallback">了</span><span class="mord cjk_fallback">变</span><span class="mord cjk_fallback">化</span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">但</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">a</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.01968em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">a</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">因</span><span class="mord cjk_fallback">为</span><span class="mord cjk_fallback">已</span><span class="mord cjk_fallback">经</span><span class="mord cjk_fallback">展</span><span class="mord cjk_fallback">开</span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">所</span><span class="mord cjk_fallback">以</span><span class="mord cjk_fallback">值</span><span class="mord cjk_fallback">就</span><span class="mord cjk_fallback">不</span><span class="mord cjk_fallback">再</span><span class="mord cjk_fallback">发</span><span class="mord cjk_fallback">生</span><span class="mord cjk_fallback">变</span><span class="mord cjk_fallback">化</span><span class="mord cjk_fallback">。</span><span class="mord cjk_fallback">而</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">a</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.01968em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">则</span><span class="mord cjk_fallback">不</span><span class="mord cjk_fallback">同</span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">因</span><span class="mord cjk_fallback">为</span><span class="mord cjk_fallback">是</span><span class="mord cjk_fallback">延</span><span class="mord cjk_fallback">迟</span><span class="mord cjk_fallback">展</span><span class="mord cjk_fallback">开</span><span class="mord cjk_fallback">变</span><span class="mord cjk_fallback">量</span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">所</span><span class="mord cjk_fallback">以</span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">当</span><span class="mord mathdefault">m</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord mathdefault">e</span><span class="mord cjk_fallback">解</span><span class="mord cjk_fallback">析</span><span class="mord cjk_fallback">到</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0em;vertical-align:0em;"></span><span class="mord cjk_fallback">符</span><span class="mord cjk_fallback">号</span><span class="mord cjk_fallback">时</span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">并</span><span class="mord cjk_fallback">没</span><span class="mord cjk_fallback">有</span><span class="mord cjk_fallback">立</span><span class="mord cjk_fallback">即</span><span class="mord cjk_fallback">把</span></span></span></span>(b)的值赋值给val_b，而是在运行echo命令时才对其展开，因为此时b的值已经是20，所以$(val_b)的值也是20</p><div class="code-wrapper"><pre><code class="hljs bash">wit@pc:/home/makefile/<span class="hljs-comment"># make</span><span class="hljs-built_in">echo</span> 11<span class="hljs-built_in">echo</span> 2020</code></pre></div><ul><li><p>立即展开变量一般用在规则中的目标、目标依赖中。make在解析Makefile阶段，需要这些变量有确切的值来构建依赖关系树。一个项目中的文件依赖关系在程序编译期间是固定不变的，因此需要立即变量在解析阶段就要有明确的值，立即展开</p></li><li><p>延迟展开变量一般用在规则的命令行中，这些变量在make编译过程中被引用到才会展开，获得其实际的值</p></li><li><p>$@：目标</p></li><li><p>$^：所有目标依赖</p></li><li><p>$&lt;：目标依赖列表中的第一个依赖</p></li><li><p>$?：所有目标依赖中被修改过的文件</p></li></ul><div class="note note-info">            <p>不常用</p><ul><li><span class="katex"><span class="katex-mathml"><math><semantics><mrow></mrow><annotation encoding="application/x-tex">%：当规则的目标是一个静态库文件时，</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"></span></span>%代表静态库的一个成员名</li><li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>+</mo><mi mathvariant="normal">：</mi><mi mathvariant="normal">类</mi><mi mathvariant="normal">似</mi></mrow><annotation encoding="application/x-tex">+：类似</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord">+</span><span class="mord cjk_fallback">：</span><span class="mord cjk_fallback">类</span><span class="mord cjk_fallback">似</span></span></span></span>^，但是保留了依赖文件中重复出现的文件</li><li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∗</mo><mi mathvariant="normal">：</mi><mi mathvariant="normal">在</mi><mi mathvariant="normal">模</mi><mi mathvariant="normal">式</mi><mi mathvariant="normal">匹</mi><mi mathvariant="normal">配</mi><mi mathvariant="normal">和</mi><mi mathvariant="normal">静</mi><mi mathvariant="normal">态</mi><mi mathvariant="normal">模</mi><mi mathvariant="normal">式</mi><mi mathvariant="normal">规</mi><mi mathvariant="normal">则</mi><mi mathvariant="normal">中</mi><mi mathvariant="normal">，</mi><mi mathvariant="normal">代</mi><mi mathvariant="normal">表</mi><mi mathvariant="normal">目</mi><mi mathvariant="normal">标</mi><mi mathvariant="normal">模</mi><mi mathvariant="normal">式</mi><mi mathvariant="normal">中</mi></mrow><annotation encoding="application/x-tex">*：在模式匹配和静态模式规则中，代表目标模式中%的部分。比如hello.c，当匹配模式为%.c时，</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.46528em;vertical-align:0em;"></span><span class="mord">∗</span><span class="mord cjk_fallback">：</span><span class="mord cjk_fallback">在</span><span class="mord cjk_fallback">模</span><span class="mord cjk_fallback">式</span><span class="mord cjk_fallback">匹</span><span class="mord cjk_fallback">配</span><span class="mord cjk_fallback">和</span><span class="mord cjk_fallback">静</span><span class="mord cjk_fallback">态</span><span class="mord cjk_fallback">模</span><span class="mord cjk_fallback">式</span><span class="mord cjk_fallback">规</span><span class="mord cjk_fallback">则</span><span class="mord cjk_fallback">中</span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">代</span><span class="mord cjk_fallback">表</span><span class="mord cjk_fallback">目</span><span class="mord cjk_fallback">标</span><span class="mord cjk_fallback">模</span><span class="mord cjk_fallback">式</span><span class="mord cjk_fallback">中</span></span></span></span>*表示hello</li><li>$(@D)：表示目标文件的目录部分</li><li>$(@F)：表示目标文件的文件名部分</li><li>$(*D)：在模式匹配中，表示目标模式中%的目录部分</li><li>$(*F)：在模式匹配中，表示目标模式中%的文件名部分</li><li>-: ：告诉make在编译时忽略所有的错误</li><li>@: ：告诉make在执行命令前不要显示命令</li></ul>          </div><p>Makefile 通过export传递变量</p><div class="code-wrapper"><pre><code class="hljs bash">make -C subdir1 subdir2 subdir3 ..</code></pre></div><p>等价于</p><div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> subdir1 &amp;&amp; $(MAKE)<span class="hljs-built_in">cd</span> subdir2 &amp;&amp; $(MAKE)<span class="hljs-built_in">cd</span> subdir3 &amp;&amp; $(MAKE)</code></pre></div>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 杂 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>双系统安装</title>
       <link href="/2022/11/15/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/"/>
       <url>/2022/11/15/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/</url>
@@ -427,25 +389,6 @@
         <tags>
             
             <tag> 环境配置 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>优雅的处理命令行参数</title>
-      <link href="/2022/09/27/%E6%9D%82/%E4%BC%98%E9%9B%85%E7%9A%84%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0/"/>
-      <url>/2022/09/27/%E6%9D%82/%E4%BC%98%E9%9B%85%E7%9A%84%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0/</url>
-      
-        <content type="html"><![CDATA[<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2><p>相信绝大部分计算机专业的同学都会接触和使用命令行,或是操作系统命令,或是软件程序传参. 日常写程序的过程中也有时候需要传递参数来控制执行的过程,如果是简单的程序只需要简单的if else处理一下argc argv就可以了,但如果是像git ffmpeg这种类型的软件,它们的命令行参数甚至需要一份专业的文档才能描述清楚,这种时候显然就需要寻求一种优雅的处理方式.</p><p>大部分编程语言都有对于命令行参数的成熟的解析库,比如</p><ul><li>Python有<a href="https://docs.python.org/3/howto/argparse.html#id1">argparse</a></li><li>Node.js有<a href="https://github.com/tj/commander.js">commander.js</a>,<a href="https://github.com/yargs/yargs">yargs</a></li><li>Java有<a href="https://github.com/cbeust/jcommander">jcommander</a>和<a href="https://commons.apache.org/proper/commons-cli/">Commons CLI</a></li><li>Rust有<a href="https://github.com/clap-rs/clap">clap</a></li></ul><p>笔者平时会写一些C/C++的程序需要命令行参数的解析,一直以来也没有花心思将这个问题优雅的解决掉,遇到的问题也并不复杂,可以说是见招拆招足以.</p><p>但拖着总不是个办法,真遇到麻烦事再去解决可不是个好主意,所以今天这篇文章就是要深入分析一下如何处理C/C++的命令行参数,以一种优雅的方式一劳永逸的解决这个问题.</p><p>文本会从四个部分来讨论这个问题</p><ol><li>如何设计一个简单但完善的命令行解析器</li><li>如何设计可以使得解析器具有更好的扩展性</li><li>如今(2022年10月)已有哪些成熟的C/C++命令行解析器可以使用</li><li>一些知名的C/C++开源项目,如git ffmpeg等,是如何高效的处理命令行参数的,是否有借鉴价值</li></ol><p>下文中的完整代码可以在<a href="https://github.com/luzhixing12345/CliParser">CliParser</a>中找到,这也是目前笔者编写并使用的命令行解析工具.如果阅读本文有收获的话,笔者建议大家单独开一个仓库完成一个属于自己的命令行解析器.我相信C/C++的程序员一定很懂造轮子的乐趣和收获.</p><p>如有本文有表述不清晰或错误之处请指正.</p><p>好,那我们正式开始吧.</p><hr /><h2 id="如何设计一个简单但完善的命令行解析器"><a class="markdownIt-Anchor" href="#如何设计一个简单但完善的命令行解析器"></a> 如何设计一个简单但完善的命令行解析器</h2>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 杂 </tag>
             
         </tags>
       
@@ -693,25 +636,6 @@
         <tags>
             
             <tag> python </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>如何给开源项目提PR</title>
-      <link href="/2022/05/04/git/%E5%A6%82%E4%BD%95%E7%BB%99%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E6%8F%90PR/"/>
-      <url>/2022/05/04/git/%E5%A6%82%E4%BD%95%E7%BB%99%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E6%8F%90PR/</url>
-      
-        <content type="html"><![CDATA[<p>作为提的第一个正式且被通过的PR,我决定有必要记录一下</p><p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20220504011138.png" alt="20220504011138" /></p><div class="note note-info">            <p>数据库系统实现实验课的代码存在问题,群里有同学问了但是一直没有得到解决,于是我改了下代码解决了这个问题</p>          </div><hr /><p>好,我们的重点是如何给开源项目提PR,过程很简单</p><ol><li>首先fork该仓库到你的仓库</li><li>git clone到本地修改代码</li><li>git push上去</li><li>选择pull requests,创建一个 <code>new pull request</code></li><li>写一写说明文档就可以了</li></ol><p>过程比简单但是需要注意一些问题:</p><ul><li>一般来说一个大型的开源项目有很多PR,他们也会给出一个PR的规范要求,<strong>需要阅读并遵守</strong></li><li>通常来说需要新建一个dev分支,然后将代码提交到dev分支上,由管理员决定要不要merge(我这里偷懒了就没建)</li><li>我个人还是觉得PR提的正式一点,修改的有用一些才好,改改错别字文档描述啥的,就不用PR了…</li></ul>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> git </tag>
             
         </tags>
       
