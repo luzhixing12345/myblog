@@ -16,20 +16,24 @@
   <meta name="author" content="luzhixing12345">
   <meta name="keywords" content="">
   
-    <meta name="description" content="个人博客,用于记录和分享计算机知识">
+    <meta name="description" content="generic-sqed-demo 复现踩坑  前言 本文是针对 generic-sqed-demo 的复现过程记录, 作者提供了docker快捷部署方式, 这里采用直接复现的方式, 工作环境: WSL2(Ubuntu22.04)  执行过程中存在诸多 git clone, curl 等需要下载外部资源的情况, 请确保网络通畅  Github 仓库地址: generic-sqed-demo gi">
 <meta property="og:type" content="article">
-<meta property="og:title" content="kamilu的博客">
-<meta property="og:url" content="https://luzhixing12345.github.io/2023/06/06/%E5%A4%84%E7%90%86%E5%99%A8%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/index.html">
+<meta property="og:title" content="generic-sqed-demo">
+<meta property="og:url" content="https://luzhixing12345.github.io/2023/07/20/generic-sqed-demo/index.html">
 <meta property="og:site_name" content="kamilu的博客">
-<meta property="og:description" content="个人博客,用于记录和分享计算机知识">
+<meta property="og:description" content="generic-sqed-demo 复现踩坑  前言 本文是针对 generic-sqed-demo 的复现过程记录, 作者提供了docker快捷部署方式, 这里采用直接复现的方式, 工作环境: WSL2(Ubuntu22.04)  执行过程中存在诸多 git clone, curl 等需要下载外部资源的情况, 请确保网络通畅  Github 仓库地址: generic-sqed-demo gi">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-06-06T15:06:04.267Z">
-<meta property="article:modified_time" content="2023-07-05T06:36:28.544Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230720111732.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230720113253.png">
+<meta property="article:published_time" content="2023-07-20T01:10:14.000Z">
+<meta property="article:modified_time" content="2023-07-20T03:33:01.563Z">
 <meta property="article:author" content="luzhixing12345">
+<meta property="article:tag" content="形式化验证">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230720111732.png">
   
   
-  <title>kamilu的博客</title>
+  <title>generic-sqed-demo - kamilu的博客</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -163,9 +167,9 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="">
+            <span class="h2" id="subtitle" title="generic-sqed-demo">
               
-                
+                generic-sqed-demo
               
             </span>
 
@@ -175,8 +179,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2023-06-06 23:06" pubdate>
-        2023年6月6日 晚上
+      <time datetime="2023-07-20 09:10" pubdate>
+        2023年7月20日 上午
       </time>
     </span>
   
@@ -186,7 +190,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      2k 字
     </span>
   
 
@@ -195,7 +199,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1 分钟
+      17 分钟
     </span>
   
 
@@ -224,21 +228,119 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none"></h1>
+            <h1 style="display: none">generic-sqed-demo</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：15 天前
+                  本文最后更新于：几秒前
                 
               </p>
             
             <div class="markdown-body">
-              
+              <h1 id="generic-sqed-demo-复现踩坑"><a class="markdownIt-Anchor" href="#generic-sqed-demo-复现踩坑"></a> generic-sqed-demo 复现踩坑</h1>
+<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>本文是针对 <a target="_blank" rel="noopener" href="https://github.com/upscale-project/generic-sqed-demo">generic-sqed-demo</a> 的复现过程记录, 作者提供了<a target="_blank" rel="noopener" href="https://github.com/upscale-project/generic-sqed-demo#docker">docker</a>快捷部署方式, 这里采用直接复现的方式, 工作环境: WSL2(Ubuntu22.04)</p>
+<blockquote>
+<p>执行过程中存在诸多 git clone, curl 等需要下载外部资源的情况, 请确保网络通畅</p>
+</blockquote>
+<p>Github 仓库地址: <a target="_blank" rel="noopener" href="https://github.com/upscale-project/generic-sqed-demo">generic-sqed-demo</a></p>
+<div class="code-wrapper"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> git@github.com:upscale-project/generic-sqed-demo.git
+<span class="hljs-built_in">cd</span> generic-sqed-demo</code></pre></div>
+<p>本项目需要两个依赖, 分别是 <a target="_blank" rel="noopener" href="https://github.com/YosysHQ/yosys">yosys</a> 和 <a target="_blank" rel="noopener" href="https://github.com/upscale-project/pono">pono</a></p>
+<p>直接所在位置为当前根目录下</p>
+<div class="code-wrapper"><pre><code class="hljs bash">├── generic-sqed-demo
+│   ├── SQED-Generator
+│   ├── cadical
+│   ├── docker
+│   ├── libpoly
+│   ├── pono                   <span class="hljs-comment"># pono</span>
+│   ├── qed-wireup-patches
+│   ├── ridecore-bugfix-patch
+│   ├── ridecore-src-buggy
+│   ├── sqed-generator
+│   └── yosys                  <span class="hljs-comment"># yosys</span></code></pre></div>
+<h2 id="yosys"><a class="markdownIt-Anchor" href="#yosys"></a> yosys</h2>
+<p>作者提供了 <code>./setup-yosys.sh</code> 用于直接下载安装, 读者可先尝试执行此过程</p>
+<div class="code-wrapper"><pre><code class="hljs bash">sudo apt-get install build-essential clang bison flex \
+	libreadline-dev gawk tcl-dev libffi-dev git \
+	graphviz xdot pkg-config python3 libboost-system-dev \
+	libboost-python-dev libboost-filesystem-dev zlib1g-dev</code></pre></div>
+<p>运行</p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># generic-sqed-demo/$</span>
+./setup-yosys.sh</code></pre></div>
+<p>如果出现问题, 可以克隆 <a target="_blank" rel="noopener" href="https://github.com/YosysHQ/yosys">yosys</a>, 安装下面的依赖</p>
+<p>选择编译器然后编译安装</p>
+<div class="code-wrapper"><pre><code class="hljs bash">make config-gcc
+make
+sudo make install</code></pre></div>
+<p>如果仍然存在问题可以选择直接采用包管理工具安装预编译的二进制文件</p>
+<div class="code-wrapper"><pre><code class="hljs bash">sudo apt install yosys</code></pre></div>
+<h2 id="pono"><a class="markdownIt-Anchor" href="#pono"></a> pono</h2>
+<p>作者同样提供了 <code>./setup-pono.sh</code></p>
+<blockquote>
+<p>笔者没有运行, 采用了直接下载编译 <a target="_blank" rel="noopener" href="https://github.com/upscale-project/pono">pono</a> 的方式</p>
+</blockquote>
+<p>pono 内部本身又需要了一些依赖, 不过好在作者也提供了一些快捷脚本, 首先安装一下 bison 和 flex</p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># generic-sqed-demo/pono/$</span>
+./contrib/setup-bison.sh
+./contrib/setup-flex.sh</code></pre></div>
+<h3 id="smt-switch"><a class="markdownIt-Anchor" href="#smt-switch"></a> smt-switch</h3>
+<p>作者提供了安装脚本 <code>./contrib/setup-smt-switch.sh</code> 但 smt-switch 本身也需要一些以来, 尤其是其中 cvc5, 再执行之前需要先安装一下必须的依赖</p>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230720111732.png" srcset="/img/loading.gif" lazyload alt="20230720111732" /></p>
+<blockquote>
+<p>pono/deps/smt-switch/cvc5/CMakeLists.txt</p>
+</blockquote>
+<p>首先需要安装 GMP</p>
+<blockquote>
+<p>参考 <a target="_blank" rel="noopener" href="https://github.com/PyMesh/PyMesh/issues/293">Could NOT find GMP (missing: GMP_LIBRARIES GMP_INCLUDE_DIR)</a></p>
+</blockquote>
+<div class="code-wrapper"><pre><code class="hljs bash">sudo apt-get install libmpfr-dev libgmp-dev libboost-all-dev</code></pre></div>
+<p>接着安装 poly 的预编译版本</p>
+<div class="code-wrapper"><pre><code class="hljs bash">sudo add-apt-repository ppa:sri-csl/formal-methods
+sudo apt-get update
+sudo apt-get install libpoly-dev</code></pre></div>
+<p>或从源码编译 <a target="_blank" rel="noopener" href="https://github.com/SRI-CSL/libpoly">libpoly</a></p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> build
+cmake .. -DCMAKE_BUILD_TYPE=Release
+make
+sudo make install</code></pre></div>
+<p>接着安装 <a target="_blank" rel="noopener" href="https://github.com/arminbiere/cadical">cadical</a>, 只能从源码编译, 然后将其直接复制到系统路径下</p>
+<div class="code-wrapper"><pre><code class="hljs bash">./configure &amp;&amp; make
+<span class="hljs-built_in">cp</span> libcadical.a /usr/lib/x86_64-linux-gnu/</code></pre></div>
+<p>最后检查一下环境中是否有 java</p>
+<div class="code-wrapper"><pre><code class="hljs bash">javac -version</code></pre></div>
+<p>如果没有安装 JDK JRE</p>
+<div class="code-wrapper"><pre><code class="hljs bash">sudo apt install default-jre
+sudo apt install default-jdk</code></pre></div>
+<p>最后可以执行了</p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># generic-sqed-demo/pono/$</span>
+./contrib/setup-smt-switch.sh
+./contrib/setup-btor2tools.sh
+./configure.sh &amp;&amp; <span class="hljs-built_in">cd</span> build &amp;&amp; make</code></pre></div>
+<h2 id="结尾"><a class="markdownIt-Anchor" href="#结尾"></a> 结尾</h2>
+<p>如果至此, 那么恭喜你已经克服种种依赖难关</p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># generic-sqed-demo/$</span>
+./setup-sqed-generator.sh
+./generate-qed-files.sh
+./wire-up-qed-module.sh
+./run-pono.sh</code></pre></div>
+<blockquote>
+<p>笔者这里的 yosys 运行会出现奇怪的报错, 问题是关于 qed-generator, 您也可以下载此处 <a target="_blank" rel="noopener" href="https://github.com/learner-lu/resources-download/releases/download/v0.0.1/sqed.tar.gz">sqed.tar.gz</a> 替换</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230720113253.png" srcset="/img/loading.gif" lazyload alt="20230720113253" /></p>
+
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%BD%A2%E5%BC%8F%E5%8C%96%E9%AA%8C%E8%AF%81/">形式化验证</a>
+                    
+                  </div>
                 
               </div>
               
@@ -253,18 +355,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/07/20/generic-sqed-demo/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">generic-sqed-demo</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/06/05/%E5%85%B3%E4%BA%8E%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2/">
-                        <span class="hidden-mobile">关于我的博客</span>
+                      <a href="/2023/06/06/%E5%A4%84%E7%90%86%E5%99%A8%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/">
+                        <span class="hidden-mobile"></span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
