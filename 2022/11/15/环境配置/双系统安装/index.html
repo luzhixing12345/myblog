@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221115141134.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230101203444.png">
 <meta property="article:published_time" content="2022-11-15T08:24:28.000Z">
-<meta property="article:modified_time" content="2023-02-28T03:32:54.024Z">
+<meta property="article:modified_time" content="2023-07-21T13:26:47.270Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="环境配置">
 <meta name="twitter:card" content="summary_large_image">
@@ -235,7 +235,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：5 个月前
+                  本文最后更新于：16 天前
                 
               </p>
             
@@ -305,13 +305,13 @@
 <li>30GB(30720MB) Primary <code>/</code></li>
 <li>剩下的 Primary <code>/home</code></li>
 </ul>
-<p><strong>下面的这一步非常重要</strong> : 在分区界面的下方，选择安装启动项的位置, <strong>这里要选择你刚刚划分的efi分区的编号</strong></p>
+<p><strong>下面的这一步非常重要</strong> : 在分区界面的下方,选择安装启动项的位置, <strong>这里要选择你刚刚划分的efi分区的编号</strong></p>
 <p>efi分区的大小是200MB,有一个是Windows的efi那个不要动! 找到你划分的那个分区的EFI. 目前划分的四个分区是连在一起的,你可以很容易的找到它(200MB),例如下图中的 <code>/dev/nvmeOn1p9</code></p>
 <p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/asdq1342.jpg" srcset="/img/loading.gif" lazyload alt="asdq1342" /></p>
 <p>然后选择安装启动引导器的设备,选择这个引导器,现在安装</p>
 <p><strong>注意不要用中文环境,使用英文环境!</strong></p>
 <h3 id="5安装完成"><a class="markdownIt-Anchor" href="#5安装完成"></a> 5.安装完成</h3>
-<p>接下来就是选地区,用户名密码这都没什么好说的. 等待安装全部完成之后,会提醒你重启,把U盘拔了,点&quot;restart now&quot;，如果卡死就强制关机再重启就好,不要慌没有问题的</p>
+<p>接下来就是选地区,用户名密码这都没什么好说的. 等待安装全部完成之后,会提醒你重启,把U盘拔了,点&quot;restart now&quot;,如果卡死就强制关机再重启就好,不要慌没有问题的</p>
 <h3 id="6双系统收尾工作"><a class="markdownIt-Anchor" href="#6双系统收尾工作"></a> 6.双系统收尾工作</h3>
 <p>注意,刚刚安装好的双系统不要马上有特别大的动作, 稍微等电脑凉一凉, 风扇不转了再配环境等等, 不然容易死机…</p>
 <h4 id="开机引导"><a class="markdownIt-Anchor" href="#开机引导"></a> 开机引导</h4>
@@ -353,7 +353,7 @@
 <p>输入 <code>select disk 0</code> 选择磁盘0(即主磁盘), 输入 <code>list partition</code> 查看所有分区</p>
 <div class="code-wrapper"><pre><code class="hljs bash">DISKPART&gt; select disk 0
 
-磁盘 0 现在是所选磁盘。
+磁盘 0 现在是所选磁盘.
 
 DISKPART&gt; list partition
 
@@ -380,7 +380,7 @@ DISKPART&gt; list partition
 delete partition override</code></pre></div>
 </li>
 </ul>
-<p>下面看一下删除之后的效果，可以看到将EFI分区删除之后，未分配的80GB正是之前用来安装Ubuntu设置的空间大小</p>
+<p>下面看一下删除之后的效果,可以看到将EFI分区删除之后,未分配的80GB正是之前用来安装Ubuntu设置的空间大小</p>
 <p><img src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230101203444.png" srcset="/img/loading.gif" lazyload alt="20230101203444" /></p>
 <p><strong>最后F2进BIOS把ubuntu的引导删掉即可</strong>,这样就彻底删除了~</p>
 <h2 id="可能遇到的问题"><a class="markdownIt-Anchor" href="#可能遇到的问题"></a> 可能遇到的问题</h2>
@@ -388,8 +388,8 @@ delete partition override</code></pre></div>
 <p>如果使用 <code>delete partition override</code> 失败,则可使用下面的方式</p>
 <p>选择分区6 <code>select partition 6</code></p>
 <p>创建一个新的挂载盘 <code>assign letter=K</code>, 这时候可以看到计算机多出来了一个盘,但是这个盘无法进入</p>
-<p>在开始菜单找到记事本，右键【记事本】，选择【<strong>以管理员身份运行</strong>】，点击【文件】，点击【打开】。在文件浏览器里面可以进入刚刚挂载的K盘，找到名为Ubuntu的文件夹删除即可</p>
-<p>删除之后再把刚刚挂载的K盘卸载就行。输入</p>
+<p>在开始菜单找到记事本,右键【记事本】,选择【<strong>以管理员身份运行</strong>】,点击【文件】,点击【打开】.在文件浏览器里面可以进入刚刚挂载的K盘,找到名为Ubuntu的文件夹删除即可</p>
+<p>删除之后再把刚刚挂载的K盘卸载就行.输入</p>
 <div class="code-wrapper"><pre><code class="hljs bash">remove letter=K</code></pre></div>
 <h3 id="windows-boot-manager-丢失"><a class="markdownIt-Anchor" href="#windows-boot-manager-丢失"></a> Windows Boot Manager 丢失</h3>
 <p>误删除Windows Boot Manager电脑会进入grub终端</p>
