@@ -16,16 +16,16 @@
   <meta name="author" content="luzhixing12345">
   <meta name="keywords" content="">
   
-    <meta name="description" content="安装  emmm 说实话我个人还是习惯bash了, 不建议  sudo apt install zsh 第一步 → 把 oh-my-zsh 项目 Clone 下来： git clone https:&#x2F;&#x2F;github.com&#x2F;robbyrussell&#x2F;oh-my-zsh.git ~&#x2F;.oh-my-zsh 第二步 → 复制 .zshrc cp ~&#x2F;.oh-my-zsh&#x2F;templates&#x2F;zshrc">
+    <meta name="description" content="安装 sudo apt install zsh 第一步 → 把 oh-my-zsh 项目 Clone 下来: git clone https:&#x2F;&#x2F;github.com&#x2F;robbyrussell&#x2F;oh-my-zsh.git ~&#x2F;.oh-my-zsh 第二步 → 复制 .zshrc cp ~&#x2F;.oh-my-zsh&#x2F;templates&#x2F;zshrc.zsh-template ~&#x2F;.zshrc 第三步 →">
 <meta property="og:type" content="article">
 <meta property="og:title" content="zsh配置">
 <meta property="og:url" content="https://luzhixing12345.github.io/2023/02/28/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/zsh%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="kamilu的博客">
-<meta property="og:description" content="安装  emmm 说实话我个人还是习惯bash了, 不建议  sudo apt install zsh 第一步 → 把 oh-my-zsh 项目 Clone 下来： git clone https:&#x2F;&#x2F;github.com&#x2F;robbyrussell&#x2F;oh-my-zsh.git ~&#x2F;.oh-my-zsh 第二步 → 复制 .zshrc cp ~&#x2F;.oh-my-zsh&#x2F;templates&#x2F;zshrc">
+<meta property="og:description" content="安装 sudo apt install zsh 第一步 → 把 oh-my-zsh 项目 Clone 下来: git clone https:&#x2F;&#x2F;github.com&#x2F;robbyrussell&#x2F;oh-my-zsh.git ~&#x2F;.oh-my-zsh 第二步 → 复制 .zshrc cp ~&#x2F;.oh-my-zsh&#x2F;templates&#x2F;zshrc.zsh-template ~&#x2F;.zshrc 第三步 →">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20230228180507.png">
 <meta property="article:published_time" content="2023-02-28T09:58:23.000Z">
-<meta property="article:modified_time" content="2023-03-13T15:30:06.678Z">
+<meta property="article:modified_time" content="2023-11-28T14:36:25.351Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="环境配置">
 <meta name="twitter:card" content="summary_large_image">
@@ -231,17 +231,14 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：7 个月前
+                  本文最后更新于：34 分钟前
                 
               </p>
             
             <div class="markdown-body">
               <h2 id="安装"><a class="markdownIt-Anchor" href="#安装"></a> 安装</h2>
-<blockquote>
-<p>emmm 说实话我个人还是习惯bash了, 不建议</p>
-</blockquote>
 <div class="code-wrapper"><pre><code class="hljs bash">sudo apt install zsh</code></pre></div>
-<p>第一步 → 把 oh-my-zsh 项目 Clone 下来：</p>
+<p>第一步 → 把 oh-my-zsh 项目 Clone 下来:</p>
 <div class="code-wrapper"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh</code></pre></div>
 <p>第二步 → 复制 .zshrc</p>
 <div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">cp</span> ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc</code></pre></div>
@@ -262,6 +259,9 @@ plugins=(git zsh-autosuggestions)
 curl -fsSL https://mimosa-pudica.net/src/incr-0.2.zsh -o <span class="hljs-variable">$ZSH_CUSTOM</span>/plugins/incr/incr.zsh
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;source $ZSH_CUSTOM/plugins/incr/incr.zsh&#x27;</span> &gt;&gt; ~/.zshrc
 <span class="hljs-built_in">source</span> ~/.zshrc</code></pre></div>
+<blockquote>
+<p>开启后会有一点卡</p>
+</blockquote>
 <h3 id="语法高亮插件"><a class="markdownIt-Anchor" href="#语法高亮插件"></a> 语法高亮插件</h3>
 <div class="code-wrapper"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git <span class="hljs-variable">$&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;</span>/plugins/zsh-syntax-highlighting</code></pre></div>
 <div class="code-wrapper"><pre><code class="hljs bash">vim ~/.zshrc
