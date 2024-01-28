@@ -24,7 +24,7 @@
 <meta property="og:description" content="关于git + github 的SSH连接在git ssh中记录了,这里不再赘述   服务器免密SSH 实际开发之中我倾向于使用Vscode远程开发,不得不说Vscode的SSH服务实在是香,很方便,Vscode界面还好看,有插件,真棒   生成 rsa公钥私钥 ssh-keygen -t rsa -C &quot;luzhixing12345@163.com&quot; 如果已经生成过一个rs">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-02-28T03:13:39.000Z">
-<meta property="article:modified_time" content="2023-03-06T08:21:46.671Z">
+<meta property="article:modified_time" content="2023-12-02T02:58:34.730Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="服务器">
 <meta name="twitter:card" content="summary_large_image">
@@ -187,7 +187,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      541 字
+      1.7k 字
     </span>
   
 
@@ -196,7 +196,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5 分钟
+      14 分钟
     </span>
   
 
@@ -229,7 +229,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：9 个月前
+                  本文最后更新于：2 个月前
                 
               </p>
             
@@ -259,6 +259,63 @@
 <div class="code-wrapper"><pre><code class="hljs bash">ssh root@IP</code></pre></div>
 </li>
 </ol>
+<h2 id="git-ssh"><a class="markdownIt-Anchor" href="#git-ssh"></a> git SSH</h2>
+<blockquote>
+<p>以下案例中使用的邮箱是 <code>luzhixing12345@163.com</code> 你只需要替换为你自己的邮箱即可</p>
+</blockquote>
+<ul>
+<li>
+<p>创建SSH key</p>
+<div class="code-wrapper"><pre><code class="hljs shell">ssh-keygen -t rsa -C &quot;luzhixing12345@163.com&quot;</code></pre></div>
+</li>
+<li>
+<p>默认路径保存,文件保存在 <code>c:/user/luzhi/.ssh</code>(Windows) 或者 <code>~/.ssh</code>(GNU/Linux)</p>
+<p>如果你需要创建多个SSH,比如远程连接多台服务器,Github+SSH,请手动设置不同的名字加以区分,比如 <code>id_rsa_server</code>,<strong>SSH私钥不能共用,一对一连接</strong></p>
+</li>
+<li>
+<p>不设置密码,跳过</p>
+</li>
+<li>
+<p>然后会在上面的文件夹中生成<code>id_rsa</code>(私钥)和<code>id_rsa.pub</code>(公钥),<strong>私钥不要泄露!</strong></p>
+</li>
+<li>
+<p>打开Github-&gt;settings-&gt;SSH and GPG keys-&gt;new SSH key</p>
+</li>
+<li>
+<p>title随便起,将<code>id_rsa.pub</code>复制到下方</p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> ~/.ssh/id_rsa.pub</code></pre></div>
+</li>
+<li>
+<p>确定后不久会收到Github的邮件</p>
+</li>
+<li>
+<p>在git bash中输入,注意就是<code>git@github.com</code>不是你的邮箱,该操作是将你的邮箱与github建立连接</p>
+<div class="code-wrapper"><pre><code class="hljs shell">ssh -T git@github.com</code></pre></div>
+<p>如果在这里出错显示需要输入git@github.com的密码则需要额外配置一下config文件</p>
+<p>在.ssh目录下新建一个config文件,目的是将SSH映射到443端口处. 配置完毕后再次重连</p>
+<div class="code-wrapper"><pre><code class="hljs txt">Host github.com
+  User luzhixing12345@163.com
+  Hostname ssh.github.com
+  PreferredAuthentications publickey
+  IdentityFile ~/.ssh/id_rsa
+  Port 443</code></pre></div>
+</li>
+<li>
+<p>yes</p>
+<blockquote>
+<p>SSH协议采用由人工判断公钥的fingerprint是否可信的方式.当使用ssh命令连接服务器时,命令行会提示如下信息:</p>
+<p>The authenticity of host '168.30.9.213 (&lt;no hostip for proxy command&gt;) can’t be established.<br />
+RSA key fingerprint is 23:42:c1:e4:3f:d2:cc:37:1d:89:cb:e7:5d:be:5d:53.<br />
+Are you sure you want to continue connecting (yes/no)?</p>
+</blockquote>
+</li>
+<li>
+<p>如果出现Hi “用户名”! You’ve successfully authenticated, but GitHub does not provide shell access则设置成功</p>
+</li>
+<li>
+<p><strong>之后使用ssh的地址<code>git@github.com:xxx</code>而不是https的地址<code>https://github.com/xxx</code></strong></p>
+</li>
+</ul>
 <h2 id="延长ssh连接时间"><a class="markdownIt-Anchor" href="#延长ssh连接时间"></a> 延长SSH连接时间</h2>
 <div class="code-wrapper"><pre><code class="hljs bash">vim ~/.ssh/config</code></pre></div>
 <div class="code-wrapper"><pre><code class="hljs txt">Host *

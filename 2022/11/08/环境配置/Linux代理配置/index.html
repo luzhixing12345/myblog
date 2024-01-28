@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/Screenshot%20from%202023-01-01%2022-08-42.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/learner-lu/picbed/master/20221115170933.png">
 <meta property="article:published_time" content="2022-11-08T06:16:29.000Z">
-<meta property="article:modified_time" content="2023-03-06T08:20:58.748Z">
+<meta property="article:modified_time" content="2023-12-02T02:56:15.714Z">
 <meta property="article:author" content="luzhixing12345">
 <meta property="article:tag" content="环境配置">
 <meta name="twitter:card" content="summary_large_image">
@@ -232,7 +232,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：9 个月前
+                  本文最后更新于：2 个月前
                 
               </p>
             
@@ -332,9 +332,9 @@ export https_proxy=&quot;http://localhost:20171&quot;</code></pre></div>
 <div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">chmod</span> +x clash-linux-amd64-v1.12.0</code></pre></div>
 <p>初始化执行</p>
 <div class="code-wrapper"><pre><code class="hljs bash">./clash-linux-amd64-v1.12.0</code></pre></div>
-<p>初始化执行 clash 会默认在 ~/.config/clash/ 目录下生成配置文件和全球IP地址库：config.yaml 和 Country.mmdb</p>
+<p>初始化执行 clash 会默认在 ~/.config/clash/ 目录下生成配置文件和全球IP地址库:config.yaml 和 Country.mmdb</p>
 <p>如果初始化出现问题可以到原网站手动下载</p>
-<p>用wget下载clash配置文件，替换默认的配置文件，下面的wget命令后面的 你的Clash订阅链接网址 ，用上面的实际的clash订阅链接替换</p>
+<p>用wget下载clash配置文件,替换默认的配置文件,下面的wget命令后面的 你的Clash订阅链接网址 ,用上面的实际的clash订阅链接替换</p>
 <p>这里的clash订阅地址需要到 <a target="_blank" rel="noopener" href="https://me.tofly.cyou/doc/#/linux/clash">https://me.tofly.cyou/doc/#/linux/clash</a> 查看自己的</p>
 <div class="code-wrapper"><pre><code class="hljs bash">wget -U <span class="hljs-string">&quot;Mozilla/6.0&quot;</span> -O ~/.config/clash/config.yaml  你的Clash订阅链接网址</code></pre></div>
 <p>再次启动clash, 这里使用后台启动, 前台启动的话如果关闭当前终端则clash代理就终止了</p>
