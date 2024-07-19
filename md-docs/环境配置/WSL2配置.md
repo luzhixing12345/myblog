@@ -362,6 +362,15 @@ wsl --set-default Ubuntu
 Ubuntu config --default-user kamilu
 ```
 
+## 修改内存大小
+
+默认的 wsl2 占用的内存是主机的一半, 如果需要启用全部内存, 编辑 `.wslconfig`, 设置 memory 为全部内存即可
+
+```bash
+[wsl2]
+memory=16GB
+```
+
 ## 参考
 
 - [WSL修改默认安装目录到其他盘](https://www.cnblogs.com/tl542475736/p/14855863.html)
