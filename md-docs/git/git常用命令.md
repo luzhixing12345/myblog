@@ -47,3 +47,20 @@ tags: git
   ```bash
   git pull origin master:{BRANCH_NAME}
   ```
+
+Git error "object file ... is empty"?
+
+[how can i fix the git error object file is empty/12371337#12371337](https://stackoverflow.com/questions/11706215/how-can-i-fix-the-git-error-object-file-is-empty/12371337#12371337)
+
+先试一下
+
+```bash
+git pull
+```
+
+```bash
+find . -type f -empty -delete -print
+git fsck --full
+tail -n 2 .git/logs/refs/heads/main
+git show hash
+```
