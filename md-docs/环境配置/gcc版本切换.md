@@ -1,8 +1,3 @@
----
-title: gcc版本切换
-date: 2023-03-14 14:55:15
-tags: 环境配置
----
 
 本文简单记录一下gcc版本的选择
 
@@ -32,3 +27,9 @@ sudo update-alternatives --config gcc # 手动切换gcc版本
 ```
 
 ![20230314135601](https://raw.githubusercontent.com/learner-lu/picbed/master/20230314135601.png)
+
+找不到 iostream, cstdint
+
+```bash
+sudo apt-get install libstdc++-12-dev
+```

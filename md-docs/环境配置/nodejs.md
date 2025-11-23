@@ -1,8 +1,3 @@
----
-title: nodejs安装
-date: 2024-02-11 12:12:12
-tags: 环境配置
----
 
 # nodejs安装
 

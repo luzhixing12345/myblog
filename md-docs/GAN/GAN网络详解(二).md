@@ -1,8 +1,3 @@
----
-title: GAN网络详解(二) - DCGAN以及GAN网络存在的一些问题
-date: 2022-05-18 00:12:07
-tags: GAN
----
 
 本文将会介绍DCGAN以及GAN网络存在的一些问题
 

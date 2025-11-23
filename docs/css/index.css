@@ -111,9 +111,10 @@ blockquote {
     margin: 0;
     margin-top: 10px;
     margin-bottom: 16px;
-    padding: 0 1em;
+    padding: 1px 1em;
     color: #6a737d;
     border-left: 0.25em solid #dfe2e5;
+    border-radius: 3px;
 }
 
 .markdown-body code,
@@ -172,7 +173,7 @@ blockquote {
 .markdown-body code {
     padding: 0.2em 0.4em;
     margin: 0;
-    font-size: 85%;
+    font-size: 95%;
     background-color: rgba(27, 31, 35, 0.05);
     border-radius: 3px;
 }
@@ -198,43 +199,18 @@ blockquote {
     border: 0;
     cursor: pointer;
 }
+ 
+/* ul lo related css */
 
-
-
-.markdown-body ul {
-    padding-left: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-/* .markdown-body ol ol,
-.markdown-body ul ol {
-    list-style-type: lower-roman;
-}
-
-.markdown-body ol ol ol,
-.markdown-body ol ul ol,
-.markdown-body ul ol ol,
-.markdown-body ul ul ol {
-    list-style-type: lower-alpha;
-} */
-
-.markdown-body ul {
+.markdown-body ul,
+.markdown-body ol {
     margin-top: 0;
     margin-bottom: 8px;
+    padding-left: 1.75em;
 }
 
-.markdown-body ol,
 .markdown-body ul {
-    padding-left: 2em;
-}
-
-.markdown-body ol ol,
-.markdown-body ol ul,
-.markdown-body ul ol,
-.markdown-body ul ul {
-    margin-top: 0;
-    margin-bottom: 0;
+    padding-left: 1em;
 }
 
 .markdown-body li {
@@ -242,16 +218,27 @@ blockquote {
 }
 
 .markdown-body li>p {
-    margin-top: 16px;
+    margin-top: 10px;
 }
 
 .markdown-body li+li {
     margin-top: 0.25em;
 }
 
-ul>li>ul>li {
+ul>li>ul>li,
+ol>li>ol>li,
+ul>li>ol>li,
+ol>li>ul>li {
+    margin-top: 0;
     margin-top: 10px;
-    /* 通过调整10px来设置上边距大小 */
+}
+
+.markdown-body ol li blockquote {
+    margin-top: 10px;
+}
+
+.markdown-body ul li blockquote {
+    margin-top: 10px;
 }
 
 /* ul 后面的文字加一个间距 */
@@ -291,7 +278,7 @@ ul>li>ul>li {
 }
 
 .markdown-body table {
-    max-width: 90%;
+    max-width: 100%;
     border-spacing: 0;
     border-collapse: collapse;
 }
@@ -351,7 +338,7 @@ ul>li>ul>li {
     padding: 3px;
     opacity: 0.9;
     border: 1px solid rgba(149, 157, 165, 0.2);
-    border-radius: 5px;
+    border-radius: 2px;
     background-color: rgb(196, 196, 196);
     z-index: 1;
 }
@@ -359,22 +346,9 @@ ul>li>ul>li {
 .markdown-body pre #code_copy:hover {
     background-color: #ffffff;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    border-radius: 5px;
+    border-radius: 2px;
 }
 
-.markdown-body ol ul,
-.markdown-body ul ol {
-    padding-left: 1em;
-    margin-top: 10px;
-}
-
-.markdown-body ol li blockquote {
-    margin-top: 10px;
-}
-
-.markdown-body ul li blockquote {
-    margin-top: 10px;
-}
 
 .markdown-body kbd {
     display: inline-block;
@@ -407,6 +381,31 @@ ul>li>ul>li {
 .markdown-body h2 {
     padding-bottom: 0.3em;
     border-bottom: 1px solid #eaecef;
+}
+
+.markdown-body .icon-note,
+.markdown-body .icon-tip,
+.markdown-body .icon-warning,
+.markdown-body .icon-important,
+.markdown-body .icon-caution,
+.markdown-body .icon-question {
+    margin-left: 0;
+    margin-right: 1%;
+    box-shadow: none;
+    /* use default display instead of block */
+    display: inline;
+}
+
+.markdown-body blockquote div {
+    align-items: center;
+    display: flex;
+    justify-content: left;
+    margin-bottom: 5px;
+}
+
+.markdown-body blockquote p {
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 
 .changeMode {
@@ -613,8 +612,8 @@ ul>li>ul>li {
 
 .markdown-body ul:has(input[type="checkbox"]) {
     list-style-type: none;
-    padding-left: 0.5em;
-    /* margin-bottom: 8px; */
+    padding-left: 0em;
+    margin-bottom: 8px;
 }
 
 .markdown-body input[type="checkbox"] {
@@ -672,7 +671,7 @@ ul>li>ul>li {
 }
 
 .header-navigator ul ul {
-    margin-left: -20px;
+    margin-left: -30px;
 }
 
 .header-navigator a {

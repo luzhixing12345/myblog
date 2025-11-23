@@ -1,8 +1,3 @@
----
-title: WSL2配置
-date: 2022-10-06 17:35:04
-tags: 环境配置
----
 
 ## WSL
 
@@ -161,6 +156,18 @@ WSL2由于直接使用局域网与本机通信,可以直接使用Windows上的�
 ![20221023180208](https://raw.githubusercontent.com/learner-lu/picbed/master/20221023180208.png)
 
 http的系统代理走局域网的10811端口
+
+WSL2 的网络和 Windows 网络通过局域网互联，这里只需要选择局域网的端口即可，不同的 v2rayn 版本使用的端口不一定相同，选择**局域网**的
+
+![20251123200838](https://raw.githubusercontent.com/learner-lu/picbed/master/20251123200838.png)
+
+> 例如这里选择 10810
+
+### 防火墙信任
+
+防火墙例外信任(重要,容易被忽略), 这一步是最重要的一步, 也是最坑的一步, 需要在Win10防火墙中允许V2ray进行公用和专用网络的访问! 只要设置这个就可以了, 不需要调整过其他设置!
+
+![20251123201126](https://raw.githubusercontent.com/learner-lu/picbed/master/20251123201126.png)
 
 ### 修改.bashrc文件
 
@@ -375,3 +382,4 @@ memory=16GB
 
 - [WSL修改默认安装目录到其他盘](https://www.cnblogs.com/tl542475736/p/14855863.html)
 - [microsoft learn](https://learn.microsoft.com/zh-cn/windows/wsl/basic-commands)
+- [记一次用wsl2中共享宿主机的代理-v2rayN](https://hlog.cc/archives/210/)

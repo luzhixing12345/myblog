@@ -1,8 +1,3 @@
----
-title: generic-sqed-demo
-date: 2023-07-20 09:10:14
-tags: 形式化验证
----
 
 # generic-sqed-demo 复现踩坑
 

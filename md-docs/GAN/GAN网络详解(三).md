@@ -1,8 +1,3 @@
----
-title: GAN网络详解(三) - WGAN-CP 与 WGAN-GP
-date: 2022-05-18 23:08:13
-tags: GAN
----
 
 本文将会介绍WGAN-CP和它的改进版本WGAN-GP
 

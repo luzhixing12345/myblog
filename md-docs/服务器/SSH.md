@@ -1,8 +1,3 @@
----
-title: SSH
-date: 2023-02-28 11:13:39
-tags: 服务器
----
 
 > 关于git + github 的SSH连接在git ssh中记录了,这里不再赘述
 

@@ -1,8 +1,3 @@
----
-title: Windows PowerShell美化以及 Vscode 终端美化配置
-date: 2023-02-28 17:12:12
-tags: 环境配置
----
 
 # Windows Powershell美化以及 Vscode 终端美化配置
 

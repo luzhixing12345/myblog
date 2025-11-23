@@ -1,8 +1,3 @@
----
-title: pytorch预训练模型下载地址
-date: 2022-05-10 02:30:31
-tags: python
----
 
 {% note info %}
 转载[pytorch预训练模型的下载地址以及解决下载速度慢的方法](https://www.cnblogs.com/ywheunji/p/10605614.html)

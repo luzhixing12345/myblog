@@ -1,8 +1,3 @@
----
-title: vscode基本配置
-date: 2022-05-19 03:14:31
-tags: 杂
----
 
 1. 添加snipplet
 

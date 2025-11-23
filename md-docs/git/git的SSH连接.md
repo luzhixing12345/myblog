@@ -1,8 +1,3 @@
----
-title: git的SSH连接
-date: 2022-04-29 15:44:25
-tags: git
----
 
 ## 不使用https连接,使用SSH连接(推荐)
 

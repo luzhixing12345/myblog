@@ -1,8 +1,3 @@
----
-title: 使用poetry发布python包
-date: 2022-04-29 11:37:58
-tags: python
----
 
 ## 引言
 

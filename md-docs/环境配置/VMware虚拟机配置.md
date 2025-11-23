@@ -1,8 +1,3 @@
----
-title: VMware虚拟机配置
-date: 2023-02-28 11:44:19
-tags: 环境配置
----
 
 正常来说 VMWARE 提供了虚拟机的图形界面, 笔者个人倾向于使用 Vscode, 刚好 Vscode 有比较好的远程连接的功能, 所以没有必要在 VMware 中写代码, 只需要开启 VMware 的 Linux 主机, 然后远程连接在本地(windows) 中流畅的写代码, 在本地使用ssh连接虚拟机的终端
 

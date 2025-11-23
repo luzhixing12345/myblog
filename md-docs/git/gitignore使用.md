@@ -1,8 +1,3 @@
----
-title: gitignore使用
-date: 2022-04-29 15:51:17
-tags: git
----
 
 > [Github官方.gitigore规范](https://github.com/github/gitignore)
 

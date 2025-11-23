@@ -1,8 +1,3 @@
----
-title: nor/nand flash 国产现状
-date: 2023-10-20 19:24:19
-tags: 存储
----
 
 ![存储芯片分类](https://raw.githubusercontent.com/learner-lu/picbed/master/20231020194306.png)
 

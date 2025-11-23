@@ -1,8 +1,3 @@
----
-title: 优雅的日志记录-logging
-date: 2022-05-13 15:11:39
-tags: python
----
 
 ## 前言
 
