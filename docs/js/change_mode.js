@@ -1,4 +1,3 @@
-
 var global_sun_src;
 var global_moon_src;
 
@@ -20,6 +19,11 @@ function changeToLight(body, markdown_part, box, change_article_boxes) {
     var allLinks = navigator.querySelectorAll('a');
     for (var i = 0; i < allLinks.length; i++) {
         allLinks[i].style.color = 'black';
+    }
+    // 重新应用激活状态的样式
+    var activeLink = navigator.querySelector('a[style*="font-weight: 900"], a[style*="fontWeight: 900"]');
+    if (activeLink) {
+        activeLink.style.color = 'black';
     }
 
     var activate_links = dirTree.querySelectorAll('.link-active-dark');
@@ -53,6 +57,11 @@ function changeToDark(body, markdown_part, box, change_article_boxes) {
     for (var i = 0; i < allLinks.length; i++) {
         allLinks[i].style.color = 'white';
     }
+    // 重新应用激活状态的样式
+    var activeLink = navigator.querySelector('a[style*="font-weight: 900"], a[style*="fontWeight: 900"]');
+    if (activeLink) {
+        activeLink.style.color = 'white';
+    }
 
     var activate_links = dirTree.querySelectorAll('.link-active');
     for (var activate_link of activate_links) {
@@ -79,17 +88,22 @@ function changeThemeMode() {
 
 }
 
+var change_mode_button;
+
 // 添加切换颜色
 function addChangeModeButton(sun_src, moon_src) {
     global_sun_src = sun_src;
     global_moon_src = moon_src;
-    var change_mode_button = document.createElement('img')
+    change_mode_button = document.createElement('img')
     change_mode_button.src = sun_src;
     change_mode_button.className = 'changeMode'
     change_mode_button.id = 'changeThemeMode'
     change_mode_button.onclick = changeThemeMode
     change_mode_button.state = false; // light: false | dark: true
     document.body.appendChild(change_mode_button)
+}
+
+document.addEventListener("DirTreeReady", () => {
     // 主题保持
     const savedTheme = localStorage.getItem('theme');
     // 如果保存的主题存在,则设置当前主题为保存的主题
@@ -104,5 +118,4 @@ function addChangeModeButton(sun_src, moon_src) {
             changeToLight(body, markdown_part, change_mode_button, change_article_boxes)
         }
     }
-}
-
+});
