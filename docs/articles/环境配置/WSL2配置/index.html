@@ -39,6 +39,54 @@
 </span><span class="Token ID">appendWindowsPath</span><span class="Token SPACE"> </span><span class="Token ASSIGN">=</span><span class="Token SPACE"> </span><span class="Token ID">false</span></code></pre><p>重启</p><pre class="language-shell"><code><span class="Token ID">wsl</span><span class="Token SPACE"> </span><span class="Token OPTION">--shutdown</span><span class="Token LF">
 </span><span class="Token ID">wsl</span></code></pre><h2 id="h2-14">GUI 界面</h2><p>WSL2 中执行</p><pre class="language-shell"><code><span class="Token ID">sudo</span><span class="Token SPACE"> </span><span class="Token ID">apt</span><span class="Token SPACE"> </span><span class="Token ID">install</span><span class="Token SPACE"> </span><span class="Token ID">xfce4</span></code></pre><p>Windows 中执行, 找到下面 WSL 对应的 IP 地址</p><pre class="language-shell"><code><span class="Token ID">ipconfig</span></code></pre><p><a data-lightbox="example-1" href="https://raw.githubusercontent.com/learner-lu/picbed/master/20230806120832.png"><img loading="lazy" src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230806120832.png" alt="20230806120832" class="pic-big"></a></p><p>在 ~/.bashrc 中添加, 将 IP 地址替换为你的</p><pre class="language-shell"><code><span class="Token Keyword EXPORT">export</span><span class="Token SPACE"> </span><span class="Token ID">DISPLAY</span><span class="Token ASSIGN">=</span><span class="Token NUMBER">172.19</span><span class="Token ID">.64.1:0</span></code></pre><p>下载 <a href="https://sourceforge.net/projects/vcxsrv/" target="_blank">sourceforge vcxsrv</a>, 完成后点击 <code>xlaunch.exe</code> 启动, 选择 one large window, 第二个不动, 最后参数添加 <code>-ac</code></p><p><a data-lightbox="example-1" href="https://raw.githubusercontent.com/learner-lu/picbed/master/20230806121155.png"><img loading="lazy" src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230806121155.png" alt="20230806121155" class="pic-big"></a></p><p>启动图形化界面, 然后在 WSL2 中运行 xfce4</p><pre class="language-shell"><code><span class="Token ID">sudo</span><span class="Token SPACE"> </span><span class="Token ID">startxfce4</span></code></pre><p><a data-lightbox="example-1" href="https://raw.githubusercontent.com/learner-lu/picbed/master/20230806120957.png"><img loading="lazy" src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230806120957.png" alt="20230806120957" class="pic-big"></a></p><p><a data-lightbox="example-1" href="https://raw.githubusercontent.com/learner-lu/picbed/master/20230806121624.png"><img loading="lazy" src="https://raw.githubusercontent.com/learner-lu/picbed/master/20230806121624.png" alt="20230806121624" class="pic-big"></a></p><ul><li><a href="https://www.cnblogs.com/blauendonau/p/14166062.html" target="_blank">通过 VcXsrv 在 WSL2 上使用图形化界面(xfce4)</a></li></ul><ul><li><a href="https://www.bilibili.com/video/BV1mX4y177dJ/" target="_blank">【WSL2】在你的win10/11电脑上安装Linux子系统+Ubuntu+图形化界面</a></li></ul><h2 id="h2-15">修改默认登录用户</h2><p><a href="https://blog.csdn.net/qq_37085158/article/details/131041223" target="_blank">WSL 修改默认用户</a></p><h2 id="h2-16">WSL2 切换根目录位置</h2><p>默认安装路径在 C 盘, 但是用久了会变大, 可以考虑移动目录到其他位置</p><p>查看虚拟机</p><pre class="language-shell"><code><span class="Token ID">wsl</span><span class="Token SPACE"> </span><span class="Token OPTION">-l</span><span class="Token SPACE"> </span><span class="Token OPTION">-v</span></code></pre><blockquote><p>假设名字为 Ubuntu</p></blockquote><pre class="language-shell"><code><span class="Token ID">wsl</span><span class="Token SPACE"> </span><span class="Token OPTION">--shutdown</span></code></pre><p>导出 Ubuntu 保存为一个镜像, 这一步会比较慢, 相当于打一个快照以便后期恢复</p><pre class="language-shell"><code><span class="Token ID">wsl</span><span class="Token SPACE"> </span><span class="Token OPTION">--export</span><span class="Token SPACE"> </span><span class="Token ID">Ubuntu</span><span class="Token SPACE"> </span><span class="Token ID">H:</span><span class="Token BACK_SLASH">\</span><span class="Token ID">wsl2-backup</span><span class="Token BACK_SLASH">\</span><span class="Token ID">WSL2Ubuntu.bak</span></code></pre><p>注销原先用户</p><pre class="language-shell"><code><span class="Token ID">wsl</span><span class="Token SPACE"> </span><span class="Token OPTION">--unregister</span><span class="Token SPACE"> </span><span class="Token ID">Ubuntu</span></code></pre><p>导入到一个新位置(F)</p><pre class="language-shell"><code><span class="Token ID">wsl</span><span class="Token SPACE"> </span><span class="Token OPTION">--import</span><span class="Token SPACE"> </span><span class="Token ID">Ubuntu</span><span class="Token SPACE"> </span><span class="Token ID">F:</span><span class="Token BACK_SLASH">\</span><span class="Token ID">wsl2</span><span class="Token BACK_SLASH">\</span><span class="Token SPACE"> </span><span class="Token ID">H:</span><span class="Token BACK_SLASH">\</span><span class="Token ID">wsl2-backup</span><span class="Token BACK_SLASH">\</span><span class="Token ID">WSL2Ubuntu.bak</span><span class="Token SPACE"> </span><span class="Token OPTION">--version</span><span class="Token SPACE"> </span><span class="Token NUMBER">2</span></code></pre><p>导入成功后可以再次查看一下</p><pre class="language-shell"><code><span class="Token ID">wsl</span><span class="Token SPACE"> </span><span class="Token OPTION">-l</span><span class="Token SPACE"> </span><span class="Token OPTION">-v</span></code></pre><p>如果不在第一个默认启动位置可以修改默认启动为 Ubuntu</p><pre class="language-shell"><code><span class="Token ID">wsl</span><span class="Token SPACE"> </span><span class="Token OPTION">--set-default</span><span class="Token SPACE"> </span><span class="Token ID">Ubuntu</span></code></pre><p>默认使用 <code>wsl</code> 登录会以 root 用户登录, 修改为之前的用户名</p><pre class="language-shell"><code><span class="Token ID">Ubuntu</span><span class="Token SPACE"> </span><span class="Token ID">config</span><span class="Token SPACE"> </span><span class="Token OPTION">--default-user</span><span class="Token SPACE"> </span><span class="Token ID">kamilu</span></code></pre><h2 id="h2-17">修改内存大小</h2><p>默认的 wsl2 占用的内存是主机的一半, 如果需要启用全部内存, 编辑 <code>.wslconfig</code>, 设置 memory 为全部内存即可</p><pre class="language-shell"><code><span class="Token BraceDepth-0 LSQUAR_PAREN">[</span><span class="Token ID">wsl2</span><span class="Token BraceDepth-0 RSQUAR_PAREN">]</span><span class="Token LF">
 </span><span class="Token ID">memory</span><span class="Token ASSIGN">=</span><span class="Token NUMBER">16GB</span></code></pre><h2 id="h2-18">参考</h2><ul><li><a href="https://www.cnblogs.com/tl542475736/p/14855863.html" target="_blank">WSL修改默认安装目录到其他盘</a></li></ul><ul><li><a href="https://learn.microsoft.com/zh-cn/windows/wsl/basic-commands" target="_blank">microsoft learn</a></li></ul><ul><li><a href="https://hlog.cc/archives/210/" target="_blank">记一次用wsl2中共享宿主机的代理-v2rayN</a></li></ul></div>
+                <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    var markdownBody = document.querySelector('.markdown-body');
+                    var giscusDiv = markdownBody.querySelector('.giscus');
+                    var referenceHtml = `<div class="references-tabs-container">
+<div class="references-tabs-nav">
+<button class="references-tab-btn active" data-tab="references-in">本文被引用</button>
+</div>
+<div class="references-tabs-content">
+<div class="references-tab-pane active" id="references-in">
+<ul class="reference-list">
+<li><a href="../../环境配置/Linux代理配置"><span class="reference-icon" aria-hidden="true"></span><span class="reference-title">Linux代理配置</span></a></li>
+</ul>
+</div>
+</div>
+</div>`;
+                    
+                    if (giscusDiv) {
+                        giscusDiv.insertAdjacentHTML('beforebegin', referenceHtml);
+                    } else {
+                        markdownBody.insertAdjacentHTML('beforeend', referenceHtml);
+                    }
+                    
+                    // 添加选项卡切换功能
+                    setTimeout(function() {
+                        var tabButtons = document.querySelectorAll('.references-tab-btn');
+                        var tabPanes = document.querySelectorAll('.references-tab-pane');
+                        
+                        tabButtons.forEach(function(button) {
+                            button.addEventListener('click', function() {
+                                var targetTab = this.getAttribute('data-tab');
+                                
+                                // 移除所有active类
+                                tabButtons.forEach(btn => btn.classList.remove('active'));
+                                tabPanes.forEach(pane => pane.classList.remove('active'));
+                                
+                                // 添加active类到当前选中的选项卡
+                                this.classList.add('active');
+                                var targetPane = document.getElementById(targetTab);
+                                if (targetPane) {
+                                    targetPane.classList.add('active');
+                                }
+                            });
+                        });
+                    }, 100);
+                });
+                </script>
+                
     <div id="dir-tree-placeholder"></div>
     <div class="zood"><a class="" href="https://github.com/luzhixing12345/zood" target="_blank">zood</a></div>
     <script type="text/javascript" src="../../../js/dir_tree_toggle.js"></script><script type="text/javascript" src="../../../js/copy_code.js"></script><script type="text/javascript" src="../../../js/navigator.js"></script><script type="text/javascript" src="../../../js/picture_preview.js"></script><script type="text/javascript" src="../../../js/global_js_configuration.js"></script>

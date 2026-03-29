@@ -1,7 +1,54 @@
 
-## Linux 代理配置
+# Linux 代理配置
 
-### V2rayA
+Linux 的代理配置有两种情况，第一种是局域网，第二种是互联网通用型
+
+## 局域网
+
+如果你的主机已经挂了代理，比如安装了 v2rayn/clash，并且是通过网线（局域网）连接的 linux 服务器，这种情况常见于学生机房。那么当你 ssh 到这台服务器可以非常简单的让它使用你主机的代理
+
+首先你需要获取你的主机所在的局域网的 ip 地址，假设你的主机和服务器位于同一个局域网，你的ip是`192.168.1.59`，服务器ip是`192.168.1.122`
+
+> 你的主机 ip 可以通过 ipconfig 查看
+
+那么只需要在服务器的 bashrc 中添加如下命令即可，其中 7890 为你本机代理的端口
+
+```bash
+export http_proxy=192.168.1.59:7890
+export https_proxy=192.168.1.59:7890
+```
+
+> 这个方式同 [wsl2配置](./WSL2配置.md) 的网络代理配置
+
+## ssh 端口转发
+
+上面这种方式更多见于局域网使用，但如果是使用 ssh 远程登录一台服务器，那么本机没有暴露 ip 可以使用就没有办法用上面的方式
+
+此时可以采用端口转发的方式，因为主机的代理开在 7890 端口，那么我们可以在 ssh 连接的时候把 7890 端口转发，此时远程服务器上访问 7890 相当于通过 ssh 访问我们主机的 7890 端口
+
+```bash
+ssh -D 7890 lcxl2
+```
+
+然后在 .bashrc 中添加。注意此时的 ip 使用 127.0.0.1，因为端口转发过去之后服务器应当访问它自己的本地 7890 端口才能达到使用代理的效果
+
+```bash
+export http_proxy=127.0.0.1:7890
+export https_proxy=127.0.0.1:7890
+```
+
+如果不想每次都使用 -D 可以写在 .ssh/config 中
+
+```txt{4}
+Host lcxl2
+    User lzx
+    HostName xxx
+    DynamicForward 7890
+```
+
+## V2rayA
+
+另外的两种方式是直接在远程服务器上安装代理软件
 
 参考官方文档 [v2rayA](https://v2raya.org/docs/prologue/introduction/),已经比较详细了,笔者个人使用的是 Debian,ubuntu同理, 这里以它为例
 
@@ -92,7 +139,7 @@
   source ~/.bashrc
   ```
 
-### clash for linux
+## clash for linux
 
 > https://me.tofly.cyou/doc/#/linux/clash
 
