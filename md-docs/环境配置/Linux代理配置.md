@@ -46,6 +46,25 @@ Host lcxl2
     DynamicForward 7890
 ```
 
+## apt 走代理
+
+apt 默认不会走代理，可以修改其配置文件
+
+```bash
+sudo vim /etc/apt/apt.conf.d/proxy.conf
+```
+
+```bash
+Acquire::http::Proxy "http://127.0.0.1:10808";
+Acquire::https::Proxy "http://127.0.0.1:10808";
+```
+
+或者如果只需要单次使用 
+
+```bash
+sudo apt -o Acquire::http::Proxy="http://127.0.0.1:10808" update
+```
+
 ## V2rayA
 
 另外的两种方式是直接在远程服务器上安装代理软件
