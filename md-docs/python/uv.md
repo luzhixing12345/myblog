@@ -26,9 +26,20 @@ default = true
 ## 使用
 
 ```bash
-uv python install 3.10
+uv python install 3.13
+```
+
+```bash
+uv venv --python 3.13
 ```
 
 ```bash
 source .venv/bin/activate
+uv pip install pip
+```
+
+[pytorch locally](https://pytorch.org/get-started/locally/)
+
+```bash
+pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cu129
 ```

@@ -1,9 +1,9 @@
 
-## WSL
+# WSL
 
 > [官方文档](https://learn.microsoft.com/zh-cn/windows/wsl/install)
 
-### 安装 WSL
+## 安装 WSL
 
 Windows可以使用WSL(**W**indows **S**ubsystem for **L**inux)来使用Linux环境
 
@@ -41,7 +41,7 @@ Windows可以使用WSL(**W**indows **S**ubsystem for **L**inux)来使用Linux环
 
    当然也支持[安装运行多个操作系统](https://learn.microsoft.com/zh-cn/windows/wsl/install#ways-to-run-multiple-linux-distributions-with-wsl),不过暂时没有这个必要
 
-### WSL 中使用gdb调试
+## WSL 中使用gdb调试
 
 1. 检查系统中是否已经安装了gdb
 
@@ -103,7 +103,7 @@ Windows可以使用WSL(**W**indows **S**ubsystem for **L**inux)来使用Linux环
    wsl --set-version Ubuntu 2
    ```
 
-### WSL 与 Windows文件互传
+## WSL 与 Windows文件互传
 
 WSL正常情况下会出现在文件资源管理器,可以直接在 home 目录下找到当前安装的操作系统
 
@@ -125,7 +125,7 @@ kamilu@LZX:/mnt/d$
 
 再利用 cp 或者 mv 命令就可以实现文件的传输了,笔者这里还是推荐第一种,比较直接
 
-### 安装一个更加美观的 Terminal 终端
+## 安装一个更加美观的 Terminal 终端
 
 原生的命令行窗口并不好看,由于本实验可能需要大部分时间面对一个终端的显示,我们考虑选择使用一个更加美观漂亮的终端
 
@@ -145,7 +145,7 @@ WSL2由于直接使用局域网与本机通信,可以直接使用Windows上的�
 
 ---
 
-## 修改V2ray默认选项
+### 修改V2ray默认选项
 
 设置->参数设置->允许来自局域网的连接
 
