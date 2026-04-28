@@ -29,7 +29,8 @@
     <div class="zood"><a class="" href="https://github.com/luzhixing12345/zood" target="_blank">zood</a></div>
     <script type="text/javascript" src="../../../js/dir_tree_toggle.js"></script><script type="text/javascript" src="../../../js/copy_code.js"></script><script type="text/javascript" src="../../../js/navigator.js"></script><script type="text/javascript" src="../../../js/picture_preview.js"></script><script type="text/javascript" src="../../../js/global_js_configuration.js"></script>
 <script>
-    const ws = new WebSocket("ws://127.0.0.1:8765");
+    const wsProtocol = window.location.protocol === "https:" ? "wss" : "ws";
+    const ws = new WebSocket(`${wsProtocol}://${window.location.hostname}:8765`);
     ws.onmessage = (event) => {
         if (event.data === "reload") location.reload();
     };
