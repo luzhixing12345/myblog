@@ -34,17 +34,26 @@ deb-src https://mirrors.ustc.edu.cn/ubuntu/ jammy-proposed main restricted unive
 - [20.04源](https://zhuanlan.zhihu.com/p/142014944)
 - [18.04源](https://zhuanlan.zhihu.com/p/61228593)
 - [16.04源](https://www.jianshu.com/p/b2288ef3f11e)
+- 清华源 [tuna mirrors](https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/)
 
 ```bash
 sudo apt update
 ```
 
-有时候 apt install 会有 lock 的问题: apt-get /var/lib/dpkg/lock-frontend
+有时候 apt install 会有 lock 的问题: apt-get /var/lib/dpkg/lock-frontend，需要等待一会儿，后台有程序在运行
+
+如果等不了也可以直接执行
 
 ```bash
 sudo rm /var/lib/dpkg/lock-frontend
 sudo rm /var/lib/dpkg/lock
 sudo rm /var/cache/apt/archives/lock
+```
+
+apt 下载默认是不走代理的，如果需要指定代理可以使用
+
+```bash
+sudo apt -o Acquire::http::Proxy="$http_proxy" update
 ```
 
 ## 创建用户
