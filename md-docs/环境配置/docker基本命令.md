@@ -41,6 +41,44 @@ docker pull ubuntu
 docker pull ubuntu:16.04
 ```
 
+docker pull 拉取镜像有可能会失败，报错 "docker: Get https://registry-1.docker.io/v2/: net/http: request canceled"
+
+这是国内网络代理导致的，需要修改 docker 配置文件
+
+```bash
+sudo vim /etc/docker/daemon.json
+```
+
+```json
+{
+  "registry-mirrors" : [
+    "https://docker.m.daocloud.io",
+    "https://mirror.aliyuncs.com"
+  ],
+  "insecure-registries" : [
+    "docker.mirrors.ustc.edu.cn"
+  ],
+  "debug": true,
+  "experimental": false
+}
+```
+
+然后重启 docker 服务
+
+```bash
+sudo systemctl restart docker
+```
+
+验证是否配置成功，查找 Registry Mirrors 字段，确保它显示你配置的镜像源
+
+```bash
+docker info
+```
+
+再次尝试拉取即可
+
+> [如何彻底解决 Docker 错误：docker: Get https://registry-1.docker.io/v2/: net/http: request canceled 的问题](https://cloud.tencent.com/developer/article/2516747)
+
 ## 查看所有镜像
 
 ```bash

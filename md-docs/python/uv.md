@@ -40,6 +40,23 @@ uv pip install pip
 
 [pytorch locally](https://pytorch.org/get-started/locally/)
 
+先用 nvidia-smi 查看 cuda 版本
+
 ```bash
 pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cu129
 ```
+
+## pypi 代理
+
+配置全局代理
+
+```bash
+vim ~/.pip/pip.conf
+```
+
+```toml
+[global]
+index-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+```
+
+pip 安装单独使用代理 --index-url https://pypi.tuna.tsinghua.edu.cn/simple
