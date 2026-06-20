@@ -136,6 +136,18 @@ da1811a84ddc   ubuntu:16.04   "/bin/bash"   7 hours ago     Up 5 hours          
 docker restart <CONTAINER_ID>
 ```
 
+### 映射端口
+
+可以使用 -p 完成端口映射
+
+```bash
+docker run --rm -p 3000:9527 kamidalu/demoboard:latest
+```
+
+上面的命令表示把容器内部的 9527 端口映射到外部的 3000 端口
+
+容器外侧主机可以访问 3000 端口，docker 会自动映射到对应的容器的 9527 端口
+
 ### 容器内权限的问题
 
 如果在服务器上运行一个 container, 如果以上述方式启动那么当内部运行的程序需要更高权限的时候会报错
