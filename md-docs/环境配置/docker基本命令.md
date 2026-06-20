@@ -267,6 +267,44 @@ Login Succeeded
 docker push kamidalu/minicrt
 ```
 
+## docker 配置代理
+
+docker pull/push/login 的时候都可能因为网络原因导致失败
+
+docker daemon 并不能直接感知终端中的 http_proxy，需要手动配置并在在 docker daemon 启动的时候启用
+
+```bash
+sudo mkdir -p /etc/systemd/system/docker.service.d
+
+sudo tee /etc/systemd/system/docker.service.d/http-proxy.conf >/dev/null <<'EOF'
+[Service]
+Environment="HTTP_PROXY=$http_proxy$"
+Environment="HTTPS_PROXY=$https_proxy$"
+Environment="NO_PROXY=localhost,127.0.0.1,::1,192.168.0.0/16,10.0.0.0/8,172.16.0.0/12"
+EOF
+```
+
+重启 docker
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
+
+检查是否生效：
+
+```bash
+docker info | grep -i proxy
+```
+
+但这个方法如果多人使用的话可能有一些问题，可以临时修改然后再改回去
+
+```bash
+sudo rm -r /etc/systemd/system/docker.service.d/
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
+
 ## 基础环境搭建
 
 纯docker容器相当的干净,可以快速地把常用软件安装一下,以便后续使用
